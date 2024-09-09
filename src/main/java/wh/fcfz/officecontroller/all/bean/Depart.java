@@ -22,5 +22,4 @@ public class Depart {
   private java.sql.Timestamp ctTime;
   private java.sql.Timestamp upTime;
   private long status;
-
 }
