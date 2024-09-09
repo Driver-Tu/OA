@@ -13,13 +13,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName("role")
 public class Role {
-  @TableId(type = IdType.AUTO)
-  private long roleId;
-  private String roleName;
-  private String permissions;
-  private java.sql.Timestamp ctTime;
-  private java.sql.Timestamp upTime;
-
+    @TableId(type = IdType.AUTO)
+    private long roleId;
+    private String roleName;
+    private String permissions;
+    private java.sql.Timestamp ctTime;
+    private java.sql.Timestamp upTime;
 
 
 }
