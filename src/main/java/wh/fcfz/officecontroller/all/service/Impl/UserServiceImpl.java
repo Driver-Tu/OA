@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.ResponseEnum;
 import wh.fcfz.officecontroller.all.bean.Result;
 import wh.fcfz.officecontroller.all.bean.User;
+import wh.fcfz.officecontroller.all.dto.UserMessage;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.UserServeice;
 
@@ -17,8 +18,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
-
-
     /**
      * 登录
      * */
@@ -40,7 +39,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         StpUtil.login(user.getUserId(),
                 //设置登录token存在时间
-                new SaLoginModel().setTimeout(20));
+                new SaLoginModel().setTimeout(60*60));
         return new Result(ResponseEnum.SUCCESS,StpUtil.getTokenInfo());
     }
 
@@ -54,9 +53,41 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         Long userId = StpUtil.getLoginIdAsLong();
         User user = userMapper.selectById(userId);
+        String departName = userMapper.selectDepartName(user.getDepartmentId());
+        String roleName = userMapper.selectRoleName(user.getRoleId());
+        UserMessage userMessage=new UserMessage();
+        userMessage.setDepartmentName(departName);
+        userMessage.setRoleName(roleName);
+        userMessage.setUserName(user.getUserName());
+        userMessage.setEmpNum(user.getEmpNum());
+        userMessage.setTelephone(user.getTelephone());
+        userMessage.setUserImage(user.getUserImage());
+        userMessage.setEmail(user.getEmail());
+        userMessage.setStatus(user.getStatus());
         if(user==null){
             return new Result(ResponseEnum.USER_NOT_EXIST,null);
         }
-        return new Result<>(ResponseEnum.SUCCESS,user);
+        return new Result(ResponseEnum.SUCCESS,userMessage);
     }
+
+    /**
+     * 退出登录
+     * */
+    @Override
+    public Result<User> logout() {
+        StpUtil.logout();
+        return new Result(ResponseEnum.SUCCESS,null);
+    }
+
+    @Override
+    public Result<User> updatePassword(String oldPassword, String newPassword) {
+        return null;
+    }
+
+    @Override
+    public Result<User> updateUserInfo(User user) {
+        return null;
+    }
+
+
 }

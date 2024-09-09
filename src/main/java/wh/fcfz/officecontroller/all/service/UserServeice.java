@@ -5,8 +5,15 @@ import wh.fcfz.officecontroller.all.bean.Result;
 import wh.fcfz.officecontroller.all.bean.User;
 
 public interface UserServeice extends IService<User> {
+    //登录
     Result<User> login(String empNum,String password);
-
     //根据id查个人信息
     Result<User> SelectByUserId();
+    //退出登录
+    Result<User> logout();
+    //修改密码
+    Result<User> updatePassword(String oldPassword,String newPassword);
+    //修改个人信息
+    Result<User> updateUserInfo(User user);
+
 }

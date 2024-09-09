@@ -22,4 +22,9 @@ public class UserController {
     public Result<User> info(){
         return userService.SelectByUserId();
     }
+
+    @GetMapping("/logout")
+    public Result<User> logout(){
+        return userService.logout();
+    }
 }

@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @TableName("user")
 public class User {
   @TableId(type = IdType.AUTO)
-  private long userId;
-  private long roleId;
-  private long departmentId;
+  private Integer userId;
+  private Integer roleId;
+  private Integer departmentId;
   private String userName;
   private String userImage;
   private String empNum;
