@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserMessage {
+  private String userName;
   private String roleName;
   private String departmentName;
-  private String userName;
   private String userImage;
   private String empNum;
   private String telephone;
