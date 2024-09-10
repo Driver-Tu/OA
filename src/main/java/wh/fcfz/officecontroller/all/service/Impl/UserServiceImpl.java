@@ -1,10 +1,12 @@
 package wh.fcfz.officecontroller.all.service.Impl;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,9 @@ import wh.fcfz.officecontroller.all.bean.User;
 import wh.fcfz.officecontroller.all.dto.UserMessage;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.UserServeice;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserServeice {
@@ -78,10 +83,38 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 /**
  * 管理员查询所有人
  * */
-    @Override
-    public Result<User> selectALL(MyPage<User> page) {
 
-        return null;
+    @Override
+    public Result<List<UserMessage>> selectALL(MyPage<User> page) {
+        Page<User> pages = new Page<>(page.getPageNum(), page.getPageSize());
+        LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
+        lambdaQueryWrapper
+                //状态
+                .eq(null!=page.getData().getStatus(),User::getStatus,page.getData().getStatus())
+                //部门
+                .eq(null!=page.getData().getDepartmentId(),User::getDepartmentId,page.getData().getDepartmentId())
+                //名称
+                .eq(null!=page.getData().getUserName(),User::getRoleId,page.getData().getUserName())
+                //排序为最新创建
+                .orderByDesc(User::getCtTime);
+        Page<User> userPage = userMapper.selectPage(pages, lambdaQueryWrapper);
+        List<UserMessage> userMessageList = userPage.getRecords().stream().map(user -> {
+            String departName = userMapper.selectDepartName(user.getDepartmentId());
+            String roleName = userMapper.selectRoleName(user.getRoleId());
+            UserMessage userMessage=new UserMessage();
+            userMessage.setDepartmentName(departName);
+            userMessage.setRoleName(roleName);
+            userMessage.setUserName(user.getUserName());
+            userMessage.setEmpNum(user.getEmpNum());
+            userMessage.setTelephone(user.getTelephone());
+            userMessage.setUserImage(user.getUserImage());
+            userMessage.setEmail(user.getEmail());
+            userMessage.setStatus(user.getStatus());
+            userMessage.setCtTime(user.getCtTime());
+            userMessage.setUpTime(user.getUpTime());
+            return userMessage;
+        }).collect(Collectors.toList());
+        return new Result(ResponseEnum.SUCCESS,userMessageList);
     }
 
     /**
