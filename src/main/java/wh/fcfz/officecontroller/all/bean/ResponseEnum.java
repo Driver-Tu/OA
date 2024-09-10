@@ -6,10 +6,11 @@ public enum ResponseEnum {
 
     SUCCESS("200", "操作成功"),
 
-    USER_NOT_EXIST("301","用户不存在"),
-    USER_NOT_LOGIN("302","用户未登录"),
-    USER_IS_LOGIN("303","用户已登录"),
-    PARAM_ERROR("601","密码或者工号为空");
+    USER_NOT_EXIST("10301","用户不存在"),
+    USER_NOT_LOGIN("10302","用户未登录"),
+    USER_IS_LOGIN("10303","用户已登录"),
+    PARAM_ERROR("10601","密码或者工号为空"),
+    PASSWORD_IS_NOT_TRUE("10602","老密码错误，无法修改密码");
 
     private String code;
     private String message;

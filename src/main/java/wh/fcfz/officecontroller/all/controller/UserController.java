@@ -27,4 +27,16 @@ public class UserController {
     public Result<User> logout(){
         return userService.logout();
     }
+
+    @PostMapping("/updatePassword")
+    public Result<User> updatePassword(
+            @RequestParam String oldPassword,
+            @RequestParam String newPassword){
+        return userService.updatePassword(oldPassword,newPassword);
+    }
+
+    @PostMapping("/updateUserInfo")
+    public Result<User> updateUserInfo(@RequestBody User user){
+        return userService.updateUserInfo(user);
+    }
 }

@@ -3,6 +3,7 @@ package wh.fcfz.officecontroller.all.service.Impl;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,14 +80,44 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return new Result(ResponseEnum.SUCCESS,null);
     }
 
+    /**
+     * 修改密码
+     * */
     @Override
-    public Result<User> updatePassword(String oldPassword, String newPassword) {
-        return null;
+    public Result<User> updatePassword(String oldPassword,String newPassword) {
+        if(!StpUtil.isLogin()){
+            return new Result(ResponseEnum.USER_NOT_LOGIN,null);
+        }
+        if(oldPassword==null||newPassword==null){
+            return new Result(ResponseEnum.PARAM_ERROR,null);
+        }
+        LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
+        lambdaUpdateWrapper
+                .set(User::getUserPassword,newPassword)
+                .eq(User::getUserPassword,oldPassword)
+                .eq(User::getUserId,StpUtil.getLoginIdAsLong());
+        if(userMapper.update(lambdaUpdateWrapper)>0){
+            return new Result(ResponseEnum.SUCCESS,null);
+        }else {
+            return new Result(ResponseEnum.PASSWORD_IS_NOT_TRUE,null);
+        }
     }
 
+    /**
+     * 修改个人信息
+     * */
     @Override
     public Result<User> updateUserInfo(User user) {
-        return null;
+        if(!StpUtil.isLogin()){
+            return new Result(ResponseEnum.USER_NOT_LOGIN,null);
+        }
+        LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
+        lambdaUpdateWrapper.eq(User::getUserId,StpUtil.getLoginIdAsLong());
+        if(userMapper.update(user,lambdaUpdateWrapper)>0){
+            return new Result(ResponseEnum.SUCCESS,null);
+        }else {
+            return new Result(ResponseEnum.USER_NOT_EXIST,null);
+        }
     }
 
 
