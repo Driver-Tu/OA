@@ -24,5 +24,6 @@ public class User {
   private String telephone;
   private String email;
   private long status;
-
+  private java.sql.Timestamp ctTime;
+  private java.sql.Timestamp upTime;
 }

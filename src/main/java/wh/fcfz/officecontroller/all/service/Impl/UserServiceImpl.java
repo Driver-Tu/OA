@@ -2,6 +2,7 @@ package wh.fcfz.officecontroller.all.service.Impl;
 
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -65,6 +66,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userMessage.setUserImage(user.getUserImage());
         userMessage.setEmail(user.getEmail());
         userMessage.setStatus(user.getStatus());
+        userMessage.setCtTime(user.getCtTime());
+        userMessage.setUpTime(user.getUpTime());
         if(user==null){
             return new Result(ResponseEnum.USER_NOT_EXIST,null);
         }
@@ -93,6 +96,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
         lambdaUpdateWrapper
+                .set(User::getUpTime, DateTime.now())
                 .set(User::getUserPassword,newPassword)
                 .eq(User::getUserPassword,oldPassword)
                 .eq(User::getUserId,StpUtil.getLoginIdAsLong());
@@ -112,7 +116,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return new Result(ResponseEnum.USER_NOT_LOGIN,null);
         }
         LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
-        lambdaUpdateWrapper.eq(User::getUserId,StpUtil.getLoginIdAsLong());
+        lambdaUpdateWrapper.set(User::getUpTime, DateTime.now())
+                .eq(User::getUserId,StpUtil.getLoginIdAsLong());
         if(userMapper.update(user,lambdaUpdateWrapper)>0){
             return new Result(ResponseEnum.SUCCESS,null);
         }else {
