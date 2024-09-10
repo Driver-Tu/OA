@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @TableName("attendance")
 public class Attendance {
 @TableId(type = IdType.AUTO)
-  private long attendanceId;
+  private Integer attendanceId;
   private String attendanceUserId;
-  private long timeIn;
+  private Integer timeIn;
   private java.sql.Timestamp timeOut;
   private String date;
   private String status;

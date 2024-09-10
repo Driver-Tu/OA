@@ -14,12 +14,12 @@ import lombok.NoArgsConstructor;
 @TableName("depart")
 public class Depart {
 @TableId(type = IdType.AUTO)
-  private long departId;
+  private Integer departId;
   private String departName;
   private String departTelephone;
   private String departEmail;
   private String departMessage;
   private java.sql.Timestamp ctTime;
   private java.sql.Timestamp upTime;
-  private long status;
+  private Integer status;
 }

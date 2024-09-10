@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wh.fcfz.officecontroller.all.bean.ResponseEnum;
-import wh.fcfz.officecontroller.all.bean.Result;
+import wh.fcfz.officecontroller.all.tool.ResponseEnum;
+import wh.fcfz.officecontroller.all.tool.Result;
 import wh.fcfz.officecontroller.all.bean.User;
 import wh.fcfz.officecontroller.all.dto.UserMessage;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
@@ -47,9 +47,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     /**
      * 获取信息
-     * */
+     *
+     * @return*/
     @Override
-    public Result<User> SelectByUserId() {
+    public Result<UserMessage> SelectByUserId() {
         if(!StpUtil.isLogin()){
             return new Result(ResponseEnum.USER_NOT_LOGIN,null);
         }
@@ -96,10 +97,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
         lambdaUpdateWrapper
-                .set(User::getUpTime, DateTime.now())
-                .set(User::getUserPassword,newPassword)
                 .eq(User::getUserPassword,oldPassword)
-                .eq(User::getUserId,StpUtil.getLoginIdAsLong());
+                .eq(User::getUserId,StpUtil.getLoginIdAsLong())
+                .set(User::getUserPassword,newPassword)
+                .set(User::getUpTime, DateTime.now());
         if(userMapper.update(lambdaUpdateWrapper)>0){
             return new Result(ResponseEnum.SUCCESS,null);
         }else {
