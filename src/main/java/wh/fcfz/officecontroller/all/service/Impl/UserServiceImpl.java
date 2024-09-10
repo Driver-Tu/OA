@@ -1,6 +1,5 @@
 package wh.fcfz.officecontroller.all.service.Impl;
 
-import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.DateTime;
@@ -10,13 +9,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wh.fcfz.officecontroller.all.tool.MyPage;
-import wh.fcfz.officecontroller.all.tool.ResponseEnum;
-import wh.fcfz.officecontroller.all.tool.Result;
 import wh.fcfz.officecontroller.all.bean.User;
 import wh.fcfz.officecontroller.all.dto.UserMessage;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.UserServeice;
+import wh.fcfz.officecontroller.all.tool.MyPage;
+import wh.fcfz.officecontroller.all.tool.ResponseEnum;
+import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -137,6 +136,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(oldPassword==null||newPassword==null){
             return new Result(ResponseEnum.PARAM_ERROR,null);
         }
+        User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
         LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
         lambdaUpdateWrapper
                 .eq(User::getUserPassword,oldPassword)
