@@ -2,10 +2,7 @@ package wh.fcfz.officecontroller.all.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import wh.fcfz.officecontroller.all.bean.Depart;
 import wh.fcfz.officecontroller.all.bean.Result;
 import wh.fcfz.officecontroller.all.bean.User;
@@ -22,5 +19,10 @@ public class DepartController {
     public Result<Depart> SelectALL(@RequestParam(defaultValue = "1") Integer pageNum,
                                     @RequestParam(defaultValue = "3") Integer pageSize){
         return deptServiceImpl.SelectPageALL(pageNum, pageSize);
+    }
+
+    @GetMapping("/{id}")
+    public Result<Depart> SelectById(@PathVariable Integer id){
+        return deptServiceImpl.SelectByID(id);
     }
 }
