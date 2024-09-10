@@ -21,4 +21,6 @@ public interface UserServeice extends IService<User> {
     Result<User> updatePassword(String oldPassword,String newPassword);
     //修改个人信息
     Result<User> updateUserInfo(User user);
+    //增加员工
+    Result<User> saveUser(User user);
 }
