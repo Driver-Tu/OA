@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 import wh.fcfz.officecontroller.all.bean.User;
@@ -73,6 +74,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return new Result(ResponseEnum.USER_NOT_EXIST,null);
         }
         return new Result(ResponseEnum.SUCCESS,userMessage);
+    }
+/**
+ * 管理员查询所有人
+ * */
+    @Override
+    public Result<User> selectALL(MyPage<User> page) {
+
+        return null;
     }
 
     /**
