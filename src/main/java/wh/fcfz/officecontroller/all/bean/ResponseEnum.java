@@ -14,9 +14,9 @@ public enum ResponseEnum {
 
     DEPT_NOT_EXIST("10401","部门不存在"),
     DEPT_ID_NULL("10402","部门id为空"),
-    DEPT_NAME_NULL("10403","部门名为空");
+    DEPT_NAME_NULL("10403","部门名为空"),
 
-
+    PASSWORD_IS_NOT_TRUE("10602","老密码错误，无法修改密码");
 
     private String code;
     private String message;
