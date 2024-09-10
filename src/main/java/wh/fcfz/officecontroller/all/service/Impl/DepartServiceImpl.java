@@ -1,5 +1,6 @@
 package wh.fcfz.officecontroller.all.service.Impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.Query;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -60,9 +61,9 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
             log.error("查询部门名称为空");
             return new Result<>(ResponseEnum.DEPT_NAME_NULL, null);
         }
-        QueryWrapper<Depart> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("depart_name", deptName);
-        List<Depart> depart = departMapper.selectList(queryWrapper);
+        LambdaQueryWrapper<Depart> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(Depart::getDepartName, deptName);
+        List<Depart> depart = departMapper.selectList(lambdaQueryWrapper);
         if(depart == null || depart.isEmpty()) {
             log.error("未找到部门");
             return new Result(ResponseEnum.DEPT_NOT_EXIST, depart);
