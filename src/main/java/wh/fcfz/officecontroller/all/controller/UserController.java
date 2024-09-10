@@ -54,4 +54,13 @@ public class UserController {
     public Result<User> updateUserInfo(@RequestBody User user){
         return userService.updateUserInfo(user);
     }
+
+    /*
+     *新增员工
+     * */
+    @SaCheckPermission("admin")
+    @PostMapping("/save")
+    public Result<User> save(@RequestBody User user){
+        return userService.saveUser(user);
+    }
 }

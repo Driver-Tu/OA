@@ -3,6 +3,7 @@ package wh.fcfz.officecontroller.all.service.Impl;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.DateTime;
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -31,7 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public Result<User> login(String empNum, String password) {
         if (empNum==null || password==null){
-            return new Result(ResponseEnum.PARAM_ERROR,null);
+            return new Result<User>(ResponseEnum.PARAM_ERROR,null);
         }
 
         LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
@@ -39,15 +40,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .eq(User::getUserPassword,password);
         User user = userMapper.selectOne(lambdaQueryWrapper);
         if(user == null){
-            return new Result(ResponseEnum.USER_NOT_EXIST,null);
+            return new Result<User>(ResponseEnum.USER_NOT_EXIST,null);
         }
-        if(StpUtil.isLogin()){
-            return new Result(ResponseEnum.USER_IS_LOGIN,null);
+        //校验当前用户是否登录
+        if (StpUtil.isLogin(user.getUserId())){
+            return new Result<User>(ResponseEnum.USER_IS_LOGIN,null);
         }
         StpUtil.login(user.getUserId(),
                 //设置登录token存在时间
                 new SaLoginModel().setTimeout(60*60));
         return new Result(ResponseEnum.SUCCESS,StpUtil.getTokenInfo());
+    }
+
+
+    /**
+     * 退出登录
+     * */
+    @Override
+    public Result<User> logout() {
+        StpUtil.logout();
+        return new Result<User>(ResponseEnum.SUCCESS,null);
     }
 
     /**
@@ -56,8 +68,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * @return*/
     @Override
     public Result<UserMessage> SelectByUserId() {
-        if(!StpUtil.isLogin()){
-            return new Result(ResponseEnum.USER_NOT_LOGIN,null);
+        if(!StpUtil.isLogin(StpUtil.getLoginId())){
+            return new Result<UserMessage>(ResponseEnum.USER_NOT_LOGIN,null);
         }
         Long userId = StpUtil.getLoginIdAsLong();
         User user = userMapper.selectById(userId);
@@ -74,10 +86,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userMessage.setStatus(user.getStatus());
         userMessage.setCtTime(user.getCtTime());
         userMessage.setUpTime(user.getUpTime());
-        if(user==null){
-            return new Result(ResponseEnum.USER_NOT_EXIST,null);
-        }
-        return new Result(ResponseEnum.SUCCESS,userMessage);
+        return new Result<UserMessage>(ResponseEnum.SUCCESS,userMessage);
     }
 /**
  * 管理员查询所有人
@@ -85,6 +94,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public Result<List<UserMessage>> selectALL(MyPage<User> page) {
+        if(!StpUtil.isLogin(StpUtil.getLoginId())){
+            return new Result<List<UserMessage>>(ResponseEnum.USER_NOT_LOGIN,null);
+        }
         Page<User> pages = new Page<>(page.getPageNum(), page.getPageSize());
         LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
         lambdaQueryWrapper
@@ -113,16 +125,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             userMessage.setUpTime(user.getUpTime());
             return userMessage;
         }).collect(Collectors.toList());
-        return new Result(ResponseEnum.SUCCESS,userMessageList);
-    }
-
-    /**
-     * 退出登录
-     * */
-    @Override
-    public Result<User> logout() {
-        StpUtil.logout();
-        return new Result(ResponseEnum.SUCCESS,null);
+        return new Result<List<UserMessage>>(ResponseEnum.SUCCESS,userMessageList);
     }
 
     /**
@@ -130,11 +133,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * */
     @Override
     public Result<User> updatePassword(String oldPassword,String newPassword) {
-        if(!StpUtil.isLogin()){
-            return new Result(ResponseEnum.USER_NOT_LOGIN,null);
+        if(!StpUtil.isLogin(StpUtil.getLoginId())){
+            return new Result<User>(ResponseEnum.USER_NOT_LOGIN,null);
         }
         if(oldPassword==null||newPassword==null){
-            return new Result(ResponseEnum.PARAM_ERROR,null);
+            return new Result<User>(ResponseEnum.PARAM_ERROR,null);
         }
         User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
         LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
@@ -143,10 +146,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .eq(User::getUserId,StpUtil.getLoginIdAsLong())
                 .set(User::getUserPassword,newPassword)
                 .set(User::getUpTime, DateTime.now());
-        if(userMapper.update(lambdaUpdateWrapper)>0){
-            return new Result(ResponseEnum.SUCCESS,null);
-        }else {
-            return new Result(ResponseEnum.PASSWORD_IS_NOT_TRUE,null);
+        try {
+            if(userMapper.update(lambdaUpdateWrapper)>0){
+                return new Result<User>(ResponseEnum.SUCCESS,null);
+            }else {
+                return new Result<User>(ResponseEnum.PASSWORD_IS_NOT_TRUE,null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result<User>(ResponseEnum.UPDATE_SERVER_ERROR,null);
         }
     }
 
@@ -155,18 +163,49 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * */
     @Override
     public Result<User> updateUserInfo(User user) {
-        if(!StpUtil.isLogin()){
-            return new Result(ResponseEnum.USER_NOT_LOGIN,null);
+        if(!StpUtil.isLogin(StpUtil.getLoginId())){
+            return new Result<User>(ResponseEnum.USER_NOT_LOGIN,null);
         }
         LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
         lambdaUpdateWrapper.set(User::getUpTime, DateTime.now())
-                .eq(User::getUserId,StpUtil.getLoginIdAsLong());
-        if(userMapper.update(user,lambdaUpdateWrapper)>0){
-            return new Result(ResponseEnum.SUCCESS,null);
-        }else {
-            return new Result(ResponseEnum.USER_NOT_EXIST,null);
+                .eq(User::getUserId,StpUtil.getLoginId());
+        try {
+            if(userMapper.update(user,lambdaUpdateWrapper)>0){
+                return new Result<User>(ResponseEnum.SUCCESS,null);
+            }else {
+                return new Result<User>(ResponseEnum.USER_NOT_EXIST,null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result<User>(ResponseEnum.UPDATE_SERVER_ERROR,null);
         }
     }
 
+    @Override
+    public Result<User> saveUser(User user) {
+        if (!StpUtil.isLogin(StpUtil.getLoginId())) {
+            return new Result<User>(ResponseEnum.USER_NOT_LOGIN, null);
+        }
+        boolean b = ObjectUtil.hasEmpty(
+                user.getUserName(), user.getEmpNum(),
+                user.getUserPassword(), user.getUserImage(),
+                user.getDepartmentId(), user.getRoleId());
+        if(b){
+            return new Result<User>(ResponseEnum.DATA_NOT_EXIST,null);
+        }
+        LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(User::getEmpNum,user.getEmpNum());
+        if(userMapper.selectOne(lambdaQueryWrapper)!=null){
+            return new Result<User>(ResponseEnum.USER_IS_EXIST,null);
+        }
+        try {
+            user.setCtTime(DateTime.now().toTimestamp());
+            int insert = userMapper.insert(user);
+            return new Result<User>(ResponseEnum.SUCCESS, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result<User>(ResponseEnum.INTERNAL_SERVER_ERROR,null);
+        }
+    }
 
 }
