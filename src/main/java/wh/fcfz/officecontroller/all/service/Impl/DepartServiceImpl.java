@@ -1,17 +1,17 @@
 package wh.fcfz.officecontroller.all.service.Impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.Query;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wh.fcfz.officecontroller.all.bean.*;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import wh.fcfz.officecontroller.all.service.DepartService;
+import wh.fcfz.officecontroller.all.bean.Depart;
 import wh.fcfz.officecontroller.all.mapper.DepartMapper;
+import wh.fcfz.officecontroller.all.service.DepartService;
+import wh.fcfz.officecontroller.all.tool.ResponseEnum;
+import wh.fcfz.officecontroller.all.tool.Result;
 
-import java.sql.Wrapper;
 import java.util.List;
 
 @Slf4j

@@ -1,13 +1,11 @@
 package wh.fcfz.officecontroller.all.controller;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
-import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import wh.fcfz.officecontroller.all.tool.Result;
 import wh.fcfz.officecontroller.all.bean.User;
 import wh.fcfz.officecontroller.all.dto.UserMessage;
 import wh.fcfz.officecontroller.all.service.Impl.UserServiceImpl;
+import wh.fcfz.officecontroller.all.tool.Result;
 
 @RestController
 @RequestMapping("/user")
