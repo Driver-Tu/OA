@@ -2,6 +2,8 @@ package wh.fcfz.officecontroller.all.service.Impl;
 
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -58,8 +60,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * */
     @Override
     public Result<User> logout() {
-        StpUtil.logout();
-        return new Result<User>(ResponseEnum.SUCCESS,null);
+        if(StpUtil.isLogin(StpUtil.getLoginId())){
+            StpUtil.logout();
+            return new Result<User>(ResponseEnum.SUCCESS,null);
+        }else {
+            return new Result<User>(ResponseEnum.USER_NOT_LOGIN,null);
+        }
+
     }
 
     /**
@@ -78,20 +85,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UserMessage userMessage=new UserMessage();
         userMessage.setDepartmentName(departName);
         userMessage.setRoleName(roleName);
-        userMessage.setUserName(user.getUserName());
-        userMessage.setEmpNum(user.getEmpNum());
-        userMessage.setTelephone(user.getTelephone());
-        userMessage.setUserImage(user.getUserImage());
-        userMessage.setEmail(user.getEmail());
-        userMessage.setStatus(user.getStatus());
-        userMessage.setCtTime(user.getCtTime());
-        userMessage.setUpTime(user.getUpTime());
+        BeanUtil.copyProperties(user,userMessage);
+
         return new Result<UserMessage>(ResponseEnum.SUCCESS,userMessage);
     }
 /**
+ *
  * 管理员查询所有人
  * */
-
     @Override
     public Result<List<UserMessage>> selectALL(MyPage<User> page) {
         if(!StpUtil.isLogin(StpUtil.getLoginId())){
@@ -115,18 +116,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             UserMessage userMessage=new UserMessage();
             userMessage.setDepartmentName(departName);
             userMessage.setRoleName(roleName);
-            userMessage.setUserName(user.getUserName());
-            userMessage.setEmpNum(user.getEmpNum());
-            userMessage.setTelephone(user.getTelephone());
-            userMessage.setUserImage(user.getUserImage());
-            userMessage.setEmail(user.getEmail());
-            userMessage.setStatus(user.getStatus());
-            userMessage.setCtTime(user.getCtTime());
-            userMessage.setUpTime(user.getUpTime());
+            BeanUtil.copyProperties(user,userMessage);
             return userMessage;
         }).collect(Collectors.toList());
         return new Result<List<UserMessage>>(ResponseEnum.SUCCESS,userMessageList);
     }
+
 
     /**
      * 修改密码
