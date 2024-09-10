@@ -15,18 +15,25 @@ public class DepartController {
     private DepartServiceImpl deptServiceImpl;
 
     @GetMapping("/list")
-    public Result<Depart> selectALL(@RequestParam(defaultValue = "1") Integer pageNum,
+    public Result<Depart> selectALL(@RequestBody(required = false) Depart depart,
+                                    @RequestParam(defaultValue = "1") Integer pageNum,
                                     @RequestParam(defaultValue = "3") Integer pageSize){
-        return deptServiceImpl.selectPageAll(pageNum, pageSize);
+        return deptServiceImpl.selectPageAll(depart, pageNum, pageSize);
     }
 
     @GetMapping("/{id}")
     public Result<Depart> selectById(@PathVariable Integer id){
-        return deptServiceImpl.selectByID(id);
+        return deptServiceImpl.selectById(id);
     }
 
-    @GetMapping("/{name}")
-    public Result<Depart> selectByName(@PathVariable String name){
-        return deptServiceImpl.selectByName(name);
+    @PostMapping("/save")
+    public Result<Depart> selectById(@RequestBody(required = false) Depart depart){
+        return deptServiceImpl.saveDepart(depart);
     }
+
+    @DeleteMapping("/{id}")
+    public Result<Depart> deleteById(@PathVariable Integer id){
+        return deptServiceImpl.deleteById(id);
+    }
+
 }

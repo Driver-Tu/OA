@@ -7,9 +7,13 @@ import wh.fcfz.officecontroller.all.tool.Result;
 
 public interface DepartService extends IService<Depart> {
 
-    Result<Depart> selectPageAll(Integer pageNum, Integer pageSize);
+    Result<Depart> selectPageAll(Depart depart, Integer pageNum, Integer pageSize);
 
-    Result<Depart> selectByID(Integer id);
+    Result<Depart> selectById(Integer id);
 
-    Result<Depart> selectByName(String deptName);
+    Result<Depart> saveDepart(Depart depart);
+
+    Result<Depart> deleteById(Integer id);
+
+//    Result<Depart> selectByName(String deptName);
 }

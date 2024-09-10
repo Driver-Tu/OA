@@ -15,8 +15,14 @@ public enum ResponseEnum {
     DEPT_NOT_EXIST("10401","部门不存在"),
     DEPT_ID_NULL("10402","部门id为空"),
     DEPT_NAME_NULL("10403","部门名为空"),
+    DEPT_LIST_NULL("10404","部门列表为空"),
+    DEPART_SAVE_FAILED("10405", "部门新增失败" ),
+    DEPART_DELETE_FAILED("10406", "部门删除失败"),
 
-    PASSWORD_IS_NOT_TRUE("10602","老密码错误，无法修改密码");
+    DELETE_SERVER_FAILED("10603", "删除时异常"),
+    INTERNAL_SERVER_ERROR("10606","新增时异常" ),
+    PASSWORD_IS_NOT_TRUE("10602","老密码错误，无法修改密码"),
+    INVALID_PARAM("10601", "查询条件为空");
 
     private String code;
     private String message;
