@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "70f3643e-3847-467c-8d5f-25a55a7a7261",
+		"name": "Depart",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "多条件查询",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "satoken",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOjEsInJuU3RyIjoid1NLcmNuZEc3blJLN2lieWxkczlhQjNXU1JDVzlMa3gifQ.9SN-VF4grqM-rh4q8XcO7flwGdRbYy8bBzfAXPYgBMM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"departName\": \"销售\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:10086/dept/list",
+					"host": [
+						"localhost"
+					],
+					"port": "10086",
+					"path": [
+						"dept",
+						"list"
+					],
+					"query": [
+						{
+							"key": "deptName",
+							"value": "人事部",
+							"disabled": true
+						},
+						{
+							"key": "deptTelephone",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "根据id查询部门",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:10086/dept/1",
+					"host": [
+						"localhost"
+					],
+					"port": "10086",
+					"path": [
+						"dept",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增部门",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    // \"departId\": \"7\",\r\n    \"departName\":\"投资部\",\r\n    \"departTelephone\": \"15791798931\",\r\n    \"departEmail\": \"2424389790@qq.com\",\r\n    \"departMessage\": \"这个项目我投了\",\r\n    \"status\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8088/dept/save",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"dept",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新建请求",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8088/dept/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"dept",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新部门",
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

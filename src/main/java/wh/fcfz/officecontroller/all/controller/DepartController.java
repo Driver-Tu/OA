@@ -36,4 +36,9 @@ public class DepartController {
         return deptServiceImpl.deleteById(id);
     }
 
+    @PostMapping("/update")
+    public Result<Depart> upDateDept(@RequestBody(required = false) Depart depart){
+        return deptServiceImpl.updateDept(depart);
+    }
+
 }

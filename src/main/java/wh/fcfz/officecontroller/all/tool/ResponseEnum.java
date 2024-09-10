@@ -12,12 +12,13 @@ public enum ResponseEnum {
     PARAM_ERROR("10601","密码或者工号为空"),
 
 
-    DEPT_NOT_EXIST("10401","部门不存在"),
-    DEPT_ID_NULL("10402","部门id为空"),
+    DEPART_NOT_EXIST("10401","部门不存在"),
+    DEPART_ID_NULL("10402","部门id为空"),
     DEPT_NAME_NULL("10403","部门名为空"),
     DEPT_LIST_NULL("10404","部门列表为空"),
     DEPART_SAVE_FAILED("10405", "部门新增失败" ),
     DEPART_DELETE_FAILED("10406", "部门删除失败"),
+    DEPT_EXIST("10407", "部门已存在"),
 
     DELETE_SERVER_FAILED("10603", "删除时异常"),
     INTERNAL_SERVER_ERROR("10606","新增时异常" ),
