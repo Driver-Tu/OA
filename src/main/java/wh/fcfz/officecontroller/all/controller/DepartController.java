@@ -16,13 +16,18 @@ public class DepartController {
     private DepartServiceImpl deptServiceImpl;
 
     @GetMapping("/list")
-    public Result<Depart> SelectALL(@RequestParam(defaultValue = "1") Integer pageNum,
+    public Result<Depart> selectALL(@RequestParam(defaultValue = "1") Integer pageNum,
                                     @RequestParam(defaultValue = "3") Integer pageSize){
-        return deptServiceImpl.SelectPageALL(pageNum, pageSize);
+        return deptServiceImpl.selectPageAll(pageNum, pageSize);
     }
 
     @GetMapping("/{id}")
-    public Result<Depart> SelectById(@PathVariable Integer id){
-        return deptServiceImpl.SelectByID(id);
+    public Result<Depart> selectById(@PathVariable Integer id){
+        return deptServiceImpl.selectByID(id);
+    }
+
+    @GetMapping("/{name}")
+    public Result<Depart> selectByName(@PathVariable String name){
+        return deptServiceImpl.selectByName(name);
     }
 }

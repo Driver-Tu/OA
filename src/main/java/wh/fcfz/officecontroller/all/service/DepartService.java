@@ -9,8 +9,10 @@ import wh.fcfz.officecontroller.all.bean.User;
 
 public interface DepartService extends IService<Depart> {
 
-    Result<Depart> SelectPageALL(Integer pageNum, Integer pageSize);
+    Result<Depart> selectPageAll(Integer pageNum, Integer pageSize);
 
-    Result<Depart> SelectByID(Integer id);
+    Result<Depart> selectByID(Integer id);
+
+    Result<Depart> selectByName(String deptName);
 
 }
