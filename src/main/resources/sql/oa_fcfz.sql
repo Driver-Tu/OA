@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 10/09/2024 15:18:03
+ Date: 10/09/2024 17:16:22
 */
 
 SET NAMES utf8mb4;
@@ -94,20 +94,21 @@ CREATE TABLE `user`  (
   `user_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户密码',
   `telephone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '电话',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '电子邮箱',
-  `status` int NOT NULL COMMENT '状态（判断是否在工作）',
+  `status` int NOT NULL DEFAULT 1 COMMENT '状态（判断是否在工作）',
   `ct_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `up_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (1, 1, 1, '梁震南', '1yeWOPS3Kd', '5938189848', '123456', '192-0151-2897', 'liangzhenn8@qq.com', 0, '2024-09-10 15:13:01', '2024-09-10 15:13:01');
 INSERT INTO `user` VALUES (2, 2, 2, '萧璐', 'q8fX9ms3FS', '0640707652', '123456', '155-6121-6220', 'luxiao@qq.com', 0, '2024-09-10 11:07:21', NULL);
-INSERT INTO `user` VALUES (3, 3, 3, '何子异', '3StKs8VbER', '9917916138', '123456', '760-771-3163', 'ziyih@qq.com', 0, '2024-09-10 11:25:12', NULL);
-INSERT INTO `user` VALUES (4, 1, 4, '小王', 'IdK8vNyTNL', '9078376889', '1234567', '20-9969-0508', 'cai7@qq.com', 0, '2024-09-10 11:27:14', '2024-09-10 11:27:14');
+INSERT INTO `user` VALUES (3, 2, 3, '何子异', '3StKs8VbER', '9917916138', '123456', '760-771-3163', 'ziyih@qq.com', 0, '2024-09-10 16:39:59', NULL);
+INSERT INTO `user` VALUES (4, 2, 4, '小王', 'IdK8vNyTNL', '9078376889', '1234567', '20-9969-0508', 'cai7@qq.com', 0, '2024-09-10 16:40:03', '2024-09-10 11:27:14');
 INSERT INTO `user` VALUES (5, 2, 5, '曹岚', 'EiwJyvOFW4', '6418582407', '123456', '28-460-1738', 'lancao@qq.com', 0, '2024-09-10 11:07:28', NULL);
 INSERT INTO `user` VALUES (6, 3, 2, '黄岚', 'SHhufLveRR', '5855972111', '123456', '760-6340-3641', 'huang12@qq.com', 1, '2024-09-10 11:07:31', NULL);
+INSERT INTO `user` VALUES (7, 2, 2, '小涂', 'ssss', '20221107040', '123456', NULL, NULL, 1, '2024-09-10 16:46:42', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

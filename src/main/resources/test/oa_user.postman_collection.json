@@ -172,6 +172,14 @@
 						"header": []
 					},
 					"response": []
+				},
+				{
+					"name": "admin新增员工",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		}
