@@ -23,6 +23,7 @@ public class User {
   private String userPassword;
   private String telephone;
   private String email;
-  private long status;
-
+  private Integer status;
+  private java.sql.Timestamp ctTime;
+  private java.sql.Timestamp upTime;
 }

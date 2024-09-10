@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @TableName("role")
 public class Role {
     @TableId(type = IdType.AUTO)
-    private long roleId;
+    private Integer roleId;
     private String roleName;
     private String permissions;
     private java.sql.Timestamp ctTime;

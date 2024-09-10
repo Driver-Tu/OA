@@ -17,4 +17,6 @@ public class UserMessage {
   private String telephone;
   private String email;
   private Long status;
+  private java.sql.Timestamp ctTime;
+  private java.sql.Timestamp upTime;
 }
