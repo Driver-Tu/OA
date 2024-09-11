@@ -2,6 +2,7 @@ package wh.fcfz.officecontroller.all.bean;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -22,4 +23,7 @@ public class Depart {
   private java.sql.Timestamp ctTime;
   private java.sql.Timestamp upTime;
   private Integer status;
+
+  @TableField(exist = false)
+  private Integer employeeCount;
 }

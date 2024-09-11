@@ -11,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.Depart;
 import wh.fcfz.officecontroller.all.mapper.DepartMapper;
+import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.DepartService;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -21,6 +25,9 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
 
     @Autowired
     private DepartMapper departMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public Result<Depart> selectPageAll(Depart depart, Integer pageNum, Integer pageSize) {
@@ -39,8 +46,17 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
 
         if (departmentPage.getRecords().isEmpty()) {
             log.info("分页查询部门列表结果为空");
-            return new Result(ResponseEnum.DEPART_NOT_EXIST, departmentPage);
+            return new Result(ResponseEnum.DEPT_ID_NULL, departmentPage);
         }
+
+        // 使用 Stream API 来统计每个部门的人数，并设置到每个部门对象中
+        List<Depart> departmentsWithCounts = departmentPage.getRecords().stream()
+                .peek(dep -> dep.setEmployeeCount(userMapper.countByDepartmentId(dep.getDepartId())))
+                .collect(Collectors.toList());
+
+        count(new LambdaQueryWrapper<>());
+        // 将更新后的部门列表设置回分页对象中
+        departmentPage.setRecords(departmentsWithCounts);
 
         return new Result(ResponseEnum.SUCCESS, departmentPage);
     }
@@ -50,12 +66,12 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
     public Result<Depart> selectById(Integer id) {
         if(id == null) {
             log.error("查询 id 为空");
-            return new Result<>(ResponseEnum.DEPART_ID_NULL, null);
+            return new Result<>(ResponseEnum.DEPT_ID_NULL, null);
         }
         Depart depart = departMapper.selectById(id);
         if(depart == null) {
             log.error("未找到部门");
-            return new Result(ResponseEnum.DEPART_NOT_EXIST, depart);
+            return new Result(ResponseEnum.DEPT_NOT_EXIST, depart);
         }
         return new Result(ResponseEnum.SUCCESS, depart);
     }
@@ -95,7 +111,7 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
     public Result<Depart> deleteById(Integer id) {
         if (id == null) {
             log.error("删除部门信息为空");
-            return new Result(ResponseEnum.DEPART_ID_NULL, null);
+            return new Result(ResponseEnum.DEPT_ID_NULL, null);
         }
 
         try {
@@ -122,7 +138,7 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
             return new Result(ResponseEnum.SUCCESS,null);
         }else {
             log.error("部门更新失败, 该部门不存在");
-            return new Result(ResponseEnum.DEPART_NOT_EXIST,null);
+            return new Result(ResponseEnum.DEPT_NOT_EXIST,null);
         }
     }
 
