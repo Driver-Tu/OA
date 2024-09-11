@@ -25,6 +25,6 @@ public interface UserServeice extends IService<User> {
     Result<User> updateUserInfo(User user);
     //增加员工
     Result<User> saveUser(User user);
-    //删除员工
+    //删除员工s
     Result<String> deleteUser(List<Integer> ids);
 }

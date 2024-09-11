@@ -65,7 +65,7 @@ public class UserController {
     }
 
     /*
-    * 批量删除
+    * 批量删除ss
     * */
     @SaCheckPermission("admin")
     @DeleteMapping("/deleteUser")
