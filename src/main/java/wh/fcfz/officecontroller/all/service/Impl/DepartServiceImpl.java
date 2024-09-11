@@ -98,11 +98,11 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
                 return new Result(ResponseEnum.SUCCESS, depart);
             } else {
                 log.error("部门信息保存失败，depart: {}", JSONUtil.toJsonStr(depart));
-                return new Result(ResponseEnum.DEPART_SAVE_FAILED, depart);
+                return new Result(ResponseEnum.DEPT_SAVE_FAILED, depart);
             }
         } catch (Exception e) { // 统一处理其他异常
             log.error("保存部门信息时出现异常，depart: {}", depart, e);
-            return new Result(ResponseEnum.INTERNAL_SERVER_ERROR, null);
+            return new Result(ResponseEnum.DEPT_SAVE_FAILED, null);
         }
     }
 
@@ -120,7 +120,7 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
                 return new Result(ResponseEnum.SUCCESS, id);
             } else {
                 log.error("部门删除失败，depart: {}", id);
-                return new Result(ResponseEnum.DEPART_DELETE_FAILED, id); // 调整错误枚举更明确
+                return new Result(ResponseEnum.DEPT_DELETE_FAILED, id); // 调整错误枚举更明确
             }
         } catch (Exception e) {
             log.error("删除部门信息时出现异常，depart: {}", id, e);

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserMessage {
+  private Integer userId;
   private String userName;
   private String roleName;
   private String departmentName;

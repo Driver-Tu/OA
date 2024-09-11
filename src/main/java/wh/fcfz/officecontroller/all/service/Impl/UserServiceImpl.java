@@ -3,7 +3,6 @@ package wh.fcfz.officecontroller.all.service.Impl;
 import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -16,10 +15,14 @@ import wh.fcfz.officecontroller.all.bean.User;
 import wh.fcfz.officecontroller.all.dto.UserMessage;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.UserServeice;
+import wh.fcfz.officecontroller.all.tool.HashEncryption;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -127,30 +130,37 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 修改密码
      * */
     @Override
-    public Result<User> updatePassword(String oldPassword,String newPassword) {
-        if(!StpUtil.isLogin(StpUtil.getLoginId())){
-            return new Result<User>(ResponseEnum.USER_NOT_LOGIN,null);
-        }
-        if(oldPassword==null||newPassword==null){
-            return new Result<User>(ResponseEnum.PARAM_ERROR,null);
-        }
-        User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
-        LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
-        lambdaUpdateWrapper
-                .eq(User::getUserPassword,oldPassword)
-                .eq(User::getUserId,StpUtil.getLoginIdAsLong())
-                .set(User::getUserPassword,newPassword)
-                .set(User::getUpTime, DateTime.now());
+    public Result<User> updatePassword(String oldPassword,String newPassword){
         try {
-            if(userMapper.update(lambdaUpdateWrapper)>0){
-                return new Result<User>(ResponseEnum.SUCCESS,null);
-            }else {
-                return new Result<User>(ResponseEnum.PASSWORD_IS_NOT_TRUE,null);
+            String password=HashEncryption.encrypt(oldPassword);
+            if(!StpUtil.isLogin(StpUtil.getLoginId())){
+                return new Result<User>(ResponseEnum.USER_NOT_LOGIN,null);
+            }
+            if(password==null||newPassword==null){
+                return new Result<User>(ResponseEnum.PARAM_ERROR,null);
+            }
+            User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
+            LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
+            lambdaUpdateWrapper
+                    .eq(User::getUserPassword,oldPassword)
+                    .eq(User::getUserId,StpUtil.getLoginIdAsLong())
+                    .set(User::getUserPassword,HashEncryption.encrypt(newPassword))
+                    .set(User::getUpTime, DateTime.now());
+            try {
+                if(userMapper.update(lambdaUpdateWrapper)>0){
+                    return new Result<User>(ResponseEnum.SUCCESS,null);
+                }else {
+                    return new Result<User>(ResponseEnum.PASSWORD_IS_NOT_TRUE,null);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                return new Result<User>(ResponseEnum.UPDATE_SERVER_ERROR,null);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result<User>(ResponseEnum.UPDATE_SERVER_ERROR,null);
+            return new Result<User>(ResponseEnum.PASSWORD_IS_NULL,null);
         }
+
     }
 
     /**
@@ -176,6 +186,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
     }
 
+    /**
+     * admin添加用户
+     * */
     @Override
     public Result<User> saveUser(User user) {
         if (!StpUtil.isLogin(StpUtil.getLoginId())) {
@@ -195,11 +208,41 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         try {
             user.setCtTime(DateTime.now().toTimestamp());
-            int insert = userMapper.insert(user);
+            user.setUserPassword(HashEncryption.encrypt(user.getUserPassword()));
+            userMapper.insert(user);
             return new Result<User>(ResponseEnum.SUCCESS, null);
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result<User>(ResponseEnum.INTERNAL_SERVER_ERROR,null);
+            return new Result<User>(ResponseEnum.INSERT_SERVER_ERROR,null);
+        }
+
+    }
+
+    /*
+    *批量删除数据
+    *  */
+    @Override
+    public Result<String> deleteUser(List<Integer> ids) {
+        if (!StpUtil.isLogin(StpUtil.getLoginId())) {
+            return new Result<String>(ResponseEnum.USER_NOT_LOGIN, null);
+        }
+        List<String> deleteOkList=new ArrayList<>();
+        List<String> deleteNoList=new ArrayList<>();
+        //删除前先查询再删除
+        ids.forEach(id-> {
+            User user = userMapper.selectById(id);
+            if(user!=null){
+                deleteOkList.add(user.getUserName());
+            }else {
+                deleteNoList.add(user.getUserName());
+            }
+        });
+        try {
+            deleteOkList.forEach(id->userMapper.deleteById(id));
+            return new Result<String>(ResponseEnum.SUCCESS,"成功删除的数据为"+deleteOkList+"失败的数据为"+deleteNoList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result<String>(ResponseEnum.DELETE_SERVER_FAILED,null);
         }
     }
 

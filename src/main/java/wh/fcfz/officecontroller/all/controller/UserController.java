@@ -63,4 +63,13 @@ public class UserController {
     public Result<User> save(@RequestBody User user){
         return userService.saveUser(user);
     }
+
+    /*
+    * 批量删除
+    * */
+    @SaCheckPermission("admin")
+    @DeleteMapping("/deleteUser")
+    public Result<String> deleteUser(@RequestParam List<Integer> ids){
+        return userService.deleteUser(ids);
+    }
 }
