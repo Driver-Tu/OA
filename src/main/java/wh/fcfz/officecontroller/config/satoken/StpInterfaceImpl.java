@@ -1,6 +1,7 @@
 package wh.fcfz.officecontroller.config.satoken;
 
 import cn.dev33.satoken.stp.StpInterface;
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -27,6 +28,8 @@ public class StpInterfaceImpl implements StpInterface {
 
     @Override
     public List<String> getRoleList(Object o, String s) {
-        return null;
+        List<String> list = new ArrayList<String>();
+        list.add(userService.getById(StpUtil.getLoginIdAsLong()).getRoleId().toString());
+        return list;
     }
 }

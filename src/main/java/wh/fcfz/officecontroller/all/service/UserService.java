@@ -10,7 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-public interface UserServeice extends IService<User> {
+public interface UserService extends IService<User> {
     //登录
     Result<User> login(String empNum,String password);
     //根据id查个人信息

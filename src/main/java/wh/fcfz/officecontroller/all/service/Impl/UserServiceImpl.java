@@ -14,20 +14,18 @@ import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.User;
 import wh.fcfz.officecontroller.all.dto.UserMessage;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
-import wh.fcfz.officecontroller.all.service.UserServeice;
+import wh.fcfz.officecontroller.all.service.UserService;
 import wh.fcfz.officecontroller.all.tool.HashEncryption;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserServeice {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
     private UserMapper userMapper;

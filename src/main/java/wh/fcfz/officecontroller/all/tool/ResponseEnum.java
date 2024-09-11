@@ -9,6 +9,7 @@ public enum ResponseEnum {
     USER_NOT_LOGIN("10302","用户未登录"),
     USER_IS_LOGIN("10303","用户已登录"),
     USER_IS_EXIST("10304", "用户已经存在"),
+    USER_NOT_PERMISSION("10305", "用户权限不够"),
     DEPT_NOT_EXIST("10401","部门不存在"),
     DEPT_ID_NULL("10402","部门id为空"),
     DEPT_NAME_NULL("10403","部门名为空"),
