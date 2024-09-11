@@ -37,13 +37,12 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
         }
 
         Page<Depart> page = new Page<>(pageNum, pageSize);
-        Page<Depart> departmentPage = departMapper.selectPage(page, null);
         LambdaQueryWrapper<Depart> lambdaQueryWrapper = new LambdaQueryWrapper();
         lambdaQueryWrapper.like(depart.getDepartName() != null, Depart::getDepartName, depart.getDepartName())
                 .eq(depart.getDepartTelephone() != null, Depart::getDepartTelephone, depart.getDepartTelephone())
                 .eq(depart.getDepartEmail() != null, Depart::getDepartEmail, depart.getDepartEmail())
                 .eq(depart.getStatus() != null, Depart::getStatus, depart.getStatus());
-
+        Page<Depart> departmentPage = departMapper.selectPage(page, lambdaQueryWrapper);
         if (departmentPage.getRecords().isEmpty()) {
             log.info("分页查询部门列表结果为空");
             return new Result(ResponseEnum.DEPT_ID_NULL, departmentPage);
@@ -54,7 +53,6 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
                 .peek(dep -> dep.setEmployeeCount(userMapper.countByDepartmentId(dep.getDepartId())))
                 .collect(Collectors.toList());
 
-        count(new LambdaQueryWrapper<>());
         // 将更新后的部门列表设置回分页对象中
         departmentPage.setRecords(departmentsWithCounts);
 
