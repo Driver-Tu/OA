@@ -26,9 +26,6 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
     @Autowired
     private DepartMapper departMapper;
 
-    @Autowired
-    private UserMapper userMapper;
-
     @Override
     public Result<Depart> selectPageAll(Depart depart, Integer pageNum, Integer pageSize) {
         if (pageNum == null || pageSize == null) {
@@ -50,7 +47,7 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
 
         // 使用 Stream API 来统计每个部门的人数，并设置到每个部门对象中
         List<Depart> departmentsWithCounts = departmentPage.getRecords().stream()
-                .peek(dep -> dep.setEmployeeCount(userMapper.countByDepartmentId(dep.getDepartId())))
+                .peek(dep -> dep.setEmployeeCount(departMapper.countByDepartmentId(dep.getDepartId())))
                 .collect(Collectors.toList());
 
         // 将更新后的部门列表设置回分页对象中
