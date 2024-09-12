@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import wh.fcfz.officecontroller.all.bean.Depart;
 import wh.fcfz.officecontroller.all.tool.Result;
 
+import java.util.List;
+
 
 public interface DepartService extends IService<Depart> {
 
@@ -17,5 +19,6 @@ public interface DepartService extends IService<Depart> {
 
     Result<Depart> updateDept(Depart depart);
 
-//    Result<Depart> selectByName(String deptName);
+    Result<String> deleteDeptsBatch(List<Integer> ids);
+
 }

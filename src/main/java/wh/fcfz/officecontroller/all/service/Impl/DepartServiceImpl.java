@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.Depart;
 import wh.fcfz.officecontroller.all.mapper.DepartMapper;
-import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.DepartService;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
@@ -137,21 +136,25 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
         }
     }
 
-//    @Override
-//    public Result<Depart> selectByName(String deptName) {
-//
-//        if(deptName == null) {
-//            log.error("查询部门名称为空");
-//            return new Result<>(ResponseEnum.DEPT_NAME_NULL, null);
-//        }
-//        LambdaQueryWrapper<Depart> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-//        lambdaQueryWrapper.eq(Depart::getDepartName, deptName);
-//        List<Depart> depart = departMapper.selectList(lambdaQueryWrapper);
-//        if(depart == null || depart.isEmpty()) {
-//            log.error("未找到部门");
-//            return new Result(ResponseEnum.DEPT_NOT_EXIST, depart);
-//        }
-//
-//        return new Result(ResponseEnum.SUCCESS, depart);
-//    }
+    @Override
+    public Result<String> deleteDeptsBatch(List<Integer> ids) {
+
+        if(ids == null || ids.isEmpty()) {
+            log.error("删除部门信息为空");
+            return new Result(ResponseEnum.DEPT_ID_NULL, null);
+        }
+        try {
+            if(departMapper.deleteBatchIds(ids)>0){
+                log.info("部门删除成功");
+                return new Result(ResponseEnum.SUCCESS,null);
+            }else {
+                log.error("部门删除失败，该部门不存在");
+                return new Result(ResponseEnum.DEPT_NOT_EXIST,null);
+            }
+        } catch (Exception e) {
+            log.error("删除部门信息时出现异常，depart: {}", ids, e);
+            return new Result(ResponseEnum.DELETE_SERVER_FAILED,null);
+        }
+    }
+
 }
