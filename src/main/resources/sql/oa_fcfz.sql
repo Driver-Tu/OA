@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 12/09/2024 09:57:00
+ Date: 12/09/2024 16:22:45
 */
 
 SET NAMES utf8mb4;
@@ -66,19 +66,31 @@ INSERT INTO `depart` VALUES (5, '技术部', '148-5422-0199', 'ziyiden515@qq.com
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu`  (
   `menu_id` int NOT NULL AUTO_INCREMENT COMMENT '主菜单id',
-  `menu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `permission` int NOT NULL,
+  `menu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '名称',
+  `permission` int NOT NULL COMMENT '职权',
+  `menu_router` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '路由',
+  `type` int NOT NULL COMMENT '层级（几层）',
+  `father_menu_id` int NOT NULL COMMENT '父id',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES (1, '首页', 2);
-INSERT INTO `menu` VALUES (2, '企业管理', 2);
-INSERT INTO `menu` VALUES (3, '考勤信息', 3);
-INSERT INTO `menu` VALUES (4, 'OA审批', 3);
-INSERT INTO `menu` VALUES (5, '员工信息', 3);
+INSERT INTO `menu` VALUES (1, '首页', 2, '/hose', 1, 0);
+INSERT INTO `menu` VALUES (2, '企业管理', 2, '/dept', 1, 0);
+INSERT INTO `menu` VALUES (3, '考勤信息', 3, '/check', 1, 0);
+INSERT INTO `menu` VALUES (4, 'OA审批', 3, '/oaflow', 1, 0);
+INSERT INTO `menu` VALUES (5, '员工信息', 3, '/people', 1, 0);
+INSERT INTO `menu` VALUES (6, '其他', 3, '/other', 1, 0);
+INSERT INTO `menu` VALUES (7, '主页', 3, '/houseAll/main', 2, 1);
+INSERT INTO `menu` VALUES (8, '人员管理', 2, '/dept/member', 2, 2);
+INSERT INTO `menu` VALUES (9, '部门管理', 2, '/dept/department', 2, 2);
+INSERT INTO `menu` VALUES (10, '职位管理', 2, '/dept/role', 2, 2);
+INSERT INTO `menu` VALUES (11, '打卡信息', 3, '/check/message', 2, 3);
+INSERT INTO `menu` VALUES (12, '考勤管理', 2, '/check/controller', 2, 3);
+INSERT INTO `menu` VALUES (13, '可视化界面', 3, '/check/message/echart', 3, 11);
+INSERT INTO `menu` VALUES (14, '细致分析', 3, '/check/message/echart/detail', 3, 13);
 
 -- ----------------------------
 -- Table structure for role
@@ -99,29 +111,6 @@ CREATE TABLE `role`  (
 INSERT INTO `role` VALUES (1, 'boss', '1', '2018-08-07 17:32:32', '2019-11-27 21:02:31');
 INSERT INTO `role` VALUES (2, 'admin', '2', '2012-01-09 13:27:48', '2002-10-03 15:31:56');
 INSERT INTO `role` VALUES (3, 'user', '3', '2017-06-12 03:23:46', '2000-06-16 23:13:48');
-
--- ----------------------------
--- Table structure for son_menu
--- ----------------------------
-DROP TABLE IF EXISTS `son_menu`;
-CREATE TABLE `son_menu`  (
-  `son_menu_id` int NOT NULL AUTO_INCREMENT,
-  `son_menu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `son_menu_router` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `son_menu_father` int NOT NULL,
-  `son_menu_permission` int NOT NULL,
-  PRIMARY KEY (`son_menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of son_menu
--- ----------------------------
-INSERT INTO `son_menu` VALUES (1, '主页', '/houseAll/main', 1, 3);
-INSERT INTO `son_menu` VALUES (2, '人员管理', '/dept/member', 2, 2);
-INSERT INTO `son_menu` VALUES (3, '部门管理', '/dept/deptment', 2, 2);
-INSERT INTO `son_menu` VALUES (4, '职位管理', '/dept/role', 2, 2);
-INSERT INTO `son_menu` VALUES (5, '打卡信息', '/check/message', 3, 3);
-INSERT INTO `son_menu` VALUES (6, '考勤管理', '/check/controller', 3, 2);
 
 -- ----------------------------
 -- Table structure for user

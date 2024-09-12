@@ -276,12 +276,12 @@
 						"header": [
 							{
 								"key": "satoken",
-								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOjcsInJuU3RyIjoicndkRHRDOUFoUE84YmFpRTJXbUJkOG5HTEZPOEJ3MWgifQ.g0JlkNCGN-uIqXDqxV87Cfobc7Qi_uaOoz5bWqFip_c",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOjcsInJuU3RyIjoiZm4yYVo3M0lrVEhCVkZ1N3MzV0t1ZFhndUt6cHg0RjQifQ.XOkQlG5fW39E9QqUDbz2ImjDETUeP6MdPz6w3cf_W4o",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8088/menu/selectById",
+							"raw": "http://localhost:8088/menu/getMenuTree",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -289,7 +289,83 @@
 							"port": "8088",
 							"path": [
 								"menu",
-								"selectById"
+								"getMenuTree"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加菜单",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "satoken",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOjcsInJuU3RyIjoib0xyNEh2UTFOTFdJMm9UcDd4b3ZPcFVYVXpQN21ISTcifQ.NwwQUowzLT54y18PPyoikZ2x1HgdrHrDa9u7IL5LSNw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"menuName\":\"其他\",\r\n\"permission\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/menu/saveMenu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"menu",
+								"saveMenu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "添加子菜单",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "satoken",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOjcsInJuU3RyIjoiNGoxZnhZYXppUGltV0t0bUlJOURQZFp3WUJxWnQ0b1AifQ.y2Flu1KnADp5R8Nt2py1ij9d-xi11n2p-ARTeQDIbQY",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"sonMenuName\":\"回收站\",\r\n   \"sonMenuRouter\":\"\",\r\n   \"\": \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/menu/saveSonMenu?menuId=6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"menu",
+								"saveSonMenu"
+							],
+							"query": [
+								{
+									"key": "menuId",
+									"value": "6"
+								}
 							]
 						}
 					},

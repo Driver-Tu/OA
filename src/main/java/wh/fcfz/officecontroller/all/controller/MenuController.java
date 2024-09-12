@@ -16,8 +16,8 @@ public class MenuController {
     @Autowired
     private MenuServiceImpl menuService;
 
-    @GetMapping("/selectById")
+    @GetMapping("/getMenuTree")
     public Result<List<MenuMessage>> selectById(){
-        return menuService.selectById();
+        return menuService.getMenuTree();
     }
 }

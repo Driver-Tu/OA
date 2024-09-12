@@ -8,5 +8,5 @@ import wh.fcfz.officecontroller.all.tool.Result;
 import java.util.List;
 
 public interface MenuService extends IService<Menu> {
-    Result<List<MenuMessage>> selectById();
+    Result<List<MenuMessage>> getMenuTree();
 }
