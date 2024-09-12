@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 10/09/2024 17:16:22
+ Date: 12/09/2024 09:57:00
 */
 
 SET NAMES utf8mb4;
@@ -40,7 +40,7 @@ CREATE TABLE `attendance`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `depart`;
 CREATE TABLE `depart`  (
-  `depart_id` int NOT NULL COMMENT '部门id',
+  `depart_id` int NOT NULL AUTO_INCREMENT COMMENT '部门id',
   `depart_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '部门名称',
   `depart_telephone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '部门电话号码',
   `depart_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '部门邮箱',
@@ -49,7 +49,7 @@ CREATE TABLE `depart`  (
   `up_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `status` int NOT NULL DEFAULT 1 COMMENT '1是活跃，0是休息',
   PRIMARY KEY (`depart_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of depart
@@ -59,6 +59,26 @@ INSERT INTO `depart` VALUES (2, '人事部', '171-1132-3748', 'yunxidai9@qq.com'
 INSERT INTO `depart` VALUES (3, '综合部', '755-455-4310', 'yuningfeng@qq.com', 'fuXJrZpQWN', '2019-01-05 15:02:32', NULL, 0);
 INSERT INTO `depart` VALUES (4, '财务部', '143-1154-5502', 'lzh123@qq.com', 'C9aJV40flW', '2018-04-19 01:34:43', NULL, 0);
 INSERT INTO `depart` VALUES (5, '技术部', '148-5422-0199', 'ziyiden515@qq.com', 'IaVnwDunpq', '2012-02-05 08:22:18', NULL, 0);
+
+-- ----------------------------
+-- Table structure for menu
+-- ----------------------------
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu`  (
+  `menu_id` int NOT NULL AUTO_INCREMENT COMMENT '主菜单id',
+  `menu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `permission` int NOT NULL,
+  PRIMARY KEY (`menu_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of menu
+-- ----------------------------
+INSERT INTO `menu` VALUES (1, '首页', 2);
+INSERT INTO `menu` VALUES (2, '企业管理', 2);
+INSERT INTO `menu` VALUES (3, '考勤信息', 3);
+INSERT INTO `menu` VALUES (4, 'OA审批', 3);
+INSERT INTO `menu` VALUES (5, '员工信息', 3);
 
 -- ----------------------------
 -- Table structure for role
@@ -79,6 +99,29 @@ CREATE TABLE `role`  (
 INSERT INTO `role` VALUES (1, 'boss', '1', '2018-08-07 17:32:32', '2019-11-27 21:02:31');
 INSERT INTO `role` VALUES (2, 'admin', '2', '2012-01-09 13:27:48', '2002-10-03 15:31:56');
 INSERT INTO `role` VALUES (3, 'user', '3', '2017-06-12 03:23:46', '2000-06-16 23:13:48');
+
+-- ----------------------------
+-- Table structure for son_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `son_menu`;
+CREATE TABLE `son_menu`  (
+  `son_menu_id` int NOT NULL AUTO_INCREMENT,
+  `son_menu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `son_menu_router` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `son_menu_father` int NOT NULL,
+  `son_menu_permission` int NOT NULL,
+  PRIMARY KEY (`son_menu_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of son_menu
+-- ----------------------------
+INSERT INTO `son_menu` VALUES (1, '主页', '/houseAll/main', 1, 3);
+INSERT INTO `son_menu` VALUES (2, '人员管理', '/dept/member', 2, 2);
+INSERT INTO `son_menu` VALUES (3, '部门管理', '/dept/deptment', 2, 2);
+INSERT INTO `son_menu` VALUES (4, '职位管理', '/dept/role', 2, 2);
+INSERT INTO `son_menu` VALUES (5, '打卡信息', '/check/message', 3, 3);
+INSERT INTO `son_menu` VALUES (6, '考勤管理', '/check/controller', 3, 2);
 
 -- ----------------------------
 -- Table structure for user
@@ -106,7 +149,6 @@ CREATE TABLE `user`  (
 INSERT INTO `user` VALUES (1, 1, 1, '梁震南', '1yeWOPS3Kd', '5938189848', '123456', '192-0151-2897', 'liangzhenn8@qq.com', 0, '2024-09-10 15:13:01', '2024-09-10 15:13:01');
 INSERT INTO `user` VALUES (2, 2, 2, '萧璐', 'q8fX9ms3FS', '0640707652', '123456', '155-6121-6220', 'luxiao@qq.com', 0, '2024-09-10 11:07:21', NULL);
 INSERT INTO `user` VALUES (3, 2, 3, '何子异', '3StKs8VbER', '9917916138', '123456', '760-771-3163', 'ziyih@qq.com', 0, '2024-09-10 16:39:59', NULL);
-INSERT INTO `user` VALUES (4, 2, 4, '小王', 'IdK8vNyTNL', '9078376889', '1234567', '20-9969-0508', 'cai7@qq.com', 0, '2024-09-10 16:40:03', '2024-09-10 11:27:14');
 INSERT INTO `user` VALUES (5, 2, 5, '曹岚', 'EiwJyvOFW4', '6418582407', '123456', '28-460-1738', 'lancao@qq.com', 0, '2024-09-10 11:07:28', NULL);
 INSERT INTO `user` VALUES (6, 3, 2, '黄岚', 'SHhufLveRR', '5855972111', '123456', '760-6340-3641', 'huang12@qq.com', 1, '2024-09-10 11:07:31', NULL);
 INSERT INTO `user` VALUES (7, 2, 2, '小涂', 'ssss', '20221107040', '123456', NULL, NULL, 1, '2024-09-10 16:46:42', NULL);
