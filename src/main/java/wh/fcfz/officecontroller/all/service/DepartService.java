@@ -15,8 +15,6 @@ public interface DepartService extends IService<Depart> {
 
     Result<Depart> saveDepart(Depart depart);
 
-    Result<Depart> deleteById(Integer id);
-
     Result<Depart> updateDept(Depart depart);
 
     Result<String> deleteDeptsBatch(List<Integer> ids);

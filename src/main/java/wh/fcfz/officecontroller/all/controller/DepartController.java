@@ -29,16 +29,12 @@ public class DepartController {
         return deptService.selectById(id);
     }
 
+    @SaCheckPermission("admin")
     @PostMapping("/save")
     public Result<Depart> selectById(@RequestBody(required = false) Depart depart){
         return deptService.saveDepart(depart);
     }
 
-    @SaCheckPermission("admin")
-    @DeleteMapping("/{id}")
-    public Result<Depart> deleteById(@PathVariable Integer id){
-        return deptService.deleteById(id);
-    }
 
     @SaCheckPermission("admin")
     @PostMapping("/update")

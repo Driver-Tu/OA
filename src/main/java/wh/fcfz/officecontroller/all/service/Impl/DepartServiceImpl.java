@@ -100,28 +100,6 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
         }
     }
 
-
-    @Override
-    public Result<Depart> deleteById(Integer id) {
-        if (id == null) {
-            log.error("删除部门信息为空");
-            return new Result(ResponseEnum.DEPT_ID_NULL, null);
-        }
-
-        try {
-            if (departMapper.deleteById(id) > 0) {
-                log.info("部门删除成功，id: {}", id);
-                return new Result(ResponseEnum.SUCCESS, id);
-            } else {
-                log.error("部门删除失败，depart: {}", id);
-                return new Result(ResponseEnum.DEPT_DELETE_FAILED, id); // 调整错误枚举更明确
-            }
-        } catch (Exception e) {
-            log.error("删除部门信息时出现异常，depart: {}", id, e);
-            return new Result(ResponseEnum.DELETE_SERVER_FAILED, null);
-        }
-    }
-
     @Override
     public Result<Depart> updateDept(Depart depart) {
         LambdaUpdateWrapper<Depart> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
