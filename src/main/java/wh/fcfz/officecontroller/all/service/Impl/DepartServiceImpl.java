@@ -76,7 +76,6 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
             log.error("部门信息为空");
             return new Result(ResponseEnum.INVALID_PARAM, null);
         }
-
         LambdaQueryWrapper<Depart> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(Depart::getDepartName, depart.getDepartName());
         if (departMapper.selectOne(lambdaQueryWrapper) != null) {

@@ -29,6 +29,10 @@ public class DepartController {
         return deptService.selectById(id);
     }
 
+    //日志
+    //1
+    //申报附件
+    //对审批进行增加时
     @SaCheckPermission("admin")
     @PostMapping("/save")
     public Result<Depart> selectById(@RequestBody(required = false) Depart depart){
@@ -41,11 +45,14 @@ public class DepartController {
     public Result<Depart> upDateDept(@RequestBody(required = false) Depart depart){
         return deptService.updateDept(depart);
     }
-
+//上传到网页（变量）
+    //提交
+    //日志模块
+    //审批模块
+    //
     @SaCheckPermission("admin")
     @DeleteMapping("/delete-batch")
     public Result<String> deleteDeptsBatch(@RequestBody List<Integer> ids){
         return deptService.deleteDeptsBatch(ids);
     }
-
 }

@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import static wh.fcfz.officecontroller.config.SystemConfig.DEFAULT_PAGE_NUM;
-import static wh.fcfz.officecontroller.config.SystemConfig.DEFAULT_PAGE_SIZE;
+import static wh.fcfz.officecontroller.config.file.SystemConfig.DEFAULT_PAGE_NUM;
+import static wh.fcfz.officecontroller.config.file.SystemConfig.DEFAULT_PAGE_SIZE;
 
 @Data
 @AllArgsConstructor
