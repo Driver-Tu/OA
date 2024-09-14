@@ -4,7 +4,10 @@ package wh.fcfz.officecontroller.config.file;
 public class SystemConfig {
 
     // 文件上传根目录（静态属性）
-    public static final String FILE_UPLOAD_ROOT_DIR="D://file//审批//";
+    public static final String FILE_UPLOAD_ROOT_DIR = "D:/My Project/myOASys/src/main/resources/file/";
+    public static final String DECLARE_REIMBURSE_FILE_DIR = "/declare/reimburse/";
+
+
 
     // 分页默认配置
     public static final int DEFAULT_PAGE_NUM = 1;

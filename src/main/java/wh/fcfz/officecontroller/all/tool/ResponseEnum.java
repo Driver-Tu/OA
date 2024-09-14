@@ -25,7 +25,10 @@ public enum ResponseEnum {
     INVALID_PARAM("10603", "查询条件为空"),
     DELETE_SERVER_FAILED("10703", "删除时异常"),
     INSERT_SERVER_ERROR("10706","新增时异常" ),
-    UPDATE_SERVER_ERROR("10707","修改时异常" );
+    UPDATE_SERVER_ERROR("10707","修改时异常" ),
+    FILE_UPLOAD_ERROR("10801", "文件上传失败"),
+    FILE_IS_NULL("10802", "文件为空");
+//    FILE_UPLOAD_ERROR("10802", "文件上传成功");
 
     private String code;
     private String message;
