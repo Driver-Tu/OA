@@ -16,73 +16,73 @@ import java.sql.Timestamp;
 public class File {
 
     /**
-     * Unique identifier for the attachment.
+     * 附件的唯一标识符。
      */
     @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
-     * Name of the file.
+     * 文件名称。
      */
     private String fileName;
 
     /**
-     * UUID of the file for unique identification.
+     * 文件的 UUID，用于唯一标识。
      */
     private String fileUuid;
 
     /**
-     * Path of the file on the disk.
+     * 文件在磁盘上的路径。
      */
     private String filePath;
 
     /**
-     * Size of the file in bytes.
+     * 文件大小（以字节为单位）。
      */
     private Long fileSize;
 
     /**
-     * Type of the file (e.g., pdf).
+     * 文件类型（例如 pdf）。
      */
     private String fileType;
 
     /**
-     * URL to access the file on the cloud server.
+     * 在云服务器上访问文件的 URL。
      */
     private String fileUrl;
 
     /**
-     * Additional description or notes about the file.
+     * 关于文件的附加描述或备注。
      */
     private String description;
 
     /**
-     * ID of the user who uploaded the file.
+     * 上传文件的用户 ID。
      */
     private Integer uploaderId;
 
     /**
-     * Timestamp when the file was uploaded.
+     * 文件上传的时间戳。
      */
     private Timestamp uploadTime;
 
     /**
-     * Type of business the file is associated with (e.g., reimbursement, travel).
+     * 文件关联的业务类型（例如报销、出差）。
      */
     private String businessType;
 
     /**
-     * ID of the business record associated with the file.
+     * 关联的业务记录 ID。
      */
     private Integer businessId;
 
     /**
-     * ID of the user who owns the file.
+     * 文件拥有者的 ID。
      */
     private Integer fileOwnerId;
 
     /**
-     * Status of the file (0 - deleted, 1 - normal, 2 - archived).
+     * 文件的状态（0 - 已删除，1 - 正常，2 - 已归档）。
      */
     private Byte fileStatus;
 }

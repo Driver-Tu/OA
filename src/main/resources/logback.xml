@@ -15,7 +15,7 @@
     <!-- 单个日志文件的最大大小 -->
     <property name="maxFileSize" value="5MB" />
     <!--格式化输出：%d表示日期，%t：表示线程名，%-5level：级别从左显示5个字符宽度，%c:类全路径，%msg：日志消息，%M:方法名，%L：日志所属行号，%n：换行符（Windows平台为"\r\n"，Unix平台为"\n"） -->
-    <property name="FORMAT" value="[%X{TRACE_ID}] - %-5level %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %c.%M：%L：%msg%n"/>
+    <property name="FORMAT" value="%d{yyyy-MM-dd HH:mm:ss.SSS}|%highlight(%level)|%cyan(%thread)|%yellow(%logger{1})|%green(line-%line)|%blue(%X{traceId})|%m%n"/>
 
     <!-- ConsoleAppender 控制台输出日志 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -24,6 +24,9 @@
                 <!-- 设置日志输出格式 -->
                 ${FORMAT}
             </pattern>
+            <charset>
+                ${charset}
+            </charset>
         </encoder>
     </appender>
 
