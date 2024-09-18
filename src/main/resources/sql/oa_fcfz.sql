@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : localhost
+ Source Server         : mysql8
  Source Server Type    : MySQL
- Source Server Version : 80039 (8.0.39)
+ Source Server Version : 80036 (8.0.36)
  Source Host           : localhost:3306
  Source Schema         : oa_fcfz
 
  Target Server Type    : MySQL
- Target Server Version : 80039 (8.0.39)
+ Target Server Version : 80036 (8.0.36)
  File Encoding         : 65001
 
- Date: 12/09/2024 16:22:45
+ Date: 18/09/2024 14:10:32
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `attendance`  (
   `date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '打卡日期',
   `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '打卡状态',
   PRIMARY KEY (`attendance_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attendance
@@ -49,7 +49,7 @@ CREATE TABLE `depart`  (
   `up_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   `status` int NOT NULL DEFAULT 1 COMMENT '1是活跃，0是休息',
   PRIMARY KEY (`depart_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of depart
@@ -59,6 +59,32 @@ INSERT INTO `depart` VALUES (2, '人事部', '171-1132-3748', 'yunxidai9@qq.com'
 INSERT INTO `depart` VALUES (3, '综合部', '755-455-4310', 'yuningfeng@qq.com', 'fuXJrZpQWN', '2019-01-05 15:02:32', NULL, 0);
 INSERT INTO `depart` VALUES (4, '财务部', '143-1154-5502', 'lzh123@qq.com', 'C9aJV40flW', '2018-04-19 01:34:43', NULL, 0);
 INSERT INTO `depart` VALUES (5, '技术部', '148-5422-0199', 'ziyiden515@qq.com', 'IaVnwDunpq', '2012-02-05 08:22:18', NULL, 0);
+
+-- ----------------------------
+-- Table structure for file
+-- ----------------------------
+DROP TABLE IF EXISTS `file`;
+CREATE TABLE `file`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '主键 ID',
+  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '文件名称',
+  `file_uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '存储文件被 uuid 化后的文件名',
+  `file_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '文件截取根路径的子路径，是磁盘路径',
+  `file_size` bigint NULL DEFAULT NULL COMMENT '文件大小',
+  `file_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '文件类型 pdf',
+  `file_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '如有即是云服务器中访问文件的路径',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '特殊备注，或描述',
+  `uploader_id` int NULL DEFAULT NULL COMMENT '上传人 ID',
+  `upload_time` datetime NULL DEFAULT NULL COMMENT '上传时间',
+  `business_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '业务类型，',
+  `business_id` int NULL DEFAULT NULL COMMENT '关联业务 ID',
+  `file_owner_id` int NULL DEFAULT NULL COMMENT '文件拥有者 ID',
+  `file_status` tinyint NULL DEFAULT NULL COMMENT '0 代表已删除，1 代表正常，2 代表已归档',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of file
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for menu
@@ -72,7 +98,7 @@ CREATE TABLE `menu`  (
   `type` int NOT NULL COMMENT '层级（几层）',
   `father_menu_id` int NOT NULL COMMENT '父id',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menu
@@ -90,7 +116,6 @@ INSERT INTO `menu` VALUES (10, '职位管理', 2, '/dept/role', 2, 2);
 INSERT INTO `menu` VALUES (11, '打卡信息', 3, '/check/message', 2, 3);
 INSERT INTO `menu` VALUES (12, '考勤管理', 2, '/check/controller', 2, 3);
 INSERT INTO `menu` VALUES (13, '可视化界面', 3, '/check/message/echart', 3, 11);
-INSERT INTO `menu` VALUES (14, '细致分析', 3, '/check/message/echart/detail', 3, 13);
 
 -- ----------------------------
 -- Table structure for role
@@ -103,7 +128,7 @@ CREATE TABLE `role`  (
   `ct_time` datetime NOT NULL COMMENT '新增时间',
   `up_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role
@@ -111,6 +136,29 @@ CREATE TABLE `role`  (
 INSERT INTO `role` VALUES (1, 'boss', '1', '2018-08-07 17:32:32', '2019-11-27 21:02:31');
 INSERT INTO `role` VALUES (2, 'admin', '2', '2012-01-09 13:27:48', '2002-10-03 15:31:56');
 INSERT INTO `role` VALUES (3, 'user', '3', '2017-06-12 03:23:46', '2000-06-16 23:13:48');
+
+-- ----------------------------
+-- Table structure for son_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `son_menu`;
+CREATE TABLE `son_menu`  (
+  `son_menu_id` int NOT NULL AUTO_INCREMENT,
+  `son_menu_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `son_menu_router` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `son_menu_father` int NOT NULL,
+  `son_menu_permission` int NOT NULL,
+  PRIMARY KEY (`son_menu_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of son_menu
+-- ----------------------------
+INSERT INTO `son_menu` VALUES (1, '主页', '/houseAll/main', 1, 3);
+INSERT INTO `son_menu` VALUES (2, '人员管理', '/dept/member', 2, 2);
+INSERT INTO `son_menu` VALUES (3, '部门管理', '/dept/deptment', 2, 2);
+INSERT INTO `son_menu` VALUES (4, '职位管理', '/dept/role', 2, 2);
+INSERT INTO `son_menu` VALUES (5, '打卡信息', '/check/message', 3, 3);
+INSERT INTO `son_menu` VALUES (6, '考勤管理', '/check/controller', 3, 2);
 
 -- ----------------------------
 -- Table structure for user
@@ -130,7 +178,7 @@ CREATE TABLE `user`  (
   `ct_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `up_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
