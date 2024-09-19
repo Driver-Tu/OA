@@ -1,10 +1,16 @@
 package wh.fcfz.officecontroller.config.file;
 
 
+import org.springframework.context.annotation.Configuration;
+
+import java.io.File;
+import java.net.URISyntaxException;
+
+
 public class SystemConfig {
 
     // 文件上传根目录（静态属性）
-    public static final String FILE_UPLOAD_ROOT_DIR = "D:/My Project/myOASys/src/main/resources/file/";
+    public static final String FILE_UPLOAD_ROOT_DIR = "D:\\Projects\\WeSpace\\WeOfficeSys\\OA\\src\\main\\resources\\file";
     public static final String DECLARE_REIMBURSE_FILE_DIR = "/declare/reimburse/";
 
 
@@ -28,7 +34,7 @@ public class SystemConfig {
 //
 //            // 检查文件夹是否存在，如果不存在则创建它
 //            if (!file.exists()) {
-//                file.mkdirs();
+//                new File(FILE_UPLOAD_ROOT_DIR).mkdirs();
 //            }
 //        } catch (URISyntaxException | NullPointerException e) {
 //            throw new RuntimeException("Failed to initialize file upload root directory", e);

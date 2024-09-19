@@ -79,7 +79,7 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
         LambdaQueryWrapper<Depart> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(Depart::getDepartName, depart.getDepartName());
         if (departMapper.selectOne(lambdaQueryWrapper) != null) {
-            log.error("部门已存在");
+            log.error("该部门已被创建");
             return new Result(ResponseEnum.DEPT_EXIST, depart);
         }
 
