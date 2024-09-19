@@ -51,7 +51,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         StpUtil.login(user.getUserId(),
                 //设置登录token存在时间
-                new SaLoginModel().setTimeout(60*60));
+                new SaLoginModel().setTimeout(60*10));
         return new Result(ResponseEnum.SUCCESS,StpUtil.getTokenInfo());
     }
 

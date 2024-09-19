@@ -31,7 +31,7 @@ public enum ResponseEnum {
 //    FILE_UPLOAD_ERROR("10802", "文件上传成功");
 
     private String code;
-    private String message;
+    private String msg;
     public String getCode() {
         return code;
     }
@@ -40,18 +40,18 @@ public enum ResponseEnum {
         this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
     // 没有public  这个构造方法 不能用到外面去  只能在这个类中被使用（提示的信息 只能在内部生成）
-    ResponseEnum(String code, String message) {
+    ResponseEnum(String code, String msg) {
         this.code = code;
-        this.message = message;
+        this.msg = msg;
     }
 
 }

@@ -9,12 +9,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Result<T> {
     private String code;
-    private String message;
+    private String msg;
     private T data;
 
     public Result(ResponseEnum responseEnum, T data){
         this.code = responseEnum.getCode();
-        this.message = responseEnum.getMessage();
+        this.msg = responseEnum.getMsg();
         this.data = data;
     }
 }
