@@ -10,19 +10,23 @@
     <property name="charset" value="UTF-8"/>
     <!-- 定义日志文件 输出位置 -->
     <property name="log_dir" value="D:/LOGS/OA" />
+
+    <property name="total_log_dir" value="D:/LOGS/TOTAL" />
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30" />
     <!-- 单个日志文件的最大大小 -->
     <property name="maxFileSize" value="5MB" />
-    <!--格式化输出：%d表示日期，%t：表示线程名，%-5level：级别从左显示5个字符宽度，%c:类全路径，%msg：日志消息，%M:方法名，%L：日志所属行号，%n：换行符（Windows平台为"\r\n"，Unix平台为"\n"） -->
-    <property name="FORMAT" value="%d{yyyy-MM-dd HH:mm:ss.SSS}|%highlight(%level)|%cyan(%thread)|%yellow(%logger{1})|%green(line-%line)|%blue(%X{traceId})|%m%n"/>
+    <!--格式化输出到控制台：%d表示日期，%t：表示线程名，%-5level：级别从左显示5个字符宽度，%c:类全路径，%msg：日志消息，%M:方法名，%L：日志所属行号，%n：换行符（Windows平台为"\r\n"，Unix平台为"\n"） -->
+    <property name="FORMAT_CONSOLE" value="%d{yyyy-MM-dd HH:mm:ss.SSS}|%highlight(%level)|%cyan(%thread)|%yellow(%logger{1})|%green(line-%line)|%blue(%X{traceId})|%m%n"/>
+    <!--格式化输出到日志文件： -->
+    <property name="FORMAT_LOGFILE" value="%d{yyyy-MM-dd HH:mm:ss.SSS}|%level|%thread|%logger{1}|line-%line|%X{traceId}|%m%n"/>
 
     <!-- ConsoleAppender 控制台输出日志 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
                 <!-- 设置日志输出格式 -->
-                ${FORMAT}
+                ${FORMAT_CONSOLE}
             </pattern>
             <charset>
                 ${charset}
@@ -62,7 +66,7 @@
         <encoder>
             <pattern>
                 <!-- 设置日志输出格式 -->
-                ${FORMAT}
+                ${FORMAT_LOGFILE}
             </pattern>
         </encoder>
     </appender>
@@ -88,7 +92,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
-            <pattern>${FORMAT}</pattern>
+            <pattern>${FORMAT_LOGFILE}</pattern>
         </encoder>
     </appender>
 
@@ -108,7 +112,7 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
-            <pattern>${FORMAT}</pattern>
+            <pattern>${FORMAT_LOGFILE}</pattern>
         </encoder>
     </appender>
 
@@ -128,7 +132,21 @@
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
-            <pattern>${FORMAT}</pattern>
+            <pattern>${FORMAT_LOGFILE}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- TOTAL级别日志不分类别,统一记录到total文件 -->
+    <appender name="TOTAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${total_log_dir}/%d{yyyy-MM-dd}/total-%i.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${maxFileSize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${FORMAT_LOGFILE}</pattern>
         </encoder>
     </appender>
 
@@ -144,5 +162,6 @@
         <appender-ref ref="INFO" />
         <appender-ref ref="WARN" />
         <appender-ref ref="DEBUG" />
+        <appender-ref ref="TOTAL" />
     </root>
 </configuration>
