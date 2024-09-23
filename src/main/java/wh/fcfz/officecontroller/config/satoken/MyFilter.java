@@ -28,7 +28,7 @@ public class MyFilter implements Filter {
         if("OPTIONS".equals(request.getMethod())){
             return;
         }
-        log.info("CorsFilter"+"以过滤");
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

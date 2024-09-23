@@ -1,6 +1,5 @@
 package wh.fcfz.officecontroller.all.service.Impl;
 
-import cn.dev33.satoken.stp.SaLoginModel;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
@@ -9,6 +8,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.User;
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
@@ -49,9 +50,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (StpUtil.isLogin(user.getUserId())){
             return new Result<User>(ResponseEnum.USER_IS_LOGIN,null);
         }
-        StpUtil.login(user.getUserId(),
-                //设置登录token存在时间
-                new SaLoginModel().setTimeout(60*10));
+        StpUtil.login(user.getUserId());
+        log.info(StpUtil.getTokenInfo().toString());
         return new Result(ResponseEnum.SUCCESS,StpUtil.getTokenInfo());
     }
 
