@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : localhost
+ Source Server         : mysql8
  Source Server Type    : MySQL
- Source Server Version : 80039 (8.0.39)
+ Source Server Version : 80036 (8.0.36)
  Source Host           : localhost:3306
  Source Schema         : oa_fcfz
 
  Target Server Type    : MySQL
- Target Server Version : 80039 (8.0.39)
+ Target Server Version : 80036 (8.0.36)
  File Encoding         : 65001
 
- Date: 23/09/2024 10:59:22
+ Date: 23/09/2024 14:29:20
 */
 
 SET NAMES utf8mb4;
@@ -26,8 +26,11 @@ CREATE TABLE `address`  (
   `address_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '地址名称',
   `longitude` decimal(10, 7) NOT NULL COMMENT '经度',
   `Latitude` decimal(10, 7) NOT NULL COMMENT '纬度',
+  `ct_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `up_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `status` tinyint(1) NULL DEFAULT NULL COMMENT '1 代表启用，0 代表关闭',
   PRIMARY KEY (`address_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of address
@@ -61,16 +64,44 @@ CREATE TABLE `attendance`  (
 DROP TABLE IF EXISTS `bluetooth`;
 CREATE TABLE `bluetooth`  (
   `bluetooth_id` int NOT NULL AUTO_INCREMENT COMMENT '蓝牙id',
-  `device_id` int NOT NULL COMMENT '蓝牙设备id',
-  `bluetooth_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '蓝牙名称',
-  `status` int NOT NULL DEFAULT 0 COMMENT '状态1，0',
+  `device_id` varchar(17) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '蓝牙物理地址，六组两位的十六进制数，如 01:23:45:67:89:AB',
+  `bluetooth_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '蓝牙名称',
+  `advertis_service_uuids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '蓝牙广播服务的 UUIDs',
+  `ct_time` timestamp NOT NULL COMMENT '创建时间',
+  `up_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
+  `status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '状态1为启用，0为关闭',
   PRIMARY KEY (`bluetooth_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of bluetooth
 -- ----------------------------
-INSERT INTO `bluetooth` VALUES (1, 11111, 'yigfviytgv', 1);
+INSERT INTO `bluetooth` VALUES (1, '30:AE:A4:2C:5A:B5', '钉钉蓝牙信标', NULL, '2024-09-23 13:59:53', NULL, 0);
+
+-- ----------------------------
+-- Table structure for companies
+-- ----------------------------
+DROP TABLE IF EXISTS `companies`;
+CREATE TABLE `companies`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id 主键',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '公司名称',
+  `code` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '公司编码',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '公司地址',
+  `phone` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '公司电话',
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '公司邮箱',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '公司描述',
+  `ct_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',
+  `up_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录更新时间',
+  `status` tinyint(1) NULL DEFAULT 1 COMMENT '公司状态，1为在被管理，2为不被管理',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `id`(`id` ASC) USING BTREE,
+  UNIQUE INDEX `name`(`name` ASC) USING BTREE,
+  UNIQUE INDEX `code`(`code` ASC) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of companies
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for depart
@@ -84,7 +115,7 @@ CREATE TABLE `depart`  (
   `depart_message` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '部门信息',
   `ct_time` datetime NOT NULL COMMENT '创建时间',
   `up_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-  `status` int NOT NULL DEFAULT 1 COMMENT '1是活跃，0是休息',
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '1是活跃，0是休息',
   PRIMARY KEY (`depart_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
@@ -115,7 +146,7 @@ CREATE TABLE `file`  (
   `business_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '业务类型，',
   `business_id` int NULL DEFAULT NULL COMMENT '关联业务 ID',
   `file_owner_id` int NULL DEFAULT NULL COMMENT '文件拥有者 ID',
-  `file_status` tinyint NULL DEFAULT NULL COMMENT '0 代表已删除，1 代表正常，2 代表已归档',
+  `file_status` tinyint(1) NULL DEFAULT NULL COMMENT '0 代表已删除，1 代表正常，2 代表已归档',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
@@ -134,24 +165,26 @@ CREATE TABLE `menu`  (
   `menu_router` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '路由',
   `type` int NOT NULL COMMENT '层级（几层）',
   `father_menu_id` int NOT NULL COMMENT '父id',
+  `ct_time` timestamp NULL DEFAULT NULL COMMENT '创建时间',
+  `up_time` timestamp NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`menu_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES (1, '首页', 2, '/hose', 1, 0);
-INSERT INTO `menu` VALUES (2, '企业管理', 2, '/dept', 1, 0);
-INSERT INTO `menu` VALUES (3, '考勤信息', 3, '/check', 1, 0);
-INSERT INTO `menu` VALUES (4, 'OA审批', 3, '/oaflow', 1, 0);
-INSERT INTO `menu` VALUES (5, '员工信息', 3, '/people', 1, 0);
-INSERT INTO `menu` VALUES (6, '其他', 3, '/other', 1, 0);
-INSERT INTO `menu` VALUES (7, '主页', 3, '/houseAll/main', 2, 1);
-INSERT INTO `menu` VALUES (8, '人员管理', 2, '/dept/member', 2, 2);
-INSERT INTO `menu` VALUES (9, '部门管理', 2, '/dept/department', 2, 2);
-INSERT INTO `menu` VALUES (10, '职位管理', 2, '/dept/role', 2, 2);
-INSERT INTO `menu` VALUES (11, '打卡信息', 3, '/check/message', 2, 3);
-INSERT INTO `menu` VALUES (12, '考勤管理', 2, '/check/controller', 2, 3);
+INSERT INTO `menu` VALUES (1, '首页', 2, '/hose', 1, 0, NULL, NULL);
+INSERT INTO `menu` VALUES (2, '企业管理', 2, '/dept', 1, 0, NULL, NULL);
+INSERT INTO `menu` VALUES (3, '考勤信息', 3, '/check', 1, 0, NULL, NULL);
+INSERT INTO `menu` VALUES (4, 'OA审批', 3, '/oaflow', 1, 0, NULL, NULL);
+INSERT INTO `menu` VALUES (5, '员工信息', 3, '/people', 1, 0, NULL, NULL);
+INSERT INTO `menu` VALUES (6, '其他', 3, '/other', 1, 0, NULL, NULL);
+INSERT INTO `menu` VALUES (7, '主页', 3, '/houseAll/main', 2, 1, NULL, NULL);
+INSERT INTO `menu` VALUES (8, '人员管理', 2, '/dept/member', 2, 2, NULL, NULL);
+INSERT INTO `menu` VALUES (9, '部门管理', 2, '/dept/department', 2, 2, NULL, NULL);
+INSERT INTO `menu` VALUES (10, '职位管理', 2, '/dept/role', 2, 2, NULL, NULL);
+INSERT INTO `menu` VALUES (11, '打卡信息', 3, '/check/message', 2, 3, NULL, NULL);
+INSERT INTO `menu` VALUES (12, '考勤管理', 2, '/check/controller', 2, 3, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for role
@@ -187,21 +220,21 @@ CREATE TABLE `user`  (
   `user_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户密码',
   `telephone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '电话',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '电子邮箱',
-  `status` int NOT NULL DEFAULT 1 COMMENT '状态（判断是否在工作）',
   `ct_time` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
   `up_time` datetime NULL DEFAULT NULL,
+  `status` int NOT NULL DEFAULT 1 COMMENT '状态（判断是否在工作）',
   PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, 1, 1, '梁震南', '1yeWOPS3Kd', '5938189848', '123456', '192-0151-2897', 'liangzhenn8@qq.com', 0, '2024-09-10 15:13:01', '2024-09-10 15:13:01');
-INSERT INTO `user` VALUES (2, 2, 2, '萧璐', 'q8fX9ms3FS', '0640707652', '123456', '155-6121-6220', 'luxiao@qq.com', 0, '2024-09-10 11:07:21', NULL);
-INSERT INTO `user` VALUES (3, 2, 3, '何子异', '3StKs8VbER', '9917916138', '123456', '760-771-3163', 'ziyih@qq.com', 0, '2024-09-10 16:39:59', NULL);
-INSERT INTO `user` VALUES (5, 2, 5, '曹岚', 'EiwJyvOFW4', '6418582407', '123456', '28-460-1738', 'lancao@qq.com', 0, '2024-09-10 11:07:28', NULL);
-INSERT INTO `user` VALUES (6, 3, 2, '黄岚', 'SHhufLveRR', '5855972111', '123456', '760-6340-3641', 'huang12@qq.com', 1, '2024-09-10 11:07:31', NULL);
-INSERT INTO `user` VALUES (7, 2, 2, '小涂', 'ssss', '20221107040', '123456', NULL, NULL, 1, '2024-09-10 16:46:42', NULL);
-INSERT INTO `user` VALUES (8, 2, 2, '小尹', 'sdasdsa', '2424389790', '123456', '2313231', '231231232', 1, '2024-09-19 17:05:21', NULL);
+INSERT INTO `user` VALUES (1, 1, 1, '梁震南', '1yeWOPS3Kd', '5938189848', '123456', '192-0151-2897', 'liangzhenn8@qq.com', '2024-09-10 15:13:01', '2024-09-10 15:13:01', 0);
+INSERT INTO `user` VALUES (2, 2, 2, '萧璐', 'q8fX9ms3FS', '0640707652', '123456', '155-6121-6220', 'luxiao@qq.com', '2024-09-10 11:07:21', NULL, 0);
+INSERT INTO `user` VALUES (3, 2, 3, '何子异', '3StKs8VbER', '9917916138', '123456', '760-771-3163', 'ziyih@qq.com', '2024-09-10 16:39:59', NULL, 0);
+INSERT INTO `user` VALUES (5, 2, 5, '曹岚', 'EiwJyvOFW4', '6418582407', '123456', '28-460-1738', 'lancao@qq.com', '2024-09-10 11:07:28', NULL, 0);
+INSERT INTO `user` VALUES (6, 3, 2, '黄岚', 'SHhufLveRR', '5855972111', '123456', '760-6340-3641', 'huang12@qq.com', '2024-09-10 11:07:31', NULL, 1);
+INSERT INTO `user` VALUES (7, 2, 2, '小涂', 'ssss', '20221107040', '123456', NULL, NULL, '2024-09-10 16:46:42', NULL, 1);
+INSERT INTO `user` VALUES (8, 2, 2, '小尹', 'sdasdsa', '2424389790', '123456', '2313231', '231231232', '2024-09-19 17:05:21', NULL, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

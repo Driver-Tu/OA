@@ -1,72 +1,33 @@
 package wh.fcfz.officecontroller.all.bean;
 
-
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("menu")
 public class Menu {
-@TableId(type = IdType.AUTO)
-  private Integer menuId;
-  private String menuName;
-  private Integer permission;
-  private String menuRouter;
-  private Integer type;
-  private Integer fatherMenuId;
+  @TableId(type = IdType.AUTO)
+  private Integer menuId; // 主菜单ID
 
+  private String menuName; // 名称
 
-  public Integer getMenuId() {
-    return menuId;
-  }
+  private Integer permission; // 职权
 
-  public void setMenuId(Integer menuId) {
-    this.menuId = menuId;
-  }
+  private String menuRouter; // 路由
 
+  private Integer type; // 层级（几层）
 
-  public String getMenuName() {
-    return menuName;
-  }
+  private Integer fatherMenuId; // 父菜单ID
 
-  public void setMenuName(String menuName) {
-    this.menuName = menuName;
-  }
+  private Timestamp ctTime; // 创建时间
 
-
-  public Integer getPermission() {
-    return permission;
-  }
-
-  public void setPermission(Integer permission) {
-    this.permission = permission;
-  }
-
-
-  public String getMenuRouter() {
-    return menuRouter;
-  }
-
-  public void setMenuRouter(String menuRouter) {
-    this.menuRouter = menuRouter;
-  }
-
-
-  public Integer getType() {
-    return type;
-  }
-
-  public void setType(Integer type) {
-    this.type = type;
-  }
-
-
-  public Integer getFatherMenuId() {
-    return fatherMenuId;
-  }
-
-  public void setFatherMenuId(Integer fatherMenuId) {
-    this.fatherMenuId = fatherMenuId;
-  }
-
+  private Timestamp upTime; // 更新时间
 }
