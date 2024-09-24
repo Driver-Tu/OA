@@ -16,5 +16,6 @@ public class MyPage<T> {
     private Integer pageSize=DEFAULT_PAGE_SIZE;
     private T data;
     private Integer total;
-
+   private  String departmentName;
+   private String userName;
 }
