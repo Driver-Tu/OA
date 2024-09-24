@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.Attendance;
 import wh.fcfz.officecontroller.all.dto.AttendancesMessage;
+import wh.fcfz.officecontroller.all.mapper.ApprovalFormsMapper;
 import wh.fcfz.officecontroller.all.mapper.AttendanceMapper;
 import wh.fcfz.officecontroller.all.service.AttendanceService;
 import wh.fcfz.officecontroller.all.tool.MyPage;
@@ -32,6 +33,8 @@ import java.util.stream.Collectors;
 public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attendance> implements AttendanceService {
     @Autowired
     private AttendanceMapper attendanceMapper;
+    @Autowired
+    private ApprovalFormsMapper approvalFormsMapper;
 
     @Override
     public Result getAllAttendance(MyPage<Attendance> myPage) {
@@ -152,17 +155,5 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
             }
         }
     }
-
-    @Override
-    public Result updateAttendance(Attendance attendance) {
-        return null;
-    }
-
-    @Override
-    public Result deleteAttendance(Integer attendanceId) {
-        return null;
-    }
-
-
 }
 

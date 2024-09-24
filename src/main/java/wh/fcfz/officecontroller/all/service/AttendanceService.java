@@ -17,12 +17,4 @@ public interface AttendanceService extends IService<Attendance> {
      * 增
      * */
     public Result addAttendance(Attendance attendance);
-    /**
-     * 改
-     * */
-    public Result updateAttendance(Attendance attendance);
-    /**
-     * 删
-     * */
-    public Result deleteAttendance(Integer attendanceId);
 }
