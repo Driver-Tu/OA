@@ -11,7 +11,7 @@
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 23/09/2024 16:48:12
+ Date: 24/09/2024 13:14:08
 */
 
 SET NAMES utf8mb4;
@@ -41,15 +41,15 @@ CREATE TABLE `attendance`  (
   `attendance_id` int NOT NULL AUTO_INCREMENT COMMENT '考勤id',
   `attendance_user_id` int NOT NULL COMMENT '考勤人id',
   `time_in` datetime NOT NULL COMMENT '上班打卡时间',
-  `time_out` datetime NOT NULL COMMENT '下班打卡时间',
+  `time_out` datetime NULL DEFAULT NULL COMMENT '下班打卡时间',
   `date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '打卡日期',
-  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '打卡状态',
+  `status` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '打卡状态',
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '打卡地址',
   `longitude` decimal(10, 7) NOT NULL COMMENT '经度',
   `latitude` decimal(10, 7) NOT NULL COMMENT '纬度',
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '打卡类型',
   PRIMARY KEY (`attendance_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1001 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1008 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of attendance
@@ -1054,6 +1054,7 @@ INSERT INTO `attendance` VALUES (997, 1, '2024-08-29 08:37:05', '2024-09-06 17:0
 INSERT INTO `attendance` VALUES (998, 1, '2024-08-30 08:21:10', '2024-09-06 17:51:36', '2024-08-26', '打卡失败', '192 3rd Section Hongxing Road, Jinjiang District', 18.1533968, 132.8806259, '上班打卡');
 INSERT INTO `attendance` VALUES (999, 4, '2024-09-05 08:51:22', '2024-09-17 17:44:44', '2024-09-04', '打卡失败', '80 Binchuan Rd, Minhang District', 126.6816482, 54.9084436, '上班打卡');
 INSERT INTO `attendance` VALUES (1000, 2, '2024-08-19 08:47:18', '2024-09-23 17:03:23', '2024-08-26', '打卡失败', '900 Shennan E Rd, Cai Wu Wei, Luohu District', 80.0303868, 95.2166375, '上班打卡');
+INSERT INTO `attendance` VALUES (1007, 7, '2024-09-24 13:07:17', '2024-09-24 13:07:18', '2024-09-24', '打卡失败', '碎甲', 122.0909000, 133.2123120, '上班打卡');
 
 -- ----------------------------
 -- Table structure for bluetooth
