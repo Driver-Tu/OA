@@ -120,7 +120,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             BeanUtil.copyProperties(user,userMessage);
             return userMessage;
         }).collect(Collectors.toList());
-        return new Result<List<UserMessage>>(ResponseEnum.SUCCESS,userMessageList);
+        Page<UserMessage> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
+        List<UserMessage> collect = userMessageList.stream().skip((long) (page.getPageNum() - 1) * page.getPageSize()).limit(page.getPageSize()).collect(Collectors.toList());
+        pageMessages.setRecords(collect);
+        pageMessages.setTotal(userMessageList.size());
+        return new Result(ResponseEnum.SUCCESS,pageMessages);
     }
 
 
@@ -234,7 +238,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             }else {
                 deleteNoList.add(user.getUserName());
             }
-        });//ss
+        });
         try {
             deleteOkList.forEach(id->userMapper.deleteById(id));
             return new Result<String>(ResponseEnum.SUCCESS,"成功删除的数据为"+deleteOkList+"失败的数据为"+deleteNoList);

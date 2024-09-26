@@ -1,9 +1,10 @@
 package wh.fcfz.officecontroller.all.tool;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Map;
 
 import static wh.fcfz.officecontroller.config.file.SystemConfig.DEFAULT_PAGE_NUM;
 import static wh.fcfz.officecontroller.config.file.SystemConfig.DEFAULT_PAGE_SIZE;
@@ -18,4 +19,5 @@ public class MyPage<T> {
     private Integer total;
    private  String departmentName;
    private String userName;
+   private Map<String,Object> params;
 }

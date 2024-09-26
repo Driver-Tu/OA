@@ -25,7 +25,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -39,39 +38,36 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
     @Override
     public Result getAllAttendance(MyPage<Attendance> myPage) {
         Page<AttendancesMessage> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
-        LambdaQueryWrapper<Attendance> queryWrapper = new LambdaQueryWrapper<>();
-        //查询已经打卡的数据
-        queryWrapper.eq(null!=myPage.getData().getStatus()&&(!myPage.getData().getStatus().equals("")),Attendance::getStatus,myPage.getData().getStatus())
-                //什么打卡方式（特殊/普通）
-                .eq(null!=myPage.getData().getType()&&(!myPage.getData().getType().equals("")),Attendance::getType,myPage.getData().getType())
-                //哪天
-                .eq(null!=myPage.getData().getDate()&&(!myPage.getData().getDate().equals("")),Attendance::getDate,myPage.getData().getDate());
-        List<Attendance> attendances = attendanceMapper.selectList(queryWrapper);
-        if (attendances.size() == 0) {
+        List<AttendancesMessage> attendancesMessages = attendanceMapper.selectAllAttendances();
+        if (attendancesMessages.size() == 0) {
             //防止空数据判断
             return new Result(ResponseEnum.DATA_NOT_EXIST, null);
         }
-        List<AttendancesMessage> attendancesMessages = attendances.stream().map(attendance -> {
-            String userName = attendanceMapper.selectAllUserName(attendance.getAttendanceUserId());
-            String DepartName = attendanceMapper.selectAllDepartName(attendance.getAttendanceUserId());
-            AttendancesMessage attendancesMessage = new AttendancesMessage();
-            BeanUtil.copyProperties(attendance, attendancesMessage);
-            attendancesMessage.setAttendanceUserName(userName);
-            attendancesMessage.setAttendanceUserDepartName(DepartName);
-            if(null!=myPage.getDepartmentName()&&(!myPage.getDepartmentName().equals(""))){
-                if(attendancesMessage.getAttendanceUserDepartName().equals(myPage.getDepartmentName())) return attendancesMessage;
-                else return null;
-            }else if(null!=myPage.getUserName()&&(!myPage.getUserName().equals(""))){
-                if(attendancesMessage.getAttendanceUserName().equals(myPage.getUserName())) return attendancesMessage;
-                else return null;
-            }else if((null!=myPage.getDepartmentName()&&(!myPage.getDepartmentName().equals("")))&&(null!=myPage.getUserName()&&(!myPage.getUserName().equals("")))){
-                if(attendancesMessage.getAttendanceUserName().equals(myPage.getUserName())&&attendancesMessage.getAttendanceUserDepartName().equals(myPage.getDepartmentName())) return attendancesMessage;
-                else return null;
-            }else {
-                return attendancesMessage;
-            }
-        }).collect(Collectors.toList());
-        attendancesMessages.removeIf(Objects::isNull);
+        if(null!=myPage.getData().getStatus()&&(!myPage.getData().getStatus().equals(""))){
+            attendancesMessages=attendancesMessages.stream()
+                    .filter(attendancesMessage -> attendancesMessage.getStatus().equals(myPage.getData().getStatus()))
+                    .collect(Collectors.toList());
+        }
+        if(null!=myPage.getData().getType()&&(!myPage.getData().getType().equals(""))){
+            attendancesMessages=attendancesMessages.stream()
+                    .filter(attendancesMessage -> attendancesMessage.getType().equals(myPage.getData().getType()))
+                    .collect(Collectors.toList());
+        }
+        if(null!=myPage.getData().getDate()&&(!myPage.getData().getDate().equals(""))){
+            attendancesMessages=attendancesMessages.stream()
+                    .filter(attendancesMessage -> attendancesMessage.getDate().equals(myPage.getData().getDate()))
+                    .collect(Collectors.toList());
+        }
+        if(null!=myPage.getDepartmentName()&&(!myPage.getDepartmentName().equals(""))){
+            attendancesMessages=attendancesMessages.stream()
+                    .filter(attendancesMessage -> attendancesMessage.getAttendanceUserDepartName().equals(myPage.getDepartmentName()))
+                    .collect(Collectors.toList());
+        }
+        if(null!=myPage.getUserName()&&(!myPage.getUserName().equals(""))){
+            attendancesMessages=attendancesMessages.stream()
+                    .filter(attendancesMessage -> attendancesMessage.getAttendanceUserName().equals(myPage.getUserName()))
+                    .collect(Collectors.toList());
+        }
         List<AttendancesMessage> collect = attendancesMessages.stream().skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize()).collect(Collectors.toList());
         page.setRecords(collect);
         page.setTotal(attendancesMessages.size());
@@ -144,7 +140,7 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
             //结算几今日打卡成功或者失败
             Timestamp timeIn = attendance1.getTimeIn();
             //小于0则早于九点，大于0则晚于九点，等于0则为九点（都是当天时间）
-            if((timeIn.toLocalDateTime().compareTo(LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 0, 0)))<=0)&&(timestamp.toLocalDateTime().compareTo(LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 30, 0)))>=0)){
+            if((timeIn.toLocalDateTime().compareTo(LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 0, 0)))<=0)||(timestamp.toLocalDateTime().compareTo(LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 30, 0)))>=0)){
                 attendance1.setStatus("打卡成功");
                 attendanceMapper.updateById(attendance1);
                 return new Result(ResponseEnum.SUCCESS,"打卡成功");
