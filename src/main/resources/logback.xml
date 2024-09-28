@@ -10,8 +10,7 @@
     <property name="charset" value="UTF-8"/>
     <!-- 定义日志文件 输出位置 -->
     <property name="log_dir" value="D:/LOGS/OA" />
-
-    <property name="total_log_dir" value="D:/LOGS/TOTAL" />
+    <property name="total_log_dir" value="${log_dir}/total" />
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30" />
     <!-- 单个日志文件的最大大小 -->
