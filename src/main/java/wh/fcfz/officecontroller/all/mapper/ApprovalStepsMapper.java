@@ -7,4 +7,5 @@ import wh.fcfz.officecontroller.all.bean.ApprovalSteps;
 
 @Mapper
 public interface ApprovalStepsMapper extends BaseMapper<ApprovalSteps> {
+
 }

@@ -17,6 +17,7 @@ public class ApprovalForms {
 @TableId(value = "form_id",type= IdType.AUTO)
   private String formId;
   private Integer applicantId;
+  private Integer attendanceId;
   private java.sql.Timestamp applicationDate;
   private String status;
   private String type;
