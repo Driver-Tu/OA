@@ -1,5 +1,11 @@
 server:
   port: 8088
+#  servlet:
+#    session:
+#      cookie:
+#        domain: loaclhost
+#        same-site: none
+#        secure: true
 
 ############## Sa-Token 配置 (文档: https://sa-token.cc) ##############
 sa-token:

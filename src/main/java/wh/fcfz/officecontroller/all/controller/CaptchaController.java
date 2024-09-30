@@ -4,7 +4,6 @@ package wh.fcfz.officecontroller.all.controller;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import wh.fcfz.officecontroller.all.service.Impl.CaptchaServiceImpl;
 import wh.fcfz.officecontroller.all.tool.Result;
@@ -25,7 +24,6 @@ public class CaptchaController {
     @PostMapping("/validate-captcha")
     public Result validateCaptcha(HttpServletRequest request, @RequestBody Map<String, String> requestBody) {
         String captchaInput = requestBody.get("captcha");
-        String key = requestBody.get("key");
         System.out.println("输入的验证码：" + captchaInput);
         boolean isValid = captchaService.validateCaptcha(request, captchaInput);
 
