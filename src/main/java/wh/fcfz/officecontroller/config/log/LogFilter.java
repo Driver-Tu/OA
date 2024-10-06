@@ -1,14 +1,13 @@
-package wh.fcfz.officecontroller.config.satoken;
+package wh.fcfz.officecontroller.config.log;
 
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-//import javax.servlet.FilterChain;
-//import javax.servlet.ServletException;
-//import javax.servlet.http.HttpServletRequest;
-//import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -19,8 +18,9 @@ import java.io.IOException;
 public class LogFilter extends OncePerRequestFilter implements Ordered {
     private final static String MDC_TRACE_ID = "traceId";
 
+
     @Override
-    protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain filterChain) throws jakarta.servlet.ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String traceIDStr = getMdcTraceId();
         MDC.put(MDC_TRACE_ID, traceIDStr);
         filterChain.doFilter(request, response);

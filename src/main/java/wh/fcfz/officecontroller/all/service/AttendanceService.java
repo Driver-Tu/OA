@@ -11,8 +11,6 @@ public interface AttendanceService extends IService<Attendance> {
      * */
     //管理员查询所有考勤记录
     public Result getAllAttendance(MyPage<Attendance> myPage);
-    //普通用户查询自己的考勤记录
-    public Result getUserAttendance(MyPage<Attendance> myPage);
     /**
      * 增
      * */

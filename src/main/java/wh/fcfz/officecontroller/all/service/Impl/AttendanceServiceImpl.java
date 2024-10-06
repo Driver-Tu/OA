@@ -2,7 +2,6 @@ package wh.fcfz.officecontroller.all.service.Impl;
 
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -11,9 +10,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.Attendance;
+import wh.fcfz.officecontroller.all.bean.User;
 import wh.fcfz.officecontroller.all.dto.AttendancesMessage;
 import wh.fcfz.officecontroller.all.mapper.ApprovalFormsMapper;
 import wh.fcfz.officecontroller.all.mapper.AttendanceMapper;
+import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.AttendanceService;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
@@ -34,7 +35,8 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
     private AttendanceMapper attendanceMapper;
     @Autowired
     private ApprovalFormsMapper approvalFormsMapper;
-
+    @Autowired
+    private UserMapper userMapper;
     @Override
     public Result getAllAttendance(MyPage<Attendance> myPage) {
         Page<AttendancesMessage> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
@@ -42,6 +44,25 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         if (attendancesMessages.size() == 0) {
             //防止空数据判断
             return new Result(ResponseEnum.DATA_NOT_EXIST, null);
+        }
+        if(null!=myPage.getData().getAttendanceUserId()){
+            User user = userMapper.selectById(myPage.getData().getAttendanceUserId());
+            attendancesMessages=attendancesMessages.stream()
+                    .filter(attendancesMessage -> attendancesMessage.getAttendanceUserName().equals(user.getUserName()))
+                    .collect(Collectors.toList());
+        }else {
+            if(myPage.getParams().containsKey("departmentName")&&(null!=myPage.getParams().get("departmentName"))&&(!myPage.getParams().get("departmentName").equals(""))){
+                Object departmentName = myPage.getParams().get("departmentName");
+                attendancesMessages=attendancesMessages.stream()
+                        .filter(attendancesMessage -> attendancesMessage.getAttendanceUserDepartName().equals(departmentName.toString()))
+                        .collect(Collectors.toList());
+            }
+            if(myPage.getParams().containsKey("userName")&&(null!=myPage.getParams().get("userName"))&&(!myPage.getParams().get("userName").equals(""))){
+                Object userName = myPage.getParams().get("userName");
+                attendancesMessages=attendancesMessages.stream()
+                        .filter(attendancesMessage -> attendancesMessage.getAttendanceUserName().equals(userName.toString()))
+                        .collect(Collectors.toList());
+            }
         }
         if(null!=myPage.getData().getStatus()&&(!myPage.getData().getStatus().equals(""))){
             attendancesMessages=attendancesMessages.stream()
@@ -58,63 +79,10 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
                     .filter(attendancesMessage -> attendancesMessage.getDate().equals(myPage.getData().getDate()))
                     .collect(Collectors.toList());
         }
-        if(null!=myPage.getDepartmentName()&&(!myPage.getDepartmentName().equals(""))){
-            attendancesMessages=attendancesMessages.stream()
-                    .filter(attendancesMessage -> attendancesMessage.getAttendanceUserDepartName().equals(myPage.getDepartmentName()))
-                    .collect(Collectors.toList());
-        }
-        if(null!=myPage.getUserName()&&(!myPage.getUserName().equals(""))){
-            attendancesMessages=attendancesMessages.stream()
-                    .filter(attendancesMessage -> attendancesMessage.getAttendanceUserName().equals(myPage.getUserName()))
-                    .collect(Collectors.toList());
-        }
         List<AttendancesMessage> collect = attendancesMessages.stream().skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize()).collect(Collectors.toList());
         page.setRecords(collect);
         page.setTotal(attendancesMessages.size());
-        if(attendancesMessages.size()!=0) {
-            return new Result(ResponseEnum.SUCCESS,page);
-        }
-        else
-            log.error(page.getRecords().toString());
-            return new Result(ResponseEnum.DATA_NOT_EXIST,null);
-    }
-
-    @Override
-    public Result getUserAttendance(MyPage<Attendance> myPage) {
-        Page<AttendancesMessage> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
-        LambdaQueryWrapper<Attendance> queryWrapper = new LambdaQueryWrapper<>();
-        //查询已经打卡的数据
-        queryWrapper.eq(null != myPage.getData().getStatus() && (!myPage.getData().getStatus().equals("")), Attendance::getStatus, myPage.getData().getStatus())
-                //什么打卡方式（特殊/普通）
-                .eq(null != myPage.getData().getType() && (!myPage.getData().getType().equals("")), Attendance::getType, myPage.getData().getType())
-                //哪天
-                .eq(null != myPage.getData().getDate() && (!myPage.getData().getDate().equals("")), Attendance::getDate, myPage.getData().getDate())
-                .eq(Attendance::getAttendanceUserId, StpUtil.getLoginId());
-        List<Attendance> attendances = attendanceMapper.selectList(queryWrapper);
-        if (attendances.size() == 0) {
-            //防止空数据判断
-            return new Result(ResponseEnum.DATA_NOT_EXIST, null);
-        }
-        //处理数据格式
-        List<AttendancesMessage> attendancesMessages = attendances.stream().map(attendance -> {
-            String userName = attendanceMapper.selectAllUserName(attendance.getAttendanceUserId());
-            String DepartName = attendanceMapper.selectAllDepartName(attendance.getAttendanceUserId());
-            AttendancesMessage attendancesMessage = new AttendancesMessage();
-            BeanUtil.copyProperties(attendance, attendancesMessage);
-            attendancesMessage.setAttendanceUserName(userName);
-            attendancesMessage.setAttendanceUserDepartName(DepartName);
-            return attendancesMessage;
-        }).collect(Collectors.toList());
-        List<AttendancesMessage> collectUser = attendancesMessages.stream().skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize()).collect(Collectors.toList());
-        page.setRecords(collectUser);
-        page.setTotal(attendancesMessages.size());
-        if (attendancesMessages.size() != 0) {
-            return new Result(ResponseEnum.SUCCESS, page);
-        } else {
-            //处理完如果没有数据
-            log.error(page.getRecords().toString());
-            return new Result(ResponseEnum.DATA_NOT_EXIST, null);
-        }
+        return new Result(ResponseEnum.SUCCESS,page);
     }
 
     @Override
@@ -143,11 +111,11 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
             if((timeIn.toLocalDateTime().compareTo(LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 0, 0)))<=0)||(timestamp.toLocalDateTime().compareTo(LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 30, 0)))>=0)){
                 attendance1.setStatus("打卡成功");
                 attendanceMapper.updateById(attendance1);
-                return new Result(ResponseEnum.SUCCESS,"打卡成功");
+                return new Result(ResponseEnum.SUCCESS,"下班打卡成功");
             }else {
                 attendance1.setStatus("打卡失败");
                 attendanceMapper.updateById(attendance1);
-                return new Result(ResponseEnum.SUCCESS,"打卡失败");
+                return new Result(ResponseEnum.SUCCESS,"下班打卡失败");
             }
         }
     }

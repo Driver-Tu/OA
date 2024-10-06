@@ -20,7 +20,7 @@ public class DepartController {
     @GetMapping("/list")
     public Result<Depart> selectALL(@RequestBody(required = false) Depart depart,
                                     @RequestParam(defaultValue = "1") Integer pageNum,
-                                    @RequestParam(defaultValue = "3") Integer pageSize){
+                                    @RequestParam(defaultValue = "10") Integer pageSize){
         return deptService.selectPageAll(depart, pageNum, pageSize);
     }
 

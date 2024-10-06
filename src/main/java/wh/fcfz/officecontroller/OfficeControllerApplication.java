@@ -9,6 +9,5 @@ public class OfficeControllerApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(OfficeControllerApplication.class, args);
-        System.out.println("启动成功，Sa-Token 配置如下：" + SaManager.getConfig());
     }
 }
