@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.Depart;
@@ -16,6 +17,7 @@ import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -26,25 +28,32 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
     private DepartMapper departMapper;
 
     @Override
-    public Result<Depart> selectPageAll(Depart depart, Integer pageNum, Integer pageSize) {
-        if (pageNum == null || pageSize == null) {
+    public Result<Page<Depart>> selectPageAll(Depart depart, Integer pageNum, Integer pageSize) {
+        // 分页参数校验
+        if (Objects.isNull(pageNum) || Objects.isNull(pageSize)) {
             log.error("分页参数为空");
             return new Result<>(ResponseEnum.PARAM_ERROR, null);
         }
 
         Page<Depart> page = new Page<>(pageNum, pageSize);
-        LambdaQueryWrapper<Depart> lambdaQueryWrapper = new LambdaQueryWrapper();
-        lambdaQueryWrapper.like(depart.getDepartName() != null, Depart::getDepartName, depart.getDepartName())
-                .eq(depart.getDepartTelephone() != null, Depart::getDepartTelephone, depart.getDepartTelephone())
-                .eq(depart.getDepartEmail() != null, Depart::getDepartEmail, depart.getDepartEmail())
-                .eq(depart.getStatus() != null, Depart::getStatus, depart.getStatus());
-        Page<Depart> departmentPage = departMapper.selectPage(page, lambdaQueryWrapper);
-        if (departmentPage.getRecords().isEmpty()) {
-            log.info("分页查询部门列表结果为空");
-            return new Result(ResponseEnum.DEPT_ID_NULL, departmentPage);
+        LambdaQueryWrapper<Depart> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+
+        // 使用 MyBatis-Plus 提供的 StringUtils 进行字段非空检查
+        if (Objects.nonNull(depart)) {
+            lambdaQueryWrapper.like(StringUtils.isNotBlank(depart.getDepartName()), Depart::getDepartName, depart.getDepartName())
+                    .eq(StringUtils.isNotBlank(depart.getDepartTelephone()), Depart::getDepartTelephone, depart.getDepartTelephone())
+                    .eq(StringUtils.isNotBlank(depart.getDepartEmail()), Depart::getDepartEmail, depart.getDepartEmail())
+                    .eq(Objects.nonNull(depart.getStatus()), Depart::getStatus, depart.getStatus());
         }
 
-        // 使用 Stream API 来统计每个部门的人数，并设置到每个部门对象中
+        Page<Depart> departmentPage = departMapper.selectPage(page, lambdaQueryWrapper);
+
+        if (departmentPage.getRecords().isEmpty()) {
+            log.info("分页查询部门列表结果为空");
+            return new Result<>(ResponseEnum.DEPT_ID_NULL, departmentPage);
+        }
+
+        // 使用 Stream 来统计每个部门的人数，并设置到每个部门对象中
         List<Depart> departmentsWithCounts = departmentPage.getRecords().stream()
                 .peek(dep -> dep.setEmployeeCount(departMapper.countByDepartmentId(dep.getDepartId())))
                 .collect(Collectors.toList());
@@ -52,8 +61,10 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
         // 将更新后的部门列表设置回分页对象中
         departmentPage.setRecords(departmentsWithCounts);
 
-        return new Result(ResponseEnum.SUCCESS, departmentPage);
+        return new Result<>(ResponseEnum.SUCCESS, departmentPage);
     }
+
+
 
 
     @Override
