@@ -20,7 +20,10 @@ import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,17 +41,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (empNum==null || password==null){
             return new Result<User>(ResponseEnum.PARAM_ERROR,null);
         }
-
         LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(User::getEmpNum,empNum)
                 .eq(User::getUserPassword,password);
         User user = userMapper.selectOne(lambdaQueryWrapper);
         if(user == null){
             return new Result<User>(ResponseEnum.USER_NOT_EXIST,null);
-        }
-        //校验当前用户是否登录
-        if (StpUtil.isLogin(user.getUserId())){
-            return new Result<User>(ResponseEnum.USER_IS_LOGIN,null);
         }
         StpUtil.login(user.getUserId());
         log.info(StpUtil.getTokenInfo().toString());
@@ -86,6 +84,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UserMessage userMessage=new UserMessage();
         userMessage.setDepartmentName(departName);
         userMessage.setRoleName(roleName);
+        String[] birthdayAndGender = getBirthdayAndGender(user.getBirthdayNum());
+        userMessage.setBirth(birthdayAndGender[0]);
+        userMessage.setSex(birthdayAndGender[1]);
         BeanUtil.copyProperties(user,userMessage);
 
         return new Result<UserMessage>(ResponseEnum.SUCCESS,userMessage);
@@ -117,6 +118,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             UserMessage userMessage=new UserMessage();
             userMessage.setDepartmentName(departName);
             userMessage.setRoleName(roleName);
+            String[] birthdayAndGender = getBirthdayAndGender(user.getBirthdayNum());
+            userMessage.setBirth(birthdayAndGender[0]);
+            userMessage.setSex(birthdayAndGender[1]);
             BeanUtil.copyProperties(user,userMessage);
             return userMessage;
         }).collect(Collectors.toList());
@@ -126,7 +130,37 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         pageMessages.setTotal(userMessageList.size());
         return new Result(ResponseEnum.SUCCESS,pageMessages);
     }
+    public static String[] getBirthdayAndGender(String idNumber) {
+        if (idNumber == null || (idNumber.length() != 15 && idNumber.length() != 18)) {
+            return null;
+        }
+        String birthday = null;
+        String gender = null;
+        try {
+            if (idNumber.length() == 18) {
+                // 提取出生日期
+                birthday = idNumber.substring(6, 14);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                Date date = sdf.parse(birthday);
+                SimpleDateFormat sdfOut = new SimpleDateFormat("yyyy-MM-dd");
+                birthday = sdfOut.format(date);
 
+                // 提取性别
+                gender = idNumber.substring(16, 17);
+                if (Integer.parseInt(gender) % 2 == 0) {
+                    gender = "2";
+                } else {
+                    gender = "1";
+                }
+            } else {
+                return null; // 只支持18位身份证号码
+            }
+        } catch (ParseException e) {
+            return null; // 发生解析异常，返回null
+        }
+
+        return new String[]{birthday, gender};
+    }
 
     /**
      * 修改密码

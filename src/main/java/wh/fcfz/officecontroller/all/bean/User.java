@@ -26,4 +26,6 @@ public class User {
   private Integer status;
   private java.sql.Timestamp ctTime;
   private java.sql.Timestamp upTime;
+  private String birthdayNum;
+  private java.sql.Timestamp timeIn;
 }

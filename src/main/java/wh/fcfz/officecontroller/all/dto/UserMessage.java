@@ -18,6 +18,9 @@ public class UserMessage {
   private String telephone;
   private String email;
   private Integer status;
+  private String sex;
+  private String birth;
+  private java.sql.Timestamp timeIn;
   private java.sql.Timestamp ctTime;
   private java.sql.Timestamp upTime;
 }
