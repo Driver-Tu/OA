@@ -9,19 +9,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import wh.fcfz.officecontroller.all.bean.ApprovalForms;
-import wh.fcfz.officecontroller.all.bean.ApprovalSteps;
-import wh.fcfz.officecontroller.all.bean.Attendance;
-import wh.fcfz.officecontroller.all.bean.User;
-import wh.fcfz.officecontroller.all.mapper.ApprovalFormsMapper;
-import wh.fcfz.officecontroller.all.mapper.AttendanceMapper;
-import wh.fcfz.officecontroller.all.mapper.UserMapper;
+import wh.fcfz.officecontroller.all.bean.*;
+import wh.fcfz.officecontroller.all.mapper.*;
 import wh.fcfz.officecontroller.all.service.ApprovalFormsService;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -32,7 +29,10 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     private ApprovalFormsMapper approvalFormsMapper;
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private LeaveMapper leaveMapper;
+    @Autowired
+    private BusinessMapper businessMapper;
     //管理员查询审批数据
     @Override
     public Result getApprovalForms(MyPage<ApprovalForms> myPage) {
@@ -61,8 +61,134 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
         User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
         String departName = userMapper.selectDepartName(user.getDepartmentId());
         approvalFormsList = approvalFormsList.stream()
-                    .filter(approvalForm -> departName.equals(approvalForm.getDepartmentName()))
+                .filter(approvalForm -> departName.equals(approvalForm.getDepartmentName()))
+                .collect(Collectors.toList());
+        approvalFormsList=approvalFormsList.stream().map(approvalForm -> {
+            switch (approvalForm.getType()) {
+                case "请假": {
+                    LeaveFrom leaveFrom = leaveMapper.selectById(approvalForm.getAllId());
+                    approvalForm.getMap().put("leave", leaveFrom);
+                    return approvalForm;
+                }
+                case "报销":
+                    return approvalForm;
+                case "出差":
+                    Business business = businessMapper.selectById(approvalForm.getAllId());
+                    approvalForm.getMap().put("business", business);
+                    return approvalForm;
+                case "加班":
+                    return approvalForm;
+                case "补签":
+                    return approvalForm;
+                case "入职":
+                    return approvalForm;
+                case "培训":
+                    return approvalForm;
+                case "薪资调整":
+                    return approvalForm;
+                case "离职":
+                    return approvalForm;
+                case "采购":
+                    return approvalForm;
+                case "用车":
+                    return approvalForm;
+                case "预算":
+                    return approvalForm;
+                case "招聘":
+                    return approvalForm;
+                case "设备维修":
+                    return approvalForm;
+                case "合同签署":
+                    return approvalForm;
+                case "项目立项":
+                    return approvalForm;
+            }
+            return null;
+        }).collect(Collectors.toList());
+        List<ApprovalForms> collect = approvalFormsList.stream()
+                .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
+                .collect(Collectors.toList());
+        page.setRecords(collect);
+        page.setTotal(approvalFormsList.size());
+        return new Result("200", "查询成功", page);
+    }
+
+    @Override
+    public Result getSelfApprovalForms(MyPage<ApprovalForms> myPage) {
+        Page<ApprovalForms> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
+        LambdaQueryWrapper<ApprovalForms> queryWrapper = new LambdaQueryWrapper<>();
+        //查询审批状态
+        queryWrapper.eq(null != myPage.getData().getStatus() && (!myPage.getData().getStatus().equals("")), ApprovalForms::getStatus, myPage.getData().getStatus())
+                //查询审批类型
+                .eq(null != myPage.getData().getType() && (!myPage.getData().getType().equals("")), ApprovalForms::getType, myPage.getData().getType())
+                .eq(ApprovalForms::getApplicantId, StpUtil.getLoginIdAsLong())
+                .orderByDesc(ApprovalForms::getApplicationDate);
+        List<ApprovalForms> approvalForms = approvalFormsMapper.selectList(queryWrapper);
+        List<ApprovalForms> approvalFormsList = approvalForms.stream().peek(approvalForm -> {
+            User user = userMapper.selectById(approvalForm.getApplicantId());
+            String departName = userMapper.selectDepartName(user.getDepartmentId());
+            approvalForm.setUserName(user.getUserName());
+            approvalForm.setDepartmentName(departName);
+        }).collect(Collectors.toList());
+        //如果map中含有userName的话，就删除不满足该名字的数据
+        if (myPage.getParams().containsKey("userName") && (null != myPage.getParams().get("userName")) && myPage.getParams().get("userName") != "") {
+            String userName = myPage.getParams().get("userName").toString();
+            approvalFormsList = approvalFormsList.stream()
+                    .filter(approvalForm -> approvalForm.getUserName().equals(userName))
                     .collect(Collectors.toList());
+        }
+        //如果map中含有departmentName的话，就删除不满足该名字的数据
+        User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
+        String departName = userMapper.selectDepartName(user.getDepartmentId());
+        approvalFormsList = approvalFormsList.stream()
+                .filter(approvalForm -> departName.equals(approvalForm.getDepartmentName()))
+                .collect(Collectors.toList());
+        approvalFormsList=approvalFormsList.stream().map(approvalForm -> {
+            switch (approvalForm.getType()) {
+                case "请假": {
+                    LeaveFrom leaveFrom = leaveMapper.selectById(approvalForm.getAllId());
+                    Map<String,Object> map = new HashMap<>();
+                    map.put("leave", leaveFrom);
+                    approvalForm.setMap(map);
+                    return approvalForm;
+                }
+                case "报销":
+                    return approvalForm;
+                case "出差":
+                    Business business = businessMapper.selectById(approvalForm.getAllId());
+                    Map<String,Object> map = new HashMap<>();
+                    map.put("business", business);
+                    approvalForm.setMap(map);
+                    return approvalForm;
+                case "加班":
+                    return approvalForm;
+                case "补签":
+                    return approvalForm;
+                case "入职":
+                    return approvalForm;
+                case "培训":
+                    return approvalForm;
+                case "薪资调整":
+                    return approvalForm;
+                case "离职":
+                    return approvalForm;
+                case "采购":
+                    return approvalForm;
+                case "用车":
+                    return approvalForm;
+                case "预算":
+                    return approvalForm;
+                case "招聘":
+                    return approvalForm;
+                case "设备维修":
+                    return approvalForm;
+                case "合同签署":
+                    return approvalForm;
+                case "项目立项":
+                    return approvalForm;
+            }
+            return approvalForm;
+        }).collect(Collectors.toList());
         List<ApprovalForms> collect = approvalFormsList.stream()
                 .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
                 .collect(Collectors.toList());
@@ -75,8 +201,8 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result addApprovalForms(ApprovalForms approvalForms) {
-        if(approvalForms==null){
-            return new Result(ResponseEnum.DATA_NOT_EXIST,null);
+        if (approvalForms == null) {
+            return new Result(ResponseEnum.DATA_NOT_EXIST, null);
         }
 
         return null;
@@ -87,17 +213,18 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
      * 情况一，当修改的审批表字段的类型为请假，员工状态变为0不在线，在结束假期后变成1在线
      * 情况二：当修改的审批表字段的类型为出差，员工的状态变为2出差中，在结束出差后变成1在线
      * 情况三：当审批类型为补签的时候，添加审批步骤，修改补签表状态为打卡成功，不修改员工状态
-     * */
+     */
     @Autowired
     private ApprovalStepsServiceImpl approvalStepsServiceImpl;
     @Autowired
     private AttendanceMapper attendanceMapper;
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     @ApiOperation(value = "修改审批status")
     public Result updateApprovalForms(MyPage<ApprovalSteps> myPage) {
-        if (myPage.getData()==null){
-            return new Result(ResponseEnum.DATA_NOT_EXIST,null);
+        if (myPage.getData() == null) {
+            return new Result(ResponseEnum.DATA_NOT_EXIST, null);
         }
         try {
             //修改steps表
@@ -107,26 +234,26 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
             approvalStepsServiceImpl.addApprovalSteps(data);
             //连着forms表一起修改
             ApprovalForms approvalForms = approvalFormsMapper.selectById(myPage.getData().getFormId());
-            if(data.getResult().equals("同意")){
+            if (data.getResult().equals("同意")) {
                 approvalForms.setStatus("已完成");
-                if(approvalForms.getType().equals("请假")){
-                    User user = userMapper.selectById(approvalForms.getApplicantId());
+                if (approvalForms.getType().equals("请假")) {
+                    User user = userMapper.selectById(approvalForms.getAllId());
                     user.setStatus(0);
                     try {
                         userMapper.updateById(user);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-                }else if(approvalForms.getType().equals("出差")){
-                    User user = userMapper.selectById(approvalForms.getApplicantId());
+                } else if (approvalForms.getType().equals("出差")) {
+                    User user = userMapper.selectById(approvalForms.getAllId());
                     user.setStatus(2);
                     try {
                         userMapper.updateById(user);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
-                }else if(approvalForms.getType().equals("补签")){
-                    Attendance attendance=attendanceMapper.selectById(approvalForms.getAttendanceId());
+                } else if (approvalForms.getType().equals("补签")) {
+                    Attendance attendance = attendanceMapper.selectById(approvalForms.getAllId());
                     attendance.setStatus("打卡成功");
                     try {
                         attendanceMapper.updateById(attendance);
@@ -134,13 +261,13 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
                         throw new RuntimeException(e);
                     }
                 }
-            }else {
+            } else {
                 approvalForms.setStatus("未完成");
             }
             //修改approvalForms表单状态
             try {
                 approvalFormsMapper.updateById(approvalForms);
-                return new Result(ResponseEnum.SUCCESS,data);
+                return new Result(ResponseEnum.SUCCESS, data);
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

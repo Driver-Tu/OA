@@ -12,6 +12,7 @@ public interface ApprovalFormsService extends IService<ApprovalForms> {
      * */
     Result getApprovalForms(MyPage<ApprovalForms> myPage);
 
+    Result getSelfApprovalForms(MyPage<ApprovalForms> myPage);
     /**
      * 插入审批数据
      * */

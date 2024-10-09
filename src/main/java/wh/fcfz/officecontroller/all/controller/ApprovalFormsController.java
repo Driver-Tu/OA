@@ -20,10 +20,16 @@ public class ApprovalFormsController {
     @Autowired
     private  ApprovalFormsServiceImpl approvalFormsService;
 
-    @PostMapping("/addApprovalForms")
+    @PostMapping("/getApprovalForms")
     public Result addApprovalForms(@RequestBody MyPage<ApprovalForms> approvalForms)
     {
         return approvalFormsService.getApprovalForms(approvalForms);
+    }
+
+    @PostMapping("/getSelfApprovalForms")
+    public Result getSelfApprovalForms(@RequestBody MyPage<ApprovalForms> approvalForms)
+    {
+        return approvalFormsService.getSelfApprovalForms(approvalForms);
     }
 
     @PostMapping("/updateApprovalFroms")

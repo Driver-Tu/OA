@@ -31,7 +31,6 @@ public class ApprovalAttachments {
     this.attachmentId = attachmentId;
   }
 
-
   public String getFormId() {
     return formId;
   }
