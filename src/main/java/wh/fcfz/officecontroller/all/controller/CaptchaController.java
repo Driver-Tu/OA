@@ -11,26 +11,26 @@ import wh.fcfz.officecontroller.all.tool.Result;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/captcha")
 public class CaptchaController {
     @Autowired
     private CaptchaServiceImpl captchaService;
 
-    @GetMapping("/captcha")
+    @GetMapping("/get")
     public void getCaptcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
         captchaService.createCaptcha(request, response);
     }
 
-    @PostMapping("/validate-captcha")
+    @PostMapping("/validate")
     public Result validateCaptcha(HttpServletRequest request, @RequestBody Map<String, String> requestBody) {
         String captchaInput = requestBody.get("captcha");
         System.out.println("输入的验证码：" + captchaInput);
         boolean isValid = captchaService.validateCaptcha(request, captchaInput);
 
         if (isValid) {
-            return new Result("200","true" ,null); // 验证通过
+            return new Result("200","登录成功" ,true); // 验证通过
         } else {
-            return new Result("400","false" ,null); // 验证失败
+            return new Result("200","验证码错误" , null); // 验证失败
         }
     }
 }

@@ -21,8 +21,8 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 //允许通过
                 .excludePathPatterns("/user/login")
-                .excludePathPatterns("/captcha")
-                .excludePathPatterns("/validate-captcha");
+                .excludePathPatterns("/captcha/get")
+                .excludePathPatterns("/captcha/validate");
     }
 
     @Bean
