@@ -102,7 +102,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         Page<User> pages = new Page<>(page.getPageNum(), page.getPageSize());
         LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
-        lambdaQueryWrapper
+        lambdaQueryWrapper.eq(null!=page.getData().getUserId(),User::getUserId,page.getData().getUserId())
                 //状态
                 .eq(null!=page.getData().getStatus(),User::getStatus,page.getData().getStatus())
                 //部门
