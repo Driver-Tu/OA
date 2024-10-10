@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.User;
 import wh.fcfz.officecontroller.all.dto.UserMessage;
+import wh.fcfz.officecontroller.all.mapper.DepartMapper;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.UserService;
 import wh.fcfz.officecontroller.all.tool.HashEncryption;
@@ -33,6 +34,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private DepartMapper departMapper;
     /**
      * 登录
      * */
@@ -96,7 +99,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
  * 管理员查询所有人
  * */
     @Override
-    public Result<List<UserMessage>> selectALL(MyPage<User> page) {
+    public Result<List<UserMessage>> selectALL(MyPage<UserMessage> page) {
         if(!StpUtil.isLogin(StpUtil.getLoginId())){
             return new Result<List<UserMessage>>(ResponseEnum.USER_NOT_LOGIN,null);
         }
@@ -105,8 +108,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         lambdaQueryWrapper.eq(null!=page.getData().getUserId(),User::getUserId,page.getData().getUserId())
                 //状态
                 .eq(null!=page.getData().getStatus(),User::getStatus,page.getData().getStatus())
-                //部门
-                .eq(null!=page.getData().getDepartmentId(),User::getDepartmentId,page.getData().getDepartmentId())
                 //名称
                 .eq(null!=page.getData().getUserName(),User::getRoleId,page.getData().getUserName())
                 //排序为最新创建
@@ -124,6 +125,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             BeanUtil.copyProperties(user,userMessage);
             return userMessage;
         }).collect(Collectors.toList());
+        userMessageList=userMessageList.stream().filter(userMessage -> userMessage.getDepartmentName().equals(page.getData().getDepartmentName())).collect(Collectors.toList());
         Page<UserMessage> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
         List<UserMessage> collect = userMessageList.stream().skip((long) (page.getPageNum() - 1) * page.getPageSize()).limit(page.getPageSize()).collect(Collectors.toList());
         pageMessages.setRecords(collect);

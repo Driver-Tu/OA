@@ -32,8 +32,8 @@ public class UserController {
     * 查询所有员工数据
     * */
      @SaCheckPermission("admin")
-     @GetMapping("/list")
-    public Result<List<UserMessage>> selectALL(@RequestBody MyPage<User> page){
+     @PostMapping("/list")
+    public Result<List<UserMessage>> selectALL(@RequestBody MyPage<UserMessage> page){
         return userService.selectALL(page);
     }
 

@@ -28,4 +28,5 @@ public class User {
   private java.sql.Timestamp upTime;
   private String birthdayNum;
   private java.sql.Timestamp timeIn;
+
 }

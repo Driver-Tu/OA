@@ -16,7 +16,7 @@ public interface UserService extends IService<User> {
     //根据id查个人信息
     Result<UserMessage> SelectByUserId();
     //查询所有用户
-    Result<List<UserMessage>> selectALL(MyPage<User> page);
+    Result<List<UserMessage>> selectALL(MyPage<UserMessage> page);
     //退出登录
     Result<User> logout();
     //修改密码
