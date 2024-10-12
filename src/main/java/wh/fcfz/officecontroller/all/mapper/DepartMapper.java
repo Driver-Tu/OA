@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import wh.fcfz.officecontroller.all.bean.Depart;
+import wh.fcfz.officecontroller.all.bean.Dao.Depart;
 
 @Mapper
 public interface DepartMapper extends BaseMapper<Depart> {

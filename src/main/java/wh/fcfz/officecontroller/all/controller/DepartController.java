@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import wh.fcfz.officecontroller.all.bean.Depart;
+import wh.fcfz.officecontroller.all.bean.Dao.Depart;
 import wh.fcfz.officecontroller.all.tool.Result;
 import wh.fcfz.officecontroller.all.service.Impl.DepartServiceImpl;
 

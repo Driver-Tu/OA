@@ -1,4 +1,4 @@
-package wh.fcfz.officecontroller.all.bean;
+package wh.fcfz.officecontroller.all.bean.Dao;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -28,5 +28,8 @@ public class User {
   private java.sql.Timestamp upTime;
   private String birthdayNum;
   private java.sql.Timestamp timeIn;
+  private Integer deleted;
 
+  public User(User user) {
+  }
 }

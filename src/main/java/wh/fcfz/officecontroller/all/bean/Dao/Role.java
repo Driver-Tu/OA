@@ -1,4 +1,4 @@
-package wh.fcfz.officecontroller.all.bean;
+package wh.fcfz.officecontroller.all.bean.Dao;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -11,11 +11,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("leave_form")
-public class LeaveFrom {
-@TableId(type = IdType.AUTO)
-  private Integer LeaveId;
-  private java.sql.Timestamp startTime;
-  private java.sql.Timestamp endTime;
-  private String filePath;
+@TableName("role")
+public class Role {
+    @TableId(type = IdType.AUTO)
+    private Integer roleId;
+    private String roleName;
+    private String permissions;
+    private java.sql.Timestamp ctTime;
+    private java.sql.Timestamp upTime;
+
+
 }

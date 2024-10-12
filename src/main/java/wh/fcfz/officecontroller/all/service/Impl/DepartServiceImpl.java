@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wh.fcfz.officecontroller.all.bean.Depart;
+import wh.fcfz.officecontroller.all.bean.Dao.Depart;
 import wh.fcfz.officecontroller.all.mapper.DepartMapper;
 import wh.fcfz.officecontroller.all.service.DepartService;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;

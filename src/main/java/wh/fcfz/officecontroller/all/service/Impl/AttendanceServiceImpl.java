@@ -9,9 +9,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wh.fcfz.officecontroller.all.bean.Attendance;
-import wh.fcfz.officecontroller.all.bean.User;
-import wh.fcfz.officecontroller.all.dto.AttendancesMessage;
+import wh.fcfz.officecontroller.all.bean.Dao.Attendance;
+import wh.fcfz.officecontroller.all.bean.Dao.User;
+import wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo;
 import wh.fcfz.officecontroller.all.mapper.ApprovalFormsMapper;
 import wh.fcfz.officecontroller.all.mapper.AttendanceMapper;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
@@ -39,49 +39,49 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
     private UserMapper userMapper;
     @Override
     public Result getAllAttendance(MyPage<Attendance> myPage) {
-        Page<AttendancesMessage> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
-        List<AttendancesMessage> attendancesMessages = attendanceMapper.selectAllAttendances();
-        if (attendancesMessages.size() == 0) {
+        Page<AttendancesVo> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
+        List<AttendancesVo> attendancesVos = attendanceMapper.selectAllAttendances();
+        if (attendancesVos.size() == 0) {
             //防止空数据判断
-            return new Result(ResponseEnum.DATA_NOT_EXIST, null);
+            return new Result(ResponseEnum.SUCCESS, null);
         }
         if(null!=myPage.getData().getAttendanceUserId()){
             User user = userMapper.selectById(myPage.getData().getAttendanceUserId());
-            attendancesMessages=attendancesMessages.stream()
-                    .filter(attendancesMessage -> attendancesMessage.getAttendanceUserName().equals(user.getUserName()))
+            attendancesVos = attendancesVos.stream()
+                    .filter(attendancesVo -> attendancesVo.getAttendanceUserName().equals(user.getUserName()))
                     .collect(Collectors.toList());
         }else {
             if(myPage.getParams().containsKey("departmentName")&&(null!=myPage.getParams().get("departmentName"))&&(!myPage.getParams().get("departmentName").equals(""))){
                 Object departmentName = myPage.getParams().get("departmentName");
-                attendancesMessages=attendancesMessages.stream()
-                        .filter(attendancesMessage -> attendancesMessage.getAttendanceUserDepartName().equals(departmentName.toString()))
+                attendancesVos = attendancesVos.stream()
+                        .filter(attendancesVo -> attendancesVo.getAttendanceUserDepartName().equals(departmentName.toString()))
                         .collect(Collectors.toList());
             }
             if(myPage.getParams().containsKey("userName")&&(null!=myPage.getParams().get("userName"))&&(!myPage.getParams().get("userName").equals(""))){
                 Object userName = myPage.getParams().get("userName");
-                attendancesMessages=attendancesMessages.stream()
-                        .filter(attendancesMessage -> attendancesMessage.getAttendanceUserName().equals(userName.toString()))
+                attendancesVos = attendancesVos.stream()
+                        .filter(attendancesVo -> attendancesVo.getAttendanceUserName().equals(userName.toString()))
                         .collect(Collectors.toList());
             }
         }
         if(null!=myPage.getData().getStatus()&&(!myPage.getData().getStatus().equals(""))){
-            attendancesMessages=attendancesMessages.stream()
-                    .filter(attendancesMessage -> attendancesMessage.getStatus().equals(myPage.getData().getStatus()))
+            attendancesVos = attendancesVos.stream()
+                    .filter(attendancesVo -> (attendancesVo.getStatus().equals(myPage.getData().getStatus())))
                     .collect(Collectors.toList());
         }
         if(null!=myPage.getData().getType()&&(!myPage.getData().getType().equals(""))){
-            attendancesMessages=attendancesMessages.stream()
-                    .filter(attendancesMessage -> attendancesMessage.getType().equals(myPage.getData().getType()))
+            attendancesVos = attendancesVos.stream()
+                    .filter(attendancesVo -> attendancesVo.getType().equals(myPage.getData().getType()))
                     .collect(Collectors.toList());
         }
         if(null!=myPage.getData().getDate()&&(!myPage.getData().getDate().equals(""))){
-            attendancesMessages=attendancesMessages.stream()
-                    .filter(attendancesMessage -> attendancesMessage.getDate().equals(myPage.getData().getDate()))
+            attendancesVos = attendancesVos.stream()
+                    .filter(attendancesVo -> attendancesVo.getDate().equals(myPage.getData().getDate()))
                     .collect(Collectors.toList());
         }
-        List<AttendancesMessage> collect = attendancesMessages.stream().skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize()).collect(Collectors.toList());
+        List<AttendancesVo> collect = attendancesVos.stream().skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize()).collect(Collectors.toList());
         page.setRecords(collect);
-        page.setTotal(attendancesMessages.size());
+        page.setTotal(attendancesVos.size());
         return new Result(ResponseEnum.SUCCESS,page);
     }
 
@@ -115,7 +115,7 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
             }else {
                 attendance1.setStatus("打卡失败");
                 attendanceMapper.updateById(attendance1);
-                return new Result(ResponseEnum.SUCCESS,"下班打卡失败");
+                return new Result(ResponseEnum.SUCCESS,"下班打卡成功");
             }
         }
     }

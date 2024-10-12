@@ -5,8 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
-import wh.fcfz.officecontroller.all.bean.Attendance;
-import wh.fcfz.officecontroller.all.dto.AttendancesMessage;
+import wh.fcfz.officecontroller.all.bean.Dao.Attendance;
+import wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo;
 
 import java.util.List;
 
@@ -25,5 +25,5 @@ public interface AttendanceMapper extends BaseMapper<Attendance> {
             @Result(column = "userName", property = "attendanceUserName"),
             @Result(column = "departName", property = "attendanceUserDepartName")
     })
-    List<AttendancesMessage> selectAllAttendances();
+    List<AttendancesVo> selectAllAttendances();
 }

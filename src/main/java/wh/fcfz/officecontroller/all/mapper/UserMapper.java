@@ -3,7 +3,7 @@ package wh.fcfz.officecontroller.all.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import wh.fcfz.officecontroller.all.bean.User;
+import wh.fcfz.officecontroller.all.bean.Dao.User;
 
 @Mapper
 public interface UserMapper extends BaseMapper<User> {

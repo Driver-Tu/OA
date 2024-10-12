@@ -19,7 +19,7 @@ public enum ResponseEnum {
     DEPT_EXIST("10407", "部门已存在"),
 
     PARAM_ERROR("10601","密码或者工号为空"),
-    DATA_NOT_EXIST("10604","数据不存在"),
+    DATA_NOT_EXIST("10604","数据不符合要求"),
     PASSWORD_IS_NULL("10605","密码转义错误"),
     PASSWORD_IS_NOT_TRUE("10602","老密码错误，无法修改密码"),
     INVALID_PARAM("10603", "查询条件为空"),

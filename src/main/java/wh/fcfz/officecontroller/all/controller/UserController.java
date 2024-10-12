@@ -3,8 +3,8 @@ package wh.fcfz.officecontroller.all.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import wh.fcfz.officecontroller.all.bean.User;
-import wh.fcfz.officecontroller.all.dto.UserMessage;
+import wh.fcfz.officecontroller.all.bean.Dao.User;
+import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
 import wh.fcfz.officecontroller.all.service.Impl.UserServiceImpl;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.Result;
@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/info")
-    public Result<UserMessage> info(){
+    public Result<UserVo> info(){
         return userService.SelectByUserId();
     }
 
@@ -33,7 +33,7 @@ public class UserController {
     * */
      @SaCheckPermission("admin")
      @PostMapping("/list")
-    public Result<List<UserMessage>> selectALL(@RequestBody MyPage<UserMessage> page){
+    public Result<List<UserVo>> selectALL(@RequestBody MyPage<UserVo> page){
         return userService.selectALL(page);
     }
 
@@ -69,7 +69,7 @@ public class UserController {
     * */
     @SaCheckPermission("admin")
     @DeleteMapping("/deleteUser")
-    public Result<String> deleteUser(@RequestParam List<Integer> ids){
+    public Result<String> deleteUser(@RequestBody List<Integer> ids){
         return userService.deleteUser(ids);
     }
 }

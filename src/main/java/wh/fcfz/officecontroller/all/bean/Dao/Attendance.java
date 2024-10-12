@@ -1,4 +1,4 @@
-package wh.fcfz.officecontroller.all.bean;
+package wh.fcfz.officecontroller.all.bean.Dao;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -24,4 +24,7 @@ public class Attendance {
   private double longitude;
   private double latitude;
   private String type;
+
+  public Attendance(Attendance attendance) {
+  }
 }

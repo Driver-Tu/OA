@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wh.fcfz.officecontroller.all.bean.Attendance;
+import wh.fcfz.officecontroller.all.bean.Dao.Attendance;
 import wh.fcfz.officecontroller.all.mapper.AttendanceMapper;
 import wh.fcfz.officecontroller.all.service.Impl.AttendanceServiceImpl;
 import wh.fcfz.officecontroller.all.tool.MyPage;

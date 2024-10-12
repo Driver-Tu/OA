@@ -4,8 +4,8 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wh.fcfz.officecontroller.all.bean.Menu;
-import wh.fcfz.officecontroller.all.dto.MenuMessage;
+import wh.fcfz.officecontroller.all.bean.Dao.Menu;
+import wh.fcfz.officecontroller.all.bean.Vo.MenuVo;
 import wh.fcfz.officecontroller.all.mapper.MenuMapper;
 import wh.fcfz.officecontroller.all.service.MenuService;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
@@ -23,7 +23,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Autowired
     private MenuMapper menuMapper;
     @Override
-    public Result<List<MenuMessage>> getMenuTree() {
+    public Result<List<MenuVo>> getMenuTree() {
         // 从数据库查询符合当前用户权限的所有菜单，保存到 dbmenuList
         List<Menu> dbmenuList = menuMapper.selectByPermissionMenu(Integer.parseInt(StpUtil.getRoleList().get(0)));
 
@@ -32,7 +32,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
                 .collect(Collectors.groupingBy(Menu::getFatherMenuId)); // 按 parentId 分组
 
         // 获取所有父菜单（parent_id 为 0 的菜单）
-        List<MenuMessage> topLevelMenus = dbmenuList.stream()
+        List<MenuVo> topLevelMenus = dbmenuList.stream()
                 .filter(menu -> menu.getFatherMenuId() == 0)
                 .map(menu -> convertToMenuMessage(menu, parentMenuMap))
                 .collect(Collectors.toList());
@@ -41,15 +41,15 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     // 将 Menu 转换为 MenuMessage 并递归构建树形结构
-    private MenuMessage convertToMenuMessage(Menu menu, Map<Integer, List<Menu>> parentMenuMap) {
+    private MenuVo convertToMenuMessage(Menu menu, Map<Integer, List<Menu>> parentMenuMap) {
         // 获取当前菜单的子菜单列表
-        List<MenuMessage> sonMenus = Optional.ofNullable(parentMenuMap.get(menu.getMenuId()))
+        List<MenuVo> sonMenus = Optional.ofNullable(parentMenuMap.get(menu.getMenuId()))
                 .orElse(Collections.emptyList())  // 如果没有子菜单则返回空列表
                 .stream()
                 .map(subMenu -> convertToMenuMessage(subMenu, parentMenuMap))  // 递归调用转换子菜单
                 .collect(Collectors.toList());
 
         // 构建 MenuMessage 并将子菜单列表赋值给 sonMenus
-        return new MenuMessage(menu.getMenuId(), menu.getMenuName(),menu.getMenuRouter(),sonMenus);
+        return new MenuVo(menu.getMenuId(), menu.getMenuName(),menu.getMenuRouter(),sonMenus);
     }
 }

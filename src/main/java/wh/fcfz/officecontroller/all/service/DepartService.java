@@ -2,7 +2,7 @@ package wh.fcfz.officecontroller.all.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import wh.fcfz.officecontroller.all.bean.Depart;
+import wh.fcfz.officecontroller.all.bean.Dao.Depart;
 import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.util.List;

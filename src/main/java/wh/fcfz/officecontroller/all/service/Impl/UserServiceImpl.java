@@ -11,8 +11,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wh.fcfz.officecontroller.all.bean.User;
-import wh.fcfz.officecontroller.all.dto.UserMessage;
+import org.springframework.transaction.annotation.Transactional;
+import wh.fcfz.officecontroller.all.bean.Dao.User;
+import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
 import wh.fcfz.officecontroller.all.mapper.DepartMapper;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.UserService;
@@ -46,6 +47,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(User::getEmpNum,empNum)
+                .select(User::getEmpNum,User::getUserPassword,User::getUserId)
                 .eq(User::getUserPassword,password);
         User user = userMapper.selectOne(lambdaQueryWrapper);
         if(user == null){
@@ -76,32 +78,32 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      *
      * @return*/
     @Override
-    public Result<UserMessage> SelectByUserId() {
+    public Result<UserVo> SelectByUserId() {
         if(!StpUtil.isLogin(StpUtil.getLoginId())){
-            return new Result<UserMessage>(ResponseEnum.USER_NOT_LOGIN,null);
+            return new Result<UserVo>(ResponseEnum.USER_NOT_LOGIN,null);
         }
         Long userId = StpUtil.getLoginIdAsLong();
         User user = userMapper.selectById(userId);
         String departName = userMapper.selectDepartName(user.getDepartmentId());
         String roleName = userMapper.selectRoleName(user.getRoleId());
-        UserMessage userMessage=new UserMessage();
-        userMessage.setDepartmentName(departName);
-        userMessage.setRoleName(roleName);
+        UserVo userVo =new UserVo();
+        userVo.setDepartmentName(departName);
+        userVo.setRoleName(roleName);
         String[] birthdayAndGender = getBirthdayAndGender(user.getBirthdayNum());
-        userMessage.setBirth(birthdayAndGender[0]);
-        userMessage.setSex(birthdayAndGender[1]);
-        BeanUtil.copyProperties(user,userMessage);
+        userVo.setBirth(birthdayAndGender[0]);
+        userVo.setSex(birthdayAndGender[1]);
+        BeanUtil.copyProperties(user, userVo);
 
-        return new Result<UserMessage>(ResponseEnum.SUCCESS,userMessage);
+        return new Result<UserVo>(ResponseEnum.SUCCESS, userVo);
     }
 /**
  *
  * 管理员查询所有人
  * */
     @Override
-    public Result<List<UserMessage>> selectALL(MyPage<UserMessage> page) {
+    public Result<List<UserVo>> selectALL(MyPage<UserVo> page) {
         if(!StpUtil.isLogin(StpUtil.getLoginId())){
-            return new Result<List<UserMessage>>(ResponseEnum.USER_NOT_LOGIN,null);
+            return new Result<List<UserVo>>(ResponseEnum.USER_NOT_LOGIN,null);
         }
         Page<User> pages = new Page<>(page.getPageNum(), page.getPageSize());
         LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
@@ -112,26 +114,30 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .eq(null!=page.getData().getUserName(),User::getRoleId,page.getData().getUserName())
                 //排序为最新创建
                 .orderByDesc(User::getCtTime);
-        Page<User> userPage = userMapper.selectPage(pages, lambdaQueryWrapper);
-        List<UserMessage> userMessageList = userPage.getRecords().stream().map(user -> {
+        List<User> userPage = userMapper.selectList(lambdaQueryWrapper);
+        List<UserVo> userVoList = userPage.stream().map(user -> {
             String departName = userMapper.selectDepartName(user.getDepartmentId());
             String roleName = userMapper.selectRoleName(user.getRoleId());
-            UserMessage userMessage=new UserMessage();
-            userMessage.setDepartmentName(departName);
-            userMessage.setRoleName(roleName);
+            UserVo userVo =new UserVo();
+            userVo.setDepartmentName(departName);
+            userVo.setRoleName(roleName);
             String[] birthdayAndGender = getBirthdayAndGender(user.getBirthdayNum());
-            userMessage.setBirth(birthdayAndGender[0]);
-            userMessage.setSex(birthdayAndGender[1]);
-            BeanUtil.copyProperties(user,userMessage);
-            return userMessage;
+            userVo.setBirth(birthdayAndGender[0]);
+            userVo.setSex(birthdayAndGender[1]);
+            BeanUtil.copyProperties(user, userVo);
+            return userVo;
         }).collect(Collectors.toList());
-        userMessageList=userMessageList.stream().filter(userMessage -> userMessage.getDepartmentName().equals(page.getData().getDepartmentName())).collect(Collectors.toList());
-        Page<UserMessage> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
-        List<UserMessage> collect = userMessageList.stream().skip((long) (page.getPageNum() - 1) * page.getPageSize()).limit(page.getPageSize()).collect(Collectors.toList());
+        if(page.getData().getDepartmentName()!=null){
+            userVoList = userVoList.stream().filter(userVo -> userVo.getDepartmentName().equals(page.getData().getDepartmentName())).collect(Collectors.toList());
+        }
+        Page<UserVo> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
+        List<UserVo> collect = userVoList.stream().skip((long) (page.getPageNum() - 1) * page.getPageSize()).limit(page.getPageSize()).collect(Collectors.toList());
         pageMessages.setRecords(collect);
-        pageMessages.setTotal(userMessageList.size());
+        pageMessages.setTotal(userVoList.size());
         return new Result(ResponseEnum.SUCCESS,pageMessages);
     }
+
+
     public static String[] getBirthdayAndGender(String idNumber) {
         if (idNumber == null || (idNumber.length() != 15 && idNumber.length() != 18)) {
             return null;
@@ -260,19 +266,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     *批量删除数据
     *  */
     @Override
+    @Transactional
     public Result<String> deleteUser(List<Integer> ids) {
         if (!StpUtil.isLogin(StpUtil.getLoginId())) {
             return new Result<String>(ResponseEnum.USER_NOT_LOGIN, null);
         }
-        List<String> deleteOkList=new ArrayList<>();
-        List<String> deleteNoList=new ArrayList<>();
+        List<Integer> deleteOkList=new ArrayList<>();
+        List<Integer> deleteNoList=new ArrayList<>();
         //删除前先查询再删除
         ids.forEach(id-> {
             User user = userMapper.selectById(id);
             if(user!=null){
-                deleteOkList.add(user.getUserName());
+                deleteOkList.add(id);
             }else {
-                deleteNoList.add(user.getUserName());
+                deleteNoList.add(id);
             }
         });
         try {

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wh.fcfz.officecontroller.all.dto.MenuMessage;
+import wh.fcfz.officecontroller.all.bean.Vo.MenuVo;
 import wh.fcfz.officecontroller.all.service.Impl.MenuServiceImpl;
 import wh.fcfz.officecontroller.all.tool.Result;
 
@@ -17,7 +17,7 @@ public class MenuController {
     private MenuServiceImpl menuService;
 
     @GetMapping("/getMenuTree")
-    public Result<List<MenuMessage>> selectById(){
+    public Result<List<MenuVo>> selectById(){
         return menuService.getMenuTree();
     }
 }
