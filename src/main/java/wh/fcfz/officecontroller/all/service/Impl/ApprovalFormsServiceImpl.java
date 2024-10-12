@@ -50,61 +50,24 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
             approvalForm.setUserName(user.getUserName());
             approvalForm.setDepartmentName(departName);
         }).collect(Collectors.toList());
-        //如果map中含有userName的话，就删除不满足该名字的数据
-        if (myPage.getParams().containsKey("userName") && (null != myPage.getParams().get("userName")) && myPage.getParams().get("userName") != "") {
-            String userName = myPage.getParams().get("userName").toString();
-            approvalFormsList = approvalFormsList.stream()
-                    .filter(approvalForm -> approvalForm.getUserName().equals(userName))
-                    .collect(Collectors.toList());
-        }
-        //如果map中含有departmentName的话，就删除不满足该名字的数据
-        User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
-        String departName = userMapper.selectDepartName(user.getDepartmentId());
-        approvalFormsList = approvalFormsList.stream()
-                .filter(approvalForm -> departName.equals(approvalForm.getDepartmentName()))
-                .collect(Collectors.toList());
-        approvalFormsList=approvalFormsList.stream().map(approvalForm -> {
-            switch (approvalForm.getType()) {
-                case "请假": {
-                    LeaveFrom leaveFrom = leaveMapper.selectById(approvalForm.getAllId());
-                    approvalForm.getMap().put("leave", leaveFrom);
-                    return approvalForm;
-                }
-                case "报销":
-                    return approvalForm;
-                case "出差":
-                    Business business = businessMapper.selectById(approvalForm.getAllId());
-                    approvalForm.getMap().put("business", business);
-                    return approvalForm;
-                case "加班":
-                    return approvalForm;
-                case "补签":
-                    return approvalForm;
-                case "入职":
-                    return approvalForm;
-                case "培训":
-                    return approvalForm;
-                case "薪资调整":
-                    return approvalForm;
-                case "离职":
-                    return approvalForm;
-                case "采购":
-                    return approvalForm;
-                case "用车":
-                    return approvalForm;
-                case "预算":
-                    return approvalForm;
-                case "招聘":
-                    return approvalForm;
-                case "设备维修":
-                    return approvalForm;
-                case "合同签署":
-                    return approvalForm;
-                case "项目立项":
-                    return approvalForm;
+        if(myPage.getParams()!=null){
+            //如果map中含有userName的话，就删除不满足该名字的数据
+            if (myPage.getParams().containsKey("userName") && (null != myPage.getParams().get("userName")) && myPage.getParams().get("userName") != "") {
+                String userName = myPage.getParams().get("userName").toString();
+                approvalFormsList = approvalFormsList.stream()
+                        .filter(approvalForm -> approvalForm.getUserName().equals(userName))
+                        .collect(Collectors.toList());
             }
-            return null;
-        }).collect(Collectors.toList());
+            //如果map中含有departmentName的话，就删除不满足该名字的数据
+            if (myPage.getParams().containsKey("departName") && (null != myPage.getParams().get("departName")) && myPage.getParams().get("departName") != "") {
+                User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
+                String departName = userMapper.selectDepartName(user.getDepartmentId());
+                approvalFormsList = approvalFormsList.stream()
+                        .filter(approvalForm -> departName.equals(approvalForm.getDepartmentName()))
+                        .collect(Collectors.toList());
+            }
+        }
+        approvalFormsList=GetList(approvalFormsList);
         List<ApprovalForms> collect = approvalFormsList.stream()
                 .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
                 .collect(Collectors.toList());
@@ -130,20 +93,34 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
             approvalForm.setUserName(user.getUserName());
             approvalForm.setDepartmentName(departName);
         }).collect(Collectors.toList());
-        //如果map中含有userName的话，就删除不满足该名字的数据
-        if (myPage.getParams().containsKey("userName") && (null != myPage.getParams().get("userName")) && myPage.getParams().get("userName") != "") {
-            String userName = myPage.getParams().get("userName").toString();
-            approvalFormsList = approvalFormsList.stream()
-                    .filter(approvalForm -> approvalForm.getUserName().equals(userName))
-                    .collect(Collectors.toList());
+        if(myPage.getParams()!=null){
+            //如果map中含有userName的话，就删除不满足该名字的数据
+            if (myPage.getParams().containsKey("userName") && (null != myPage.getParams().get("userName")) && myPage.getParams().get("userName") != "") {
+                String userName = myPage.getParams().get("userName").toString();
+                approvalFormsList = approvalFormsList.stream()
+                        .filter(approvalForm -> approvalForm.getUserName().equals(userName))
+                        .collect(Collectors.toList());
+            }
+            //如果map中含有departmentName的话，就删除不满足该名字的数据
+            if (myPage.getParams().containsKey("departName") && (null != myPage.getParams().get("departName")) && myPage.getParams().get("departName") != "") {
+                User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
+                String departName = userMapper.selectDepartName(user.getDepartmentId());
+                approvalFormsList = approvalFormsList.stream()
+                        .filter(approvalForm -> departName.equals(approvalForm.getDepartmentName()))
+                        .collect(Collectors.toList());
+            }
         }
-        //如果map中含有departmentName的话，就删除不满足该名字的数据
-        User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
-        String departName = userMapper.selectDepartName(user.getDepartmentId());
-        approvalFormsList = approvalFormsList.stream()
-                .filter(approvalForm -> departName.equals(approvalForm.getDepartmentName()))
+        approvalFormsList=GetList(approvalFormsList);
+        List<ApprovalForms> collect = approvalFormsList.stream()
+                .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
                 .collect(Collectors.toList());
-        approvalFormsList=approvalFormsList.stream().map(approvalForm -> {
+        page.setRecords(collect);
+        page.setTotal(approvalFormsList.size());
+        return new Result("200", "查询成功", page);
+    }
+
+    public List<ApprovalForms> GetList(List<ApprovalForms> approvalFormsList){
+        return approvalFormsList=approvalFormsList.stream().map(approvalForm -> {
             switch (approvalForm.getType()) {
                 case "请假": {
                     LeaveFrom leaveFrom = leaveMapper.selectById(approvalForm.getAllId());
@@ -189,14 +166,7 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
             }
             return approvalForm;
         }).collect(Collectors.toList());
-        List<ApprovalForms> collect = approvalFormsList.stream()
-                .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
-                .collect(Collectors.toList());
-        page.setRecords(collect);
-        page.setTotal(approvalFormsList.size());
-        return new Result("200", "查询成功", page);
     }
-
     //添加审批数据
     @Override
     @Transactional(rollbackFor = Exception.class)
