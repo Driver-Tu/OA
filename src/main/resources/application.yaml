@@ -41,6 +41,22 @@ spring:
       # 设置单个文件上传大小
       max-file-size: 10MB
       max-request-size: 20MB
+  data:
+    redis:
+      database: 1
+      host: 127.0.0.1
+      port: 6379
+      timeout: 10s
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
 
 #mp日志
 mybatis-plus:
@@ -57,3 +73,6 @@ my:
   files:
     upload:
       path: D:\Projects\WeSpace\WeOfficeSys\OA\src\main\resources\file\
+
+
+

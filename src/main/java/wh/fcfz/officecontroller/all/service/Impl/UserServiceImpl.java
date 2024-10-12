@@ -3,6 +3,7 @@ package wh.fcfz.officecontroller.all.service.Impl;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
+import cn.hutool.core.util.DesensitizedUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import wh.fcfz.officecontroller.all.bean.Dao.Depart;
 import wh.fcfz.officecontroller.all.bean.Dao.User;
 import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
 import wh.fcfz.officecontroller.all.mapper.DepartMapper;
@@ -114,22 +116,27 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .eq(null!=page.getData().getUserName(),User::getRoleId,page.getData().getUserName())
                 //排序为最新创建
                 .orderByDesc(User::getCtTime);
+        if(null!=page.getData().getDepartmentName()){
+            log.error(page.getData().getDepartmentName());
+            lambdaQueryWrapper.eq(null!=page.getData().getDepartmentName(),User::getDepartmentId
+                    ,departMapper.selectOne(new LambdaQueryWrapper<Depart>().eq(Depart::getDepartName,page.getData().getDepartmentName())).getDepartId());
+        }
         List<User> userPage = userMapper.selectList(lambdaQueryWrapper);
         List<UserVo> userVoList = userPage.stream().map(user -> {
+
             String departName = userMapper.selectDepartName(user.getDepartmentId());
             String roleName = userMapper.selectRoleName(user.getRoleId());
             UserVo userVo =new UserVo();
+            BeanUtil.copyProperties(user, userVo);
             userVo.setDepartmentName(departName);
             userVo.setRoleName(roleName);
             String[] birthdayAndGender = getBirthdayAndGender(user.getBirthdayNum());
             userVo.setBirth(birthdayAndGender[0]);
             userVo.setSex(birthdayAndGender[1]);
-            BeanUtil.copyProperties(user, userVo);
+            userVo.setBirthdayNum(DesensitizedUtil.idCardNum(user.getBirthdayNum(),6,0));
+            log.info(userVo.getBirthdayNum());
             return userVo;
         }).collect(Collectors.toList());
-        if(page.getData().getDepartmentName()!=null){
-            userVoList = userVoList.stream().filter(userVo -> userVo.getDepartmentName().equals(page.getData().getDepartmentName())).collect(Collectors.toList());
-        }
         Page<UserVo> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
         List<UserVo> collect = userVoList.stream().skip((long) (page.getPageNum() - 1) * page.getPageSize()).limit(page.getPageSize()).collect(Collectors.toList());
         pageMessages.setRecords(collect);
