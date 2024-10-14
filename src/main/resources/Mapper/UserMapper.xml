@@ -15,7 +15,7 @@
         FROM role
         WHERE role_id = #{roleId}
     </select>
-    <select id="selectUserList" parameterType="wh.fcfz.officecontroller.all.bean.Dto.UserDto"
+    <select id="selectUserList"
             resultType="wh.fcfz.officecontroller.all.bean.Vo.UserVo">
         SELECT
         u.user_id as userId,
@@ -40,26 +40,26 @@
         LEFT JOIN role r ON u.role_id = r.role_id
         LEFT JOIN depart d ON u.department_id = d.depart_id
         <where>
-            <if test="userId != null">
-                AND u.user_id = #{userId}
+            <if test="data.userId != null">
+                AND u.user_id = #{data.userId}
             </if>
-            <if test="userName != null and userName.trim() != ''">
-                AND u.user_name LIKE CONCAT('%', #{userName}, '%')
+            <if test="data.userName != null and data.userName.trim() != ''">
+                AND u.user_name LIKE CONCAT('%', #{data.userName}, '%')
             </if>
-            <if test="empNum != null and empNum.trim() != ''">
-                AND u.emp_num = #{empNum}
+            <if test="data.empNum != null and data.empNum.trim() != ''">
+                AND u.emp_num = #{data.empNum}
             </if>
-            <if test="status != null">
-                AND u.status = #{status}
+            <if test="data.status != null">
+                AND u.status = #{data.status}
             </if>
-            <if test="timeIn != null">
-                AND u.time_in = #{timeIn}
+            <if test="data.timeIn != null">
+                AND u.time_in = #{data.timeIn}
             </if>
-            <if test="departName!=null">
-                AND d.depart_name LIKE CONCAT('%', #{departName}, '%')
+            <if test="data.departName!=null">
+                AND d.depart_name LIKE CONCAT('%', #{data.departName}, '%')
             </if>
-        AND u.deleted=0
+                AND u.deleted=0
         </where>
+        order by u.time_in desc
     </select>
-
 </mapper>

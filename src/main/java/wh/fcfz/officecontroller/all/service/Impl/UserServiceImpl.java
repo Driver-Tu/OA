@@ -27,7 +27,6 @@ import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -98,7 +97,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userVo.setBirth(birthdayAndGender[0]);
         userVo.setSex(birthdayAndGender[1]);
         BeanUtil.copyProperties(user, userVo);
-
         return new Result<UserVo>(ResponseEnum.SUCCESS, userVo);
     }
 /**
@@ -111,7 +109,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return new Result<List<UserVo>>(ResponseEnum.USER_NOT_LOGIN,null);
         }
         Page<User> pages = new Page<>(page.getPageNum(), page.getPageSize());
-        List<UserVo> userPage = userMapper.selectUserList(page.getData());
+        List<UserVo> userPage = userMapper.selectUserList(page);
         List<UserVo> userVoList = userPage.stream().map(userVo -> {
             String[] birthdayAndGender = getBirthdayAndGender(userVo.getBirthdayNum());
             userVo.setBirth(birthdayAndGender[0]);
@@ -260,23 +258,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if (!StpUtil.isLogin(StpUtil.getLoginId())) {
             return new Result<String>(ResponseEnum.USER_NOT_LOGIN, null);
         }
-        List<Integer> deleteOkList=new ArrayList<>();
-        List<Integer> deleteNoList=new ArrayList<>();
-        //删除前先查询再删除
-        ids.forEach(id-> {
-            User user = userMapper.selectById(id);
-            if(user!=null){
-                deleteOkList.add(id);
-            }else {
-                deleteNoList.add(id);
-            }
-        });
         try {
-            deleteOkList.forEach(id->userMapper.deleteById(id));
-            return new Result<String>(ResponseEnum.SUCCESS,"成功删除的数据为"+deleteOkList+"失败的数据为"+deleteNoList);
+            userMapper.deleteBatchIds(ids);
+            return new Result<String>(ResponseEnum.SUCCESS,"成功删除的数据为"+ids);
         } catch (Exception e) {
             e.printStackTrace();
-            return new Result<String>(ResponseEnum.DELETE_SERVER_FAILED,null);
+           throw e;
         }
     }
 

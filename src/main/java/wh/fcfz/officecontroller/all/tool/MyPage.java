@@ -12,7 +12,7 @@ import static wh.fcfz.officecontroller.config.file.SystemConfig.DEFAULT_PAGE_SIZ
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MyPage<T> {
+public class MyPage<T>{
     private Integer pageNum=DEFAULT_PAGE_NUM;
     private Integer pageSize=DEFAULT_PAGE_SIZE;
     private T data;
