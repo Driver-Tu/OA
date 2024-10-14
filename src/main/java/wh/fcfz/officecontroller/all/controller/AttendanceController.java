@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import wh.fcfz.officecontroller.all.bean.Dao.Attendance;
+import wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo;
 import wh.fcfz.officecontroller.all.mapper.AttendanceMapper;
 import wh.fcfz.officecontroller.all.service.Impl.AttendanceServiceImpl;
 import wh.fcfz.officecontroller.all.tool.MyPage;
@@ -23,12 +24,12 @@ public class AttendanceController {
 
     @SaCheckPermission("admin")
     @PostMapping("/getAllAttendance")
-    public Result getAllAttendance(@RequestBody MyPage<Attendance> myPage) {
+    public Result getAllAttendance(@RequestBody MyPage<AttendancesVo> myPage) {
         return attendanceService.getAllAttendance(myPage);
     }
 
     @PostMapping("/getSelfAttendance")
-    public Result getSelfAttendance(@RequestBody MyPage<Attendance> myPage) {
+    public Result getSelfAttendance(@RequestBody MyPage<AttendancesVo> myPage) {
         Integer loginId = StpUtil.getLoginIdAsInt();
         myPage.getData().setAttendanceUserId(loginId);
         return attendanceService.getAllAttendance(myPage);

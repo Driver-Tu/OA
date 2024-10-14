@@ -13,5 +13,5 @@ public interface AttendanceMapper extends BaseMapper<Attendance> {
 
     String selectAllDepartName(Integer attendanceId);
 
-    List<AttendancesVo> selectAllAttendances();
+    List<AttendancesVo> selectAllAttendances(AttendancesVo attendancesVo);
 }

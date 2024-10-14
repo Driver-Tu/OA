@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wh.fcfz.officecontroller.all.bean.Dao.Attendance;
-import wh.fcfz.officecontroller.all.bean.Dao.User;
 import wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo;
 import wh.fcfz.officecontroller.all.mapper.ApprovalFormsMapper;
 import wh.fcfz.officecontroller.all.mapper.AttendanceMapper;
@@ -38,46 +37,12 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
     @Autowired
     private UserMapper userMapper;
     @Override
-    public Result getAllAttendance(MyPage<Attendance> myPage) {
+    public Result getAllAttendance(MyPage<AttendancesVo> myPage) {
         Page<AttendancesVo> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
-        List<AttendancesVo> attendancesVos = attendanceMapper.selectAllAttendances();
+        List<AttendancesVo> attendancesVos = attendanceMapper.selectAllAttendances(myPage.getData());
         if (attendancesVos.size() == 0) {
             //防止空数据判断
             return new Result(ResponseEnum.SUCCESS, null);
-        }
-        if(null!=myPage.getData().getAttendanceUserId()){
-            User user = userMapper.selectById(myPage.getData().getAttendanceUserId());
-            attendancesVos = attendancesVos.stream()
-                    .filter(attendancesVo -> attendancesVo.getAttendanceUserName().equals(user.getUserName()))
-                    .collect(Collectors.toList());
-        }else {
-            if(myPage.getParams().containsKey("departmentName")&&(null!=myPage.getParams().get("departmentName"))&&(!myPage.getParams().get("departmentName").equals(""))){
-                Object departmentName = myPage.getParams().get("departmentName");
-                attendancesVos = attendancesVos.stream()
-                        .filter(attendancesVo -> attendancesVo.getAttendanceUserDepartName().equals(departmentName.toString()))
-                        .collect(Collectors.toList());
-            }
-            if(myPage.getParams().containsKey("userName")&&(null!=myPage.getParams().get("userName"))&&(!myPage.getParams().get("userName").equals(""))){
-                Object userName = myPage.getParams().get("userName");
-                attendancesVos = attendancesVos.stream()
-                        .filter(attendancesVo -> attendancesVo.getAttendanceUserName().equals(userName.toString()))
-                        .collect(Collectors.toList());
-            }
-        }
-        if(null!=myPage.getData().getStatus()&&(!myPage.getData().getStatus().equals(""))){
-            attendancesVos = attendancesVos.stream()
-                    .filter(attendancesVo -> (attendancesVo.getStatus().equals(myPage.getData().getStatus())))
-                    .collect(Collectors.toList());
-        }
-        if(null!=myPage.getData().getType()&&(!myPage.getData().getType().equals(""))){
-            attendancesVos = attendancesVos.stream()
-                    .filter(attendancesVo -> attendancesVo.getType().equals(myPage.getData().getType()))
-                    .collect(Collectors.toList());
-        }
-        if(null!=myPage.getData().getDate()&&(!myPage.getData().getDate().equals(""))){
-            attendancesVos = attendancesVos.stream()
-                    .filter(attendancesVo -> attendancesVo.getDate().equals(myPage.getData().getDate()))
-                    .collect(Collectors.toList());
         }
         List<AttendancesVo> collect = attendancesVos.stream().skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize()).collect(Collectors.toList());
         page.setRecords(collect);

@@ -13,9 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import wh.fcfz.officecontroller.all.bean.Dao.Depart;
-import wh.fcfz.officecontroller.all.bean.Dao.Role;
 import wh.fcfz.officecontroller.all.bean.Dao.User;
+import wh.fcfz.officecontroller.all.bean.Dto.UserDto;
 import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
 import wh.fcfz.officecontroller.all.mapper.DepartMapper;
 import wh.fcfz.officecontroller.all.mapper.RoleMapper;
@@ -107,39 +106,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
  * 管理员查询所有人
  * */
     @Override
-    public Result<List<UserVo>> selectALL(MyPage<UserVo> page) {
+    public Result<List<UserVo>> selectALL(MyPage<UserDto> page) {
         if(!StpUtil.isLogin(StpUtil.getLoginId())){
             return new Result<List<UserVo>>(ResponseEnum.USER_NOT_LOGIN,null);
         }
         Page<User> pages = new Page<>(page.getPageNum(), page.getPageSize());
-        LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(null!=page.getData().getUserId(),User::getUserId,page.getData().getUserId())
-                //状态
-                .eq(null!=page.getData().getStatus(),User::getStatus,page.getData().getStatus())
-                //名称
-                .eq(null!=page.getData().getUserName(),User::getUserName,page.getData().getUserName())
-                //排序为最新创建
-                .orderByDesc(User::getCtTime);
-        if(null!=page.getData().getDepartmentName()){
-            lambdaQueryWrapper.eq(null!=page.getData().getDepartmentName(),User::getDepartmentId
-                    ,departMapper.selectOne(new LambdaQueryWrapper<Depart>().eq(Depart::getDepartName,page.getData().getDepartmentName())).getDepartId());
-        }
-        if(null!=page.getData().getRoleName()){
-            lambdaQueryWrapper.eq(null!=page.getData().getDepartmentName(),User::getRoleId
-                    ,roleMapper.selectOne(new LambdaQueryWrapper<Role>().eq(Role::getRoleName,page.getData().getDepartmentName())).getRoleId());
-        }
-        List<User> userPage = userMapper.selectList(lambdaQueryWrapper);
-        List<UserVo> userVoList = userPage.stream().map(user -> {
-            String departName = userMapper.selectDepartName(user.getDepartmentId());
-            String roleName = userMapper.selectRoleName(user.getRoleId());
-            UserVo userVo =new UserVo();
-            BeanUtil.copyProperties(user, userVo);
-            userVo.setDepartmentName(departName);
-            userVo.setRoleName(roleName);
-            String[] birthdayAndGender = getBirthdayAndGender(user.getBirthdayNum());
+        List<UserVo> userPage = userMapper.selectUserList(page.getData());
+        List<UserVo> userVoList = userPage.stream().map(userVo -> {
+            String[] birthdayAndGender = getBirthdayAndGender(userVo.getBirthdayNum());
             userVo.setBirth(birthdayAndGender[0]);
             userVo.setSex(birthdayAndGender[1]);
-            userVo.setBirthdayNum(DesensitizedUtil.idCardNum(user.getBirthdayNum(),6,0));
+            userVo.setBirthdayNum(DesensitizedUtil.idCardNum(userVo.getBirthdayNum(),6,0));
             return userVo;
         }).collect(Collectors.toList());
         Page<UserVo> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());

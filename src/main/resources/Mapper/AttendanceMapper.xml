@@ -3,25 +3,48 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="wh.fcfz.officecontroller.all.mapper.AttendanceMapper">
-    <select id="selectAllAttendances" resultType="wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo">
+    <select id="selectAllAttendances" parameterType="wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo" resultType="wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo">
         SELECT
-            a.attendance_id as attendance_id,
-            a.attendance_user_id as attendance_user_id,
-            u.user_name as attendanceUserName,
-            d.depart_name as attendanceUserDepartName,
-            a.time_in as time_in,
-            a.time_out as time_out,
-            a.date as date,
-            a.status as status,
-            a.address as address,
-            a.type as type
+        a.attendance_id as attendance_id,
+        a.attendance_user_id as attendance_user_id,
+        u.user_name as userName,
+        d.depart_name as departName,
+        a.time_in as time_in,
+        a.time_out as time_out,
+        a.date as date,
+        a.status as status,
+        a.address as address,
+        a.type as type
         FROM
-            user as u,
-            depart as d,
-            attendance as a
-        WHERE
-            u.department_id = d.depart_id
-          AND a.attendance_user_id = u.user_id
+        user as u
+        INNER JOIN depart as d ON u.department_id = d.depart_id
+        INNER JOIN attendance as a ON a.attendance_user_id = u.user_id
+        <where>
+            <if test="attendanceId != null">
+                AND a.attendance_id = #{attendanceId}
+            </if>
+            <if test="attendanceUserId != null">
+                AND a.attendance_user_id = #{attendanceUserId}
+            </if>
+            <if test="userName != null and userName != ''">
+                AND u.user_name LIKE CONCAT('%', #{userName}, '%')
+            </if>
+            <if test="departName != null and departName != ''">
+                AND d.depart_name LIKE CONCAT('%', #{departName}, '%')
+            </if>
+            <if test="date != null">
+                AND a.date = #{date}
+            </if>
+            <if test="status != null">
+                AND a.status = #{status}
+            </if>
+            <if test="address != null and address != ''">
+                AND a.address LIKE CONCAT('%', #{address}, '%')
+            </if>
+            <if test="type != null">
+                AND a.type = #{type}
+            </if>
+        </where>
     </select>
     <!-- 查询用户名称 -->
     <select id="selectAllUserName" resultType="java.lang.String">

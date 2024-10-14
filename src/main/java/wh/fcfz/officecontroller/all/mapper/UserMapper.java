@@ -2,15 +2,19 @@ package wh.fcfz.officecontroller.all.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 import wh.fcfz.officecontroller.all.bean.Dao.User;
+import wh.fcfz.officecontroller.all.bean.Dto.UserDto;
+import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
-    @Select("select depart.depart_name from depart where depart_id=#{departmentId}")
+
+    List<UserVo>  selectUserList(UserDto userDto);
+
     String selectDepartName(Integer departmentId);
 //33
-    @Select("select role.role_name from role where role_id=#{roleId}")
     String selectRoleName(Integer roleId);
 
 }

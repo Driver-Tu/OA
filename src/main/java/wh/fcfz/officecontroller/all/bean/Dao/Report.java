@@ -14,8 +14,8 @@ import lombok.NoArgsConstructor;
 @TableName("report")
 public class Report {
     @TableId(value = "report_id", type = IdType.AUTO)
-    private long reportId;
-    private long reportUserId;
+    private Integer reportId;
+    private Integer reportUserId;
     private String reportName;
     private String type;
     private java.sql.Timestamp reportDate;

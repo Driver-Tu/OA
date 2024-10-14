@@ -4,6 +4,7 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import wh.fcfz.officecontroller.all.bean.Dao.User;
+import wh.fcfz.officecontroller.all.bean.Dto.UserDto;
 import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
 import wh.fcfz.officecontroller.all.service.Impl.UserServiceImpl;
 import wh.fcfz.officecontroller.all.tool.MyPage;
@@ -33,7 +34,7 @@ public class UserController {
     * */
      @SaCheckPermission("admin")
      @PostMapping("/list")
-    public Result<List<UserVo>> selectALL(@RequestBody MyPage<UserVo> page){
+    public Result<List<UserVo>> selectALL(@RequestBody MyPage<UserDto> page){
         return userService.selectALL(page);
     }
 
