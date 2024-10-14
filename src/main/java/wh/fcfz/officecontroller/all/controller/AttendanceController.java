@@ -29,9 +29,14 @@ public class AttendanceController {
     }
 
     @PostMapping("/getSelfAttendance")
-    public Result getSelfAttendance(@RequestBody MyPage<AttendancesVo> myPage) {
+    public Result getSelfAttendance() {
         Integer loginId = StpUtil.getLoginIdAsInt();
-        myPage.getData().setAttendanceUserId(loginId);
+        MyPage<AttendancesVo> myPage = new MyPage<>();
+        AttendancesVo attendancesVo = new AttendancesVo();
+        attendancesVo.setAttendanceUserId(loginId);
+        myPage.setPageSize(356);
+        myPage.setPageNum(1);
+        myPage.setData(attendancesVo);
         return attendanceService.getAllAttendance(myPage);
     }
 

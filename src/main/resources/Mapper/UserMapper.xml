@@ -18,27 +18,29 @@
     <select id="selectUserList"
             resultType="wh.fcfz.officecontroller.all.bean.Vo.UserVo">
         SELECT
-        u.user_id as userId,
-        u.role_id as roleId,
-        u.department_id as departmentId,
-        u.user_name as userName,
-        u.user_image as userImage,
-        u.emp_num as empNum,
-        u.user_password as userPassword,
-        u.telephone,
-        u.email,
-        u.status,
-        u.ct_time as ctTime,
-        u.up_time as upTime,
-        u.birthday_num as birthdayNum,
-        u.time_in as timeIn,
-        u.deleted,
-        r.role_name as roleName,
-        d.depart_name as departmentName
+            u.user_id as userId,
+            u.role_id as roleId,
+            u.department_id as departmentId,
+            u.user_name as userName,
+            u.user_image as userImage,
+            u.emp_num as empNum,
+            u.user_password as userPassword,
+            u.telephone,
+            u.email,
+            u.status,
+            u.ct_time as ctTime,
+            u.up_time as upTime,
+            u.birthday_num as birthdayNum,
+            u.time_in as timeIn,
+            u.deleted,
+            r.role_name as roleName,
+            d.depart_name as departmentName
         FROM
-        user u
-        LEFT JOIN role r ON u.role_id = r.role_id
-        LEFT JOIN depart d ON u.department_id = d.depart_id
+            user u
+        LEFT JOIN
+            role r ON u.role_id = r.role_id
+        LEFT JOIN
+            depart d ON u.department_id = d.depart_id
         <where>
             <if test="data.userId != null">
                 AND u.user_id = #{data.userId}
@@ -47,7 +49,7 @@
                 AND u.user_name LIKE CONCAT('%', #{data.userName}, '%')
             </if>
             <if test="data.empNum != null and data.empNum.trim() != ''">
-                AND u.emp_num = #{data.empNum}
+                AND u.emp_num LIKE CONCAT('%', #{data.empNum}, '%')
             </if>
             <if test="data.status != null">
                 AND u.status = #{data.status}
@@ -55,7 +57,7 @@
             <if test="data.timeIn != null">
                 AND u.time_in = #{data.timeIn}
             </if>
-            <if test="data.departName!=null">
+            <if test="data.departName != null">
                 AND d.depart_name LIKE CONCAT('%', #{data.departName}, '%')
             </if>
                 AND u.deleted=0
