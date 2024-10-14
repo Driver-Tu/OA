@@ -140,7 +140,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             userVo.setBirth(birthdayAndGender[0]);
             userVo.setSex(birthdayAndGender[1]);
             userVo.setBirthdayNum(DesensitizedUtil.idCardNum(user.getBirthdayNum(),6,0));
-            log.info(userVo.getBirthdayNum());
             return userVo;
         }).collect(Collectors.toList());
         Page<UserVo> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
