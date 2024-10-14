@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="wh.fcfz.officecontroller.all.mapper.AttendanceMapper">
     <select id="selectAllAttendances" resultType="wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo">
         SELECT
             a.attendance_id as attendance_id,
-            u.user_name as userName,
-            d.depart_name as departName,
+            a.attendance_user_id as attendance_user_id,
+            u.user_name as attendanceUserName,
+            d.depart_name as attendanceUserDepartName,
             a.time_in as time_in,
             a.time_out as time_out,
             a.date as date,
