@@ -14,9 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wh.fcfz.officecontroller.all.bean.Dao.Depart;
+import wh.fcfz.officecontroller.all.bean.Dao.Role;
 import wh.fcfz.officecontroller.all.bean.Dao.User;
 import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
 import wh.fcfz.officecontroller.all.mapper.DepartMapper;
+import wh.fcfz.officecontroller.all.mapper.RoleMapper;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.UserService;
 import wh.fcfz.officecontroller.all.tool.HashEncryption;
@@ -39,6 +41,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private UserMapper userMapper;
     @Autowired
     private DepartMapper departMapper;
+    @Autowired
+    private RoleMapper roleMapper;
     /**
      * 登录
      * */
@@ -113,17 +117,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 //状态
                 .eq(null!=page.getData().getStatus(),User::getStatus,page.getData().getStatus())
                 //名称
-                .eq(null!=page.getData().getUserName(),User::getRoleId,page.getData().getUserName())
+                .eq(null!=page.getData().getUserName(),User::getUserName,page.getData().getUserName())
                 //排序为最新创建
                 .orderByDesc(User::getCtTime);
         if(null!=page.getData().getDepartmentName()){
-            log.error(page.getData().getDepartmentName());
             lambdaQueryWrapper.eq(null!=page.getData().getDepartmentName(),User::getDepartmentId
                     ,departMapper.selectOne(new LambdaQueryWrapper<Depart>().eq(Depart::getDepartName,page.getData().getDepartmentName())).getDepartId());
         }
+        if(null!=page.getData().getRoleName()){
+            lambdaQueryWrapper.eq(null!=page.getData().getDepartmentName(),User::getRoleId
+                    ,roleMapper.selectOne(new LambdaQueryWrapper<Role>().eq(Role::getRoleName,page.getData().getDepartmentName())).getRoleId());
+        }
         List<User> userPage = userMapper.selectList(lambdaQueryWrapper);
         List<UserVo> userVoList = userPage.stream().map(user -> {
-
             String departName = userMapper.selectDepartName(user.getDepartmentId());
             String roleName = userMapper.selectRoleName(user.getRoleId());
             UserVo userVo =new UserVo();
