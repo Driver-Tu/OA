@@ -6,15 +6,12 @@ import cn.hutool.core.lang.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.MalformedInputException;
 import java.nio.file.Paths;
 
-import static wh.fcfz.officecontroller.all.tool.ResponseEnum.*;
 
 @Slf4j
 @Component
@@ -25,16 +22,20 @@ public class FileUtil {
 
 
     // 批量存储文件
-    public Result<String> uploadFile(MultipartFile[] files, String filePathByType, Integer uuid) {
+    // 修改 uploadFile 方法以返回布尔值或状态信息
+    public boolean uploadFile(MultipartFile[] files, String filePathByType, Integer uuid) {
         // 空值检查
         if (files == null || files.length == 0) {
-            return new Result<>(FILE_IS_NULL, null);
+            log.warn("文件为空");
+            return false; // 返回 false 表示上传失败
         }
         if (filePathByType == null || filePathByType.trim().isEmpty()) {
-            return new Result<>(FILE_UPLOAD_ERROR, null);
+            log.warn("文件路径为空");
+            return false; // 返回 false 表示上传失败
         }
-        if (uuid == null || uuid.toString().trim().isEmpty()) {
-            return new Result<>(FILE_UPLOAD_ERROR, null);
+        if (uuid == null) {
+            log.warn("UUID 为空");
+            return false; // 返回 false 表示上传失败
         }
 
         try {
@@ -45,20 +46,16 @@ public class FileUtil {
                 if (fileName != null && !fileName.trim().isEmpty()) {
                     String path = getNowFilePath(filePathByType, uuid);
                     String savePath = saveFile(file, path);
-                    log.info(fileName + "文件上传成功，路径为：" + savePath);
+                    log.info(fileName + " 文件上传成功，路径为：" + savePath);
                 } else {
                     allFilesUploaded = false;
                     log.warn("文件名为空，跳过文件上传");
                 }
             }
-            if (allFilesUploaded) {
-                return new Result<>(SUCCESS, "所有文件已经存储");
-            } else {
-                return new Result<>(FILE_UPLOAD_PARTIALLY_SUCCESS, "部分文件上传成功");
-            }
+            return allFilesUploaded; // 返回 true 表示所有文件都上传成功
         } catch (IOException e) {
             log.error("文件上传失败: " + e.getMessage());
-            return new Result<>(FILE_UPLOAD_ERROR, e.getMessage());
+            return false; // 返回 false 表示上传失败
         }
     }
 
