@@ -1,17 +1,17 @@
 /*
  Navicat Premium Dump SQL
 
- Source Server         : localhost
+ Source Server         : 牢涂的 MySQL
  Source Server Type    : MySQL
  Source Server Version : 80039 (8.0.39)
- Source Host           : localhost:3306
+ Source Host           : 192.168.0.196:3306
  Source Schema         : oa_fcfz
 
  Target Server Type    : MySQL
  Target Server Version : 80039 (8.0.39)
  File Encoding         : 65001
 
- Date: 10/10/2024 16:54:37
+ Date: 16/10/2024 10:43:53
 */
 
 SET NAMES utf8mb4;
@@ -107,7 +107,7 @@ INSERT INTO `attendance` VALUES (1031, 8, '2024-10-21 09:08:25', '2024-10-21 17:
 INSERT INTO `attendance` VALUES (1032, 8, '2024-10-25 08:37:57', '2024-10-25 16:56:34', '2024-10-25', '打卡失败', '锦江区人民南路四段903号', 120.7407720, 74.5524700, '正常打卡');
 INSERT INTO `attendance` VALUES (1033, 8, '2024-10-15 08:36:02', '2024-10-15 17:23:56', '2024-10-15', '打卡成功', '白云区小坪东路927号', 86.9242185, 12.0206626, '出差打卡');
 INSERT INTO `attendance` VALUES (1034, 8, '2024-10-28 08:35:44', '2024-10-28 16:54:05', '2024-10-28', '打卡失败', '锦江区人民南路四段714号', 118.7519405, 64.1143247, '正常打卡');
-INSERT INTO `attendance` VALUES (1035, 8, '2024-10-15 09:08:35', '2024-10-15 17:28:55', '2024-10-15', '打卡失败', '延庆区028县道329号', 28.7400146, 38.4047007, '出差打卡');
+INSERT INTO `attendance` VALUES (1035, 8, '2024-10-16 09:08:35', '2024-10-16 17:28:55', '2024-10-16', '打卡失败', '延庆区028县道329号', 28.7400146, 38.4047007, '出差打卡');
 INSERT INTO `attendance` VALUES (1036, 8, '2024-10-14 09:07:36', '2024-10-14 17:16:57', '2024-10-14', '打卡失败', '乐丰六路363号', 87.7815349, 42.1752618, '出差打卡');
 INSERT INTO `attendance` VALUES (1037, 8, '2024-10-22 08:59:47', '2024-10-22 17:09:16', '2024-10-22', '打卡成功', '罗湖区蔡屋围深南东路809号', 72.2682526, 5.1126349, '出差打卡');
 INSERT INTO `attendance` VALUES (1038, 8, '2024-10-26 09:05:18', '2024-10-26 17:21:15', '2024-10-26', '打卡失败', '白云区小坪东路622号', 18.2622030, 33.7353141, '正常打卡');
@@ -260,7 +260,7 @@ CREATE TABLE `report`  (
   `report_user_id` int NOT NULL COMMENT '报告归属人',
   `report_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '日志名称',
   `type` enum('日报','周报','月报') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '日志类型',
-  `report_date` datetime NOT NULL COMMENT '日志对应时间',
+  `report_date` date NOT NULL COMMENT '日志对应时间',
   `up_date` datetime NULL DEFAULT NULL COMMENT '记录修改时间',
   `ct_date` datetime NOT NULL COMMENT '记录生成时间',
   `file_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '日志文件路径',

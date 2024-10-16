@@ -54,7 +54,7 @@ public class DepartServiceImpl extends ServiceImpl<DepartMapper, Depart> impleme
         }
 
         // 使用 Stream 来统计每个部门的人数，并设置到每个部门对象中
-        List<Depart> departmentsWithCounts = departmentPage.getRecords().stream()
+        List<Depart> departmentsWithCounts = departmentPage.getRecords().stream().parallel()
                 .peek(dep -> dep.setEmployeeCount(departMapper.countByDepartmentId(dep.getDepartId())))
                 .collect(Collectors.toList());
 
