@@ -18,7 +18,7 @@ public class Report {
     private Integer reportUserId;
     private String reportName;
     private String type;
-    private java.sql.Timestamp reportDate;
+    private java.sql.Date reportDate;
     private java.sql.Timestamp upDate;
     private java.sql.Timestamp ctDate;
     private String filePath;

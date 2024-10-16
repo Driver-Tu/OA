@@ -58,7 +58,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return new Result<User>(ResponseEnum.USER_NOT_EXIST,null);
         }
         StpUtil.login(user.getUserId());
-        log.info(StpUtil.getTokenInfo().toString());
         return new Result(ResponseEnum.SUCCESS,StpUtil.getTokenInfo());
     }
 
@@ -110,7 +109,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         Page<User> pages = new Page<>(page.getPageNum(), page.getPageSize());
         List<UserVo> userPage = userMapper.selectUserList(page);
-        List<UserVo> userVoList = userPage.stream().map(userVo -> {
+        List<UserVo> userVoList = userPage.stream().parallel().map(userVo -> {
             String[] birthdayAndGender = getBirthdayAndGender(userVo.getBirthdayNum());
             userVo.setBirth(birthdayAndGender[0]);
             userVo.setSex(birthdayAndGender[1]);
@@ -118,7 +117,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return userVo;
         }).collect(Collectors.toList());
         Page<UserVo> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
-        List<UserVo> collect = userVoList.stream().skip((long) (page.getPageNum() - 1) * page.getPageSize()).limit(page.getPageSize()).collect(Collectors.toList());
+        List<UserVo> collect = userVoList.stream()
+                .skip((long) (page.getPageNum() - 1) * page.getPageSize())
+                .limit(page.getPageSize()).collect(Collectors.toList());
         pageMessages.setRecords(collect);
         pageMessages.setTotal(userVoList.size());
         return new Result(ResponseEnum.SUCCESS,pageMessages);

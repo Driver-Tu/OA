@@ -14,7 +14,7 @@ public class ApprovalStepsServiceImpl extends ServiceImpl<ApprovalStepsMapper, A
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Result addApprovalSteps(ApprovalSteps approvalSteps) {
-        if(approvalSteps==null){
+        if(approvalSteps ==null){
             return new Result(ResponseEnum.DATA_NOT_EXIST,null);
         }
         try {

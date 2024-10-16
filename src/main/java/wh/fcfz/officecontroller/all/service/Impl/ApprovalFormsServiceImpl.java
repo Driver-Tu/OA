@@ -43,8 +43,8 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
                 //查询审批类型
                 .eq(null != myPage.getData().getType() && (!myPage.getData().getType().equals("")), ApprovalForms::getType, myPage.getData().getType())
                 .orderByDesc(ApprovalForms::getApplicationDate);
-        List<ApprovalForms> approvalForms = approvalFormsMapper.selectList(queryWrapper);
-        List<ApprovalForms> approvalFormsList = approvalForms.stream().peek(approvalForm -> {
+        List<ApprovalForms> approvalFormDaos = approvalFormsMapper.selectList(queryWrapper);
+        List<ApprovalForms> approvalFormsList = approvalFormDaos.stream().parallel().peek(approvalForm -> {
             User user = userMapper.selectById(approvalForm.getApplicantId());
             String departName = userMapper.selectDepartName(user.getDepartmentId());
             approvalForm.setUserName(user.getUserName());
@@ -67,7 +67,7 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
                         .collect(Collectors.toList());
             }
         }
-        approvalFormsList=GetList(approvalFormsList);
+        approvalFormsList =GetList(approvalFormsList);
         List<ApprovalForms> collect = approvalFormsList.stream()
                 .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
                 .collect(Collectors.toList());
@@ -86,8 +86,8 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
                 .eq(null != myPage.getData().getType() && (!myPage.getData().getType().equals("")), ApprovalForms::getType, myPage.getData().getType())
                 .eq(ApprovalForms::getApplicantId, StpUtil.getLoginIdAsLong())
                 .orderByDesc(ApprovalForms::getApplicationDate);
-        List<ApprovalForms> approvalForms = approvalFormsMapper.selectList(queryWrapper);
-        List<ApprovalForms> approvalFormsList = approvalForms.stream().peek(approvalForm -> {
+        List<ApprovalForms> approvalFormDaos = approvalFormsMapper.selectList(queryWrapper);
+        List<ApprovalForms> approvalFormsList = approvalFormDaos.stream().peek(approvalForm -> {
             User user = userMapper.selectById(approvalForm.getApplicantId());
             String departName = userMapper.selectDepartName(user.getDepartmentId());
             approvalForm.setUserName(user.getUserName());
@@ -110,7 +110,7 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
                         .collect(Collectors.toList());
             }
         }
-        approvalFormsList=GetList(approvalFormsList);
+        approvalFormsList =GetList(approvalFormsList);
         List<ApprovalForms> collect = approvalFormsList.stream()
                 .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
                 .collect(Collectors.toList());
@@ -120,7 +120,7 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     }
 
     public List<ApprovalForms> GetList(List<ApprovalForms> approvalFormsList){
-        return approvalFormsList=approvalFormsList.stream().map(approvalForm -> {
+        return approvalFormsList = approvalFormsList.stream().map(approvalForm -> {
             switch (approvalForm.getType()) {
                 case "请假": {
                     LeaveFrom leaveFrom = leaveMapper.selectById(approvalForm.getAllId());
