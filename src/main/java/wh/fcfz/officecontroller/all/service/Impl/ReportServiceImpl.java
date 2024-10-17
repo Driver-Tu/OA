@@ -2,15 +2,18 @@ package wh.fcfz.officecontroller.all.service.Impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import wh.fcfz.officecontroller.all.bean.Dao.File;
 import wh.fcfz.officecontroller.all.bean.Dao.Report;
 import wh.fcfz.officecontroller.all.bean.Dto.ReportDto;
 import wh.fcfz.officecontroller.all.bean.Vo.ReportVo;
+import wh.fcfz.officecontroller.all.mapper.FileMapper;
 import wh.fcfz.officecontroller.all.mapper.ReportMapper;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.ReportService;
@@ -30,6 +33,8 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
     private ReportMapper reportMapper;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private FileMapper fileMapper;
 
     @Override
     @Transactional
@@ -43,27 +48,27 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
         //添加时为第一次修改，值一样
         report.setUpDate(report.getCtDate());
         report.setReportDate(Date.valueOf(LocalDate.now()));
-        //如果携带文件则需要写入文件URL名称，随机的请求路径名称，由DCloud管理
-        if (reportdto.getFilePath() != null) {
-            List<String> filePaths = reportdto.getFilePath();
-            StringBuilder FilePathAll = new StringBuilder();
-            for (int i = 0; i < filePaths.size(); i++) {
-                if (i != filePaths.size() - 1) {
-                    FilePathAll.append(filePaths.get(i)).append(",");
-                } else {
-                    FilePathAll.append(filePaths.get(i));
-                }
-            }
-            report.setFilePath(FilePathAll.toString());
-        }
         //全部存在这个路径里面，加type为了分组
         try {
-            int insert = reportMapper.insert(report);
-            if (insert > 0) return new Result<>(ResponseEnum.SUCCESS, true);
-            else return new Result<>(ResponseEnum.INSERT_SERVER_ERROR, false);
+            this.save(report);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        Integer reportID = reportMapper.selectById(report.getReportId()).getReportId();
+        //如果携带文件则需要写入文件URL名称，随机的请求路径名称，由DCloud管理
+        if (reportdto.getFilePath() != null) {
+            List<String> filePaths = reportdto.getFilePath();
+            for (String uuid : filePaths) {
+                File file = fileMapper.selectOne(new LambdaQueryWrapper<File>().eq(File::getFileUuid, uuid));
+                file.setBusinessId(reportID);
+                try {
+                    fileMapper.updateById(file);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        return new Result<>(ResponseEnum.SUCCESS, true);
     }
 
     @Override

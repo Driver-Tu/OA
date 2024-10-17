@@ -23,7 +23,8 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/captcha/get")
                 .excludePathPatterns("/captcha/validate")
-                .excludePathPatterns("/file/downloadFile");
+                .excludePathPatterns("/file/downloadFile")
+                .excludePathPatterns("/report/file/upload");
     }
 
     @Bean
