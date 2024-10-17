@@ -1,4 +1,4 @@
-package wh.fcfz.officecontroller.config.OSS;
+package wh.fcfz.officecontroller.config.oss;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

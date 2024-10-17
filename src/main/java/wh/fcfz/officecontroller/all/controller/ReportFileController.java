@@ -16,7 +16,7 @@ import wh.fcfz.officecontroller.all.service.Impl.ReportServiceImpl;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
-import wh.fcfz.officecontroller.config.OSS.AliOssUtil;
+import wh.fcfz.officecontroller.all.tool.AliOssUtil;
 
 import java.io.IOException;
 
