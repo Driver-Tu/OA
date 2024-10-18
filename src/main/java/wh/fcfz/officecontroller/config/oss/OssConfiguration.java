@@ -1,5 +1,6 @@
 package wh.fcfz.officecontroller.config.oss;
 
+import com.aliyun.oss.OSSClientBuilder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +14,8 @@ public class OssConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public AliOssUtil getAliOssUtil(AliOssProperties aliOssProperties) {
-        log.info("创建OssUtil");
+        log.info("创建 OssUtil");
+
         AliOssUtil aliOssUtil = new AliOssUtil(
                 aliOssProperties.getEndpoint(),
                 aliOssProperties.getAccessKeyId(),

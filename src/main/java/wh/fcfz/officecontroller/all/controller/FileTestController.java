@@ -5,6 +5,7 @@ import cn.hutool.core.lang.UUID;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.OSSObject;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -25,6 +26,7 @@ import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 import wh.fcfz.officecontroller.config.file.SystemConfig;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Timestamp;
@@ -99,28 +101,27 @@ public class FileTestController {
 
 
     @GetMapping("/downloadFile")
-    public ResponseEntity<Resource> downloadFile(@RequestParam String fileName) throws IOException {
-        // 创建 OSS 客户端
-        OSS ossClient = new OSSClientBuilder().build("https://" + aliOssUtil.getEndpoint(), aliOssUtil.getAccessKeyId(), aliOssUtil.getAccessKeySecret());
-        try {
-            // 获取文件对象
-            OSSObject ossObject = ossClient.getObject(aliOssUtil.getBucketName(), fileName);
+    public Result downloadFile(@RequestParam Integer fileId, HttpServletResponse response) {
 
-            // 获取文件输入流
-            InputStream inputStream = ossObject.getObjectContent();
+        // 根据参数 fileId 从数据库查询文件
+        File file = fileMapper.selectById(fileId);
 
-            // 创建 Resource 以便于返回文件
-            Resource resource = new InputStreamResource(inputStream);
+        // 如果文件不存在，返回404错误
+        if (file == null) {
 
-            // 通过 ResponseEntity 返回文件
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM) // 可以根据实际文件类型更改
-                    .body(resource);
-        } finally {
-            // 确保在完成后关闭 OSS 客户端
-            ossClient.shutdown();
         }
+
+        String fileName = file.getFileUuid() + "_" + file.getFileName();
+
+        aliOssUtil.download(fileName, file.getFileName(), response);
+        return new Result<>("200", "操作成功", null);
+    }
+
+    @GetMapping("/downloadFileBig")
+    public Result downloadFileBig(@RequestParam String fileName, @RequestParam String originalFileName, HttpServletResponse response) {
+
+        aliOssUtil.download(fileName, originalFileName, response);
+        return new Result<>("200", "操作成功", null);
     }
 
 

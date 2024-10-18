@@ -4,11 +4,19 @@ import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
+import com.aliyun.oss.model.OSSObject;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import wh.fcfz.officecontroller.config.oss.AliOssProperties;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.net.URLEncoder;
 
 
 @Slf4j
@@ -57,4 +65,74 @@ public class AliOssUtil {
 
         return stringBuilder.toString();
     }
+
+    /**
+     * 文件下载
+     * @param objectName 下载的文件名
+     * @param originalFileName 文件原名
+     * @param response HTTP 响应对象
+     */
+    public void download(String objectName, String originalFileName, HttpServletResponse response) {
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        try {
+            // 设置响应头，支持文件下载
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(originalFileName, "UTF-8"));
+
+            // 获取 OSS 中的对象
+            OSSObject ossObject = ossClient.getObject(bucketName, objectName);
+            try (InputStream inputStream = ossObject.getObjectContent();
+                 BufferedInputStream in = new BufferedInputStream(inputStream);
+                 ServletOutputStream out = response.getOutputStream();
+                 BufferedOutputStream bout = new BufferedOutputStream(out)) {
+
+                byte[] buffer = new byte[64 * 1024]; // 16KB 缓冲区
+                int len;
+                while ((len = in.read(buffer)) != -1) {
+                    bout.write(buffer, 0, len);
+                }
+                bout.flush();
+            }
+        } catch (Exception e) {
+            log.error("下载失败：{}", e.getMessage());
+        } finally {
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
+    }
+
+    /**
+     * 从阿里云 OSS 读取图片并通过 HTTP 响应返回
+     * @param objectName OSS 中的文件名
+     * @param response HTTP 响应对象
+     */
+    public void readImage(String objectName, HttpServletResponse response) {
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        try {
+            // 获取 OSS 中的对象
+            OSSObject ossObject = ossClient.getObject(bucketName, objectName);
+            try (InputStream inputStream = ossObject.getObjectContent();
+                 BufferedInputStream in = new BufferedInputStream(inputStream);
+                 ServletOutputStream out = response.getOutputStream()) {
+
+                // 设置响应头，表明返回的内容是图片
+                response.setContentType("image/jpeg"); // 根据图片类型设置
+                response.setHeader("Cache-Control", "max-age=3600"); // 设置缓存控制
+
+                byte[] buffer = new byte[64 * 1024]; // 64KB 缓冲区
+                int len;
+                while ((len = in.read(buffer)) != -1) {
+                    out.write(buffer, 0, len);
+                }
+                out.flush();
+            }
+        } catch (Exception e) {
+            log.error("读取图片失败：{}", e.getMessage());
+        } finally {
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
+    }
+
 }
