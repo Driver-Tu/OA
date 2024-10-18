@@ -20,13 +20,13 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 //拦截所有
                 .addPathPatterns("/**")
                 //允许通过
+                // 放行以下路径
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/captcha/get")
                 .excludePathPatterns("/captcha/validate")
                 .excludePathPatterns("/file/downloadFile")
-                .excludePathPatterns("/file/downloadFileBig");
-                .excludePathPatterns("/file/downloadFile")
-                .excludePathPatterns("/report/file/upload");
+                .excludePathPatterns("/file/downloadFileBig")
+                .excludePathPatterns("/report/file/**");
     }
 
     @Bean

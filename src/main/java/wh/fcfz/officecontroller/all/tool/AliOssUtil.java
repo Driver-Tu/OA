@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import wh.fcfz.officecontroller.config.oss.AliOssProperties;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -36,7 +35,7 @@ public class AliOssUtil {
     /**
      * 文件上传
      *
-     * @param bytes ：传入的文件要转为byte[]
+     * @param bytes      ：传入的文件要转为byte[]
      * @param objectName ：表示在oss中存储的文件名字。
      */
     public String upload(byte[] bytes, String objectName) {
@@ -68,9 +67,10 @@ public class AliOssUtil {
 
     /**
      * 文件下载
-     * @param objectName 下载的文件名
+     *
+     * @param objectName       下载的文件名
      * @param originalFileName 文件原名
-     * @param response HTTP 响应对象
+     * @param response         HTTP 响应对象
      */
     public void download(String objectName, String originalFileName, HttpServletResponse response) {
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
@@ -101,24 +101,37 @@ public class AliOssUtil {
         }
     }
 
+    private static final String DEFAULT_IMAGE_OBJECT_NAME = "defaultImage/f6ee1317a9bb3ef11258a0297a4cabe7.jpg";
+
     /**
      * 从阿里云 OSS 读取图片并通过 HTTP 响应返回
+     *
      * @param objectName OSS 中的文件名
-     * @param response HTTP 响应对象
+     * @param response   HTTP 响应对象
      */
     public void readImage(String objectName, HttpServletResponse response) {
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
         try {
             // 获取 OSS 中的对象
             OSSObject ossObject = ossClient.getObject(bucketName, objectName);
-            try (InputStream inputStream = ossObject.getObjectContent();
-                 BufferedInputStream in = new BufferedInputStream(inputStream);
-                 ServletOutputStream out = response.getOutputStream()) {
-
+            String contentType = ossObject.getObjectMetadata().getContentType();
+            log.error(contentType);
+            boolean isImageOrVideo = isImageOrVideo(contentType);
+            log.error(String.valueOf(isImageOrVideo));
+            if (!isImageOrVideo) {
+                ossObject = ossClient.getObject(bucketName, DEFAULT_IMAGE_OBJECT_NAME);
+            }
+            try (
+                    InputStream inputStream = ossObject.getObjectContent(); BufferedInputStream in = new BufferedInputStream(inputStream);
+                    ServletOutputStream out = response.getOutputStream()) {
                 // 设置响应头，表明返回的内容是图片
-                response.setContentType("image/jpeg"); // 根据图片类型设置
+                // 设置响应头
+                if (isImageOrVideo) {
+                    response.setContentType(contentType);
+                } else {
+                    response.setContentType("image/jpg"); // 默认图片的 MIME 类型
+                }
                 response.setHeader("Cache-Control", "max-age=3600"); // 设置缓存控制
-
                 byte[] buffer = new byte[64 * 1024]; // 64KB 缓冲区
                 int len;
                 while ((len = in.read(buffer)) != -1) {
@@ -135,4 +148,7 @@ public class AliOssUtil {
         }
     }
 
+    private boolean isImageOrVideo(String contentType) {
+        return contentType.startsWith("image/") || contentType.startsWith("video/");
+    }
 }

@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import wh.fcfz.officecontroller.all.bean.Dao.Report;
 
+import java.util.List;
+
 
 @Data
 @AllArgsConstructor
@@ -12,6 +14,7 @@ import wh.fcfz.officecontroller.all.bean.Dao.Report;
 public class ReportVo extends Report {
     private String userName;
     private String departName;
+    private List<String> fileUrls;
     public ReportVo(Report report){
         super(report);
     }

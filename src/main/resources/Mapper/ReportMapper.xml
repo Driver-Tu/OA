@@ -52,4 +52,27 @@
             </if>
         </where>
     </select>
+    <select id="selectFile" resultType="wh.fcfz.officecontroller.all.bean.Dao.File">
+            SELECT
+                f.id AS id,
+                f.file_name AS file_name,
+                f.file_uuid AS file_uuid,
+                f.file_path AS file_path,
+                f.file_size AS file_size,
+                f.file_type AS file_type,
+                f.file_url AS file_url,
+                f.description AS description,
+                f.uploader_id AS uploader_id,
+                f.upload_time AS upload_time,
+                f.business_type AS business_type,
+                f.business_id AS business_id,
+                f.file_owner_id AS file_owner_id,
+                f.file_status AS file_status
+            FROM
+                file f
+            WHERE
+                f.file_status = 1
+                AND f.business_type = 'report'
+                AND f.business_id = #{reportId}
+    </select>
 </mapper>
