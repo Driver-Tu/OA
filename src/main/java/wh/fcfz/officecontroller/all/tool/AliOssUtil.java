@@ -11,11 +11,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URLEncoder;
+import java.util.Base64;
 
 
 @Slf4j
@@ -151,4 +149,63 @@ public class AliOssUtil {
     private boolean isImageOrVideo(String contentType) {
         return contentType.startsWith("image/") || contentType.startsWith("video/");
     }
+
+    public String readResource(String objectName) {
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        try {
+            // 获取 OSS 中的对象
+            OSSObject ossObject = ossClient.getObject(bucketName, objectName);
+            try (InputStream inputStream = ossObject.getObjectContent();
+                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+
+                // 将输入流转换为字节数组
+                byte[] buffer = new byte[64 * 1024]; // 64KB 缓冲区
+                int len;
+                while ((len = inputStream.read(buffer)) != -1) {
+                    byteArrayOutputStream.write(buffer, 0, len);
+                }
+
+                // 将字节数组转换为 Base64 字符串
+                byte[] bytes = byteArrayOutputStream.toByteArray();
+                return Base64.getEncoder().encodeToString(bytes);
+            }
+        } catch (Exception e) {
+            log.error("读取文件失败：{}", e.getMessage());
+            return null; // 或者抛出自定义异常
+        } finally {
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
+    }
+
+    public String readDefaultImage() {
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        try {
+            // 获取 OSS 中的对象
+            OSSObject ossObject = ossClient.getObject(bucketName, DEFAULT_IMAGE_OBJECT_NAME);
+            try (InputStream inputStream = ossObject.getObjectContent();
+                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()) {
+
+                // 将输入流转换为字节数组
+                byte[] buffer = new byte[64 * 1024]; // 64KB 缓冲区
+                int len;
+                while ((len = inputStream.read(buffer)) != -1) {
+                    byteArrayOutputStream.write(buffer, 0, len);
+                }
+
+                // 将字节数组转换为 Base64 字符串
+                byte[] bytes = byteArrayOutputStream.toByteArray();
+                return Base64.getEncoder().encodeToString(bytes);
+            }
+        } catch (Exception e) {
+            log.error("读取文件失败：{}", e.getMessage());
+            return null; // 或者抛出自定义异常
+        } finally {
+            if (ossClient != null) {
+                ossClient.shutdown();
+            }
+        }
+    }
+
 }
