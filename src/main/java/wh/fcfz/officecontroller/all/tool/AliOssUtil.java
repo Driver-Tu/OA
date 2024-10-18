@@ -120,7 +120,8 @@ public class AliOssUtil {
                 ossObject = ossClient.getObject(bucketName, DEFAULT_IMAGE_OBJECT_NAME);
             }
             try (
-                    InputStream inputStream = ossObject.getObjectContent(); BufferedInputStream in = new BufferedInputStream(inputStream);
+                    InputStream inputStream = ossObject.getObjectContent();
+                    BufferedInputStream in = new BufferedInputStream(inputStream);
                     ServletOutputStream out = response.getOutputStream()) {
                 // 设置响应头，表明返回的内容是图片
                 // 设置响应头

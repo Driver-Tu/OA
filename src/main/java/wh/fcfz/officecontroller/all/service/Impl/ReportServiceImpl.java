@@ -39,11 +39,13 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
     @Override
     @Transactional
     public Result<Boolean> addReport(ReportDto reportdto) {
+        log.info(reportdto.toString());
         //将传递的基本信息添加进来
         Report report = new Report();
         BeanUtil.copyProperties(reportdto, report);
         report.setReportUserId(StpUtil.getLoginIdAsInt());
         //两个时间ct和up值获取
+        report.setFilePath(reportdto.getFilePath().toString());
         report.setCtDate(Timestamp.valueOf(java.time.LocalDateTime.now()));
         //添加时为第一次修改，值一样
         report.setUpDate(report.getCtDate());
@@ -98,7 +100,7 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
         List<ReportVo> reportVos = reportMapper.selectReport(myPage.getData());
         List<ReportVo> list = reportVos.stream().parallel().map(reportVo -> {
             List<File> files = reportMapper.selectFile(reportVo.getReportId());
-            List<String> fileUrlList = files.stream().parallel().map(File::getFileUuid).toList();
+            List<String> fileUrlList = files.stream().parallel().map(file -> file.getFileUuid()+file.getFileType()).toList();
             reportVo.setFileUrls(fileUrlList);
             return reportVo;
         }).toList();

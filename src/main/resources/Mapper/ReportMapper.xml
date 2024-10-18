@@ -72,7 +72,7 @@
                 file f
             WHERE
                 f.file_status = 1
-                AND f.business_type = 'report'
+                AND f.business_type = '报告'
                 AND f.business_id = #{reportId}
     </select>
 </mapper>
