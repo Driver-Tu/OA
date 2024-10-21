@@ -43,7 +43,7 @@ public class ReportFileController {
                     fileType = originalFilename.substring(originalFilename.lastIndexOf("."));
                 }
                 String s =  uuid + fileType;
-                String upload = aliOssUtil.upload(files.getBytes(), s);
+                String upload = aliOssUtil.upload(files, s);
                 File file = new File();
                 file.setFileName(originalFilename);
                 file.setFileUrl(upload);

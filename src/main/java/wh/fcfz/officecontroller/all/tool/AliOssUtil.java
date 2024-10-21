@@ -5,15 +5,18 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.OSSObject;
+import com.aliyun.oss.model.ObjectMetadata;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.net.URLEncoder;
 import java.util.Base64;
+import java.util.Date;
 
 
 @Slf4j
@@ -33,25 +36,38 @@ public class AliOssUtil {
     /**
      * 文件上传
      *
-     * @param bytes      ：传入的文件要转为byte[]
-     * @param objectName ：表示在oss中存储的文件名字。
+     * @param file       ：上传的文件
+     * @param objectName ：表示在OSS中存储的文件名字。
+     * @return 文件访问路径
      */
-    public String upload(byte[] bytes, String objectName) {
+    public String upload(MultipartFile file, String objectName) {
         // 创建OSSClient实例。
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
         try {
-            // 创建PutObject请求。
-            ossClient.putObject(bucketName, objectName, new ByteArrayInputStream(bytes));
+            // 创建ObjectMetadata对象
+            ObjectMetadata metadata = new ObjectMetadata();
+            String mimeType = file.getContentType();
+            if (mimeType.startsWith("image/") || mimeType.startsWith("video/")) {
+                metadata.setHeader("Content-Disposition", "inline"); // 设置 Content-Disposition
+            } else {
+                metadata.setHeader("Content-Disposition", "attachment");
+            }
+
+            // 上传文件
+            ossClient.putObject(bucketName, objectName, file.getInputStream(), metadata);
         } catch (OSSException oe) {
             log.error("Error Message:" + oe.getErrorMessage());
         } catch (ClientException ce) {
             log.error("Error Message:" + ce.getMessage());
+        } catch (IOException e) {
+            log.error("File upload failed: " + e.getMessage());
         } finally {
             if (ossClient != null) {
                 ossClient.shutdown();
             }
         }
-        //文件访问路径规则 https://BucketName.Endpoint/ObjectName
+
+        // 文件访问路径规则 https://BucketName.Endpoint/ObjectName
         StringBuilder stringBuilder = new StringBuilder("https://");
         stringBuilder
                 .append(bucketName)
@@ -59,6 +75,8 @@ public class AliOssUtil {
                 .append(endpoint)
                 .append("/")
                 .append(objectName);
+
+        System.out.println("临时访问url："+ossClient.generatePresignedUrl(bucketName, objectName, new Date(new Date().getTime() + 3600 * 1000)).toString());
 
         return stringBuilder.toString();
     }

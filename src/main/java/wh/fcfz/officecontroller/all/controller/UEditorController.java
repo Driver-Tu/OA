@@ -1,14 +1,19 @@
 package wh.fcfz.officecontroller.all.controller;
 
+import cn.hutool.core.lang.UUID;
 import jakarta.annotation.Resource;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import wh.fcfz.officecontroller.all.bean.Dao.File;
+import wh.fcfz.officecontroller.all.service.FileService;
+import wh.fcfz.officecontroller.all.tool.AliOssUtil;
 import wh.fcfz.officecontroller.all.tool.FileUtil;
 import wh.fcfz.officecontroller.config.file.SystemConfig;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +25,12 @@ public class UEditorController {
 
     @Resource
     private FileUtil fileUtil;
+
+    @Autowired
+    private AliOssUtil aliOssUtil;
+
+    @Autowired
+    private FileService fileService;
 
     // 1. 获取配置接口
     @GetMapping(params = "action=config")
@@ -46,50 +57,39 @@ public class UEditorController {
 
     // 3. 上传图片
     @PostMapping(params = "action=image")
-    public ResponseEntity<Map<String, Object>> uploadImage(@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(handleFileUpload(file, "image"));
+    public ResponseEntity<Map<String, Object>> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
+        return ResponseEntity.ok(handleFileUpload(file, "image", "报告", 1));
     }
 
     // 4. 上传视频
     @PostMapping(params = "action=video")
-    public ResponseEntity<Map<String, Object>> uploadVideo(@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(handleFileUpload(file, "file"));
+    public ResponseEntity<Map<String, Object>> uploadVideo(@RequestParam("file") MultipartFile file) throws IOException {
+        return ResponseEntity.ok(handleFileUpload(file, "video", "报告", 1));
     }
 
     // 5. 上传其他文件
-    public ResponseEntity<Map<String, Object>> uploadGenericFile(@RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            return ResponseEntity.badRequest().body(Map.of("state", "No file uploaded"));
-        }
-
-        String fileName = file.getOriginalFilename();
-        String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/uploads/")  // 假设文件上传到 /uploads 目录下
-                .path(fileName)
-                .toUriString();
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("state", "SUCCESS");
-        response.put("url", fileUri);
-        response.put("title", fileName);
-        response.put("original", fileName);
-        return ResponseEntity.ok(response);
+    @PostMapping(params = "action=uploadFile")
+    public ResponseEntity<Map<String, Object>> uploadGenericFile(@RequestParam("file") MultipartFile file) throws IOException {
+        return ResponseEntity.ok(handleFileUpload(file, "file", "报告", 1));
     }
 
-    private Map<String, Object> handleFileUpload(MultipartFile file, String type) {
+    private Map<String, Object> handleFileUpload(MultipartFile file, String type, String businessType, Integer businessId) throws IOException {
         Map<String, Object> response = new HashMap<>();
         if (file.isEmpty()) {
             response.put("state", "ERROR");
             return response;
         }
         String fileName = file.getOriginalFilename();
-        MultipartFile[] files = new MultipartFile[1];
-        files[0] = file;
-        fileUtil.uploadFile(files, SystemConfig.DECLARE_REIMBURSE_FILE_DIR, 1);
+//        String fileUUID = String.valueOf(UUID.randomUUID());
+//        String newFileName = fileUUID + "_" + file.getOriginalFilename();
+//        String url = aliOssUtil.upload(file.getBytes(),newFileName);
+        List<String> fileUUIDs = fileService.uploadFile(List.of(new MultipartFile[]{file}), businessType, businessId);
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        String url = "res/" + fileUUIDs.get(0) + (extension.isEmpty() ? "" : "." + extension);
 //        try {
 //            file.transferTo(destination);
             response.put("state", "SUCCESS");
-            response.put("url", "http://localhost:8088/file/images"); // 返回相对路径
+            response.put("url", url); // 返回相对路径
             response.put("title", fileName);
             response.put("original", fileName);
 //        } catch (IOException e) {
@@ -100,7 +100,7 @@ public class UEditorController {
     }
 
     // 6. 抓取图片接口
-    @PostMapping("/catchImage")
+    @GetMapping(params = "action=listImage")
     public ResponseEntity<Map<String, Object>> catchImage(
             @RequestParam("action") String action,
             @RequestParam("source") String source) {
@@ -131,7 +131,7 @@ public class UEditorController {
     }
 
     // 8. 文件列表接口
-    @GetMapping("/listFile")
+    @GetMapping(params = "action=listFile")
     public ResponseEntity<Map<String, Object>> listFile(@RequestParam String action) {
         if ("listFile".equals(action)) {
             // 假设从数据库或文件系统中获取文件列表
@@ -172,7 +172,7 @@ public class UEditorController {
         config.put("snapscreenInsertAlign", "none"); // 插入的截图浮动方式
 
         // 图片抓取配置
-        config.put("catcherActionName", "catch"); // 执行抓取远程图片的action名称
+        config.put("catcherActionName", "listImage"); // 执行抓取远程图片的action名称
         config.put("catcherFieldName", "source"); // 提交的图片列表表单名称
         config.put("catcherLocalDomain", List.of("127.0.0.1", "localhost")); // 例外的图片抓取域名
         config.put("catcherUrlPrefix", ""); // 抓取图片访问路径前缀
@@ -194,7 +194,7 @@ public class UEditorController {
         config.put("fileAllowFiles", new String[]{".zip", ".pdf", ".doc"}); // 上传文件格式显示
 
         // 图片列表配置
-        config.put("imageManagerActionName", "listImage"); // 执行图片管理的action名称
+        config.put("imageManagerActionName", "catch"); // 执行图片管理的action名称
         config.put("imageManagerListSize", 20); // 每次列出文件数量
         config.put("imageManagerUrlPrefix", ""); // 图片列表访问路径前缀
         config.put("imageManagerInsertAlign", "none"); // 插入的图片列表浮动方式

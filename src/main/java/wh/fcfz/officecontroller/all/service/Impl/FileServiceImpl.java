@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.lang.UUID;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
@@ -35,44 +36,42 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
     private ResourceLoader resourceLoader;
 
     @Override
-    public List<Integer> uploadFile(List<MultipartFile> files, String businessType, Integer businessId) {
-        List<Integer> fileIds = files.stream()
+    public List<String> uploadFile(List<MultipartFile> files, String businessType, Integer businessId) {
+        List<String> fileUUIDs = files.stream()
                 .map(file -> {
+
+                    // 避免上传的文件重名，重新生成一个文件名
+                    String fileUUID = String.valueOf(UUID.randomUUID());
+                    // 获取文件后缀
+                    String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+                    String newFileName = fileUUID + (extension.isEmpty() ? "" : "." + extension);
+                    // 创建 File 对象并设置属性
+                    File fileEntity = new File();
+                    fileEntity.setFileName(file.getOriginalFilename());
+                    fileEntity.setFileUuid(fileUUID); // 存储生成的 UUID 文件名
+                    fileEntity.setFilePath("/"); // 存储路径（可以根据需求调整）
+                    fileEntity.setFileSize(file.getSize());
+                    fileEntity.setFileType(file.getContentType());
+                    fileEntity.setUploaderId(StpUtil.getLoginIdAsInt());
+                    fileEntity.setFileOwnerId(StpUtil.getLoginIdAsInt());
+                    fileEntity.setUploadTime(new Timestamp(System.currentTimeMillis())); // 设置上传时间
+                    fileEntity.setBusinessType(businessType);
+                    fileEntity.setBusinessId(businessId);
+                    fileEntity.setFileStatus((byte) 1); // 状态设为正常
+                    String fileUrl = null;
+                    fileUrl = aliOssUtil.upload(file, newFileName);
+                    fileEntity.setFileUrl(fileUrl);
+                    // 将文件信息批量插入数据库
                     try {
-                        // 避免上传的文件重名，重新生成一个文件名
-                        String fileUUID = String.valueOf(UUID.randomUUID());
-                        String newFileName = fileUUID + "_" + file.getOriginalFilename();
-                        // 创建 File 对象并设置属性
-                        File fileEntity = new File();
-                        fileEntity.setFileName(file.getOriginalFilename());
-                        fileEntity.setFileUuid(fileUUID); // 存储生成的 UUID 文件名
-                        fileEntity.setFilePath("/"); // 存储路径（可以根据需求调整）
-                        fileEntity.setFileSize(file.getSize());
-                        fileEntity.setFileType(file.getContentType());
-                        fileEntity.setUploaderId(StpUtil.getLoginIdAsInt());
-                        fileEntity.setFileOwnerId(StpUtil.getLoginIdAsInt());
-                        fileEntity.setUploadTime(new Timestamp(System.currentTimeMillis())); // 设置上传时间
-                        fileEntity.setBusinessType(businessType);
-                        fileEntity.setBusinessId(businessId);
-                        fileEntity.setFileStatus((byte) 1); // 状态设为正常
-                        String fileUrl = null;
-                        fileUrl = aliOssUtil.upload(file.getBytes(), newFileName);
-                        fileEntity.setFileUrl(fileUrl);
-                        // 将文件信息批量插入数据库
-                        try {
-                            save(fileEntity);
-                        } catch (Exception e) {
-                            throw new RuntimeException("文件插入数据库失败", e);
-                        }
-                        // 返回文件在 OSS 中的访问地址
-                        return fileEntity.getId();
-                    } catch (IOException e) {
-                        // 处理文件上传异常，您可以选择记录日志或抛出自定义异常
-                        throw new RuntimeException("文件上传失败: " + file.getOriginalFilename(), e);
+                        save(fileEntity);
+                    } catch (Exception e) {
+                        throw new RuntimeException("文件插入数据库失败", e);
                     }
+                    // 返回文件在 OSS 中的访问地址
+                    return fileEntity.getFileUuid();
                 }).toList();
         // 返回操作成功的结果，包含所有文件的 URL
-        return fileIds;
+        return fileUUIDs;
     }
 
     @Override

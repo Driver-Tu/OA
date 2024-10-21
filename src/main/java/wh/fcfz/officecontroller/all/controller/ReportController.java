@@ -34,6 +34,11 @@ public class ReportController {
         return reportService.selectReport(myPage);
     }
 
+    @PostMapping("/list-self")
+    public Result<Page<ReportVo>> selectReportBySelf(@RequestBody MyPage<ReportDto> myPage) {
+        return reportService.selectReport(myPage);
+    }
+
     @PostMapping("/updateReport")
     public Result<Report> updateReport(@RequestBody ReportDto report) {
         return reportService.updateReport(report);
