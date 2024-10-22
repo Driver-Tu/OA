@@ -50,6 +50,12 @@
             <if test="reportDate != null">
                 AND r.report_date = #{reportDate}
             </if>
+        <if test="type != null">
+            AND r.type = #{type}
+        </if>
+        <if test="reportId != null">
+            AND r.report_id = #{reportId}
+        </if>
         </where>
     </select>
     <select id="selectFile" resultType="wh.fcfz.officecontroller.all.bean.Dao.File">

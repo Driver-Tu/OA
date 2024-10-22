@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="wh.fcfz.officecontroller.all.mapper.AttendanceMapper">
-    <select id="selectAllAttendances" parameterType="wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo" resultType="wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo">
+    <select id="selectAllAttendances" resultType="wh.fcfz.officecontroller.all.bean.Vo.AttendancesVo">
         SELECT
         a.attendance_id as attendance_id,
         a.attendance_user_id as attendance_user_id,

@@ -131,23 +131,17 @@ public class AliOssUtil {
             // 获取 OSS 中的对象
             OSSObject ossObject = ossClient.getObject(bucketName, objectName);
             String contentType = ossObject.getObjectMetadata().getContentType();
-            log.error(contentType);
             boolean isImageOrVideo = isImageOrVideo(contentType);
-            log.error(String.valueOf(isImageOrVideo));
-            if (!isImageOrVideo) {
-                ossObject = ossClient.getObject(bucketName, DEFAULT_IMAGE_OBJECT_NAME);
-            }
+//            if (!isImageOrVideo) {
+//                ossObject = ossClient.getObject(bucketName, DEFAULT_IMAGE_OBJECT_NAME);
+//            }
             try (
                     InputStream inputStream = ossObject.getObjectContent();
                     BufferedInputStream in = new BufferedInputStream(inputStream);
                     ServletOutputStream out = response.getOutputStream()) {
                 // 设置响应头，表明返回的内容是图片
                 // 设置响应头
-                if (isImageOrVideo) {
-                    response.setContentType(contentType);
-                } else {
-                    response.setContentType("image/jpg"); // 默认图片的 MIME 类型
-                }
+                response.setContentType(contentType);
                 response.setHeader("Cache-Control", "max-age=3600"); // 设置缓存控制
                 byte[] buffer = new byte[64 * 1024]; // 64KB 缓冲区
                 int len;

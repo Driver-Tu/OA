@@ -40,10 +40,6 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
     public Result getAllAttendance(MyPage<AttendancesVo> myPage) {
         Page<AttendancesVo> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
         List<AttendancesVo> attendancesVos = attendanceMapper.selectAllAttendances(myPage.getData());
-        if (attendancesVos.size() == 0) {
-            //防止空数据判断
-            return new Result(ResponseEnum.SUCCESS, null);
-        }
         List<AttendancesVo> collect;
         if(myPage.getData().getAttendanceUserId()==null){
             collect = attendancesVos.stream().skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize()).collect(Collectors.toList());
