@@ -1,5 +1,6 @@
 package wh.fcfz.officecontroller.all.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,7 @@ public class ReportController {
 
     @PostMapping("/list-self")
     public Result<Page<ReportVo>> selectReportBySelf(@RequestBody MyPage<ReportDto> myPage) {
+        myPage.getData().setReportUserId(StpUtil.getLoginIdAsInt());
         return reportService.selectReport(myPage);
     }
 

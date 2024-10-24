@@ -191,7 +191,7 @@ public class UEditorController {
         config.put("fileFieldName", "file"); // 提交的文件表单名称
         config.put("fileUrlPrefix", ""); // 文件访问路径前缀
         config.put("fileMaxSize", 104857600); // 上传文件大小限制
-        config.put("fileAllowFiles", new String[]{".zip", ".pdf", ".doc"}); // 上传文件格式显示
+        config.put("fileAllowFiles", new String[]{".zip", ".pdf", ".doc", ".docx"}); // 上传文件格式显示
 
         // 图片列表配置
         config.put("imageManagerActionName", "catch"); // 执行图片管理的action名称
@@ -204,7 +204,7 @@ public class UEditorController {
         config.put("fileManagerActionName", "listFile"); // 执行文件管理的action名称
         config.put("fileManagerUrlPrefix", ""); // 文件列表访问路径前缀
         config.put("fileManagerListSize", 20); // 每次列出文件数量
-        config.put("fileManagerAllowFiles", new String[]{".zip", ".pdf", ".doc"}); // 列出的文件类型
+        config.put("fileManagerAllowFiles", new String[]{".zip", ".pdf", ".doc", ".docx"}); // 列出的文件类型
 
         // 公式配置
         Map<String, String> formulaConfig = new HashMap<>();

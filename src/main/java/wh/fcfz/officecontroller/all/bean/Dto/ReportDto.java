@@ -17,6 +17,7 @@ public class ReportDto {
     private java.sql.Date reportDate;
     private List<String> filePath;
     private String content;
+    private Integer reportUserId;
     private String userName;
     private String departName;
 }

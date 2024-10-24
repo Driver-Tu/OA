@@ -34,7 +34,9 @@
                 LEFT JOIN depart d ON u.department_id = d.depart_id
 
         <where>
-
+            <if test="reportUserId != null">
+                AND r.report_user_id = #{reportUserId}
+            </if>
             <if test="reportName != null">
                 AND r.report_name = #{reportName}
             </if>
@@ -43,6 +45,9 @@
             </if>
             <if test="departName != null">
                 AND d.depart_name = #{departName}
+            </if>
+            <if test="type != null">
+                AND r.type = #{type}
             </if>
             <if test="content != null and content != ''">
                 AND r.content LIKE CONCAT('%', #{content}, '%')
