@@ -20,4 +20,6 @@ public class ReportDto {
     private Integer reportUserId;
     private String userName;
     private String departName;
+    private List<String> userIDS;
+    private String share;
 }

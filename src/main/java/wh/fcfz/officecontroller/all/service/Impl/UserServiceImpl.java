@@ -108,7 +108,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return new Result<List<UserVo>>(ResponseEnum.USER_NOT_LOGIN,null);
         }
         Page<User> pages = new Page<>(page.getPageNum(), page.getPageSize());
-        List<UserVo> userPage = userMapper.selectUserList(page);
+        List<UserVo> userPage = userMapper.selectUserList(page.getData());
         List<UserVo> userVoList = userPage.stream().parallel().map(userVo -> {
             String[] birthdayAndGender = getBirthdayAndGender(userVo.getBirthdayNum());
             userVo.setBirth(birthdayAndGender[0]);

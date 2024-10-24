@@ -15,6 +15,7 @@ public class ReportVo extends Report {
     private String userName;
     private String departName;
     private List<String> fileUrls;
+    //分享人的基本信息存
     public ReportVo(Report report){
         super(report);
     }

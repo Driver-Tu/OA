@@ -16,6 +16,7 @@ import wh.fcfz.officecontroller.all.bean.Dto.ReportDto;
 import wh.fcfz.officecontroller.all.bean.Vo.ReportVo;
 import wh.fcfz.officecontroller.all.mapper.FileMapper;
 import wh.fcfz.officecontroller.all.mapper.ReportMapper;
+import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.ReportService;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
@@ -35,6 +36,8 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
     private FileMapper fileMapper;
     @Autowired
     private ResourceLoader resourceLoader;
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     @Transactional
@@ -45,31 +48,43 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
         BeanUtil.copyProperties(reportdto, report);
         report.setReportUserId(StpUtil.getLoginIdAsInt());
         //两个时间ct和up值获取
-        report.setFilePath(reportdto.getFilePath().toString());
         report.setCtDate(Timestamp.valueOf(java.time.LocalDateTime.now()));
         //添加时为第一次修改，值一样
         report.setUpDate(report.getCtDate());
         report.setReportDate(Date.valueOf(LocalDate.now()));
         //全部存在这个路径里面，加type为了分组
+        //获取分享人的id
+        if(!reportdto.getUserIDS().isEmpty()){
+            List<String> userIDS = reportdto.getUserIDS();
+            StringBuilder userIDStr = new StringBuilder();
+            for (int i = 0; i < userIDS.size(); i++) {
+                if(i<userIDS.size()-1){
+                    userIDStr.append(userIDS.get(i)).append(",");
+                }else{
+                    userIDStr.append(userIDS.get(i));
+                }
+            }
+            report.setShareUserId(userIDStr.toString());
+        }
         try {
             this.save(report);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        Integer reportID = reportMapper.selectById(report.getReportId()).getReportId();
         //获取文件的uuid集合，查询每一个file数据，修改业务id
         if (reportdto.getFilePath() != null) {
             List<String> filePaths = reportdto.getFilePath();
             for (String uuid : filePaths) {
                 File file = fileMapper.selectOne(new LambdaQueryWrapper<File>().eq(File::getFileUuid, uuid));
-                file.setBusinessId(reportID);
                 try {
+                    file.setBusinessId(report.getReportId());
                     fileMapper.updateById(file);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
             }
         }
+
         return new Result<>(ResponseEnum.SUCCESS, true);
     }
 
@@ -78,10 +93,10 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
     public Result<Boolean> deleteReport(List<Integer> reportIds) {
         try {
             reportIds.stream().parallel().forEach(reportId -> {
-                if (reportMapper.selectFile(reportId) != null) {
+                if (!reportMapper.selectFile(reportId).isEmpty()) {
                     //查询所有日报对应reportId的file，并且删除所有report文件
                     try {
-                        fileMapper.deleteBatchIds(reportMapper.selectFile(reportId).stream().map(File::getFileUuid).toList());
+                        fileMapper.deleteBatchIds(reportMapper.selectFile(reportId).stream().map(File::getId).toList());
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -100,11 +115,14 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
         List<ReportVo> reportVos = reportMapper.selectReport(myPage.getData());
         List<ReportVo> list = reportVos.stream().parallel().map(reportVo -> {
             List<File> files = reportMapper.selectFile(reportVo.getReportId());
-            List<String> fileUrlList = files.stream().parallel().map(file -> file.getFileUuid()+file.getFileType()).toList();
+            List<String> fileUrlList = files.stream().parallel().map(File::getFileUrl).toList();
             reportVo.setFileUrls(fileUrlList);
             return reportVo;
         }).toList();
-        List<ReportVo> collect = reportVos.stream()
+        if(myPage.getData().getReportUserId()!=null){
+            list.stream().filter(reportVo -> reportVo.getReportUserId()==myPage.getData().getReportUserId());
+        }
+        List<ReportVo> collect = list.stream()
                 .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize())
                 .limit(myPage.getPageSize()).toList();
         Page<ReportVo> pageMessages = new Page<>(myPage.getPageNum(), myPage.getPageSize());

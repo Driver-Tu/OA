@@ -1,16 +1,25 @@
 package wh.fcfz.officecontroller.all.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import wh.fcfz.officecontroller.all.bean.Dao.Report;
 import wh.fcfz.officecontroller.all.bean.Dto.ReportDto;
+import wh.fcfz.officecontroller.all.bean.Dto.UserDto;
 import wh.fcfz.officecontroller.all.bean.Vo.ReportVo;
+import wh.fcfz.officecontroller.all.bean.Vo.UserOnVo;
+import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
+import wh.fcfz.officecontroller.all.mapper.ReportMapper;
+import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.Impl.ReportServiceImpl;
+import wh.fcfz.officecontroller.all.service.Impl.UserServiceImpl;
 import wh.fcfz.officecontroller.all.tool.MyPage;
+import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,6 +28,12 @@ public class ReportController {
 
     @Autowired
     private ReportServiceImpl reportService;
+    @Autowired
+    private UserServiceImpl userServiceImpl;
+    @Autowired
+    private UserMapper userMapper;
+    @Autowired
+    private ReportMapper reportMapper;
 
     @RequestMapping("/addReport")
     public Result<Boolean> addReport(@RequestBody ReportDto reportDto) {
@@ -44,6 +59,43 @@ public class ReportController {
     @PostMapping("/updateReport")
     public Result<Report> updateReport(@RequestBody ReportDto report) {
         return reportService.updateReport(report);
+    }
+
+
+    //return:userOnVo
+    @GetMapping("/shareReport")
+    public Result<Page<Report>> shareReport() {
+        List<ReportVo> reportVos = reportMapper.selectReport(new ReportDto());
+        List<ReportVo> list = new ArrayList<>();
+        reportVos.stream().parallel().forEach(reportVo -> {
+            String[] split = reportVo.getShareUserId().split(",");
+            if (split.length > 0) {
+                for (String s : split) {
+                    if(Integer.parseInt(s)==StpUtil.getLoginIdAsInt()){
+                        //只要有一个是对的就添加该条数据
+                        list.add(reportVo);
+                    }
+                }
+            }
+        });
+        Page<ReportVo> page = new Page<>();
+
+        return null;
+    }
+
+    @PostMapping("/shareReportToUser")
+    public Result<List<UserOnVo>> shareReportToUser(@RequestBody List<Integer> ids) {
+        List<UserOnVo> userOnVos=new ArrayList<>();
+        for (Integer id : ids) {
+            UserDto userDto = new UserDto();
+            userDto.setUserId(id);
+            List<UserVo> userVos = userMapper.selectUserList(userDto);
+            UserOnVo userOnVo = new UserOnVo();
+            //只可能有一个
+            BeanUtil.copyProperties(userVos.get(0), userOnVo);
+            userOnVos.add(userOnVo);
+        }
+        return new Result<>(ResponseEnum.SUCCESS, userOnVos);
     }
 
 

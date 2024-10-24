@@ -23,7 +23,7 @@ public class Report {
     private java.sql.Timestamp ctDate;
     private String filePath;
     private String content;
-
+    private String shareUserId;
     public Report(Report report) {
     }
 }
