@@ -83,9 +83,10 @@ public class UEditorController {
 //        String fileUUID = String.valueOf(UUID.randomUUID());
 //        String newFileName = fileUUID + "_" + file.getOriginalFilename();
 //        String url = aliOssUtil.upload(file.getBytes(),newFileName);
-        List<String> fileUUIDs = fileService.uploadFile(List.of(new MultipartFile[]{file}), businessType, businessId);
+        List<Integer> ids = fileService.uploadFile(List.of(new MultipartFile[]{file}), businessType, businessId);
+//        fileService.getFileById(ids);
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        String url = "res/" + fileUUIDs.get(0) + (extension.isEmpty() ? "" : "." + extension);
+        String url = "res/" + ids.get(0) + (extension.isEmpty() ? "" : "." + extension);
 //        try {
 //            file.transferTo(destination);
             response.put("state", "SUCCESS");
@@ -99,24 +100,8 @@ public class UEditorController {
         return response;
     }
 
-    // 6. 抓取图片接口
-    @GetMapping(params = "action=listImage")
-    public ResponseEntity<Map<String, Object>> catchImage(
-            @RequestParam("action") String action,
-            @RequestParam("source") String source) {
-        if ("catch".equals(action)) {
-            // 此处可以根据 source URL 抓取图片，并进行相应处理
-            // 这里假设抓取成功并返回示例数据
-            Map<String, Object> response = new HashMap<>();
-            response.put("state", "SUCCESS");
-            response.put("list", List.of(Map.of("state", "SUCCESS", "url", "upload/demo.jpg", "title", "demo.jpg", "original", "demo.jpg")));
-            return ResponseEntity.ok(response);
-        }
-        return ResponseEntity.badRequest().body(Map.of("state", "Invalid action"));
-    }
-
     // 7. 图片列表接口
-    @GetMapping("/listImage")
+    @GetMapping(params = "action=listImage")
     public ResponseEntity<Map<String, Object>> listImage(@RequestParam String action) {
         if ("listImage".equals(action)) {
             // 假设从数据库或文件系统中获取图片列表
@@ -194,7 +179,7 @@ public class UEditorController {
         config.put("fileAllowFiles", new String[]{".zip", ".pdf", ".doc", ".docx"}); // 上传文件格式显示
 
         // 图片列表配置
-        config.put("imageManagerActionName", "catch"); // 执行图片管理的action名称
+        config.put("imageManagerActionName", "listImage"); // 执行图片管理的action名称
         config.put("imageManagerListSize", 20); // 每次列出文件数量
         config.put("imageManagerUrlPrefix", ""); // 图片列表访问路径前缀
         config.put("imageManagerInsertAlign", "none"); // 插入的图片列表浮动方式

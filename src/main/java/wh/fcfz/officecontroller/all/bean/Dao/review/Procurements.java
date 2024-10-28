@@ -16,7 +16,7 @@ public class Procurements {
   private String department;
   private String itemDescription;
   private Long quantity;
-  private double budget;
+  private Long budget;
   private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;

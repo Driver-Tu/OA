@@ -30,6 +30,9 @@ public enum ResponseEnum {
     FILE_IS_NULL("10802", "文件为空"),
     FILE_SIZE_EXCEEDED("10803","存在大于10M的文件，无法上传" ),
     FILE_UPLOAD_PARTIALLY_SUCCESS("10804", "部分文件上传成功"),
+
+
+    NOT_LOGIN_EXCEEDED("10500","用户未登录" ),
     SYSTEM_ERRO("400", "系统发生异常");
 //    FILE_UPLOAD_ERROR("10802", "文件上传成功");
 

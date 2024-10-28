@@ -2,29 +2,22 @@ package wh.fcfz.officecontroller.all.service.Impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.lang.UUID;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 import wh.fcfz.officecontroller.all.bean.Dao.File;
+import wh.fcfz.officecontroller.all.bean.Dto.FileDto;
 import wh.fcfz.officecontroller.all.mapper.FileMapper;
 import wh.fcfz.officecontroller.all.service.FileService;
 import wh.fcfz.officecontroller.all.tool.AliOssUtil;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements FileService {
@@ -34,10 +27,17 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
 
     @Autowired
     private ResourceLoader resourceLoader;
+    
+    @Override
+    public List<File> selectFileList(FileDto fileDto) {
+        LambdaQueryWrapper<File> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        lambdaQueryWrapper.eq(File::getBusinessType, fileDto.getBusinessType());
+                return null;
+    }
 
     @Override
-    public List<String> uploadFile(List<MultipartFile> files, String businessType, Integer businessId) {
-        List<String> fileUUIDs = files.stream()
+    public List<Integer> uploadFile(List<MultipartFile> files, String businessType, Integer businessId) {
+        List<Integer> ids = files.stream()
                 .map(file -> {
 
                     // 避免上传的文件重名，重新生成一个文件名
@@ -68,10 +68,10 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
                         throw new RuntimeException("文件插入数据库失败", e);
                     }
                     // 返回文件在 OSS 中的访问地址
-                    return fileEntity.getFileUuid();
+                    return fileEntity.getId();
                 }).toList();
         // 返回操作成功的结果，包含所有文件的 URL
-        return fileUUIDs;
+        return ids;
     }
 
     @Override
@@ -82,5 +82,10 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
 
         // 调用工具类读取图片并返回响应
         aliOssUtil.readImage(fileName, response);
+    }
+
+    // 更新文件信息
+    public void updateFile() {
+
     }
 }

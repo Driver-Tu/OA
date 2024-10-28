@@ -14,7 +14,7 @@ public class Reimbursements {
 @TableId(value = "reimbursement_id", type = IdType.AUTO)
   private Long reimbursementId;
   private Long employeeId;
-  private double amount;
+  private Long amount;
   private String receipt;
   private String description;
   private String status;

@@ -14,8 +14,8 @@ public class SalaryAdjustments {
 @TableId(value = "adjustment_id",type = IdType.AUTO)
   private Long adjustmentId;
   private Long employeeId;
-  private double currentSalary;
-  private double proposedSalary;
+  private Long currentSalary;
+  private Long proposedSalary;
   private String reason;
   private String status;
   private java.sql.Timestamp createdAt;

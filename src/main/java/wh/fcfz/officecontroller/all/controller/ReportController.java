@@ -64,7 +64,6 @@ public class ReportController {
         return reportService.updateReport(report);
     }
 
-
     //return:userOnVo
     @PostMapping("/shareReport")
     public Result<Page<ReportVo>> shareReport(@RequestParam Integer pageNum,@RequestParam Integer pageSize) {

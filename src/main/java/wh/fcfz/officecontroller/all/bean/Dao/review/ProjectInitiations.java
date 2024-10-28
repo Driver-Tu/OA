@@ -16,7 +16,7 @@ public class ProjectInitiations {
   private String projectName;
   private java.sql.Date startDate;
   private java.sql.Date endDate;
-  private double budget;
+  private Long budget;
   private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;

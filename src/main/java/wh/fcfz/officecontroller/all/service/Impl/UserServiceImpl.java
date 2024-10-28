@@ -70,10 +70,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(StpUtil.isLogin(StpUtil.getLoginId())){
             StpUtil.logout();
             return new Result<User>(ResponseEnum.SUCCESS,null);
-        }else {
+        } else {
             return new Result<User>(ResponseEnum.USER_NOT_LOGIN,null);
         }
-
     }
 
     /**
