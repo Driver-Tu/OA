@@ -12,8 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Trainings {
 @TableId(value = "training_id", type = IdType.AUTO)
-  private long trainingId;
-  private long employeeId;
+  private Long trainingId;
+  private Long employeeId;
   private java.sql.Date startDate;
   private java.sql.Date endDate;
   private String trainingType;
@@ -21,86 +21,5 @@ public class Trainings {
   private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
-
-
-  public long getTrainingId() {
-    return trainingId;
-  }
-
-  public void setTrainingId(long trainingId) {
-    this.trainingId = trainingId;
-  }
-
-
-  public long getEmployeeId() {
-    return employeeId;
-  }
-
-  public void setEmployeeId(long employeeId) {
-    this.employeeId = employeeId;
-  }
-
-
-  public java.sql.Date getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(java.sql.Date startDate) {
-    this.startDate = startDate;
-  }
-
-
-  public java.sql.Date getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(java.sql.Date endDate) {
-    this.endDate = endDate;
-  }
-
-
-  public String getTrainingType() {
-    return trainingType;
-  }
-
-  public void setTrainingType(String trainingType) {
-    this.trainingType = trainingType;
-  }
-
-
-  public String getProvider() {
-    return provider;
-  }
-
-  public void setProvider(String provider) {
-    this.provider = provider;
-  }
-
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-
-  public java.sql.Timestamp getCreatedAt() {
-    return createdAt;
-  }
-
-  public void setCreatedAt(java.sql.Timestamp createdAt) {
-    this.createdAt = createdAt;
-  }
-
-
-  public java.sql.Timestamp getUpdatedAt() {
-    return updatedAt;
-  }
-
-  public void setUpdatedAt(java.sql.Timestamp updatedAt) {
-    this.updatedAt = updatedAt;
-  }
 
 }
