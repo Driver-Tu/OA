@@ -3,12 +3,11 @@ package wh.fcfz.officecontroller.all.bean.Dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import wh.fcfz.officecontroller.all.bean.Vo.ApprovalFormsVo;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApprovalFormsDto extends ApprovalFormsVo {
+public class ApprovalFormsDto {
     private Integer formId;
     private Integer applicantId;
     private Integer allId;

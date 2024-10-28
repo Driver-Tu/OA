@@ -137,7 +137,6 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
             //修改steps表
             ApprovalSteps data = myPage.getData();
             data.setApprovalDate(new java.sql.Timestamp(System.currentTimeMillis()));
-            data.setApprover(userMapper.selectById(StpUtil.getLoginIdAsLong()).getUserName());
             approvalStepsServiceImpl.addApprovalSteps(data);
             //连着forms表一起修改
             ApprovalForms approvalForms = approvalFormsMapper.selectById(myPage.getData().getFormId());
