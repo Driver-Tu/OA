@@ -26,6 +26,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -113,14 +114,13 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
     @Override
     public Result<Page<ReportVo>> selectReport(MyPage<ReportDto> myPage) {
         List<ReportVo> reportVos = reportMapper.selectReport(myPage.getData());
-        List<ReportVo> list = reportVos.stream().parallel().map(reportVo -> {
+        List<ReportVo> list = reportVos.stream().parallel().peek(reportVo -> {
             List<File> files = reportMapper.selectFile(reportVo.getReportId());
             List<String> fileUrlList = files.stream().parallel().map(File::getFileUrl).toList();
             reportVo.setFileUrls(fileUrlList);
-            return reportVo;
         }).toList();
         if(myPage.getData().getReportUserId()!=null){
-            list.stream().filter(reportVo -> reportVo.getReportUserId()==myPage.getData().getReportUserId());
+           list=list.stream().filter(reportVo -> Objects.equals(reportVo.getReportUserId(), myPage.getData().getReportUserId())).toList();
         }
         List<ReportVo> collect = list.stream()
                 .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize())
@@ -135,38 +135,34 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
     @Transactional
     public Result<Report> updateReport(ReportDto reportdto) {
         Report report = reportMapper.selectById(reportdto.getReportId());
-        if (reportdto != null) {
-            //内容
-            report.setContent(reportdto.getContent());
-            //汇报时间
-            report.setReportDate(Date.valueOf(LocalDate.now()));
-            //汇报名称
-            report.setReportName(reportdto.getReportName());
-            //汇报类型
-            report.setType(reportdto.getType());
-            //修改时间
-            report.setUpDate(Timestamp.valueOf(java.time.LocalDateTime.now()));
-            if (report.getFilePath() != null) {
-                List<String> filePaths = reportdto.getFilePath();
-                StringBuilder FilePathAll = new StringBuilder();
-                for (int i = 0; i < filePaths.size(); i++) {
-                    if (i != filePaths.size() - 1) {
-                        FilePathAll.append(filePaths.get(i)).append(",");
-                    } else {
-                        FilePathAll.append(filePaths.get(i));
-                    }
+        //内容
+        report.setContent(reportdto.getContent());
+        //汇报时间
+        report.setReportDate(Date.valueOf(LocalDate.now()));
+        //汇报名称
+        report.setReportName(reportdto.getReportName());
+        //汇报类型
+        report.setType(reportdto.getType());
+        //修改时间
+        report.setUpDate(Timestamp.valueOf(java.time.LocalDateTime.now()));
+        if (report.getFilePath() != null) {
+            List<String> filePaths = reportdto.getFilePath();
+            StringBuilder FilePathAll = new StringBuilder();
+            for (int i = 0; i < filePaths.size(); i++) {
+                if (i != filePaths.size() - 1) {
+                    FilePathAll.append(filePaths.get(i)).append(",");
+                } else {
+                    FilePathAll.append(filePaths.get(i));
                 }
-                report.setFilePath(FilePathAll.toString());
             }
-            try {
-                int i = reportMapper.updateById(report);
-                if (i > 0) return new Result(ResponseEnum.SUCCESS, report);
-                else return new Result(ResponseEnum.UPDATE_SERVER_ERROR, null);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            return new Result(ResponseEnum.DATA_NOT_EXIST, null);
+            report.setFilePath(FilePathAll.toString());
+        }
+        try {
+            int i = reportMapper.updateById(report);
+            if (i > 0) return new Result(ResponseEnum.SUCCESS, report);
+            else return new Result(ResponseEnum.UPDATE_SERVER_ERROR, null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

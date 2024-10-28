@@ -55,7 +55,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .eq(User::getUserPassword,password);
         User user = userMapper.selectOne(lambdaQueryWrapper);
         if(user == null){
-            return new Result<User>(ResponseEnum.USER_NOT_EXIST,null);
+            return new Result<>(ResponseEnum.USER_NOT_EXIST, null);
         }
         StpUtil.login(user.getUserId());
         return new Result(ResponseEnum.SUCCESS,StpUtil.getTokenInfo());

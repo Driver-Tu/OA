@@ -1,7 +1,6 @@
 package wh.fcfz.officecontroller.all.service.Impl;
 
 import cn.dev33.satoken.stp.StpUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wh.fcfz.officecontroller.all.bean.Dao.*;
+import wh.fcfz.officecontroller.all.bean.Dto.ApprovalFormsDto;
+import wh.fcfz.officecontroller.all.bean.Vo.ApprovalFormsVo;
 import wh.fcfz.officecontroller.all.mapper.*;
 import wh.fcfz.officecontroller.all.service.ApprovalFormsService;
 import wh.fcfz.officecontroller.all.tool.MyPage;
@@ -35,92 +36,23 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     private BusinessMapper businessMapper;
     //管理员查询审批数据
     @Override
-    public Result getApprovalForms(MyPage<ApprovalForms> myPage) {
-        Page<ApprovalForms> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
-        LambdaQueryWrapper<ApprovalForms> queryWrapper = new LambdaQueryWrapper<>();
-        //查询审批状态
-        queryWrapper.eq(null != myPage.getData().getStatus() && (!myPage.getData().getStatus().equals("")), ApprovalForms::getStatus, myPage.getData().getStatus())
-                //查询审批类型
-                .eq(null != myPage.getData().getType() && (!myPage.getData().getType().equals("")), ApprovalForms::getType, myPage.getData().getType())
-                .orderByDesc(ApprovalForms::getApplicationDate);
-        List<ApprovalForms> approvalFormDaos = approvalFormsMapper.selectList(queryWrapper);
-        List<ApprovalForms> approvalFormsList = approvalFormDaos.stream().parallel().peek(approvalForm -> {
-            User user = userMapper.selectById(approvalForm.getApplicantId());
-            String departName = userMapper.selectDepartName(user.getDepartmentId());
-            approvalForm.setUserName(user.getUserName());
-            approvalForm.setDepartmentName(departName);
+    public Result getApprovalForms(MyPage<ApprovalFormsDto> myPage) {
+        List<ApprovalFormsVo> approvalFormsList = approvalFormsMapper.getList(myPage.getData());
+        approvalFormsList = approvalFormsList.stream().parallel().peek(approvalForm -> {
+            List<String> fileUrlList = approvalFormsMapper.getFileList(approvalForm.getFormId()).stream().parallel().map(File::getFileUrl).toList();
+            approvalForm.setFileUrlList(fileUrlList);
         }).collect(Collectors.toList());
-        if(myPage.getParams()!=null){
-            //如果map中含有userName的话，就删除不满足该名字的数据
-            if (myPage.getParams().containsKey("userName") && (null != myPage.getParams().get("userName")) && myPage.getParams().get("userName") != "") {
-                String userName = myPage.getParams().get("userName").toString();
-                approvalFormsList = approvalFormsList.stream()
-                        .filter(approvalForm -> approvalForm.getUserName().equals(userName))
-                        .collect(Collectors.toList());
-            }
-            //如果map中含有departmentName的话，就删除不满足该名字的数据
-            if (myPage.getParams().containsKey("departName") && (null != myPage.getParams().get("departName")) && myPage.getParams().get("departName") != "") {
-                User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
-                String departName = userMapper.selectDepartName(user.getDepartmentId());
-                approvalFormsList = approvalFormsList.stream()
-                        .filter(approvalForm -> departName.equals(approvalForm.getDepartmentName()))
-                        .collect(Collectors.toList());
-            }
-        }
         approvalFormsList =GetList(approvalFormsList);
-        List<ApprovalForms> collect = approvalFormsList.stream()
+        List<ApprovalFormsVo> collect = approvalFormsList.stream()
                 .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
                 .collect(Collectors.toList());
+        Page<ApprovalFormsVo> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
         page.setRecords(collect);
         page.setTotal(approvalFormsList.size());
         return new Result("200", "查询成功", page);
     }
-
-    @Override
-    public Result getSelfApprovalForms(MyPage<ApprovalForms> myPage) {
-        Page<ApprovalForms> page = new Page<>(myPage.getPageNum(), myPage.getPageSize());
-        LambdaQueryWrapper<ApprovalForms> queryWrapper = new LambdaQueryWrapper<>();
-        //查询审批状态
-        queryWrapper.eq(null != myPage.getData().getStatus() && (!myPage.getData().getStatus().equals("")), ApprovalForms::getStatus, myPage.getData().getStatus())
-                //查询审批类型
-                .eq(null != myPage.getData().getType() && (!myPage.getData().getType().equals("")), ApprovalForms::getType, myPage.getData().getType())
-                .eq(ApprovalForms::getApplicantId, StpUtil.getLoginIdAsLong())
-                .orderByDesc(ApprovalForms::getApplicationDate);
-        List<ApprovalForms> approvalFormDaos = approvalFormsMapper.selectList(queryWrapper);
-        List<ApprovalForms> approvalFormsList = approvalFormDaos.stream().peek(approvalForm -> {
-            User user = userMapper.selectById(approvalForm.getApplicantId());
-            String departName = userMapper.selectDepartName(user.getDepartmentId());
-            approvalForm.setUserName(user.getUserName());
-            approvalForm.setDepartmentName(departName);
-        }).collect(Collectors.toList());
-        if(myPage.getParams()!=null){
-            //如果map中含有userName的话，就删除不满足该名字的数据
-            if (myPage.getParams().containsKey("userName") && (null != myPage.getParams().get("userName")) && myPage.getParams().get("userName") != "") {
-                String userName = myPage.getParams().get("userName").toString();
-                approvalFormsList = approvalFormsList.stream()
-                        .filter(approvalForm -> approvalForm.getUserName().equals(userName))
-                        .collect(Collectors.toList());
-            }
-            //如果map中含有departmentName的话，就删除不满足该名字的数据
-            if (myPage.getParams().containsKey("departName") && (null != myPage.getParams().get("departName")) && myPage.getParams().get("departName") != "") {
-                User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
-                String departName = userMapper.selectDepartName(user.getDepartmentId());
-                approvalFormsList = approvalFormsList.stream()
-                        .filter(approvalForm -> departName.equals(approvalForm.getDepartmentName()))
-                        .collect(Collectors.toList());
-            }
-        }
-        approvalFormsList =GetList(approvalFormsList);
-        List<ApprovalForms> collect = approvalFormsList.stream()
-                .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
-                .collect(Collectors.toList());
-        page.setRecords(collect);
-        page.setTotal(approvalFormsList.size());
-        return new Result("200", "查询成功", page);
-    }
-
-    public List<ApprovalForms> GetList(List<ApprovalForms> approvalFormsList){
-        return approvalFormsList = approvalFormsList.stream().map(approvalForm -> {
+    public List<ApprovalFormsVo> GetList(List<ApprovalFormsVo> approvalFormsList){
+        return approvalFormsList = approvalFormsList.stream().parallel().map(approvalForm -> {
             switch (approvalForm.getType()) {
                 case "请假": {
                     LeaveFrom leaveFrom = leaveMapper.selectById(approvalForm.getAllId());
@@ -170,12 +102,17 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     //添加审批数据
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Result addApprovalForms(ApprovalForms approvalForms) {
-        if (approvalForms == null) {
-            return new Result(ResponseEnum.DATA_NOT_EXIST, null);
+    public ApprovalForms addApprovalForms(ApprovalForms approvalForms) {
+        approvalForms.setApplicantId(StpUtil.getLoginIdAsInt());
+        approvalForms.setApplicationDate(new java.sql.Timestamp(System.currentTimeMillis()));
+        approvalForms.setStatus("已提交");
+        try {
+            //保存审批信息
+            boolean save = this.save(approvalForms);
+            return save ? approvalForms : null;
+        }catch (Exception e){
+            throw new RuntimeException(e);
         }
-
-        return null;
     }
 
     /**

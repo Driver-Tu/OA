@@ -3,6 +3,7 @@ package wh.fcfz.officecontroller.all.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import wh.fcfz.officecontroller.all.bean.Dao.Report;
@@ -20,8 +21,10 @@ import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/report")
 public class ReportController {
@@ -63,24 +66,29 @@ public class ReportController {
 
 
     //return:userOnVo
-    @GetMapping("/shareReport")
-    public Result<Page<Report>> shareReport() {
-        List<ReportVo> reportVos = reportMapper.selectReport(new ReportDto());
+    @PostMapping("/shareReport")
+    public Result<Page<ReportVo>> shareReport(@RequestParam Integer pageNum,@RequestParam Integer pageSize) {
+        ReportDto reportDto = new ReportDto();
+        reportDto.setShare("1");
+        List<ReportVo> reportVos = reportMapper.selectReport(reportDto);
         List<ReportVo> list = new ArrayList<>();
-        reportVos.stream().parallel().forEach(reportVo -> {
+        reportVos.stream().forEach(reportVo -> {
             String[] split = reportVo.getShareUserId().split(",");
-            if (split.length > 0) {
-                for (String s : split) {
-                    if(Integer.parseInt(s)==StpUtil.getLoginIdAsInt()){
-                        //只要有一个是对的就添加该条数据
-                        list.add(reportVo);
-                    }
+            log.error(Arrays.toString(split));
+            int loginIdAsInt = StpUtil.getLoginIdAsInt();
+            for (String s : split) {
+                log.info(s);
+                if (Integer.parseInt(s) == loginIdAsInt) {
+                    //只要有一个是对的就添加该条数据
+                    list.add(reportVo);
                 }
             }
         });
-        Page<ReportVo> page = new Page<>();
-
-        return null;
+        Page<ReportVo> page = new Page<>(pageNum,pageSize);
+        List<ReportVo> collect = list.stream().skip((long) (pageNum - 1) * pageSize).limit(pageSize).toList();
+        page.setRecords(collect);
+        page.setTotal(list.size());
+        return new Result<>(ResponseEnum.SUCCESS, page);
     }
 
     @PostMapping("/shareReportToUser")
