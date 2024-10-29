@@ -19,4 +19,9 @@ public class AddApprovalFormsDto {
      * 审批人们
      * */
     private List<Integer> approvers;
+
+    /**
+     * 额外类型的对象
+     * */
+    private Object object;
 }

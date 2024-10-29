@@ -20,7 +20,6 @@ import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/approvalForms")
@@ -53,19 +52,22 @@ public class ApprovalFormsController {
 
     @PostMapping("/addApprovalForms")
     @Transactional
-    public Result addApprovalForms(AddApprovalFormsDto addApprovalFormsDto)
+    public Result addApprovalForms(@RequestBody AddApprovalFormsDto addApprovalFormsDto)
     {
        if(addApprovalFormsDto.getApprovalForms()==null){
            return new Result(ResponseEnum.DATA_NOT_EXIST,null);
        }
+        Long id = approvalFormsService.setDetail(addApprovalFormsDto);
+        addApprovalFormsDto.getApprovalForms().setAllId(id);
         ApprovalForms AddApprovalForms = approvalFormsService.addApprovalForms(addApprovalFormsDto.getApprovalForms());
         List<Integer> approvers = addApprovalFormsDto.getApprovers();
-        Stream<Integer> appSteps = approvers.stream().parallel().peek(approver -> {
-            ApprovalSteps approvalSteps = new ApprovalSteps();
-            approvalSteps.setFormId(AddApprovalForms.getFormId());
-            approvalSteps.setApprover(approver);
-            ApprovalSteps AddApprovalStep = approvalStepsServiceImpl.addApprovalSteps(approvalSteps);
+        approvers.stream().forEach(approver ->{
+                ApprovalSteps approvalSteps = new ApprovalSteps();
+                approvalSteps.setFormId(AddApprovalForms.getFormId());
+                approvalSteps.setApprover(approver);
+                ApprovalSteps AddApprovalStep = approvalStepsServiceImpl.addApprovalSteps(approvalSteps);
         });
         return new Result(ResponseEnum.SUCCESS,true);
     }
+
 }

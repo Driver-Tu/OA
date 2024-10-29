@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @TableName("approval_forms")
 public class ApprovalForms {
 @TableId(value = "form_id",type= IdType.AUTO)
-  private Integer formId;
+  private Long formId;
   private Integer applicantId;
-  private Integer allId;
+  private Long allId;
   private String fromName;
   private java.sql.Timestamp applicationDate;
   private String status;

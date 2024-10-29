@@ -14,5 +14,5 @@ import java.util.List;
 public interface ApprovalFormsMapper extends BaseMapper<ApprovalForms> {
     List<ApprovalFormsVo> getList(ApprovalFormsDto approvalFormsDto);
 
-    List<File> getFileList(Integer formId);
+    List<File> getFileList(Long formId);
 }

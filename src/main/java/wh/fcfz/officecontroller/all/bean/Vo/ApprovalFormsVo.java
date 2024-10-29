@@ -15,7 +15,7 @@ public class ApprovalFormsVo extends ApprovalForms {
     private String UserName;
     private String departmentName;
     private Map<String,Object> map;
-    private List<String> fileUrlList;
+    private List<String> fileList;
     public  ApprovalFormsVo(ApprovalForms ApprovalForms) {
         super(ApprovalForms);
     }

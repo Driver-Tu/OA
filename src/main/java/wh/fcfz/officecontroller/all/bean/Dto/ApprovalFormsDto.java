@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApprovalFormsDto {
-    private Integer formId;
+    private Long formId;
     private Integer applicantId;
-    private Integer allId;
+    private Long allId;
     private String fromName;
     private java.sql.Timestamp applicationDate;
     private String status;
