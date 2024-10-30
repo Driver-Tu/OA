@@ -54,8 +54,8 @@ public class FileTestController {
     ) {
         try {
             // 调用Service层的方法进行文件上传
-            List<Integer> ids = fileService.uploadFile(files, businessType, businessId);
-            return new Result("200","文件上传成功", ids); // 返回成功结果和文件 ID 列表
+            List<String> fileUUIDs = fileService.uploadFile(files, businessType, businessId);
+            return new Result("200","文件上传成功", fileUUIDs); // 返回成功结果和文件 ID 列表
         } catch (Exception e) {
             // 处理异常情况
             return new Result("500", "文件上传失败", null);

@@ -11,7 +11,7 @@ public interface FileService {
 
     List<File> selectFileList(FileDto fileDto);
 
-    List<Integer> uploadFile(List<MultipartFile> files, String businessType, Integer businessId);
+    List<String> uploadFile(List<MultipartFile> files, String businessType, Integer businessId);
 
     void getFileAsResource(HttpServletResponse response, Integer fileId);
 }

@@ -36,8 +36,8 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
     }
 
     @Override
-    public List<Integer> uploadFile(List<MultipartFile> files, String businessType, Integer businessId) {
-        List<Integer> ids = files.stream()
+    public List<String> uploadFile(List<MultipartFile> files, String businessType, Integer businessId) {
+        List<String> fileUUIDs = files.stream()
                 .map(file -> {
 
                     // 避免上传的文件重名，重新生成一个文件名
@@ -68,10 +68,10 @@ public class FileServiceImpl extends ServiceImpl<FileMapper, File> implements Fi
                         throw new RuntimeException("文件插入数据库失败", e);
                     }
                     // 返回文件在 OSS 中的访问地址
-                    return fileEntity.getId();
+                    return fileEntity.getFileUuid();
                 }).toList();
         // 返回操作成功的结果，包含所有文件的 URL
-        return ids;
+        return fileUUIDs;
     }
 
     @Override

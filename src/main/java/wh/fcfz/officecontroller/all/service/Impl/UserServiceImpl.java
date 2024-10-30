@@ -95,7 +95,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userVo.setBirth(birthdayAndGender[0]);
         userVo.setSex(birthdayAndGender[1]);
         BeanUtil.copyProperties(user, userVo);
-        return new Result<UserVo>(ResponseEnum.SUCCESS, userVo);
+        return new Result<>(ResponseEnum.SUCCESS, userVo);
     }
 /**
  *

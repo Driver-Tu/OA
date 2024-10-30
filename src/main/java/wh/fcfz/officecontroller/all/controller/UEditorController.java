@@ -58,19 +58,19 @@ public class UEditorController {
     // 3. 上传图片
     @PostMapping(params = "action=image")
     public ResponseEntity<Map<String, Object>> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
-        return ResponseEntity.ok(handleFileUpload(file, "image", "报告", 1));
+        return ResponseEntity.ok(handleFileUpload(file, "image", "报告", 0));
     }
 
     // 4. 上传视频
     @PostMapping(params = "action=video")
     public ResponseEntity<Map<String, Object>> uploadVideo(@RequestParam("file") MultipartFile file) throws IOException {
-        return ResponseEntity.ok(handleFileUpload(file, "video", "报告", 1));
+        return ResponseEntity.ok(handleFileUpload(file, "video", "报告", 0));
     }
 
     // 5. 上传其他文件
     @PostMapping(params = "action=uploadFile")
     public ResponseEntity<Map<String, Object>> uploadGenericFile(@RequestParam("file") MultipartFile file) throws IOException {
-        return ResponseEntity.ok(handleFileUpload(file, "file", "报告", 1));
+        return ResponseEntity.ok(handleFileUpload(file, "file", "报告", 0));
     }
 
     private Map<String, Object> handleFileUpload(MultipartFile file, String type, String businessType, Integer businessId) throws IOException {
@@ -83,10 +83,10 @@ public class UEditorController {
 //        String fileUUID = String.valueOf(UUID.randomUUID());
 //        String newFileName = fileUUID + "_" + file.getOriginalFilename();
 //        String url = aliOssUtil.upload(file.getBytes(),newFileName);
-        List<Integer> ids = fileService.uploadFile(List.of(new MultipartFile[]{file}), businessType, businessId);
-//        fileService.getFileById(ids);
+        List<String> fileUUIDs = fileService.uploadFile(List.of(new MultipartFile[]{file}), businessType, businessId);
+//        fileService.getFileById(fileUUIDs);
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        String url = "res/" + ids.get(0) + (extension.isEmpty() ? "" : "." + extension);
+        String url = "res/" + fileUUIDs.get(0) + (extension.isEmpty() ? "" : "." + extension);
 //        try {
 //            file.transferTo(destination);
             response.put("state", "SUCCESS");

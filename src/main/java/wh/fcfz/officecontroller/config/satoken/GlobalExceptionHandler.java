@@ -35,6 +35,6 @@ public class GlobalExceptionHandler {
     public Result<String> handleNotLoginException(NotLoginException e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',未能读取到有效 token.", requestURI, e);
-        return new Result<>(ResponseEnum.NOT_LOGIN_EXCEEDED, null);
+        return new Result<>(ResponseEnum.USER_NOT_LOGIN, null);
     }
 }
