@@ -108,13 +108,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         Page<User> pages = new Page<>(page.getPageNum(), page.getPageSize());
         List<UserVo> userPage = userMapper.selectUserList(page.getData());
-        List<UserVo> userVoList = userPage.stream().parallel().map(userVo -> {
+        List<UserVo> userVoList = userPage.stream().parallel().peek(userVo -> {
             String[] birthdayAndGender = getBirthdayAndGender(userVo.getBirthdayNum());
             userVo.setBirth(birthdayAndGender[0]);
             userVo.setSex(birthdayAndGender[1]);
             userVo.setBirthdayNum(DesensitizedUtil.idCardNum(userVo.getBirthdayNum(),6,0));
-            return userVo;
-        }).collect(Collectors.toList());
+        }).toList();
         Page<UserVo> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
         List<UserVo> collect = userVoList.stream()
                 .skip((long) (page.getPageNum() - 1) * page.getPageSize())
@@ -209,10 +208,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             if(userMapper.update(user,lambdaUpdateWrapper)>0){
                 return new Result<User>(ResponseEnum.SUCCESS,null);
             }else {
+                log.error("修改个人信息时出现异常，user: {}", user);
                 return new Result<User>(ResponseEnum.USER_NOT_EXIST,null);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+           log.error("修改个人信息时出现异常，user: {}", user, e);
             return new Result<User>(ResponseEnum.UPDATE_SERVER_ERROR,null);
         }
     }
@@ -262,7 +262,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             userMapper.deleteBatchIds(ids);
             return new Result<String>(ResponseEnum.SUCCESS,"成功删除的数据为"+ids);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("批量删除数据时出现异常，ids: {}", ids, e);
            throw e;
         }
     }

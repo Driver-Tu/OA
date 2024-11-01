@@ -51,7 +51,6 @@ public class UserController {
         return userService.logout();
     }
 
-
     @PostMapping("/updatePassword")
     public Result<User> updatePassword(
             @RequestParam String oldPassword,

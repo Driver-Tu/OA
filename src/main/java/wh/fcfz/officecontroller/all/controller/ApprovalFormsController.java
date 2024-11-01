@@ -3,12 +3,10 @@ package wh.fcfz.officecontroller.all.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import wh.fcfz.officecontroller.all.bean.Dao.ApprovalForms;
 import wh.fcfz.officecontroller.all.bean.Dao.ApprovalSteps;
 import wh.fcfz.officecontroller.all.bean.Dto.AddApprovalFormsDto;
@@ -21,6 +19,7 @@ import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/approvalForms")
 public class ApprovalFormsController {
@@ -29,6 +28,8 @@ public class ApprovalFormsController {
     private  ApprovalFormsServiceImpl approvalFormsService;
     @Autowired
     private ApprovalStepsServiceImpl approvalStepsServiceImpl;
+    @Autowired
+    private ApprovalFormsServiceImpl approvalFormsServiceImpl;
 
     @PostMapping("/getApprovalForms")
     public Result addApprovalForms(@RequestBody MyPage<ApprovalFormsDto> approvalForms)
@@ -57,7 +58,8 @@ public class ApprovalFormsController {
        if(addApprovalFormsDto.getApprovalForms()==null){
            return new Result(ResponseEnum.DATA_NOT_EXIST,null);
        }
-        Long id = approvalFormsService.setDetail(addApprovalFormsDto);
+
+        Long id = approvalFormsServiceImpl.setDetail(addApprovalFormsDto);
         addApprovalFormsDto.getApprovalForms().setAllId(id);
         ApprovalForms AddApprovalForms = approvalFormsService.addApprovalForms(addApprovalFormsDto.getApprovalForms());
         List<Integer> approvers = addApprovalFormsDto.getApprovers();
@@ -65,9 +67,36 @@ public class ApprovalFormsController {
                 ApprovalSteps approvalSteps = new ApprovalSteps();
                 approvalSteps.setFormId(AddApprovalForms.getFormId());
                 approvalSteps.setApprover(approver);
+                approvalSteps.setResult("待审批");
                 ApprovalSteps AddApprovalStep = approvalStepsServiceImpl.addApprovalSteps(approvalSteps);
         });
+
         return new Result(ResponseEnum.SUCCESS,true);
     }
 
+    @DeleteMapping("/deleteAppForms")
+    @Transactional
+    public Result deleteAppForms(@RequestBody List<Long> ids)
+    {
+        ApprovalForms byId=new ApprovalForms();
+        for (Long id : ids) {
+            byId= approvalFormsService.getById(id);
+            if(byId==null){
+                return new Result(ResponseEnum.DATA_NOT_EXIST,"删除的数据中有非审批数据");
+            }
+            if(byId.getStatus().equals("已完成")){
+                return new Result(ResponseEnum.DATA_NOT_EXIST,"删除的数据中有审批完成的数据:"+byId.getFromName());
+            }
+            if (byId.getApplicantId()!=StpUtil.getLoginIdAsInt()){
+                return new Result(ResponseEnum.DATA_NOT_EXIST,"删除的数据中有非本人提交的数据:"+byId.getFromName());
+            }
+            try {
+                boolean b1 = approvalFormsService.deleteApprovalForms(id);
+                boolean b2 = approvalStepsServiceImpl.deleteApprovalSteps(id);
+            } catch (Exception e) {
+                throw new RuntimeException("删除失败");
+            }
+        }
+        return new Result(ResponseEnum.SUCCESS,true);
+    }
 }

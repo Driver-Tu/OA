@@ -20,4 +20,6 @@ public interface ApprovalFormsService extends IService<ApprovalForms> {
      * 修改审批数据
      * */
     Result updateApprovalForms(MyPage<ApprovalSteps> myPage);
+
+    boolean deleteApprovalForms(Long id);
 }
