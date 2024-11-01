@@ -1,6 +1,7 @@
 package wh.fcfz.officecontroller.all.controller;
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.lang.UUID;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +41,8 @@ public class UserController {
    /**
     * 查询所有员工数据
     * */
-     @SaCheckPermission("admin")
-     @PostMapping("/list")
+    @SaCheckPermission(value={"admin","boss"}, mode= SaMode.OR)
+    @PostMapping("/list")
     public Result<List<UserVo>> selectALL(@RequestBody MyPage<UserDto> page){
         return userService.selectALL(page);
     }
@@ -66,7 +67,7 @@ public class UserController {
     /*
      *新增员工
      * */
-    @SaCheckPermission("admin")
+    @SaCheckPermission(value={"admin","boss"}, mode= SaMode.OR)
     @PostMapping("/save")
     public Result<User> save(@RequestBody User user){
         return userService.saveUser(user);
@@ -75,7 +76,7 @@ public class UserController {
     /*
     * 批量删除
     * */
-    @SaCheckPermission("admin")
+    @SaCheckPermission(value={"admin","boss"}, mode= SaMode.OR)
     @DeleteMapping("/deleteUser")
     public Result<String> deleteUser(@RequestBody List<Integer> ids){
         return userService.deleteUser(ids);

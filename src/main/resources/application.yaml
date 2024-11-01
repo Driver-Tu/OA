@@ -26,6 +26,7 @@ sa-token:
   is-log: true
   # jwt秘钥
   jwt-secret-key: asdasdasifhueuiwyurfewbfjsdafjk
+  is-read-cookie: false
 
 #sql配置
 spring:
