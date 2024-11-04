@@ -15,4 +15,7 @@ public interface ApprovalFormsMapper extends BaseMapper<ApprovalForms> {
     List<ApprovalFormsVo> getList(ApprovalFormsDto approvalFormsDto);
 
     List<File> getFileList(Long formId);
+
+    //查询step表中完成或者未完成的审批有几个，排除掉没有审批
+    int getApprovalStepsCount(Long formId);
 }

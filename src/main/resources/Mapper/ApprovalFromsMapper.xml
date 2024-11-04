@@ -75,5 +75,15 @@
             ORDER BY
                 f.upload_time DESC
     </select>
+    <select id="getApprovalStepsCount" resultType="java.lang.Integer">
+            SELECT
+                COUNT(*)
+            FROM
+                approval_steps
+            WHERE
+                form_id = #{formId}
+            AND result = '成功'
+            AND approval_date is not null
+    </select>
 
 </mapper>

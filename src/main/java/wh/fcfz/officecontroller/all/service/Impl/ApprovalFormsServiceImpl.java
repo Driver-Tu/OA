@@ -2,6 +2,7 @@ package wh.fcfz.officecontroller.all.service.Impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.swagger.annotations.ApiOperation;
@@ -9,15 +10,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import wh.fcfz.officecontroller.all.bean.Dao.*;
+import wh.fcfz.officecontroller.all.bean.Dao.ApprovalForms;
+import wh.fcfz.officecontroller.all.bean.Dao.File;
+import wh.fcfz.officecontroller.all.bean.Dao.StepCount;
 import wh.fcfz.officecontroller.all.bean.Dao.review.*;
 import wh.fcfz.officecontroller.all.bean.Dto.AddApprovalFormsDto;
 import wh.fcfz.officecontroller.all.bean.Dto.ApprovalFormsDto;
 import wh.fcfz.officecontroller.all.bean.Vo.ApprovalFormsVo;
 import wh.fcfz.officecontroller.all.mapper.*;
 import wh.fcfz.officecontroller.all.service.ApprovalFormsService;
+import wh.fcfz.officecontroller.all.tool.MyException;
 import wh.fcfz.officecontroller.all.tool.MyPage;
-import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.util.HashMap;
@@ -65,6 +68,8 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     private ContractSigningsMapper contractSigningsMapper;//合同
     @Autowired
     private ProjectInitiationsMapper projectInitiationsMapper;//项目立项
+    @Autowired
+    private StepCountMapper stepCountMapper;
 
     //管理员查询审批数据
     @Override
@@ -115,57 +120,44 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     @Override
     @Transactional(rollbackFor = Exception.class)
     @ApiOperation(value = "修改审批status")
-    public Result updateApprovalForms(MyPage<ApprovalSteps> myPage) {
-        if (myPage.getData() == null) {
-            return new Result(ResponseEnum.DATA_NOT_EXIST, null);
+    public int updateApprovalForms(String result, ApprovalForms approvalForms) {
+        int approvalStepsCount = approvalFormsMapper.getApprovalStepsCount(approvalForms.getFormId());
+        StepCount stepCount = stepCountMapper.selectOne(new LambdaQueryWrapper<StepCount>()
+                .eq(StepCount::getStepType, approvalForms.getType()));
+        log.error("approvalStepsCount:"+approvalStepsCount+"========"+stepCount);
+        //如果审批次数大于可以审批次数
+        if(stepCount.getStepCount()<approvalStepsCount){
+            throw new MyException("审批已完成，无法审批","10707");
         }
-        try {
-            //修改steps表
-            ApprovalSteps data = myPage.getData();
-            data.setApprovalDate(new java.sql.Timestamp(System.currentTimeMillis()));
-            approvalStepsServiceImpl.addApprovalSteps(data);
-            //连着forms表一起修改
-            ApprovalForms approvalForms = approvalFormsMapper.selectById(myPage.getData().getFormId());
-            if (data.getResult().equals("同意")) {
-                approvalForms.setStatus("已完成");
-                if (approvalForms.getType().equals("请假")) {
-                    User user = userMapper.selectById(approvalForms.getAllId());
-                    user.setStatus(0);
-                    try {
-                        userMapper.updateById(user);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                } else if (approvalForms.getType().equals("出差")) {
-                    User user = userMapper.selectById(approvalForms.getAllId());
-                    user.setStatus(2);
-                    try {
-                        userMapper.updateById(user);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                } else if (approvalForms.getType().equals("补签")) {
-                    Attendance attendance = attendanceMapper.selectById(approvalForms.getAllId());
-                    attendance.setStatus("打卡成功");
-                    try {
-                        attendanceMapper.updateById(attendance);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            } else {
+        //如果审批记录条数刚好等于可已审批次数
+            if(result.equals("失败")){
                 approvalForms.setStatus("未完成");
+                int i = approvalFormsMapper.updateById(approvalForms);
+                if(i>0){
+                    return i;
+                }else {
+                    throw new MyException("修改失败","10707");
+                }
+            }else{
+                if(stepCount.getStepCount()==approvalStepsCount){
+                approvalForms.setStatus("已完成");
+                int i = approvalFormsMapper.updateById(approvalForms);
+                if(i>0){
+                    return i;
+                }else {
+                    throw new MyException("修改失败","10707");
+                }
+            }else{
+            //如果不等于审批次数，则修改为审批中
+            approvalForms.setStatus("审批中");
+            int i = approvalFormsMapper.updateById(approvalForms);
+            if (i > 0) {
+                return i;
+            } else {
+                throw new MyException("修改失败", "10707");
             }
-            //修改approvalForms表单状态
-            try {
-                approvalFormsMapper.updateById(approvalForms);
-                return new Result(ResponseEnum.SUCCESS, data);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
+    }
     }
 
     @Override
@@ -177,49 +169,33 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
             if(i>0){
                 return true;
             }else {
-                throw new RuntimeException("删除表单数据失败");
+                throw new MyException("删除失败","10703");
             }
         }else {
-            throw new RuntimeException("删除表单详细数据失败");
+            throw new MyException("删除失败","10703");
         }
     }
 
     public boolean deleteIdsAll(Long id, String type) {
-        switch (type) {
-            case "请假":
-                return leaveRequestsService.removeById(id);
-            case "报销":
-                return reimbursementMapper.deleteById(id) > 0;
-            case "出差":
-                return businessMapper.deleteById(id) > 0;
-            case "加班":
-                return overtimesMapper.deleteById(id) > 0;
-            case "补签":
-                return attandenceCorrectionsMapper.deleteById(id) > 0;
-            case "入职":
-                return onboardingsMapper.deleteById(id) > 0;
-            case "培训":
-                return trainingsMapper.deleteById(id) > 0;
-            case "薪资调整":
-                return salaryAdjustmentsMapper.deleteById(id) > 0;
-            case "离职":
-                return resignationsMapper.deleteById(id) > 0;
-            case "采购":
-                return procurementsMapper.deleteById(id) > 0;
-            case "用车":
-                return vehicleUsagesMapper.deleteById(id) > 0;
-            case "预算":
-                return budgetsMapper.deleteById(id) > 0;
-            case "招聘":
-                return recruitmentsMapper.deleteById(id) > 0;
-            case "设备维修":
-                return equipmentMaintenancesMapper.deleteById(id) > 0;
-            case "合同签署":
-                return contractSigningsMapper.deleteById(id) > 0;
-            case "项目立项":
-                return projectInitiationsMapper.deleteById(id) > 0;
-        }
-        return false;
+        return switch (type) {
+            case "请假" -> leaveRequestsService.removeById(id);
+            case "报销" -> reimbursementMapper.deleteById(id) > 0;
+            case "出差" -> businessMapper.deleteById(id) > 0;
+            case "加班" -> overtimesMapper.deleteById(id) > 0;
+            case "补签" -> attandenceCorrectionsMapper.deleteById(id) > 0;
+            case "入职" -> onboardingsMapper.deleteById(id) > 0;
+            case "培训" -> trainingsMapper.deleteById(id) > 0;
+            case "薪资调整" -> salaryAdjustmentsMapper.deleteById(id) > 0;
+            case "离职" -> resignationsMapper.deleteById(id) > 0;
+            case "采购" -> procurementsMapper.deleteById(id) > 0;
+            case "用车" -> vehicleUsagesMapper.deleteById(id) > 0;
+            case "预算" -> budgetsMapper.deleteById(id) > 0;
+            case "招聘" -> recruitmentsMapper.deleteById(id) > 0;
+            case "设备维修" -> equipmentMaintenancesMapper.deleteById(id) > 0;
+            case "合同签署" -> contractSigningsMapper.deleteById(id) > 0;
+            case "项目立项" -> projectInitiationsMapper.deleteById(id) > 0;
+            default -> false;
+        };
     }
 
     public List<ApprovalFormsVo> GetList(List<ApprovalFormsVo> approvalFormsList) {

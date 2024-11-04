@@ -7,7 +7,6 @@ public enum ResponseEnum {
     SUCCESS("200", "操作成功"),
     USER_NOT_EXIST("10301","用户不存在"),
     USER_NOT_LOGIN("10302","用户未登录"),
-    USER_IS_LOGIN("10303","用户已登录"),
     USER_IS_EXIST("10304", "用户已经存在"),
     USER_NOT_PERMISSION("10305", "用户权限不够"),
     DEPT_NOT_EXIST("10401","部门不存在"),

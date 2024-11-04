@@ -13,6 +13,7 @@ import wh.fcfz.officecontroller.all.bean.Dto.AddApprovalFormsDto;
 import wh.fcfz.officecontroller.all.bean.Dto.ApprovalFormsDto;
 import wh.fcfz.officecontroller.all.service.Impl.ApprovalFormsServiceImpl;
 import wh.fcfz.officecontroller.all.service.Impl.ApprovalStepsServiceImpl;
+import wh.fcfz.officecontroller.all.tool.MyException;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
@@ -46,9 +47,26 @@ public class ApprovalFormsController {
 
     @PostMapping("/updateApprovalForms")
     @SaCheckPermission("admin")
-    public Result updateApprovalFroms(@RequestBody MyPage<ApprovalSteps> approvalSteps)
+    @Transactional
+    public Result updateApprovalFroms(@RequestBody  ApprovalSteps approvalSteps)
     {
-        return approvalFormsService.updateApprovalForms(approvalSteps);
+        if(approvalSteps.getStepId()==null){
+            return new Result(ResponseEnum.DATA_NOT_EXIST,null);
+        }
+        ApprovalSteps byId = approvalStepsServiceImpl.getById(approvalSteps.getStepId());
+        if(byId.getApprover()!=StpUtil.getLoginIdAsInt()){
+            throw new MyException("权限不足","10305");
+        }
+        ApprovalForms approvalForms = approvalFormsService.getById(byId.getFormId());
+        //修改审批步骤表
+        int i = approvalStepsServiceImpl.updateApprovalSteps(approvalForms, byId);
+        //修改审批信息表
+        int j= approvalFormsService.updateApprovalForms(byId.getResult(), approvalForms);
+        if(i>0&&j>0){
+            return new Result(ResponseEnum.SUCCESS,true);
+        }else {
+            throw new MyException("审批失败","10707");
+        }
     }
 
     @PostMapping("/addApprovalForms")
@@ -63,22 +81,20 @@ public class ApprovalFormsController {
         addApprovalFormsDto.getApprovalForms().setAllId(id);
         ApprovalForms AddApprovalForms = approvalFormsService.addApprovalForms(addApprovalFormsDto.getApprovalForms());
         List<Integer> approvers = addApprovalFormsDto.getApprovers();
-        approvers.stream().forEach(approver ->{
+        approvers.forEach(approver ->{
                 ApprovalSteps approvalSteps = new ApprovalSteps();
                 approvalSteps.setFormId(AddApprovalForms.getFormId());
                 approvalSteps.setApprover(approver);
                 approvalSteps.setResult("待审批");
                 ApprovalSteps AddApprovalStep = approvalStepsServiceImpl.addApprovalSteps(approvalSteps);
         });
-
         return new Result(ResponseEnum.SUCCESS,true);
     }
 
     @DeleteMapping("/deleteAppForms")
     @Transactional
-    public Result deleteAppForms(@RequestBody List<Long> ids)
-    {
-        ApprovalForms byId=new ApprovalForms();
+    public Result deleteAppForms(@RequestBody List<Long> ids) {
+        ApprovalForms byId;
         for (Long id : ids) {
             byId= approvalFormsService.getById(id);
             if(byId==null){
@@ -92,9 +108,11 @@ public class ApprovalFormsController {
             }
             try {
                 boolean b1 = approvalFormsService.deleteApprovalForms(id);
-                boolean b2 = approvalStepsServiceImpl.deleteApprovalSteps(id);
+                if(b1){
+                    approvalStepsServiceImpl.deleteApprovalSteps(id);
+                }
             } catch (Exception e) {
-                throw new RuntimeException("删除失败");
+                throw new MyException("删除失败","10703");
             }
         }
         return new Result(ResponseEnum.SUCCESS,true);
