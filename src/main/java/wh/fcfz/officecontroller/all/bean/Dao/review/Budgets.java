@@ -17,7 +17,6 @@ public class Budgets {
   private String department;
   private Long amount;
   private String period;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
 

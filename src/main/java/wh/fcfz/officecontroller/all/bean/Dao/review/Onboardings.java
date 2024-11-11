@@ -19,7 +19,6 @@ public class Onboardings {
   private java.sql.Date startDate;
   private String department;
   private String position;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
 }

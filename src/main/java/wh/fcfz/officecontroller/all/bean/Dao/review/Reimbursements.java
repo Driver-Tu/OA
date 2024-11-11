@@ -17,7 +17,6 @@ public class Reimbursements {
   private Long amount;
   private String receipt;
   private String description;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
 }

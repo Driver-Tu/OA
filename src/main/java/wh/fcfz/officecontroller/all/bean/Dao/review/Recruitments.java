@@ -16,7 +16,6 @@ public class Recruitments {
   private String position;
   private String department;
   private String description;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
 }

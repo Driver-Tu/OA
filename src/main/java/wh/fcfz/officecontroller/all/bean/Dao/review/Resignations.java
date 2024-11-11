@@ -16,7 +16,6 @@ public class Resignations {
   private Long employeeId;
   private java.sql.Date resignationDate;
   private String reason;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
 

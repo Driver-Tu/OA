@@ -18,9 +18,6 @@ public class LeaveRequests {
   private Long employeeId;
   private java.sql.Date startDate;
   private java.sql.Date endDate;
-  private String reason;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
-
 }

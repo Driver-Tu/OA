@@ -17,7 +17,6 @@ public class SalaryAdjustments {
   private Long currentSalary;
   private Long proposedSalary;
   private String reason;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
 

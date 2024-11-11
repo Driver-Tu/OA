@@ -38,7 +38,7 @@ public class ReportController {
     @Autowired
     private ReportMapper reportMapper;
 
-    @RequestMapping("/addReport")
+    @PostMapping("/addReport")
     public Result<Boolean> addReport(@RequestBody ReportDto reportDto) {
         return reportService.addReport(reportDto);
     }

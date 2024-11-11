@@ -19,7 +19,6 @@ public class ContractSignings {
   private java.sql.Date startDate;
   private java.sql.Date endDate;
   private Long amount;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
 

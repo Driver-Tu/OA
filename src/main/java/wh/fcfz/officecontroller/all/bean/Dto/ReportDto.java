@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +23,5 @@ public class ReportDto {
     private String departName;
     private List<String> userIDS;
     private String share;
+    private Map<String,Object> params;
 }

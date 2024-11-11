@@ -85,7 +85,6 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
                 }
             }
         }
-
         return new Result<>(ResponseEnum.SUCCESS, true);
     }
 

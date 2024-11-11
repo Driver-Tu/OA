@@ -18,7 +18,6 @@ public class BusinessTrips {
   private java.sql.Date endDate;
   private String destination;
   private String purpose;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
 

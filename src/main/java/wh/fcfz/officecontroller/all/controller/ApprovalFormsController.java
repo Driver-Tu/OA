@@ -11,6 +11,9 @@ import wh.fcfz.officecontroller.all.bean.Dao.ApprovalForms;
 import wh.fcfz.officecontroller.all.bean.Dao.ApprovalSteps;
 import wh.fcfz.officecontroller.all.bean.Dto.AddApprovalFormsDto;
 import wh.fcfz.officecontroller.all.bean.Dto.ApprovalFormsDto;
+import wh.fcfz.officecontroller.all.bean.Dto.UserDto;
+import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
+import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.Impl.ApprovalFormsServiceImpl;
 import wh.fcfz.officecontroller.all.service.Impl.ApprovalStepsServiceImpl;
 import wh.fcfz.officecontroller.all.tool.MyException;
@@ -76,7 +79,6 @@ public class ApprovalFormsController {
        if(addApprovalFormsDto.getApprovalForms()==null){
            return new Result(ResponseEnum.DATA_NOT_EXIST,null);
        }
-
         Long id = approvalFormsServiceImpl.setDetail(addApprovalFormsDto);
         addApprovalFormsDto.getApprovalForms().setAllId(id);
         ApprovalForms AddApprovalForms = approvalFormsService.addApprovalForms(addApprovalFormsDto.getApprovalForms());
@@ -116,5 +118,24 @@ public class ApprovalFormsController {
             }
         }
         return new Result(ResponseEnum.SUCCESS,true);
+    }
+
+    @Autowired
+    private UserMapper userMapper;
+    /**
+     * 指定审批人
+     */
+    @GetMapping("/setApprovers")
+    @Transactional
+    public Result SelectApprovers() {
+        /**
+         * 查询每个用户的权限和信息
+         */
+        UserDto userDto = new UserDto();
+        userDto.setRoleName("admin");
+        userDto.setDepartName(userMapper.selectDepartName(userMapper.selectById(StpUtil.getLoginIdAsInt()).getDepartmentId()));
+        List<UserVo> userVos = userMapper.selectUserList(userDto);
+
+        return new Result<>(ResponseEnum.SUCCESS, userVos);
     }
 }

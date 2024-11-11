@@ -18,7 +18,6 @@ public class Overtimes {
   private java.sql.Time startTime;
   private java.sql.Time endTime;
   private String reason;
-  private String status;
   private java.sql.Timestamp createdAt;
   private java.sql.Timestamp updatedAt;
 }

@@ -69,7 +69,7 @@ public class ReportFileController {
         }
     }
 
-    @RequestMapping("/getData")
+    @GetMapping("/getData")
     public void getData(@RequestParam("objectName") String objectName, HttpServletResponse response) {
         aliOssUtil.readImage(objectName, response);
     }
