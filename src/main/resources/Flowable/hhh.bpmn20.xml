@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:flowable="http://flowable.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.flowable.org/processdef">
+  <process id="hhh" name="hhh" isExecutable="true">
+    <startEvent id="sid-145e4e81-f706-4622-a217-afaefcce3ab4"/>
+    <userTask id="sid-497b37be-9d9f-472b-8782-8d7e22d3d706"/>
+    <sequenceFlow id="sid-b6f6bb97-9858-484c-a7fc-771e9d889cf8" sourceRef="sid-145e4e81-f706-4622-a217-afaefcce3ab4" targetRef="sid-497b37be-9d9f-472b-8782-8d7e22d3d706"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_hhh">
+    <bpmndi:BPMNPlane bpmnElement="hhh" id="BPMNPlane_hhh">
+      <bpmndi:BPMNShape id="shape-7c7a2653-e4fc-4190-86fe-886ae93700b2" bpmnElement="sid-145e4e81-f706-4622-a217-afaefcce3ab4">
+        <omgdc:Bounds x="-105.0" y="-55.0" width="30.0" height="30.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-38efa6fb-8cc6-4da2-80fb-f25aa3cee21c" bpmnElement="sid-497b37be-9d9f-472b-8782-8d7e22d3d706">
+        <omgdc:Bounds x="-10.0" y="-60.0" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge-e4f53764-9779-454b-8845-38ad8524f884" bpmnElement="sid-b6f6bb97-9858-484c-a7fc-771e9d889cf8">
+        <omgdi:waypoint x="-75.0" y="-40.0"/>
+        <omgdi:waypoint x="-10.0" y="-40.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

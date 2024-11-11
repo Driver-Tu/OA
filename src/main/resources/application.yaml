@@ -59,6 +59,44 @@ spring:
         # 连接池中的最小空闲连接
         min-idle: 0
 
+# springdoc-openai 配置
+springdoc:
+  api-docs:
+    # 是否开启接口文档
+    enabled: true
+    # OpenAPI文档的路径
+    path: /v3/api-docs
+  swagger-ui:
+    # 是否开启swagger-ui
+    enabled: true
+    # swagger-ui路径
+    path: /swagger-ui.html
+    # 持久化认证数据
+    persistAuthorization: true
+  info:
+    # 标题
+    title: '标题：my-oa 系统_接口文档'
+    # 描述
+    description: '描述：用于公司的自动化办公OA系统'
+    # 版本
+    version: '版本号: 1.0.0'
+    # 作者信息
+    contact:
+      name: geist
+      email: 2424389790@qq.com
+      url: https://github.com/WtfZek
+#  components:
+  # 鉴权方式配置
+  #    security-schemes:
+  #      apiKey:
+  #        type: APIKEY
+  #        in: HEADER
+  #        name: Authorization
+  # 分组配置
+  group-configs:
+    - group: 后台管理模块接口文档
+      packages-to-scan: wh.fcfz.officecontroller.all
+
 #mp日志
 mybatis-plus:
   configuration:

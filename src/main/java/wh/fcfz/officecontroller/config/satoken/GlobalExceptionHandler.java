@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     public Result<?> handleException(Exception e, HttpServletRequest request) {
         String requestURI = request.getRequestURI();
         log.error("请求地址'{}',发生系统异常.", requestURI, e);
-        return new Result<>("400", e.getMessage(),null);
+        return new Result<>("500", e.getMessage(),null);
     }
 
     @ExceptionHandler(MaxUploadSizeExceededException.class)

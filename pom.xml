@@ -35,12 +35,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-boot-starter -->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
-            <version>3.0.3</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/com.github.xiaoymin/knife4j-spring-ui -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
@@ -136,6 +130,50 @@
             <artifactId>aliyun-sdk-oss</artifactId>
             <version>3.18.1</version>
         </dependency>
+
+
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-webmvc-core</artifactId>-->
+<!--            <version>1.6.14</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-javadoc</artifactId>-->
+<!--            <version>1.6.14</version>-->
+<!--        </dependency>-->
+
+<!--        <dependency>-->
+<!--            <groupId>org.springdoc</groupId>-->
+<!--            <artifactId>springdoc-openapi-ui</artifactId>-->
+<!--            <version>1.6.14</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.github.therapi</groupId>-->
+<!--            <artifactId>therapi-runtime-javadoc</artifactId>-->
+<!--            <version>0.15.0</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.7</version>
+        </dependency>
+
+        <!-- Knife4j for API documentation -->
+<!--        <dependency>-->
+<!--            <groupId>com.github.xiaoymin</groupId>-->
+<!--            <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>-->
+<!--            <version>4.4.0</version>-->
+<!--        </dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -161,6 +199,33 @@
                     <compilerArgs>
                         <arg>-parameters</arg>
                     </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>com.github.therapi</groupId>
+                            <artifactId>therapi-runtime-javadoc-scribe</artifactId>
+                            <version>0.15.0</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.24</version>
+                        </path>
+                        <path>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                            <version>${spring-boot.version}</version>
+                        </path>
+<!--                        <path>-->
+<!--                            <groupId>io.github.linpeilie</groupId>-->
+<!--                            <artifactId>mapstruct-plus-processor</artifactId>-->
+<!--                            <version>${mapstruct-plus.version}</version>-->
+<!--                        </path>-->
+<!--                        <path>-->
+<!--                            <groupId>org.projectlombok</groupId>-->
+<!--                            <artifactId>lombok-mapstruct-binding</artifactId>-->
+<!--                            <version>${mapstruct-plus.lombok.version}</version>-->
+<!--                        </path>-->
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
@@ -171,14 +236,6 @@
                     <mainClass>wh.fcfz.officecontroller.OfficeControllerApplication</mainClass>
                     <skip>false</skip>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

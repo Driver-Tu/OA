@@ -5,7 +5,6 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,7 +119,6 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    @ApiOperation(value = "修改审批status")
     public int updateApprovalForms(String result, ApprovalForms approvalForms) {
         int approvalStepsCount = approvalFormsMapper.getApprovalStepsCount(approvalForms.getFormId());
         StepCount stepCount = stepCountMapper.selectOne(new LambdaQueryWrapper<StepCount>()
