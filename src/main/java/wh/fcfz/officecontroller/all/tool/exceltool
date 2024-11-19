@@ -1,0 +1,56 @@
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+public class DatabaseToExcelExample {
+
+    public static void main(String[] args) {
+        // 配置数据源
+        DataSource dataSource = new DriverManagerDataSource("jdbc:mysql://localhost:3306/your_database", "username", "password");
+
+        // 创建JdbcTemplate
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+        // 查询数据库
+        String sql = "SELECT * FROM your_table";
+        List<Map<String, Object>> data = jdbcTemplate.query(sql, new RowMapper<Map<String, Object>>() {
+            @Override
+            public Map<String, Object> mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Map<String, Object> row = new HashMap<>();
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    row.put(rs.getMetaData().getColumnName(i), rs.getObject(i));
+                }
+                return row;
+            }
+        });
+
+        // 将查询结果写入Excel
+        writeDynamicDataToExcel(data, "database_data.xlsx");
+    }
+
+    public static void writeDynamicDataToExcel(List<Map<String, Object>> data, String fileName) {
+        // 获取所有列的标题
+        List<String> head = new ArrayList<>();
+        if (!data.isEmpty()) {
+            head.addAll(data.get(0).keySet());
+        }
+
+        // 写入Excel
+        EasyExcel.write(fileName)
+                .head(head.stream().map(s -> List.of(s)).collect(Collectors.toList()))
+                .sheet("Sheet1")
+                .doWrite(data.stream().map(map -> {
+                    List<Object> row = new ArrayList<>();
+                    for (String key : head) {
+                        row.add(map.get(key));
+                    }
+                    return row;
+                }).collect(Collectors.toList()));
+    }
+}

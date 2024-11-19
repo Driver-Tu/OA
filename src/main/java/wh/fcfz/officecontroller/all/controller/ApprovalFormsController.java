@@ -135,7 +135,11 @@ public class ApprovalFormsController {
         userDto.setRoleName("admin");
         userDto.setDepartName(userMapper.selectDepartName(userMapper.selectById(StpUtil.getLoginIdAsInt()).getDepartmentId()));
         List<UserVo> userVos = userMapper.selectUserList(userDto);
-
         return new Result<>(ResponseEnum.SUCCESS, userVos);
+    }
+
+    @GetMapping("/getApprovalFormsExcel")
+    public Result getApprovalFormsExcel(@RequestBody MyPage<ApprovalFormsDto> approvalFormsDtoMyPage) {
+        return new Result<>(ResponseEnum.SUCCESS, approvalFormsService.setExcelApprovalForms(approvalFormsDtoMyPage));
     }
 }

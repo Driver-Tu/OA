@@ -2,6 +2,9 @@ package wh.fcfz.officecontroller.all.service.Impl;
 
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.write.metadata.WriteSheet;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -22,6 +25,8 @@ import wh.fcfz.officecontroller.all.tool.MyException;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.Result;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,12 +78,7 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     //管理员查询审批数据
     @Override
     public Result getApprovalForms(MyPage<ApprovalFormsDto> myPage) {
-        List<ApprovalFormsVo> approvalFormsList = approvalFormsMapper.getList(myPage.getData());
-        approvalFormsList = approvalFormsList.stream().parallel().peek(approvalForm -> {
-            List<String> fileUrlList = approvalFormsMapper.getFileList(approvalForm.getFormId()).stream().parallel().map(File::getFileUrl).toList();
-            approvalForm.setFileList(fileUrlList);
-        }).collect(Collectors.toList());
-        approvalFormsList = GetList(approvalFormsList);
+        List<ApprovalFormsVo> approvalFormsList = getFormsVos(myPage);
         List<ApprovalFormsVo> collect = approvalFormsList.stream()
                 .skip((long) (myPage.getPageNum() - 1) * myPage.getPageSize()).limit(myPage.getPageSize())
                 .collect(Collectors.toList());
@@ -86,6 +86,21 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
         page.setRecords(collect);
         page.setTotal(approvalFormsList.size());
         return new Result("200", "查询成功", page);
+    }
+
+    private List<ApprovalFormsVo> getFormsVos(MyPage<ApprovalFormsDto> myPage) {
+        List<ApprovalFormsVo> approvalFormsList = getApprovalFormsVos(myPage);
+        approvalFormsList = GetList(approvalFormsList);
+        return approvalFormsList;
+    }
+
+    private List<ApprovalFormsVo> getApprovalFormsVos(MyPage<ApprovalFormsDto> myPage) {
+        List<ApprovalFormsVo> approvalFormsList = approvalFormsMapper.getList(myPage.getData());
+        approvalFormsList = approvalFormsList.stream().parallel().peek(approvalForm -> {
+            List<String> fileUrlList = approvalFormsMapper.getFileList(approvalForm.getFormId()).stream().parallel().map(File::getFileUrl).toList();
+            approvalForm.setFileList(fileUrlList);
+        }).collect(Collectors.toList());
+        return approvalFormsList;
     }
 
 
@@ -387,6 +402,183 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
         } catch (Exception e) {
             log.error("保存申请信息时出现异常，object: {}", object, e);
             throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * 查询审批数据
+     */
+
+    public String setExcelApprovalForms(MyPage<ApprovalFormsDto> myPage) {
+        List<ApprovalFormsVo> approvalFormsVos = getFormsVos(myPage);
+        List<String> approvalDatailList=new ArrayList<>();
+        //获取所有的map，并且存入集合
+        //根据不同的审批获取对应的字段名
+        String className="";
+        Map<String, Object> map = approvalFormsVos.get(0).getMap();
+        for (Map.Entry<String, Object> stringObjectEntry : map.entrySet()) {
+            className=stringObjectEntry.getKey();
+        }
+        //创建一个
+        Field[] declaredFields1 = ApprovalFormsVo.class.getDeclaredFields();
+        for (Field field : declaredFields1) {
+            approvalDatailList.add(field.getName());
+        }
+        approvalDatailList.remove(10);
+        //获取表头
+        extracted(className, approvalDatailList);
+        List<List<String>> head=new ArrayList<>();
+        head.add(approvalDatailList);
+        List<List<Object>> data=new ArrayList<>();
+        // 3. 创建写入对象
+        String fileName = "output.xlsx";
+        try (ExcelWriter excelWriter = EasyExcel.write(fileName).build()) {
+
+            // 4. 创建写入工作表
+            WriteSheet writeSheet = EasyExcel.writerSheet("Sheet1").head(head).build();
+
+            // 5. 写入数据
+            excelWriter.write(data, writeSheet);
+
+            // 6. 关闭写入对象
+            excelWriter.finish();
+        }
+        return null;
+    }
+
+    private static void extracted(String className, List<String> approvalDatailList) {
+        switch (className){
+            case "leave":{
+                Class<?> aClass = LeaveRequests.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "business":{
+                Class<?> aClass = BusinessTrips.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "overtimes":{
+                Class<?> aClass = Overtimes.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "attendanceCorrections":{
+                Class<?> aClass = AttendanceCorrections.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "reimbursement":{
+                Class<?> aClass = Reimbursements.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "budget":{
+                Class<?> aClass = Budgets.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "onboarding":{
+                Class<?> aClass = Onboardings.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "equipmentMaintenance":{
+                Class<?> aClass = EquipmentMaintenances.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "procurement":{
+                Class<?> aClass = Procurements.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "training":{
+                Class<?> aClass = Trainings.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "salaryAdjustment":{
+                Class<?> aClass = SalaryAdjustments.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "vehicleUsage":{
+                Class<?> aClass = VehicleUsages.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "resignation":{
+                Class<?> aClass = Resignations.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "recruitment":{
+                Class<?> aClass = Recruitments.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "contractSigning":{
+                Class<?> aClass = ContractSignings.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            case "projectInitiation":{
+                Class<?> aClass = ProjectInitiations.class;
+                Field[] declaredFields = aClass.getDeclaredFields();
+                for (Field declaredField : declaredFields){
+                    approvalDatailList.add(declaredField.getName());
+                }
+                break;
+            }
+            default:{
+                throw new MyException("400","没有该类型");
+            }
         }
     }
 }

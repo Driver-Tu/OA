@@ -41,6 +41,4 @@ public class LogFilter extends OncePerRequestFilter implements Ordered {
     public int getOrder() {
         return Ordered.HIGHEST_PRECEDENCE;
     }
-
-
 }
