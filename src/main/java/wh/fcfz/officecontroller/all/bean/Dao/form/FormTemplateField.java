@@ -20,7 +20,7 @@ public class FormTemplateField implements Serializable {
      * 主键，字段模板 ID，自增
      */
     @TableId(type = IdType.AUTO)
-    private Long filedId;
+    private Long fieldId;
 
     /**
      * 表单类型 ID，关联 sys_form_type 表
@@ -101,7 +101,7 @@ public class FormTemplateField implements Serializable {
             return false;
         }
         FormTemplateField other = (FormTemplateField) that;
-        return (this.getFiledId() == null ? other.getFiledId() == null : this.getFiledId().equals(other.getFiledId()))
+        return (this.getFieldId() == null ? other.getFieldId() == null : this.getFieldId().equals(other.getFieldId()))
             && (this.getTemplateId() == null ? other.getTemplateId() == null : this.getTemplateId().equals(other.getTemplateId()))
             && (this.getFieldTitle() == null ? other.getFieldTitle() == null : this.getFieldTitle().equals(other.getFieldTitle()))
             && (this.getFieldType() == null ? other.getFieldType() == null : this.getFieldType().equals(other.getFieldType()))
@@ -120,7 +120,7 @@ public class FormTemplateField implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getFiledId() == null) ? 0 : getFiledId().hashCode());
+        result = prime * result + ((this.getFieldId() == null) ? 0 : this.getFieldId().hashCode());
         result = prime * result + ((getTemplateId() == null) ? 0 : getTemplateId().hashCode());
         result = prime * result + ((getFieldTitle() == null) ? 0 : getFieldTitle().hashCode());
         result = prime * result + ((getFieldType() == null) ? 0 : getFieldType().hashCode());
@@ -142,7 +142,7 @@ public class FormTemplateField implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", filedId=").append(filedId);
+        sb.append(", filedId=").append(fieldId);
         sb.append(", templateId=").append(templateId);
         sb.append(", fieldTitle=").append(fieldTitle);
         sb.append(", fieldType=").append(fieldType);
