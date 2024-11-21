@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface UserService extends IService<User> {
     //登录
-    Result<User> login(String empNum,String password);
+    Result<User> login(String empNum,String password,String device);
     //根据id查个人信息
     Result<UserVo> SelectByUserId();
     //查询所有用户

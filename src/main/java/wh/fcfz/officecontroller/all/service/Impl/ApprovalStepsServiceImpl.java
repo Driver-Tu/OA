@@ -56,7 +56,7 @@ public class ApprovalStepsServiceImpl extends ServiceImpl<ApprovalStepsMapper, A
             ApprovalStepsVo approvalStepsVo = new ApprovalStepsVo();
             BeanUtil.copyProperties(approvalStep, approvalStepsVo);
             ApprovalFormsDto approvalFormsDto = new ApprovalFormsDto();
-            approvalFormsDto.setFormId(approvalStep.getFormId());
+            approvalFormsDto.setFormId(Long.valueOf(approvalStep.getFormId()));
             List<ApprovalFormsVo> approvalFormsVos = approvalFormsMapper.getList(approvalFormsDto);
             List<ApprovalFormsVo> approvalFormsVoList =approvalFormsService.GetList(approvalFormsVos);
             approvalStepsVo.setApprovalForms(approvalFormsVoList.get(0));
@@ -84,7 +84,7 @@ public class ApprovalStepsServiceImpl extends ServiceImpl<ApprovalStepsMapper, A
 
     @Override
     public int updateApprovalSteps(ApprovalForms approvalForms, ApprovalSteps approvalSteps) {
-        int approvalStepsCount = approvalFormsMapper.getApprovalStepsCount(approvalForms.getFormId());
+        int approvalStepsCount = approvalFormsMapper.getApprovalStepsCount(Long.valueOf(approvalForms.getFormId()));
         StepCount stepCount = stepCountMapper.selectOne(new LambdaQueryWrapper<StepCount>().eq(StepCount::getStepType, approvalForms.getType()));
         approvalSteps.setApprovalDate(new Timestamp(System.currentTimeMillis()));
         int i = approvalStepsMapper.updateById(approvalSteps);

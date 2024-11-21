@@ -3,6 +3,9 @@ package wh.fcfz.officecontroller.all.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import wh.fcfz.officecontroller.all.bean.Dao.form.Form;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import wh.fcfz.officecontroller.all.bean.domain.FormFieldAllDomain;
+
+import java.util.List;
 
 /**
 * @author admin
@@ -12,6 +15,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 @Mapper
 public interface FormMapper extends BaseMapper<Form> {
+    //根据formId查询字段和字段值
+     List<FormFieldAllDomain> getFormField(Integer formId);
 
 }
 

@@ -74,14 +74,14 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
             //结算几今日打卡成功或者失败
             Timestamp timeIn = attendance1.getTimeIn();
             //小于0则早于九点，大于0则晚于九点，等于0则为九点（都是当天时间）
-            if((timeIn.toLocalDateTime().compareTo(LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 0, 0)))<=0)||(timestamp.toLocalDateTime().compareTo(LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 30, 0)))>=0)){
+            if((!timeIn.toLocalDateTime().isAfter(LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 0, 0))))||(timestamp.toLocalDateTime().isBefore(LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 30, 0))))){
                 attendance1.setStatus("打卡成功");
                 attendanceMapper.updateById(attendance1);
                 return new Result(ResponseEnum.SUCCESS,"下班打卡成功");
             }else {
                 attendance1.setStatus("打卡失败");
                 attendanceMapper.updateById(attendance1);
-                return new Result(ResponseEnum.SUCCESS,"下班打卡成功");
+                return new Result(ResponseEnum.SUCCESS,"下班打卡失败");
             }
         }
     }

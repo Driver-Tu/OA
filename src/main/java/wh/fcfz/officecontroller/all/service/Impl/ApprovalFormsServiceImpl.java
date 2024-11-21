@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wh.fcfz.officecontroller.all.bean.Dao.ApprovalForms;
@@ -27,7 +28,6 @@ import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -74,6 +74,10 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     private ProjectInitiationsMapper projectInitiationsMapper;//项目立项
     @Autowired
     private StepCountMapper stepCountMapper;
+    @Autowired
+    private FormMapper formMapper;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     //管理员查询审批数据
     @Override
@@ -97,7 +101,7 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     private List<ApprovalFormsVo> getApprovalFormsVos(MyPage<ApprovalFormsDto> myPage) {
         List<ApprovalFormsVo> approvalFormsList = approvalFormsMapper.getList(myPage.getData());
         approvalFormsList = approvalFormsList.stream().parallel().peek(approvalForm -> {
-            List<String> fileUrlList = approvalFormsMapper.getFileList(approvalForm.getFormId()).stream().parallel().map(File::getFileUrl).toList();
+            List<String> fileUrlList = approvalFormsMapper.getFileList(Long.valueOf(approvalForm.getFormId())).stream().parallel().map(File::getFileUrl).toList();
             approvalForm.setFileList(fileUrlList);
         }).collect(Collectors.toList());
         return approvalFormsList;
@@ -135,7 +139,7 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     @Override
     @Transactional(rollbackFor = Exception.class)
     public int updateApprovalForms(String result, ApprovalForms approvalForms) {
-        int approvalStepsCount = approvalFormsMapper.getApprovalStepsCount(approvalForms.getFormId());
+        int approvalStepsCount = approvalFormsMapper.getApprovalStepsCount(Long.valueOf(approvalForms.getFormId()));
         StepCount stepCount = stepCountMapper.selectOne(new LambdaQueryWrapper<StepCount>()
                 .eq(StepCount::getStepType, approvalForms.getType()));
         log.error("approvalStepsCount:"+approvalStepsCount+"========"+stepCount);
@@ -177,7 +181,7 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     @Override
     public boolean deleteApprovalForms(Long id) {
         ApprovalForms approvalForms = approvalFormsMapper.selectById(id);
-        boolean b = deleteIdsAll(approvalForms.getAllId(), approvalForms.getType());
+        boolean b = deleteIdsAll(Long.valueOf(approvalForms.getAllId()), approvalForms.getType());
         if (b) {
             int i = approvalFormsMapper.deleteById(id);
             if(i>0){
@@ -213,76 +217,20 @@ public class ApprovalFormsServiceImpl extends ServiceImpl<ApprovalFormsMapper, A
     }
 
     public List<ApprovalFormsVo> GetList(List<ApprovalFormsVo> approvalFormsList) {
-        return approvalFormsList = approvalFormsList.stream().parallel().map(approvalForm -> {
-            Map<String, Object> map = new HashMap<>();
-            switch (approvalForm.getType()) {
-                case "请假": {
-                    map.put("leave", leaveRequestsService.getById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
+        return approvalFormsList.stream().parallel().peek(approvalForm -> {
+            Integer allId = approvalForm.getAllId();
+            StringBuilder stringBuilder = new StringBuilder();
+            formMapper.getFormField(allId).forEach(formFieldAllDomain -> {
+//                String.valueOf(formFieldAllDomain.getFieldId())
+//                        , formFieldAllDomain.getFieldName()+","+formFieldAllDomain.getFieldValue();
+               //判断是app的token还是ps端的token
+                if(StpUtil.getSessionByLoginId(StpUtil.getLoginIdAsLong()).getTokenValueListByDevice("app").get(0).equals(StpUtil.getTokenValue())){
+                    stringBuilder.append("<view><text>").append(formFieldAllDomain.getFieldName()).append(":</text><text>").append(formFieldAllDomain.getFieldValue()).append("</text></view>");
+                }else {
+                    stringBuilder.append("<span><strong>").append(formFieldAllDomain.getFieldName()).append(":<strong>").append(formFieldAllDomain.getFieldValue()).append("</span><br>");
                 }
-                case "报销":
-                    map.put("reimbursement", reimbursementMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "出差":
-                    map.put("business", businessMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "加班":
-                    map.put("overtime", overtimesMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "补签":
-                    map.put("attendanceCorrection", attandenceCorrectionsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "入职":
-                    map.put("onboarding", onboardingsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "培训":
-                    map.put("training", trainingsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "薪资调整":
-                    map.put("salaryAdjustments", salaryAdjustmentsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "离职":
-                    map.put("resignation", resignationsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "采购":
-                    map.put("procurements", procurementsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "用车":
-                    map.put("vehicleUsages", vehicleUsagesMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "预算":
-                    map.put("budgets", budgetsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "招聘":
-                    map.put("recruitments", recruitmentsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "设备维修":
-                    map.put("equipmentMaintenances", equipmentMaintenancesMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "合同签署":
-                    map.put("contractSignings", contractSigningsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-                case "项目立项":
-                    map.put("projectInitiations", projectInitiationsMapper.selectById(approvalForm.getAllId()));
-                    approvalForm.setMap(map);
-                    return approvalForm;
-            }
-            return approvalForm;
+            });
+            approvalForm.setDescription(stringBuilder.toString());
         }).collect(Collectors.toList());
     }
 

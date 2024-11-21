@@ -80,7 +80,7 @@ public class ApprovalFormsController {
            return new Result(ResponseEnum.DATA_NOT_EXIST,null);
        }
         Long id = approvalFormsServiceImpl.setDetail(addApprovalFormsDto);
-        addApprovalFormsDto.getApprovalForms().setAllId(id);
+        addApprovalFormsDto.getApprovalForms().setAllId(Math.toIntExact(id));
         ApprovalForms AddApprovalForms = approvalFormsService.addApprovalForms(addApprovalFormsDto.getApprovalForms());
         List<Integer> approvers = addApprovalFormsDto.getApprovers();
         approvers.forEach(approver ->{

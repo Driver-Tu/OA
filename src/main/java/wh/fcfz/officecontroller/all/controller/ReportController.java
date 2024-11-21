@@ -1,5 +1,7 @@
 package wh.fcfz.officecontroller.all.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -48,6 +50,7 @@ public class ReportController {
         return reportService.deleteReport(reportIds);
     }
 
+    @SaCheckPermission(value={"admin","boss"}, mode= SaMode.OR)
     @PostMapping("/list")
     public Result<Page<ReportVo>> selectReport(@RequestBody MyPage<ReportDto> myPage) {
         return reportService.selectReport(myPage);

@@ -29,8 +29,9 @@ public class UserController {
 
     @PostMapping("/login")
     public Result<User> login(@RequestParam String empNum,
-                              @RequestParam String password){
-        return userService.login(empNum,password);
+                              @RequestParam String password,
+    @RequestParam String device){
+        return userService.login(empNum,password,device);
     }
 
     @GetMapping("/info")

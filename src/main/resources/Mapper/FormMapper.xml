@@ -4,27 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wh.fcfz.officecontroller.all.mapper.FormMapper">
 
-    <resultMap id="BaseResultMap" type="wh.fcfz.officecontroller.all.bean.Dao.form.Form">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="formName" column="form_name" jdbcType="VARCHAR"/>
-            <result property="templateId" column="template_id" jdbcType="INTEGER"/>
-            <result property="formRouter" column="form_router" jdbcType="VARCHAR"/>
-            <result property="isScheduled" column="is_scheduled" jdbcType="CHAR"/>
-            <result property="sendTime" column="send_time" jdbcType="TIMESTAMP"/>
-            <result property="status" column="status" jdbcType="CHAR"/>
-            <result property="remark" column="remark" jdbcType="VARCHAR"/>
-            <result property="createdAt" column="created_at" jdbcType="INTEGER"/>
-            <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
-            <result property="updatedAt" column="updated_at" jdbcType="INTEGER"/>
-            <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP"/>
-            <result property="submitTime" column="submit_time" jdbcType="TIMESTAMP"/>
-    </resultMap>
-
-    <sql id="Base_Column_List">
-        id,form_name,template_id,
-        form_router,is_scheduled,send_time,
-        status,remark,created_at,
-        created_time,updated_at,updated_time,
-        submit_time
-    </sql>
+    <select id="getFormField" resultType="wh.fcfz.officecontroller.all.bean.domain.FormFieldAllDomain">
+            select
+                ffv.id,
+                ffv.form_id,
+                ffv.field_id AS fieldId,
+                form_template_field.field_title AS fieldName,
+                field_value AS fieldValue
+            from form_template_field
+            left join form_field_value ffv on form_template_field.field_id = ffv.field_id
+            where
+                ffv.form_id = #{formId}
+            order by ffv.id
+    </select>
 </mapper>

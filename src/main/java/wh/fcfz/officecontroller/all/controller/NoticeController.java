@@ -1,5 +1,7 @@
 package wh.fcfz.officecontroller.all.controller;
 
+import cn.dev33.satoken.annotation.SaCheckPermission;
+import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.stp.StpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,11 @@ public class NoticeController {
 
     @Autowired
     private NotificationPushMapper notificationPushMapper;
+
+    /**
+     * 查询自己收到的邮件
+     * @return
+     */
     @GetMapping("/getNotice")
     public List<NotificationPush> getNotice(){
         return notificationPushMapper.selectNotifications(StpUtil.getLoginIdAsInt());
@@ -33,8 +40,15 @@ public class NoticeController {
 
     @Autowired
     private MailUtil mailUtil;
-    @PostMapping("/getAllNotice")
-    public Result getAllNotice(@RequestBody NotificationPush notificationPush){
+
+    /**
+     * 保存邮件
+     * @param notificationPush
+     * @return
+     */
+    @SaCheckPermission(value={"boss","admin"}, mode= SaMode.OR)
+    @PostMapping("/saveNotice")
+    public Result saveNotice(@RequestBody NotificationPush notificationPush){
         String[] split = notificationPush.getRecipientIds().split(",");
         StringBuilder sb=new StringBuilder();
         Arrays.stream(split).toList().forEach(s->{
@@ -53,6 +67,12 @@ public class NoticeController {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 发送邮件
+     * @param id
+     * @return
+     */
+    @SaCheckPermission(value={"admin","boss"}, mode= SaMode.OR)
     @PostMapping("/sendEmail")
     private boolean sendMail(@RequestParam Long id){
         NotificationPush notificationPush=notificationPushMapper.selectById(id);

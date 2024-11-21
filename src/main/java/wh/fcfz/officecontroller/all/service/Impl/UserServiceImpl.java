@@ -1,5 +1,6 @@
 package wh.fcfz.officecontroller.all.service.Impl;
 
+import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateTime;
@@ -20,10 +21,7 @@ import wh.fcfz.officecontroller.all.mapper.DepartMapper;
 import wh.fcfz.officecontroller.all.mapper.RoleMapper;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.UserService;
-import wh.fcfz.officecontroller.all.tool.HashEncryption;
-import wh.fcfz.officecontroller.all.tool.MyPage;
-import wh.fcfz.officecontroller.all.tool.ResponseEnum;
-import wh.fcfz.officecontroller.all.tool.Result;
+import wh.fcfz.officecontroller.all.tool.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,7 +43,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 登录
      * */
     @Override
-    public Result<User> login(String empNum, String password) {
+    public Result<User> login(String empNum, String password,String device) {
         if (empNum==null || password==null){
             return new Result<User>(ResponseEnum.PARAM_ERROR,null);
         }
@@ -57,7 +55,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(user == null){
             return new Result<>(ResponseEnum.USER_NOT_EXIST, null);
         }
-        StpUtil.login(user.getUserId());
+        SaSession sessionByLoginId = StpUtil.getSessionByLoginId(user.getUserId());
+        if(StpUtil.isLogin(user.getUserId())&& !sessionByLoginId.getTokenValueListByDevice(device).isEmpty()){
+            throw new MyException("账户已登录，请先退出登录","506");
+        }
+        StpUtil.login(user.getUserId(),device);
         return new Result(ResponseEnum.SUCCESS,StpUtil.getTokenInfo());
     }
 

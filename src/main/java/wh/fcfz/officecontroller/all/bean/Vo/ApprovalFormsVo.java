@@ -12,9 +12,9 @@ import java.util.Map;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApprovalFormsVo{
-    private Long formId;
+    private Integer formId;
     private Integer applicantId;
-    private Long allId;
+    private Integer allId;
     private String fromName;
     private java.sql.Timestamp applicationDate;
     private String status;
