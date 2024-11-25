@@ -20,7 +20,7 @@ public class FormTemplate implements Serializable {
      * 表单类型主键 ID
      */
     @TableId(type = IdType.AUTO)
-    private Long templateId;
+    private Integer templateId;
 
     /**
      * 表单类型名称，report 代表报告表单
@@ -55,12 +55,12 @@ public class FormTemplate implements Serializable {
     /**
      * 创建部门
      */
-    private Long createDept;
+    private Integer createDept;
 
     /**
      * 创建者
      */
-    private Long createBy;
+    private Integer createBy;
 
     /**
      * 创建时间
@@ -70,7 +70,7 @@ public class FormTemplate implements Serializable {
     /**
      * 更新者
      */
-    private Long updateBy;
+    private Integer updateBy;
 
     /**
      * 更新时间

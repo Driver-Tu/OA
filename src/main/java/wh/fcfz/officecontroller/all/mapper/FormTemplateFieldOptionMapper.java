@@ -3,6 +3,9 @@ package wh.fcfz.officecontroller.all.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import wh.fcfz.officecontroller.all.bean.Dao.form.FormTemplateFieldOption;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import wh.fcfz.officecontroller.all.bean.Vo.FieldOptionVo;
+
+import java.util.List;
 
 /**
 * @author admin
@@ -13,6 +16,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 @Mapper
 public interface FormTemplateFieldOptionMapper extends BaseMapper<FormTemplateFieldOption> {
 
+    List<FieldOptionVo> selecFormFieldOptionListByFormFieldId(Integer fieldId);
 }
 
 

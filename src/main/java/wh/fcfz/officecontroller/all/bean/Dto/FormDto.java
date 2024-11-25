@@ -1,4 +1,4 @@
-package wh.fcfz.officecontroller.all.bean.Vo;
+package wh.fcfz.officecontroller.all.bean.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,11 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormVo {
-
-    /**
-     * 表单通用表主键
-     */
+public class FormDto {
     private Integer formId;
 
     /**
@@ -48,14 +44,8 @@ public class FormVo {
     private String status;
 
     /**
-     * 更新时间
+     * 表单状态（0 草稿，1 已提交）
      */
-    private Date updatedTime;
+    List<FormValueDto> formValues;
 
-    /**
-     * 提交时间
-     */
-    private Date submitTime;
-
-    private List<FormFieldValueVo> formFieldValues;
 }

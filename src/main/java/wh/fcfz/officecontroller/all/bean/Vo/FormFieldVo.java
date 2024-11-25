@@ -9,15 +9,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormFieldValueVo {
+public class FormFieldVo {
 
     /**
      * 字段值id
-     */
-    private Integer id;
-
-    /**
-     * 字段id
      */
     private Integer fieldId;
 
@@ -56,18 +51,8 @@ public class FormFieldValueVo {
      */
     private String defaultValue;
 
-    private Integer isSummary;
-
-    private Integer isVisible;
-
-    /**
-     * 用于存储多选项的值
-     */
-    private Object fieldValue;
-
     /**
      * 字段的选项
      */
     private List<FieldOptionVo> fieldOptions;
-
 }

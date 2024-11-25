@@ -11,6 +11,7 @@
     <select id="selecFormFieldValueListByFormId" resultMap="FormFieldValueResult">
         select
             v.id,
+            v.field_id,
             f.field_title,
             f.field_type,
             f.field_sort,
@@ -18,6 +19,8 @@
             f.is_required,
             f.form_item_type,
             f.default_value,
+            f.is_summary,
+            f.is_visible,
             v.field_value
         from form_template_field f
         left join form_field_value v on f.field_id = v.field_id
@@ -28,5 +31,29 @@
         </if>
         order by f.field_sort asc
     </select>
+
+    <!-- 批量插入 -->
+    <insert id="batchInsertFormFieldValues" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO form_field_value (
+            form_id,
+            field_id,
+            field_value,
+            create_by,
+            create_time,
+            update_by,
+            update_time
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.formId},
+                #{item.fieldId},
+                #{item.fieldValue},
+                #{item.createBy},
+                #{item.createTime},
+                #{item.updateBy},
+                #{item.updateTime}
+            )
+        </foreach>
+    </insert>
 
 </mapper>

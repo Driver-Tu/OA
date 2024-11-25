@@ -2,6 +2,7 @@ package wh.fcfz.officecontroller.all.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import wh.fcfz.officecontroller.all.bean.Dao.form.FormFieldValue;
 import wh.fcfz.officecontroller.all.bean.Vo.FormFieldValueVo;
 
@@ -17,6 +18,8 @@ import java.util.List;
 public interface FormFieldValueMapper extends BaseMapper<FormFieldValue> {
 
     public List<FormFieldValueVo> selecFormFieldValueListByFormId(Integer formId);
+
+    public int batchInsertFormFieldValues(@Param("list") List<FormFieldValue> formFieldValues);
 
 }
 

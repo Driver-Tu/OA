@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 表单通用 ( 字段 ) 表
@@ -19,7 +20,7 @@ public class Form implements Serializable {
      * 表单通用表主键
      */
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Integer formId;
 
     /**
      * 表单名称
@@ -96,7 +97,7 @@ public class Form implements Serializable {
             return false;
         }
         Form other = (Form) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+        return (this.getFormId() == null ? other.getFormId() == null : this.getFormId().equals(other.getFormId()))
             && (this.getFormName() == null ? other.getFormName() == null : this.getFormName().equals(other.getFormName()))
             && (this.getTemplateId() == null ? other.getTemplateId() == null : this.getTemplateId().equals(other.getTemplateId()))
             && (this.getFormRouter() == null ? other.getFormRouter() == null : this.getFormRouter().equals(other.getFormRouter()))
@@ -115,7 +116,7 @@ public class Form implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
+        result = prime * result + ((getFormId() == null) ? 0 : getFormId().hashCode());
         result = prime * result + ((getFormName() == null) ? 0 : getFormName().hashCode());
         result = prime * result + ((getTemplateId() == null) ? 0 : getTemplateId().hashCode());
         result = prime * result + ((getFormRouter() == null) ? 0 : getFormRouter().hashCode());
@@ -137,7 +138,7 @@ public class Form implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
+        sb.append(", formId=").append(formId);
         sb.append(", formName=").append(formName);
         sb.append(", templateId=").append(templateId);
         sb.append(", formRouter=").append(formRouter);

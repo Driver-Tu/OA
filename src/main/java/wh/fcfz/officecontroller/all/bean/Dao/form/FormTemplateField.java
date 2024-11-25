@@ -20,12 +20,12 @@ public class FormTemplateField implements Serializable {
      * 主键，字段模板 ID，自增
      */
     @TableId(type = IdType.AUTO)
-    private Long fieldId;
+    private Integer fieldId;
 
     /**
      * 表单类型 ID，关联 sys_form_type 表
      */
-    private Long templateId;
+    private Integer templateId;
 
     /**
      * 字段名称，存储具体的字段
@@ -64,12 +64,12 @@ public class FormTemplateField implements Serializable {
     /**
      * 创建部门
      */
-    private Long createDept;
+    private Integer createDept;
 
     /**
      * 创建者
      */
-    private Long createBy;
+    private Integer createBy;
 
     /**
      * 创建时间
@@ -79,7 +79,7 @@ public class FormTemplateField implements Serializable {
     /**
      * 修改人
      */
-    private Long updateBy;
+    private Integer updateBy;
 
     /**
      * 修改时间
