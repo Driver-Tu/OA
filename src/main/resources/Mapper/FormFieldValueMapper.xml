@@ -6,6 +6,7 @@
 
     <resultMap type="wh.fcfz.officecontroller.all.bean.Vo.FormFieldValueVo" id="FormFieldValueResult">
             <id property="id" column="id"/>
+            <result column="validation_rule" jdbcType="VARCHAR" property="validationRule" javaType="cn.hutool.json.JSONArray" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
     </resultMap>
 
     <select id="selecFormFieldValueListByFormId" resultMap="FormFieldValueResult">
@@ -16,14 +17,13 @@
             f.field_type,
             f.field_sort,
             f.validation_rule,
-            f.is_required,
             f.form_item_type,
             f.default_value,
             f.is_summary,
             f.is_visible,
             v.field_value
-        from form_template_field f
-        left join form_field_value v on f.field_id = v.field_id
+        from form_field_value v
+        left join form_template_field f on f.field_id = v.field_id
         <if test="formId != null">
             <where>
                 v.form_id = #{formId}

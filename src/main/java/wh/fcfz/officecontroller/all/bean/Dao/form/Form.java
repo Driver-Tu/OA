@@ -47,6 +47,8 @@ public class Form implements Serializable {
      */
     private Date sendTime;
 
+    private String content;
+
     /**
      * 表单状态（0 草稿，1 已提交）
      */
@@ -60,22 +62,22 @@ public class Form implements Serializable {
     /**
      * 创建者
      */
-    private Integer createdAt;
+    private Integer createBy;
 
     /**
      * 创建时间
      */
-    private Date createdTime;
+    private Date createTime;
 
     /**
      * 更新者
      */
-    private Integer updatedAt;
+    private Integer updateBy;
 
     /**
      * 更新时间
      */
-    private Date updatedTime;
+    private Date updateTime;
 
     /**
      * 提交时间
@@ -105,10 +107,10 @@ public class Form implements Serializable {
             && (this.getSendTime() == null ? other.getSendTime() == null : this.getSendTime().equals(other.getSendTime()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
-            && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
-            && (this.getCreatedTime() == null ? other.getCreatedTime() == null : this.getCreatedTime().equals(other.getCreatedTime()))
-            && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()))
-            && (this.getUpdatedTime() == null ? other.getUpdatedTime() == null : this.getUpdatedTime().equals(other.getUpdatedTime()))
+            && (this.getCreateBy() == null ? other.getCreateBy() == null : this.getCreateBy().equals(other.getCreateBy()))
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getUpdateBy() == null ? other.getUpdateBy() == null : this.getUpdateBy().equals(other.getUpdateBy()))
+            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getSubmitTime() == null ? other.getSubmitTime() == null : this.getSubmitTime().equals(other.getSubmitTime()));
     }
 
@@ -124,10 +126,10 @@ public class Form implements Serializable {
         result = prime * result + ((getSendTime() == null) ? 0 : getSendTime().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
-        result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
-        result = prime * result + ((getCreatedTime() == null) ? 0 : getCreatedTime().hashCode());
-        result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
-        result = prime * result + ((getUpdatedTime() == null) ? 0 : getUpdatedTime().hashCode());
+        result = prime * result + ((this.getCreateBy() == null) ? 0 : this.getCreateBy().hashCode());
+        result = prime * result + ((this.getCreateTime() == null) ? 0 : this.getCreateTime().hashCode());
+        result = prime * result + ((this.getUpdateBy() == null) ? 0 : this.getUpdateBy().hashCode());
+        result = prime * result + ((this.getUpdateTime() == null) ? 0 : this.getUpdateTime().hashCode());
         result = prime * result + ((getSubmitTime() == null) ? 0 : getSubmitTime().hashCode());
         return result;
     }
@@ -146,10 +148,10 @@ public class Form implements Serializable {
         sb.append(", sendTime=").append(sendTime);
         sb.append(", status=").append(status);
         sb.append(", remark=").append(remark);
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", createdTime=").append(createdTime);
-        sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", updatedTime=").append(updatedTime);
+        sb.append(", createBy=").append(createBy);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateBy=").append(updateBy);
+        sb.append(", updateTime=").append(updateTime);
         sb.append(", submitTime=").append(submitTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

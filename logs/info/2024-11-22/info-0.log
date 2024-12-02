@@ -1,0 +1,26 @@
+2024-11-22 09:07:09.309|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 16300 (D:\My Project\myOASys\target\classes started by zds in D:\My Project\myOASys)
+2024-11-22 09:07:09.317|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-22 09:07:12.239|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-22 09:07:12.239|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-22 09:07:12.411|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 101 ms. Found 0 Redis repository interfaces.
+2024-11-22 09:07:13.660|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-22 09:07:13.660|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-22 09:07:13.660|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-22 09:07:13.676|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-22 09:07:13.832|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-22 09:07:13.832|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 4446 ms
+2024-11-22 09:07:14.129|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-22 09:07:15.466|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-22 09:07:17.351|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-22 09:07:17.508|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-22 09:07:17.523|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-22 09:07:17.540|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 8.604 seconds (process running for 9.616)
+2024-11-22 09:07:17.911|INFO|RMI TCP Connection(28)-192.168.159.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-22 09:07:18.005|INFO|RMI TCP Connection(28)-192.168.159.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c4a0f06
+2024-11-22 09:07:18.005|INFO|RMI TCP Connection(28)-192.168.159.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-22 09:07:55.782|INFO|http-nio-8088-exec-6|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-22 09:07:55.782|INFO|http-nio-8088-exec-6|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-22 09:07:55.784|INFO|http-nio-8088-exec-6|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-11-22 11:11:23.014|INFO|http-nio-8088-exec-6|o.s.a.AbstractOpenApiResource|line-390|traceId_953712967442700|Init duration for springdoc-openapi is: 2565 ms
+2024-11-22 17:24:23.908|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-22 17:24:23.916|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.

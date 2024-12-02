@@ -1,5 +1,6 @@
 package wh.fcfz.officecontroller.all.bean.Vo;
 
+import cn.hutool.json.JSONArray;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -39,7 +40,7 @@ public class FormFieldValueVo {
     /**
      * 字段验证规则，存储验证规则如 max:255 等
      */
-    private String validationRule;
+    private JSONArray validationRule;
 
     /**
      * 是否必填，1 表示必填，0 表示非必填

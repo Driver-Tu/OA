@@ -1,9 +1,11 @@
 package wh.fcfz.officecontroller.all.bean.Dao.form;
 
+import cn.hutool.json.JSONArray;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,7 +15,7 @@ import java.util.Date;
  * 表单字段模板表
  * @TableName form_template_field
  */
-@TableName(value ="form_template_field")
+@TableName(value ="form_template_field", autoResultMap = true)
 @Data
 public class FormTemplateField implements Serializable {
     /**
@@ -44,12 +46,8 @@ public class FormTemplateField implements Serializable {
     /**
      * 字段验证规则，存储验证规则如 max:255 等
      */
-    private String validationRule;
-
-    /**
-     * 是否必填，1 表示必填，0 表示非必填
-     */
-    private Integer isRequired;
+    @TableField(value = "validation_rule", typeHandler = JacksonTypeHandler.class)
+    private JSONArray validationRule;
 
     /**
      * 是否为单选框和多选框（input为输入框 radio为单选框/单选列表 checkbox为多选框/多选列表 date_picker为日期选择器 datetime_piker为日期时间选择器）
@@ -60,6 +58,10 @@ public class FormTemplateField implements Serializable {
      * 字段的默认值
      */
     private String defaultValue;
+
+    private Integer isSummary;
+
+    private Integer isVisible;
 
     /**
      * 创建部门
@@ -106,7 +108,6 @@ public class FormTemplateField implements Serializable {
             && (this.getFieldTitle() == null ? other.getFieldTitle() == null : this.getFieldTitle().equals(other.getFieldTitle()))
             && (this.getFieldType() == null ? other.getFieldType() == null : this.getFieldType().equals(other.getFieldType()))
             && (this.getValidationRule() == null ? other.getValidationRule() == null : this.getValidationRule().equals(other.getValidationRule()))
-            && (this.getIsRequired() == null ? other.getIsRequired() == null : this.getIsRequired().equals(other.getIsRequired()))
             && (this.getFormItemType() == null ? other.getFormItemType() == null : this.getFormItemType().equals(other.getFormItemType()))
             && (this.getDefaultValue() == null ? other.getDefaultValue() == null : this.getDefaultValue().equals(other.getDefaultValue()))
             && (this.getCreateDept() == null ? other.getCreateDept() == null : this.getCreateDept().equals(other.getCreateDept()))
@@ -125,7 +126,6 @@ public class FormTemplateField implements Serializable {
         result = prime * result + ((getFieldTitle() == null) ? 0 : getFieldTitle().hashCode());
         result = prime * result + ((getFieldType() == null) ? 0 : getFieldType().hashCode());
         result = prime * result + ((getValidationRule() == null) ? 0 : getValidationRule().hashCode());
-        result = prime * result + ((getIsRequired() == null) ? 0 : getIsRequired().hashCode());
         result = prime * result + ((getFormItemType() == null) ? 0 : getFormItemType().hashCode());
         result = prime * result + ((getDefaultValue() == null) ? 0 : getDefaultValue().hashCode());
         result = prime * result + ((getCreateDept() == null) ? 0 : getCreateDept().hashCode());
@@ -147,7 +147,6 @@ public class FormTemplateField implements Serializable {
         sb.append(", fieldTitle=").append(fieldTitle);
         sb.append(", fieldType=").append(fieldType);
         sb.append(", validationRule=").append(validationRule);
-        sb.append(", isRequired=").append(isRequired);
         sb.append(", formItemType=").append(formItemType);
         sb.append(", defaultValue=").append(defaultValue);
         sb.append(", createDept=").append(createDept);

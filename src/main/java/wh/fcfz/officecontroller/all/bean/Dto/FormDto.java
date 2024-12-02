@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FormDto {
+
     private Integer formId;
 
     /**
@@ -27,7 +28,6 @@ public class FormDto {
      * 表单路由地址
      */
     private String formRouter;
-
     /**
      * 是否开启定时发送（0否 1是）
      */

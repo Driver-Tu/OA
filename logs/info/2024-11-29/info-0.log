@@ -1,0 +1,17 @@
+2024-11-29 11:12:24.346|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 20428 (D:\My Project\myOASys\target\classes started by zds in D:\My Project\myOASys)
+2024-11-29 11:12:24.469|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-29 11:12:33.452|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-29 11:12:33.455|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-29 11:12:33.501|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 23 ms. Found 0 Redis repository interfaces.
+2024-11-29 11:12:34.446|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-29 11:12:34.466|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-29 11:12:34.468|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-29 11:12:34.469|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-29 11:12:34.615|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-29 11:12:34.616|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 9799 ms
+2024-11-29 11:12:34.835|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-29 11:12:35.982|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-29 11:12:36.649|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-29 11:12:36.736|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-29 11:12:36.755|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-29 11:12:36.768|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 14.548 seconds (process running for 28.225)
