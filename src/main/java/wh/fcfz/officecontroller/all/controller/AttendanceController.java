@@ -1,6 +1,5 @@
 package wh.fcfz.officecontroller.all.controller;
 
-import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.stp.StpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +21,6 @@ public class AttendanceController {
     @Autowired
     private AttendanceMapper attendanceMapper;
 
-    @SaCheckPermission("admin")
     @PostMapping("/getAllAttendance")
     public Result getAllAttendance(@RequestBody MyPage<AttendancesVo> myPage) {
         return attendanceService.getAllAttendance(myPage);

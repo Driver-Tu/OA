@@ -66,6 +66,8 @@
                 and r.share_user_id is not null
             </if>
         </where>
+        # 日期排序
+        ORDER BY r.report_date DESC
     </select>
     <select id="selectFile" resultType="wh.fcfz.officecontroller.all.bean.Dao.File">
             SELECT

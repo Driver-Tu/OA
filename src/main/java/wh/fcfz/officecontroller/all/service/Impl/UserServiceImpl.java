@@ -91,12 +91,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String departName = userMapper.selectDepartName(user.getDepartmentId());
         String roleName = userMapper.selectRoleName(user.getRoleId());
         UserVo userVo =new UserVo();
+        BeanUtil.copyProperties(user, userVo);
         userVo.setDepartmentName(departName);
         userVo.setRoleName(roleName);
         String[] birthdayAndGender = getBirthdayAndGender(user.getBirthdayNum());
         userVo.setBirth(birthdayAndGender[0]);
         userVo.setSex(birthdayAndGender[1]);
-        BeanUtil.copyProperties(user, userVo);
+        userVo.setBirthdayNum(DesensitizedUtil.idCardNum(user.getBirthdayNum(),1,1));
         return new Result<>(ResponseEnum.SUCCESS, userVo);
     }
 /**
@@ -114,7 +115,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             String[] birthdayAndGender = getBirthdayAndGender(userVo.getBirthdayNum());
             userVo.setBirth(birthdayAndGender[0]);
             userVo.setSex(birthdayAndGender[1]);
-            userVo.setBirthdayNum(DesensitizedUtil.idCardNum(userVo.getBirthdayNum(),6,0));
+            userVo.setBirthdayNum(DesensitizedUtil.idCardNum(userVo.getBirthdayNum(),1,1));
         }).toList();
         Page<UserVo> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
         List<UserVo> collect = userVoList.stream()

@@ -167,3 +167,5 @@
 2024-12-02 16:06:56.814|INFO|http-nio-8088-exec-2|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
 2024-12-02 16:06:56.816|INFO|http-nio-8088-exec-2|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
 2024-12-02 16:06:56.819|INFO|http-nio-8088-exec-2|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 2 ms
+2024-12-02 17:25:27.542|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-12-02 17:25:27.545|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
