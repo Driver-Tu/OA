@@ -1,15 +1,16 @@
-package wh.fcfz.officecontroller.all.bean.Vo;
+package wh.fcfz.officecontroller.all.bean.Dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormVo {
+public class FormDto {
 
     private Integer formId;
 
@@ -27,7 +28,6 @@ public class FormVo {
      * 表单路由地址
      */
     private String formRouter;
-
     /**
      * 是否开启定时发送（0否 1是）
      */
@@ -38,42 +38,14 @@ public class FormVo {
      */
     private Date sendTime;
 
-    private String content;
-
     /**
      * 表单状态（0 草稿，1 已提交）
      */
     private String status;
 
     /**
-     * 表单备注
+     * 表单状态（0 草稿，1 已提交）
      */
-    private String remark;
-
-    /**
-     * 创建者
-     */
-//    private Integer createBy;
-
-    /**
-     * 创建时间
-     */
-//    private Date createTime;
-
-    /**
-     * 更新者
-     */
-//    private Integer updateBy;
-
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
-
-    /**
-     * 提交时间
-     */
-    private Date submitTime;
-
+    List<FormValueDto> formValues;
 
 }

@@ -1,36 +1,93 @@
 package wh.fcfz.officecontroller.all.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import wh.fcfz.officecontroller.all.bean.Dao.form.Form;
-import wh.fcfz.officecontroller.all.bean.Vo.FormFieldValueVo;
+import org.springframework.web.bind.annotation.*;
+import wh.fcfz.officecontroller.all.bean.Dto.FormDto;
+import wh.fcfz.officecontroller.all.bean.Vo.FormTemplateVo;
+import wh.fcfz.officecontroller.all.bean.Vo.FormValueVo;
 import wh.fcfz.officecontroller.all.bean.Vo.FormVo;
-import wh.fcfz.officecontroller.all.mapper.FormFieldValueMapper;
-import wh.fcfz.officecontroller.all.mapper.FormMapper;
+import wh.fcfz.officecontroller.all.mapper.FormTemplateFieldMapper;
+import wh.fcfz.officecontroller.all.mapper.FormTemplateFieldOptionMapper;
+import wh.fcfz.officecontroller.all.mapper.FormTemplateMapper;
+import wh.fcfz.officecontroller.all.service.FormService;
+import wh.fcfz.officecontroller.all.service.FormTemplateService;
+import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.Result;
 
-import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping("/form")
 public class MyFormController {
 
     @Autowired
-    private FormFieldValueMapper formFieldValueMapper;
+    private FormTemplateMapper formTemplateMapper;
 
     @Autowired
-    private FormMapper formMapper;
+    private FormTemplateFieldMapper formTemplateFieldMapper;
 
-    @GetMapping("/{id}")
-    public Result<FormVo> getFormById(@PathVariable("id") Integer id) {
-        List<FormFieldValueVo> formFieldValues = formFieldValueMapper.selecFormFieldValueListByFormId(id);
-        FormVo formVo = new FormVo();
-        Form form = formMapper.selectById(id);
-        formVo.setForm(form);
-        formVo.setFormFieldValues(formFieldValues);
-        return new Result<>("200","success",formVo);
+    @Autowired
+    private FormTemplateFieldOptionMapper formTemplateFieldOptionMapper;
+
+    @Autowired
+    private FormService formService;
+
+    @Autowired
+    private FormTemplateService formTemplateService;
+
+
+    /**
+     * 查询所有员工数据
+     * */
+    @PostMapping("/list")
+    public Result<Page<FormVo>> selectPage(@RequestBody MyPage<FormDto> page){
+        Page<FormVo> pageData = formService.selectPage(page);
+        return new Result<>("200", "success", pageData);
     }
+
+    /**
+     * 根据 id 查询表单结构与数据
+     * @param id
+     * @return 表单结构和数据
+     */
+    @GetMapping("/{id}")
+    public Result<FormValueVo> getFormById(@PathVariable("id") Integer id) {
+        FormValueVo formValueVo = formService.getFormById(id);
+        return new Result<>("200", "success", formValueVo);
+    }
+
+    /**
+     * 根据 id 查询表单结构与数据
+     * @param id
+     * @return 表单结构和数据
+     */
+    @GetMapping("/template/{id}")
+    public Result<FormTemplateVo> getTemplateById(@PathVariable("id") Integer id) {
+        FormTemplateVo templateVo = formTemplateService.getTemplateById(id);
+        return new Result<>("200", "success", templateVo);
+    }
+
+    /**
+     * 添加表单
+     * @param formDto
+     * @return
+     */
+    @PostMapping("/add")
+    public Result<Void> addForm(@RequestBody FormDto formDto) {
+        formService.addForm(formDto);
+        return new Result<>("200", "success", null);
+    }
+
+    /**
+     * 添加表单
+     * @param formDto
+     * @return
+     */
+    @PostMapping("/update")
+    public Result<Void> updateForm(@RequestBody FormDto formDto) {
+        formService.updateForm(formDto);
+        return new Result<>("200", "success", null);
+    }
+
 }

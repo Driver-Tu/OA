@@ -1,8 +1,11 @@
 package wh.fcfz.officecontroller.all.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import wh.fcfz.officecontroller.all.bean.Dao.form.FormTemplateField;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import wh.fcfz.officecontroller.all.bean.Vo.TemplateFieldVo;
+
+import java.util.List;
 
 /**
 * @author admin
@@ -12,6 +15,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 */
 @Mapper
 public interface FormTemplateFieldMapper extends BaseMapper<FormTemplateField> {
+
+    public List<TemplateFieldVo> selectTemplateFieldListByFormId(Integer templateId);
 
 }
 

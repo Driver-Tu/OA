@@ -1,20 +1,26 @@
 package wh.fcfz.officecontroller.all.service.Impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import wh.fcfz.officecontroller.all.bean.Dao.form.FormTemplate;
 import wh.fcfz.officecontroller.all.bean.Vo.ApprovalForReviewVo;
+import wh.fcfz.officecontroller.all.bean.Vo.FieldOptionVo;
+import wh.fcfz.officecontroller.all.bean.Vo.FormTemplateVo;
+import wh.fcfz.officecontroller.all.bean.Vo.TemplateFieldVo;
 import wh.fcfz.officecontroller.all.mapper.FormTemplateFieldMapper;
 import wh.fcfz.officecontroller.all.mapper.FormTemplateFieldOptionMapper;
 import wh.fcfz.officecontroller.all.mapper.FormTemplateMapper;
 import wh.fcfz.officecontroller.all.service.FormTemplateService;
-import wh.fcfz.officecontroller.all.bean.Dao.form.FormTemplateField;
 
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * @author admin
@@ -25,14 +31,16 @@ import java.util.*;
 public class FormTemplateServiceImpl extends ServiceImpl<FormTemplateMapper, FormTemplate>
         implements FormTemplateService {
 
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
-    private final StringRedisTemplate stringRedisTemplate;
-    private final FormTemplateMapper formTemplateMapper;
+    @Autowired
+    private FormTemplateMapper formTemplateMapper;
 
-    public FormTemplateServiceImpl(StringRedisTemplate stringRedisTemplate, FormTemplateMapper formTemplateMapper) {
-        this.stringRedisTemplate = stringRedisTemplate;
-        this.formTemplateMapper = formTemplateMapper;
-    }
+    @Autowired
+    private FormTemplateFieldMapper formTemplateFieldMapper;
+    @Autowired
+    private FormTemplateFieldOptionMapper formTemplateFieldOptionMapper;
 
     @Override
     public List<ApprovalForReviewVo> selectApprovalForReview() {
@@ -68,29 +76,35 @@ public class FormTemplateServiceImpl extends ServiceImpl<FormTemplateMapper, For
         return approvalForReviewVos;
     }
 
-    @Autowired
-    private FormTemplateFieldMapper formTemplateFieldMapper;
-    @Autowired
-    private FormTemplateFieldOptionMapper formTemplateFieldOptionMapper;
-
     @Override
-    public List<FormTemplateField> getSysTemplateField(Integer templateId) {
-        if (!Objects.requireNonNull(stringRedisTemplate.opsForList().range("template:" + templateId, 0, -1)).isEmpty()) {
-            return Objects.requireNonNull(stringRedisTemplate.opsForList()
-                            .range("template:" + templateId, 0, -1))
-                    .stream()
-                    .map(s -> JSONUtil.toBean(s, FormTemplateField.class))
-                    .toList();
-        }
-        List<FormTemplateField> formTemplateFields = formTemplateFieldMapper
-                .selectList(new LambdaQueryWrapper<FormTemplateField>()
-                        .eq(FormTemplateField::getTemplateId, templateId)
-                        .orderByAsc(FormTemplateField::getFieldSort));
-        formTemplateFields.forEach(formTemplateField -> {
-            stringRedisTemplate.opsForList().rightPush("template:" + templateId, JSONUtil.toJsonStr(formTemplateField));
-        });
-        return formTemplateFields;
-    }
+    public FormTemplateVo getTemplateById(@PathVariable("id") Integer id) {
+        List<TemplateFieldVo> templateFields = formTemplateFieldMapper.selectTemplateFieldListByFormId(id);
+        FormTemplateVo templateVo = new FormTemplateVo();
+        FormTemplate formTemplate = formTemplateMapper.selectById(id);
+        BeanUtil.copyProperties(formTemplate, templateVo);
+        templateVo.setTemplateFields(templateFields);
 
+        Pattern pattern = Pattern.compile("^1[3-9]\\d{9}$");
+//        // 遍历处理 "multi-varchar" 和 "multi-bigint" 类型
+//        templateFields.forEach(templateField -> {
+//            JSONObject validationRule = JsonUtils.parseObject(templateField.getValidationRule(),JSONObject.class);
+//            templateField.setValidationRule(validationRule);
+//        });
+
+        // 处理 "single_select" 和 "multiple_select" 的 fieldOptions 属性
+        templateFields.stream()
+                .filter(templateField ->
+                        "single_select".equals(templateField.getFormItemType())
+                                || "multiple_select".equals(templateField.getFormItemType())
+                )
+                .forEach(templateField -> {
+                    List<FieldOptionVo> fieldOptions = formTemplateFieldOptionMapper.selecFormFieldOptionListByFormFieldId(templateField.getFieldId());
+                    log.warn("fieldOptions: " + fieldOptions);
+                    templateField.setFieldOptions(fieldOptions);
+                });
+
+        templateVo.setTestPattern(pattern);
+        return templateVo;
+    }
 
 }

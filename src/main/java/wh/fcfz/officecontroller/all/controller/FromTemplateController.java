@@ -2,9 +2,7 @@ package wh.fcfz.officecontroller.all.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import wh.fcfz.officecontroller.all.bean.Dao.form.FormTemplateField;
 import wh.fcfz.officecontroller.all.bean.Vo.ApprovalForReviewVo;
 import wh.fcfz.officecontroller.all.service.FormTemplateService;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
@@ -32,11 +30,4 @@ public class FromTemplateController {
         return new Result<>(ResponseEnum.SUCCESS,formTemplateService.selectApprovalForReview());
     }
 
-    /*
-      获取模版字段
-     */
-    @GetMapping("getSysTemplateField")
-    public  Result<List<FormTemplateField>> getSysTemplateField(@RequestParam("templateId") Integer templateId){
-        return new Result<>(ResponseEnum.SUCCESS,formTemplateService.getSysTemplateField(templateId));
-    }
 }

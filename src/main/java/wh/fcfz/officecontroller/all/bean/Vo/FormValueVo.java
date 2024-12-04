@@ -5,12 +5,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormVo {
+public class FormValueVo {
 
+    /**
+     * 表单通用表主键
+     */
     private Integer formId;
 
     /**
@@ -38,42 +42,20 @@ public class FormVo {
      */
     private Date sendTime;
 
-    private String content;
-
     /**
      * 表单状态（0 草稿，1 已提交）
      */
     private String status;
 
     /**
-     * 表单备注
-     */
-    private String remark;
-
-    /**
-     * 创建者
-     */
-//    private Integer createBy;
-
-    /**
-     * 创建时间
-     */
-//    private Date createTime;
-
-    /**
-     * 更新者
-     */
-//    private Integer updateBy;
-
-    /**
      * 更新时间
      */
-    private Date updateTime;
+    private Date updatedTime;
 
     /**
      * 提交时间
      */
     private Date submitTime;
 
-
+    private List<FormFieldValueVo> formFieldValues;
 }

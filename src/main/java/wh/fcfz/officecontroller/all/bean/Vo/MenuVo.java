@@ -10,8 +10,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MenuVo {
-    private Integer menuId;
-    private String menuName;
-    private String menuRouter;
+    private String path;
+    private String name;
+    private String label;
+    private String icon;
+    private String url;
     private List<MenuVo> children;
 }

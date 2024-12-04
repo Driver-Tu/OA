@@ -4,27 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wh.fcfz.officecontroller.all.mapper.FormTemplateFieldMapper">
 
-    <resultMap id="BaseResultMap" type="wh.fcfz.officecontroller.all.bean.Dao.form.FormTemplateField">
-            <id property="filedId" column="filed_id" jdbcType="BIGINT"/>
-            <result property="templateId" column="template_id" jdbcType="BIGINT"/>
-            <result property="fieldTitle" column="field_title" jdbcType="VARCHAR"/>
-            <result property="fieldType" column="field_type" jdbcType="VARCHAR"/>
-            <result property="validationRule" column="validation_rule" jdbcType="VARCHAR"/>
-            <result property="isRequired" column="is_required" jdbcType="INTEGER"/>
-            <result property="formItemType" column="form_item_type" jdbcType="VARCHAR"/>
-            <result property="defaultValue" column="default_value" jdbcType="VARCHAR"/>
-            <result property="createDept" column="create_dept" jdbcType="BIGINT"/>
-            <result property="createBy" column="create_by" jdbcType="BIGINT"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateBy" column="update_by" jdbcType="BIGINT"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <resultMap type="wh.fcfz.officecontroller.all.bean.Vo.TemplateFieldVo" id="FormFieldTemplateResult">
+        <id property="fieldId" column="field_id"/>
+        <result column="validation_rule" jdbcType="VARCHAR" property="validationRule" javaType="cn.hutool.json.JSONArray" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        filed_id,template_id,field_title,
-        field_type,validation_rule,is_required,
-        form_item_type,default_value,create_dept,
-        create_by,create_time,update_by,
-        update_time
-    </sql>
+    <select id="selectTemplateFieldListByFormId" resultMap="FormFieldTemplateResult">
+        select
+        f.field_id,
+        f.field_title,
+        f.field_type,
+        f.field_sort,
+        f.validation_rule,
+        f.form_item_type,
+        f.default_value,
+        f.is_summary,
+        f.is_visible
+        from form_template_field f
+        <if test="templateId != null">
+            <where>
+                f.template_id = #{templateId}
+            </where>
+        </if>
+        order by f.field_sort asc
+    </select>
+
 </mapper>

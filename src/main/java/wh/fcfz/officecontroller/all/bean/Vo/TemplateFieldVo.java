@@ -10,15 +10,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormFieldValueVo {
+public class TemplateFieldVo {
 
     /**
      * 字段值id
-     */
-    private Integer id;
-
-    /**
-     * 字段id
      */
     private Integer fieldId;
 
@@ -43,11 +38,6 @@ public class FormFieldValueVo {
     private JSONArray validationRule;
 
     /**
-     * 是否必填，1 表示必填，0 表示非必填
-     */
-    private Integer isRequired;
-
-    /**
      * 是否为单选框和多选框（input为输入框 radio为单选框/单选列表 checkbox为多选框/多选列表 date_picker为日期选择器 datetime_piker为日期时间选择器）
      */
     private String formItemType;
@@ -62,13 +52,7 @@ public class FormFieldValueVo {
     private Integer isVisible;
 
     /**
-     * 用于存储多选项的值
-     */
-    private Object fieldValue;
-
-    /**
      * 字段的选项
      */
     private List<FieldOptionVo> fieldOptions;
-
 }

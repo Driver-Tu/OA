@@ -3,6 +3,7 @@ package wh.fcfz.officecontroller.config.satoken;
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.json.JSONUtil;
+import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class StpInterfaceImpl implements StpInterface {
 
     @Autowired
     private UserServiceImpl userService;
-    @Autowired
+    @Resource
     private StringRedisTemplate stringRedisTemplate;
 
     /**

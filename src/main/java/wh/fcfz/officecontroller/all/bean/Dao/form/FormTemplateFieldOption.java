@@ -19,12 +19,12 @@ public class FormTemplateFieldOption implements Serializable {
      * 表单模板列的可选项 ID
      */
     @TableId(type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
     /**
      * 表单模板列 ID
      */
-    private Long templateFieldId;
+    private Integer templateFieldId;
 
     /**
      * 可选项值

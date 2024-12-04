@@ -12,6 +12,6 @@ public interface MenuMapper extends BaseMapper<Menu> {
     @Select("SELECT user.role_id FROM user WHERE user_id = #{userId}")
     Integer selectByPermission(Integer userId);
 
-    @Select("select * from menu where permission>=#{permission}")
-    List<Menu> selectByPermissionMenu(Integer permission);
+    @Select("select * from menu where perms_id>=#{permsId}")
+    List<Menu> selectByPermissionMenu(Integer permsId);
 }
