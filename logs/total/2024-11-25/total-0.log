@@ -1,0 +1,1473 @@
+2024-11-25 09:07:53.951|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 39316 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 09:07:53.953|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 09:07:55.222|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 09:07:55.225|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 09:07:55.259|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2024-11-25 09:07:55.899|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 09:07:55.908|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 09:07:55.910|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 09:07:55.910|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 09:07:55.994|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 09:07:55.994|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1856 ms
+2024-11-25 09:07:56.139|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 09:07:57.173|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 09:07:58.090|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 09:07:58.153|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 09:07:58.171|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 09:07:58.185|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.653 seconds (process running for 8.237)
+2024-11-25 09:11:43.033|INFO|http-nio-8088-exec-1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 09:11:43.035|INFO|http-nio-8088-exec-1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 09:11:43.038|INFO|http-nio-8088-exec-1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 3 ms
+2024-11-25 09:11:43.486|ERROR|http-nio-8088-exec-3|w.f.o.c.s.GlobalExceptionHandler|line-36|traceId_2794965078677700|请求地址'/user/isLogin',未能读取到有效 token.
+cn.dev33.satoken.exception.NotLoginException: token 无效：eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsb2dpblR5cGUiOiJsb2dpbiIsImxvZ2luSWQiOjcsInJuU3RyIjoib3JlMXVPQkNGaUZLdjdxQmpMbGRvb254dEJINkhZeHcifQ.cuBZrwwd0qoKatNzlsXedjjvoVS5lhfHQSnrmBGwK2A
+	at cn.dev33.satoken.exception.NotLoginException.newInstance(NotLoginException.java:134)
+	at cn.dev33.satoken.stp.StpLogic.getLoginId(StpLogic.java:947)
+	at cn.dev33.satoken.stp.StpUtil.getLoginId(StpUtil.java:340)
+	at wh.fcfz.officecontroller.all.controller.UserController.isLogin(UserController.java:88)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:343)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:699)
+	at wh.fcfz.officecontroller.all.controller.UserController$$SpringCGLIB$$0.isLogin(<generated>)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:207)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:152)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:884)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1080)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:973)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1011)
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:705)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:814)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:223)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at wh.fcfz.officecontroller.config.satoken.MyFilter.doFilter(MyFilter.java:33)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at cn.dev33.satoken.filter.SaPathCheckFilterForJakartaServlet.doFilter(SaPathCheckFilterForJakartaServlet.java:55)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:109)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at wh.fcfz.officecontroller.config.log.LogFilter.doFilterInternal(LogFilter.java:26)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 09:11:43.523|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2794965078677700|请求耗时：450ms
+2024-11-25 09:11:49.916|INFO|http-nio-8088-exec-5|c.z.h.HikariDataSource|line-110|traceId_2794971855193100|HikariPool-1 - Starting...
+2024-11-25 09:11:50.127|INFO|http-nio-8088-exec-5|c.z.h.p.HikariPool|line-565|traceId_2794971855193100|HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6aea087d
+2024-11-25 09:11:50.132|INFO|http-nio-8088-exec-5|c.z.h.HikariDataSource|line-123|traceId_2794971855193100|HikariPool-1 - Start completed.
+2024-11-25 09:11:50.566|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2794971855193100|请求耗时：717ms
+2024-11-25 09:11:50.590|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2794972587246500|请求耗时：8ms
+2024-11-25 09:14:36.947|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2795138945648300|请求耗时：7ms
+2024-11-25 09:14:37.063|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2795138977032100|请求耗时：92ms
+2024-11-25 09:14:42.809|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2795144772966100|请求耗时：42ms
+2024-11-25 09:14:46.600|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2795148555503400|请求耗时：51ms
+2024-11-25 09:14:47.098|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2795149099548300|请求耗时：4ms
+2024-11-25 09:14:47.160|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2795149111018100|请求耗时：55ms
+2024-11-25 09:14:49.883|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2795151883055500|请求耗时：6ms
+2024-11-25 09:14:49.928|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2795151896809200|请求耗时：37ms
+2024-11-25 09:14:53.372|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2795155282071600|请求耗时：96ms
+2024-11-25 09:15:01.203|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2795163141245200|请求耗时：68ms
+2024-11-25 09:15:05.986|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2795167915091600|请求耗时：77ms
+2024-11-25 09:22:43.759|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2795625758784700|请求耗时：7ms
+2024-11-25 09:22:43.808|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2795625774096100|请求耗时：40ms
+2024-11-25 09:22:46.292|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2795628252048600|请求耗时：46ms
+2024-11-25 09:23:12.488|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2795654487930600|请求耗时：5ms
+2024-11-25 09:23:12.535|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2795654506051700|请求耗时：35ms
+2024-11-25 09:23:14.084|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2795656082205700|请求耗时：8ms
+2024-11-25 09:23:16.145|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2795658131526400|请求耗时：19ms
+2024-11-25 09:23:16.208|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2795658130131200|请求耗时：83ms
+2024-11-25 09:23:17.049|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2795658997903800|请求耗时：57ms
+2024-11-25 09:23:17.574|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2795659510689500|请求耗时：69ms
+2024-11-25 09:23:18.175|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2795660118529200|请求耗时：63ms
+2024-11-25 09:23:18.383|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2795660341867100|请求耗时：47ms
+2024-11-25 09:23:28.148|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2795670150000100|请求耗时：4ms
+2024-11-25 09:23:29.266|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2795671265863800|请求耗时：6ms
+2024-11-25 09:23:29.324|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2795671281298000|请求耗时：48ms
+2024-11-25 09:23:30.353|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2795672349668800|请求耗时：9ms
+2024-11-25 09:23:30.868|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2795672866292300|请求耗时：8ms
+2024-11-25 09:23:30.915|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2795672881316200|请求耗时：40ms
+2024-11-25 09:23:34.204|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2795676206041900|请求耗时：4ms
+2024-11-25 09:23:34.237|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2795676214857400|请求耗时：29ms
+2024-11-25 09:23:35.419|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2795677390518700|请求耗时：35ms
+2024-11-25 09:23:38.195|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2795680195667400|请求耗时：5ms
+2024-11-25 09:23:38.243|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2795680212194500|请求耗时：37ms
+2024-11-25 09:23:39.825|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2795681795521600|请求耗时：36ms
+2024-11-25 09:23:44.228|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2795686217857200|请求耗时：16ms
+2024-11-25 09:23:44.965|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2795686941982500|请求耗时：30ms
+2024-11-25 09:24:58.982|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2795760983613700|请求耗时：5ms
+2024-11-25 09:24:59.038|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2795760997852200|请求耗时：46ms
+2024-11-25 09:25:02.063|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2795764036495800|请求耗时：33ms
+2024-11-25 09:26:14.324|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2795836290541600|请求耗时：39ms
+2024-11-25 09:26:14.359|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2795836333262000|请求耗时：32ms
+2024-11-25 09:30:54.341|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2796116307150500|请求耗时：40ms
+2024-11-25 09:32:28.352|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2796210333677500|请求耗时：25ms
+2024-11-25 09:32:28.370|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2796210332076400|请求耗时：44ms
+2024-11-25 09:32:28.390|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2796210360550900|请求耗时：36ms
+2024-11-25 09:32:28.419|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2796210380558800|请求耗时：45ms
+2024-11-25 09:33:56.103|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2796298099544600|请求耗时：10ms
+2024-11-25 09:33:56.119|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2796298099448100|请求耗时：26ms
+2024-11-25 09:35:17.039|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2796379009551200|请求耗时：35ms
+2024-11-25 09:35:17.051|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2796379009551800|请求耗时：47ms
+2024-11-25 09:35:44.471|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2796406446336500|请求耗时：31ms
+2024-11-25 09:35:44.486|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2796406446349400|请求耗时：46ms
+2024-11-25 09:36:04.769|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2796426750815700|请求耗时：24ms
+2024-11-25 09:36:04.774|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2796426750816100|请求耗时：29ms
+2024-11-25 09:36:10.197|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2796432176604100|请求耗时：27ms
+2024-11-25 09:36:10.204|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2796432176604600|请求耗时：34ms
+2024-11-25 09:39:25.839|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2796627820750300|请求耗时：25ms
+2024-11-25 09:39:25.844|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2796627820760400|请求耗时：30ms
+2024-11-25 09:39:43.106|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2796645084693700|请求耗时：28ms
+2024-11-25 09:39:43.117|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2796645084693500|请求耗时：39ms
+2024-11-25 09:41:51.833|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2796773809153300|请求耗时：30ms
+2024-11-25 09:41:51.839|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2796773806217700|请求耗时：39ms
+2024-11-25 09:44:09.557|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2796911524858700|请求耗时：38ms
+2024-11-25 09:44:09.570|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2796911524884100|请求耗时：51ms
+2024-11-25 09:44:59.637|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2796961601812000|请求耗时：42ms
+2024-11-25 09:44:59.642|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2796961601791000|请求耗时：47ms
+2024-11-25 09:48:45.370|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2797187340571100|请求耗时：36ms
+2024-11-25 09:48:45.382|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2797187340571100|请求耗时：48ms
+2024-11-25 09:50:25.883|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2797287858577600|请求耗时：29ms
+2024-11-25 09:50:25.892|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2797287858577600|请求耗时：38ms
+2024-11-25 09:51:47.093|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2797369064575400|请求耗时：36ms
+2024-11-25 09:51:47.099|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2797369063581400|请求耗时：42ms
+2024-11-25 09:53:57.213|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2797499181007300|请求耗时：38ms
+2024-11-25 09:53:57.223|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2797499181007500|请求耗时：48ms
+2024-11-25 09:55:57.602|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2797619579420100|请求耗时：28ms
+2024-11-25 09:55:57.608|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2797619579541100|请求耗时：34ms
+2024-11-25 09:56:39.942|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2797661914171800|请求耗时：34ms
+2024-11-25 09:56:39.951|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2797661914172000|请求耗时：43ms
+2024-11-25 09:58:44.828|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2797786806279500|请求耗时：29ms
+2024-11-25 09:58:44.836|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2797786806249900|请求耗时：37ms
+2024-11-25 10:00:09.547|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2797871515021900|请求耗时：38ms
+2024-11-25 10:00:09.557|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2797871515021800|请求耗时：48ms
+2024-11-25 10:02:41.321|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2798023295109300|请求耗时：32ms
+2024-11-25 10:02:41.332|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2798023295214800|请求耗时：43ms
+2024-11-25 10:06:09.888|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2798231856646400|请求耗时：37ms
+2024-11-25 10:06:09.892|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2798231856646400|请求耗时：41ms
+2024-11-25 10:12:43.300|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2798625270820100|请求耗时：35ms
+2024-11-25 10:12:43.314|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2798625270820200|请求耗时：49ms
+2024-11-25 10:12:58.085|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2798640067340900|请求耗时：24ms
+2024-11-25 10:12:58.097|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2798640066644400|请求耗时：37ms
+2024-11-25 10:13:34.585|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2798676564368600|请求耗时：27ms
+2024-11-25 10:13:34.591|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2798676564368500|请求耗时：33ms
+2024-11-25 10:13:59.560|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2798701534988100|请求耗时：31ms
+2024-11-25 10:13:59.571|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2798701527886300|请求耗时：49ms
+2024-11-25 10:15:27.749|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2798789726900400|请求耗时：28ms
+2024-11-25 10:15:27.764|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2798789726900400|请求耗时：43ms
+2024-11-25 10:16:49.186|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2798871136387800|请求耗时：55ms
+2024-11-25 10:16:49.189|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2798871161591800|请求耗时：28ms
+2024-11-25 10:17:13.947|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2798895927450400|请求耗时：26ms
+2024-11-25 10:17:13.963|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2798895927450600|请求耗时：42ms
+2024-11-25 10:20:38.264|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2799100243639200|请求耗时：27ms
+2024-11-25 10:20:38.273|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2799100240798400|请求耗时：37ms
+2024-11-25 10:22:46.857|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2799228832184300|请求耗时：30ms
+2024-11-25 10:22:46.871|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2799228832184200|请求耗时：43ms
+2024-11-25 10:22:50.002|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2799231973011200|请求耗时：34ms
+2024-11-25 10:22:50.007|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2799231973254600|请求耗时：39ms
+2024-11-25 10:22:51.446|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2799233426672800|请求耗时：26ms
+2024-11-25 10:22:51.456|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2799233426122200|请求耗时：36ms
+2024-11-25 10:24:08.740|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2799310705828900|请求耗时：41ms
+2024-11-25 10:24:08.746|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2799310705828700|请求耗时：47ms
+2024-11-25 10:25:27.318|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2799389295243100|请求耗时：29ms
+2024-11-25 10:25:27.323|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2799389295243800|请求耗时：34ms
+2024-11-25 10:25:28.773|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2799390745190900|请求耗时：34ms
+2024-11-25 10:25:28.779|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2799390759026600|请求耗时：26ms
+2024-11-25 10:27:15.546|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2799497517768400|请求耗时：34ms
+2024-11-25 10:27:15.552|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2799497517768300|请求耗时：40ms
+2024-11-25 10:27:42.518|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2799524492937200|请求耗时：31ms
+2024-11-25 10:27:42.525|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2799524492937300|请求耗时：38ms
+2024-11-25 10:30:09.380|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2799671353218900|请求耗时：33ms
+2024-11-25 10:30:09.386|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2799671353190800|请求耗时：39ms
+2024-11-25 10:30:09.655|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2799671658060900|请求耗时：4ms
+2024-11-25 10:30:09.693|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2799671676377800|请求耗时：23ms
+2024-11-25 10:30:17.496|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2799679480584700|请求耗时：22ms
+2024-11-25 10:30:17.508|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2799679480584700|请求耗时：34ms
+2024-11-25 10:30:23.025|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2799684999769100|请求耗时：31ms
+2024-11-25 10:30:23.031|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2799684999791900|请求耗时：37ms
+2024-11-25 10:30:25.642|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2799687644821300|请求耗时：3ms
+2024-11-25 10:30:25.698|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2799687652994700|请求耗时：51ms
+2024-11-25 10:30:27.470|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2799689474331000|请求耗时：3ms
+2024-11-25 10:30:28.055|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2799690059618000|请求耗时：2ms
+2024-11-25 10:30:30.273|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2799692275361600|请求耗时：4ms
+2024-11-25 10:30:30.306|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2799692286676300|请求耗时：26ms
+2024-11-25 10:30:31.929|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2799693932804600|请求耗时：3ms
+2024-11-25 10:30:32.711|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2799694714268300|请求耗时：3ms
+2024-11-25 10:30:32.740|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2799694722213400|请求耗时：23ms
+2024-11-25 10:30:33.934|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2799695936512400|请求耗时：4ms
+2024-11-25 10:30:36.446|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2799698448484900|请求耗时：4ms
+2024-11-25 10:30:36.482|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2799698458036500|请求耗时：31ms
+2024-11-25 10:30:39.153|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2799701131201500|请求耗时：28ms
+2024-11-25 10:30:39.157|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2799701127900200|请求耗时：35ms
+2024-11-25 10:30:41.201|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2799703187630500|请求耗时：20ms
+2024-11-25 10:30:41.206|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2799703187872400|请求耗时：24ms
+2024-11-25 10:30:42.514|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2799704517162700|请求耗时：3ms
+2024-11-25 10:30:42.547|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2799704529540300|请求耗时：24ms
+2024-11-25 10:30:45.376|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2799707379336200|请求耗时：3ms
+2024-11-25 10:30:45.410|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2799707388791600|请求耗时：28ms
+2024-11-25 10:30:46.433|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2799708397546800|请求耗时：42ms
+2024-11-25 10:30:48.453|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2799710445480100|请求耗时：14ms
+2024-11-25 10:30:48.755|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2799710741332500|请求耗时：19ms
+2024-11-25 10:30:49.141|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2799711126021200|请求耗时：21ms
+2024-11-25 10:30:51.893|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2799713882251100|请求耗时：17ms
+2024-11-25 10:30:52.315|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2799714310843600|请求耗时：10ms
+2024-11-25 10:30:53.988|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2799715981687000|请求耗时：13ms
+2024-11-25 10:30:56.701|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2799718685684100|请求耗时：21ms
+2024-11-25 10:30:58.244|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2799720231777500|请求耗时：19ms
+2024-11-25 10:35:17.710|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2799979714575800|请求耗时：2ms
+2024-11-25 10:35:17.749|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2799979724953100|请求耗时：31ms
+2024-11-25 10:35:19.686|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2799981667484300|请求耗时：25ms
+2024-11-25 10:35:19.699|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2799981664524200|请求耗时：41ms
+2024-11-25 10:39:39.389|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2800241392629800|请求耗时：3ms
+2024-11-25 10:39:39.432|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2800241404468800|请求耗时：34ms
+2024-11-25 10:40:26.320|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2800288304478900|请求耗时：22ms
+2024-11-25 10:40:26.344|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2800288302868700|请求耗时：48ms
+2024-11-25 10:40:40.962|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2800302965961000|请求耗时：3ms
+2024-11-25 10:40:40.999|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2800302976718600|请求耗时：29ms
+2024-11-25 10:42:05.372|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2800387345210800|请求耗时：33ms
+2024-11-25 10:42:05.377|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2800387345199900|请求耗时：38ms
+2024-11-25 10:56:17.842|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2801236241031800|请求耗时：37ms
+2024-11-25 10:56:17.850|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2801236241031700|请求耗时：45ms
+2024-11-25 10:56:19.478|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2801237883394400|请求耗时：30ms
+2024-11-25 10:56:19.481|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2801237882628700|请求耗时：34ms
+2024-11-25 10:56:28.894|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2801247293959500|请求耗时：36ms
+2024-11-25 10:56:28.901|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2801247294081500|请求耗时：43ms
+2024-11-25 10:56:51.076|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2801269487187700|请求耗时：25ms
+2024-11-25 10:56:51.084|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2801269487227500|请求耗时：33ms
+2024-11-25 10:56:52.422|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2801270831146000|请求耗时：26ms
+2024-11-25 10:56:52.436|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2801270831146000|请求耗时：40ms
+2024-11-25 10:56:56.779|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2801275186972400|请求耗时：28ms
+2024-11-25 10:56:56.779|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2801275181615100|请求耗时：33ms
+2024-11-25 10:56:58.487|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2801276897650500|请求耗时：25ms
+2024-11-25 10:56:58.497|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2801276886930900|请求耗时：45ms
+2024-11-25 10:57:32.860|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2801311226632500|请求耗时：69ms
+2024-11-25 10:57:34.142|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2801312553433200|请求耗时：25ms
+2024-11-25 10:57:34.146|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2801312553433400|请求耗时：29ms
+2024-11-25 10:57:54.945|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2801333352574900|请求耗时：28ms
+2024-11-25 10:57:54.957|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2801333352481000|请求耗时：40ms
+2024-11-25 10:57:55.832|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2801334246889700|请求耗时：21ms
+2024-11-25 10:57:55.839|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2801334244940800|请求耗时：30ms
+2024-11-25 10:58:00.578|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2801339011353800|请求耗时：3ms
+2024-11-25 10:58:00.617|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2801339022897600|请求耗时：30ms
+2024-11-25 10:58:04.459|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2801342890123700|请求耗时：4ms
+2024-11-25 10:58:05.449|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2801343882046800|请求耗时：3ms
+2024-11-25 12:22:02.495|INFO|http-nio-8088-exec-6|o.s.a.AbstractOpenApiResource|line-390|traceId_2806380327004600|Init duration for springdoc-openapi is: 568 ms
+2024-11-25 12:22:02.520|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2806380327004600|请求耗时：629ms
+2024-11-25 13:13:27.813|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2809466237651100|请求耗时：11ms
+2024-11-25 13:23:39.121|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2810077552839100|请求耗时：4ms
+2024-11-25 13:23:39.178|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2810077570580000|请求耗时：43ms
+2024-11-25 13:23:40.428|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2810078844316500|请求耗时：19ms
+2024-11-25 13:23:40.438|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2810078840620300|请求耗时：34ms
+2024-11-25 13:23:52.504|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2810090918715900|请求耗时：21ms
+2024-11-25 13:23:52.510|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2810090918679400|请求耗时：27ms
+2024-11-25 13:23:52.974|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2810091407591000|请求耗时：2ms
+2024-11-25 13:23:52.997|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2810091415231300|请求耗时：17ms
+2024-11-25 13:24:40.150|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2810138583852800|请求耗时：2ms
+2024-11-25 13:24:40.186|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2810138600341100|请求耗时：21ms
+2024-11-25 13:26:07.099|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2810225519340800|请求耗时：15ms
+2024-11-25 13:26:11.466|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2810229874788700|请求耗时：27ms
+2024-11-25 13:26:11.480|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2810229911733000|请求耗时：4ms
+2024-11-25 13:26:12.929|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2810231362407400|请求耗时：2ms
+2024-11-25 13:26:12.963|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2810231371887600|请求耗时：27ms
+2024-11-25 13:26:16.465|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2810234881018700|请求耗时：20ms
+2024-11-25 13:26:16.471|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2810234878352600|请求耗时：28ms
+2024-11-25 13:26:17.708|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2810236141742400|请求耗时：2ms
+2024-11-25 13:26:17.741|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2810236149919300|请求耗时：27ms
+2024-11-25 13:26:29.351|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2810247784603500|请求耗时：3ms
+2024-11-25 13:26:29.386|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2810247795826500|请求耗时：26ms
+2024-11-25 13:29:08.120|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 13:29:08.124|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 13:29:24.232|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 12732 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 13:29:24.235|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 13:29:25.586|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 13:29:25.588|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 13:29:25.619|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
+2024-11-25 13:29:26.164|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 13:29:26.181|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 13:29:26.182|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 13:29:26.182|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 13:29:26.303|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 13:29:26.303|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 2002 ms
+2024-11-25 13:29:26.451|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 13:29:27.480|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 13:29:28.321|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 13:29:28.416|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 13:29:28.437|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 13:29:28.450|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.641 seconds (process running for 6.187)
+2024-11-25 13:29:28.962|INFO|RMI TCP Connection(2)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 13:29:28.963|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 13:29:28.962|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 13:29:28.965|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 2 ms
+2024-11-25 13:29:29.162|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@426cdeb
+2024-11-25 13:29:29.166|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 13:29:59.330|WARN|RMI TCP Connection(1)-192.168.200.1|o.s.b.a.m.MailHealthIndicator|line-94||Mail health check failed
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.qq.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2247)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:754)
+	at jakarta.mail.Service.connect(Service.java:342)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:518)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:398)
+	at org.springframework.boot.actuate.mail.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:42)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:82)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:76)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:122)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:814)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.GeneratedMethodAccessor24.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 13:29:59.334|WARN|RMI TCP Connection(1)-192.168.200.1|o.s.b.a.h.HealthEndpointSupport|line-181||Health contributor org.springframework.boot.actuate.mail.MailHealthIndicator (mail) took 30149ms to respond
+2024-11-25 13:35:54.523|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2810812864341900|请求耗时：94ms
+2024-11-25 13:35:54.664|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2810812965169200|请求耗时：135ms
+2024-11-25 13:36:07.792|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2810826221146700|请求耗时：7ms
+2024-11-25 13:36:07.820|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2810826224505200|请求耗时：31ms
+2024-11-25 13:36:07.853|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2810826254217800|请求耗时：35ms
+2024-11-25 13:37:45.261|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2810923691193000|请求耗时：5ms
+2024-11-25 13:37:45.263|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2810923691193000|请求耗时：7ms
+2024-11-25 13:37:45.362|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2810923743771000|请求耗时：53ms
+2024-11-25 13:37:46.100|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2810924529658600|请求耗时：5ms
+2024-11-25 13:37:46.733|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2810925163145800|请求耗时：5ms
+2024-11-25 13:37:46.735|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2810925163145800|请求耗时：7ms
+2024-11-25 13:37:46.806|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2810925174609800|请求耗时：67ms
+2024-11-25 13:37:51.254|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2810929683103000|请求耗时：6ms
+2024-11-25 13:37:51.256|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2810929683103700|请求耗时：8ms
+2024-11-25 13:37:51.296|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2810929699654600|请求耗时：32ms
+2024-11-25 13:38:53.535|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2810991965034900|请求耗时：5ms
+2024-11-25 13:39:03.387|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2811001818023300|请求耗时：5ms
+2024-11-25 13:39:03.390|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2811001818024900|请求耗时：8ms
+2024-11-25 13:39:03.445|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2811001837890500|请求耗时：42ms
+2024-11-25 13:39:06.877|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2811005309691800|请求耗时：3ms
+2024-11-25 13:39:06.878|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2811005309691600|请求耗时：4ms
+2024-11-25 13:39:06.916|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2811005319145600|请求耗时：32ms
+2024-11-25 13:39:09.354|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2811007785024300|请求耗时：4ms
+2024-11-25 13:39:10.940|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2811009371336500|请求耗时：4ms
+2024-11-25 13:39:11.876|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2811010306028800|请求耗时：5ms
+2024-11-25 13:39:15.398|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2811013830234400|请求耗时：3ms
+2024-11-25 13:39:16.326|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2811014755945900|请求耗时：5ms
+2024-11-25 13:39:16.329|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2811014759602800|请求耗时：5ms
+2024-11-25 13:39:16.385|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2811014780937900|请求耗时：40ms
+2024-11-25 13:39:19.334|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2811017765810700|请求耗时：3ms
+2024-11-25 13:39:19.335|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2811017765810400|请求耗时：4ms
+2024-11-25 13:39:19.406|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2811017779045100|请求耗时：62ms
+2024-11-25 13:39:21.571|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2811020001925900|请求耗时：4ms
+2024-11-25 13:39:21.572|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2811020001932400|请求耗时：5ms
+2024-11-25 13:39:21.606|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2811020016295100|请求耗时：25ms
+2024-11-25 13:39:44.476|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2811042906772400|请求耗时：4ms
+2024-11-25 13:39:44.477|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2811042906772700|请求耗时：5ms
+2024-11-25 13:39:44.525|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2811042921661800|请求耗时：39ms
+2024-11-25 13:39:48.150|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2811046559930900|请求耗时：25ms
+2024-11-25 13:39:55.603|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2811053931152800|请求耗时：108ms
+2024-11-25 13:39:55.621|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2811054051578900|请求耗时：5ms
+2024-11-25 13:39:57.196|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2811055626822600|请求耗时：5ms
+2024-11-25 13:39:57.230|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2811055630042500|请求耗时：36ms
+2024-11-25 13:39:57.238|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2811055644464000|请求耗时：30ms
+2024-11-25 13:40:01.099|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2811059531280500|请求耗时：3ms
+2024-11-25 13:40:01.100|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2811059528287300|请求耗时：6ms
+2024-11-25 13:40:01.133|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2811059541427800|请求耗时：27ms
+2024-11-25 13:40:01.897|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2811060330584900|请求耗时：2ms
+2024-11-25 13:40:02.301|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2811060731596900|请求耗时：5ms
+2024-11-25 13:40:02.755|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2811061185729500|请求耗时：5ms
+2024-11-25 13:40:03.604|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2811062034657000|请求耗时：5ms
+2024-11-25 13:40:03.609|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2811062038591200|请求耗时：6ms
+2024-11-25 13:40:03.641|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2811062049681200|请求耗时：27ms
+2024-11-25 13:40:06.154|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2811064580539500|请求耗时：9ms
+2024-11-25 13:40:28.435|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2811086856822300|请求耗时：14ms
+2024-11-25 13:40:34.636|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2811093050717500|请求耗时：21ms
+2024-11-25 13:40:34.654|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2811093086165000|请求耗时：3ms
+2024-11-25 13:41:02.178|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2811120610124000|请求耗时：4ms
+2024-11-25 13:41:02.179|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2811120610277700|请求耗时：5ms
+2024-11-25 13:41:02.220|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2811120624474300|请求耗时：32ms
+2024-11-25 14:03:16.138|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2812454566821800|请求耗时：7ms
+2024-11-25 14:03:16.138|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2812454566721400|请求耗时：7ms
+2024-11-25 14:03:16.186|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2812454582993500|请求耗时：39ms
+2024-11-25 14:03:17.384|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2812455785839600|请求耗时：34ms
+2024-11-25 14:03:17.389|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2812455783102400|请求耗时：41ms
+2024-11-25 14:03:18.598|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2812457029356000|请求耗时：4ms
+2024-11-25 14:03:18.600|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2812457029507000|请求耗时：6ms
+2024-11-25 14:03:18.638|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2812457042036900|请求耗时：31ms
+2024-11-25 14:04:03.318|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2812501747786400|请求耗时：5ms
+2024-11-25 14:04:03.318|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2812501747786400|请求耗时：5ms
+2024-11-25 14:04:03.361|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2812501760773200|请求耗时：37ms
+2024-11-25 14:04:04.236|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2812502661813700|请求耗时：10ms
+2024-11-25 14:04:11.572|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2812509986862400|请求耗时：21ms
+2024-11-25 14:04:11.590|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2812510019473900|请求耗时：6ms
+2024-11-25 14:04:13.511|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2812511939861600|请求耗时：7ms
+2024-11-25 14:04:13.561|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2812511944026600|请求耗时：52ms
+2024-11-25 14:04:13.561|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2812511957629200|请求耗时：39ms
+2024-11-25 14:04:16.989|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2812515397478000|请求耗时：27ms
+2024-11-25 14:04:16.993|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2812515392307200|请求耗时：36ms
+2024-11-25 14:11:15.037|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2812933450575600|请求耗时：22ms
+2024-11-25 14:11:15.047|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2812933450575300|请求耗时：32ms
+2024-11-25 14:16:09.919|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2813228319645400|请求耗时：34ms
+2024-11-25 14:16:09.924|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2813228319645700|请求耗时：39ms
+2024-11-25 14:16:10.176|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2813228588537100|请求耗时：23ms
+2024-11-25 14:16:10.182|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2813228584064200|请求耗时：33ms
+2024-11-25 14:18:07.796|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2813346204838900|请求耗时：27ms
+2024-11-25 14:18:07.817|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2813346201805500|请求耗时：51ms
+2024-11-25 14:19:14.785|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2813413187663400|请求耗时：33ms
+2024-11-25 14:19:14.794|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2813413182416100|请求耗时：46ms
+2024-11-25 14:19:25.268|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2813423674035700|请求耗时：30ms
+2024-11-25 14:19:25.280|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2813423668917100|请求耗时：47ms
+2024-11-25 14:19:39.564|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2813437975709800|请求耗时：24ms
+2024-11-25 14:19:39.572|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2813437974634300|请求耗时：33ms
+2024-11-25 14:19:41.954|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2813440356623800|请求耗时：33ms
+2024-11-25 14:19:41.963|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2813440341784300|请求耗时：57ms
+2024-11-25 14:22:07.024|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2813585437628700|请求耗时：21ms
+2024-11-25 14:22:07.024|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2813585415712500|请求耗时：44ms
+2024-11-25 14:22:13.415|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2813591825578400|请求耗时：25ms
+2024-11-25 14:22:13.423|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2813591825578500|请求耗时：33ms
+2024-11-25 14:22:54.955|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2813633353697600|请求耗时：37ms
+2024-11-25 14:22:54.960|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2813633353697800|请求耗时：42ms
+2024-11-25 14:23:07.748|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2813646155894700|请求耗时：28ms
+2024-11-25 14:23:07.757|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2813646155844700|请求耗时：36ms
+2024-11-25 14:23:29.248|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2813667656714100|请求耗时：27ms
+2024-11-25 14:23:29.255|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2813667653938900|请求耗时：37ms
+2024-11-25 14:23:34.948|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2813673380060100|请求耗时：4ms
+2024-11-25 14:23:34.953|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2813673384645700|请求耗时：4ms
+2024-11-25 14:23:34.992|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2813673401651800|请求耗时：26ms
+2024-11-25 14:23:36.702|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2813675125672200|请求耗时：12ms
+2024-11-25 14:23:46.721|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2813685130656200|请求耗时：26ms
+2024-11-25 14:23:46.761|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2813685193354600|请求耗时：3ms
+2024-11-25 14:23:48.116|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2813686547625300|请求耗时：4ms
+2024-11-25 14:23:48.124|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2813686553158800|请求耗时：7ms
+2024-11-25 14:23:48.165|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2813686565275400|请求耗时：35ms
+2024-11-25 14:23:49.016|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2813687426406600|请求耗时：25ms
+2024-11-25 14:23:49.021|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2813687423676700|请求耗时：33ms
+2024-11-25 14:25:18.593|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2813777025312400|请求耗时：3ms
+2024-11-25 14:25:18.594|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2813777025312900|请求耗时：4ms
+2024-11-25 14:25:18.629|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2813777038546000|请求耗时：26ms
+2024-11-25 14:25:19.740|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2813778171291600|请求耗时：5ms
+2024-11-25 14:25:31.964|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2813790377787400|请求耗时：22ms
+2024-11-25 14:25:31.978|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2813790410178300|请求耗时：4ms
+2024-11-25 14:25:34.124|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2813792555833400|请求耗时：4ms
+2024-11-25 14:25:34.127|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2813792558203300|请求耗时：4ms
+2024-11-25 14:25:34.162|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2813792569321500|请求耗时：29ms
+2024-11-25 14:25:34.746|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2813793159481700|请求耗时：22ms
+2024-11-25 14:25:34.751|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2813793156345500|请求耗时：31ms
+2024-11-25 14:28:11.574|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2813949982537200|请求耗时：27ms
+2024-11-25 14:28:11.585|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2813949982566500|请求耗时：38ms
+2024-11-25 14:28:12.907|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2813951314295500|请求耗时：28ms
+2024-11-25 14:28:12.915|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2813951310000100|请求耗时：39ms
+2024-11-25 14:29:00.553|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2813998985160500|请求耗时：3ms
+2024-11-25 14:29:00.554|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2813998985160400|请求耗时：4ms
+2024-11-25 14:29:00.596|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2813999001034300|请求耗时：31ms
+2024-11-25 14:30:47.150|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814105579483500|请求耗时：6ms
+2024-11-25 14:30:47.152|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814105579472000|请求耗时：6ms
+2024-11-25 14:30:47.205|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2814105595656700|请求耗时：45ms
+2024-11-25 14:39:38.675|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814637105360400|请求耗时：4ms
+2024-11-25 14:39:38.676|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2814637107141400|请求耗时：4ms
+2024-11-25 14:39:38.717|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814637121793000|请求耗时：32ms
+2024-11-25 14:39:39.940|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814638348720000|请求耗时：27ms
+2024-11-25 14:39:39.947|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2814638345027100|请求耗时：38ms
+2024-11-25 14:39:41.334|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814639765152700|请求耗时：4ms
+2024-11-25 14:39:41.335|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2814639765152800|请求耗时：5ms
+2024-11-25 14:39:41.377|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2814639778926000|请求耗时：34ms
+2024-11-25 14:39:43.236|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814641650328300|请求耗时：22ms
+2024-11-25 14:39:43.245|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2814641650328100|请求耗时：31ms
+2024-11-25 14:40:13.649|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2814672080322600|请求耗时：4ms
+2024-11-25 14:40:13.649|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814672080322900|请求耗时：4ms
+2024-11-25 14:40:13.712|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2814672098013400|请求耗时：50ms
+2024-11-25 14:40:16.591|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814675024184500|请求耗时：2ms
+2024-11-25 14:40:16.592|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2814675024184300|请求耗时：3ms
+2024-11-25 14:40:16.644|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814675037845200|请求耗时：41ms
+2024-11-25 14:40:18.209|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814676558112800|请求耗时：85ms
+2024-11-25 14:40:19.552|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814677969364600|请求耗时：19ms
+2024-11-25 14:40:20.051|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2814678471282800|请求耗时：14ms
+2024-11-25 14:40:21.102|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814679515912600|请求耗时：22ms
+2024-11-25 14:40:21.619|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2814680022928000|请求耗时：31ms
+2024-11-25 14:40:21.911|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2814680335390100|请求耗时：11ms
+2024-11-25 14:40:22.208|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814680633865500|请求耗时：10ms
+2024-11-25 14:40:23.552|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814681971495400|请求耗时：16ms
+2024-11-25 14:40:24.743|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2814683161606700|请求耗时：17ms
+2024-11-25 14:40:25.861|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814684281229600|请求耗时：16ms
+2024-11-25 14:40:39.255|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2814697664714000|请求耗时：23ms
+2024-11-25 14:40:43.651|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814702065687200|请求耗时：21ms
+2024-11-25 14:40:43.969|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2814702386952300|请求耗时：17ms
+2024-11-25 14:40:44.748|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814703171503400|请求耗时：12ms
+2024-11-25 14:40:45.278|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2814703695551000|请求耗时：18ms
+2024-11-25 14:40:46.671|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814705075057400|请求耗时：31ms
+2024-11-25 14:40:48.557|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814706990483200|请求耗时：2ms
+2024-11-25 14:40:50.887|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814709319731100|请求耗时：3ms
+2024-11-25 14:40:51.423|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814709854629200|请求耗时：4ms
+2024-11-25 14:40:51.425|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2814709858254200|请求耗时：3ms
+2024-11-25 14:40:51.470|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814709875243100|请求耗时：31ms
+2024-11-25 14:40:52.478|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814710897347600|请求耗时：16ms
+2024-11-25 14:40:53.558|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2814711991550800|请求耗时：2ms
+2024-11-25 14:40:53.559|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814711991733400|请求耗时：3ms
+2024-11-25 14:40:53.611|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814712003426700|请求耗时：42ms
+2024-11-25 14:40:54.590|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814713002625300|请求耗时：23ms
+2024-11-25 14:40:57.004|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2814715400931300|请求耗时：39ms
+2024-11-25 14:40:57.584|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2814716002516600|请求耗时：17ms
+2024-11-25 14:40:57.836|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814716258984700|请求耗时：13ms
+2024-11-25 14:40:59.141|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2814717557947900|请求耗时：19ms
+2024-11-25 14:40:59.361|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814717784085900|请求耗时：12ms
+2024-11-25 14:40:59.830|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814718256536200|请求耗时：10ms
+2024-11-25 14:41:00.074|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814718494517800|请求耗时：15ms
+2024-11-25 14:41:00.331|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2814718751606500|请求耗时：16ms
+2024-11-25 14:41:00.617|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814719029251400|请求耗时：24ms
+2024-11-25 14:41:00.895|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2814719312119400|请求耗时：19ms
+2024-11-25 14:41:01.158|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2814719582627500|请求耗时：11ms
+2024-11-25 14:41:01.475|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814719903326600|请求耗时：7ms
+2024-11-25 14:41:01.891|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2814720318194100|请求耗时：9ms
+2024-11-25 14:41:23.202|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2814741618055200|请求耗时：20ms
+2024-11-25 14:41:26.630|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814745032644800|请求耗时：33ms
+2024-11-25 14:41:26.916|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814745334896200|请求耗时：17ms
+2024-11-25 14:41:27.770|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2814746190640200|请求耗时：15ms
+2024-11-25 14:41:28.021|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814746439703200|请求耗时：17ms
+2024-11-25 14:41:28.327|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2814746746718900|请求耗时：16ms
+2024-11-25 14:41:28.573|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814746999131700|请求耗时：9ms
+2024-11-25 14:41:28.814|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2814747238299800|请求耗时：12ms
+2024-11-25 14:41:30.083|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814748503633400|请求耗时：15ms
+2024-11-25 14:41:30.356|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2814748776406600|请求耗时：16ms
+2024-11-25 14:41:30.687|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814749085900500|请求耗时：37ms
+2024-11-25 14:41:31.667|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2814750100302100|请求耗时：3ms
+2024-11-25 14:41:51.899|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814770333342200|请求耗时：2ms
+2024-11-25 14:41:51.899|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2814770333341900|请求耗时：2ms
+2024-11-25 14:41:51.944|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814770354469200|请求耗时：25ms
+2024-11-25 14:41:52.737|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814771153104300|请求耗时：20ms
+2024-11-25 14:41:54.151|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814772567267900|请求耗时：19ms
+2024-11-25 14:41:54.435|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2814772855901700|请求耗时：15ms
+2024-11-25 14:42:30.494|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814808896462700|请求耗时：34ms
+2024-11-25 14:42:31.761|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2814810194211200|请求耗时：2ms
+2024-11-25 14:42:31.761|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2814810194212200|请求耗时：3ms
+2024-11-25 14:42:31.797|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814810205508400|请求耗时：27ms
+2024-11-25 14:42:33.637|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2814812061905600|请求耗时：10ms
+2024-11-25 14:42:47.565|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2814825984174400|请求耗时：17ms
+2024-11-25 14:42:47.580|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2814826011351700|请求耗时：4ms
+2024-11-25 14:42:49.185|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2814827618844500|请求耗时：2ms
+2024-11-25 14:42:49.189|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2814827620953800|请求耗时：4ms
+2024-11-25 14:42:49.219|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814827629622200|请求耗时：25ms
+2024-11-25 14:42:51.182|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2814829563539800|请求耗时：54ms
+2024-11-25 14:44:37.189|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2814935563519800|请求耗时：61ms
+2024-11-25 14:44:46.012|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2814944445296100|请求耗时：3ms
+2024-11-25 14:44:47.309|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2814945741258900|请求耗时：4ms
+2024-11-25 14:44:47.312|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2814945743615000|请求耗时：5ms
+2024-11-25 14:44:47.358|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2814945767326400|请求耗时：26ms
+2024-11-25 14:44:48.181|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2814946576339100|请求耗时：40ms
+2024-11-25 14:45:59.354|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:45:59.357|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:46:05.035|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 23876 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:46:05.040|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:46:05.986|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:46:05.988|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:46:06.018|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:46:06.553|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:46:06.560|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:46:06.562|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:46:06.562|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:46:06.648|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:46:06.648|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1547 ms
+2024-11-25 14:46:06.781|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:46:07.784|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:46:08.620|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:46:08.695|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:46:08.714|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:46:08.727|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.099 seconds (process running for 4.805)
+2024-11-25 14:46:09.318|INFO|RMI TCP Connection(2)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:46:09.318|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:46:09.318|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:46:09.320|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-11-25 14:46:09.514|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@49a7f5b3
+2024-11-25 14:46:09.516|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:46:11.494|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2815029465463800|请求耗时：464ms
+2024-11-25 14:46:39.654|WARN|RMI TCP Connection(1)-192.168.200.1|o.s.b.a.m.MailHealthIndicator|line-94||Mail health check failed
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.qq.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2247)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:754)
+	at jakarta.mail.Service.connect(Service.java:342)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:518)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:398)
+	at org.springframework.boot.actuate.mail.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:42)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:82)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:76)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:122)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:814)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.GeneratedMethodAccessor22.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 14:46:39.658|WARN|RMI TCP Connection(1)-192.168.200.1|o.s.b.a.h.HealthEndpointSupport|line-181||Health contributor org.springframework.boot.actuate.mail.MailHealthIndicator (mail) took 30122ms to respond
+2024-11-25 14:47:19.265|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:47:19.271|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:47:24.654|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 34656 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:47:24.661|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:47:25.657|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:47:25.659|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:47:25.685|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:47:26.192|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:47:26.201|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:47:26.202|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:47:26.203|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:47:26.302|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:47:26.302|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1594 ms
+2024-11-25 14:47:26.430|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:47:27.463|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:47:28.269|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:47:28.340|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:47:28.356|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:47:28.370|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.109 seconds (process running for 4.93)
+2024-11-25 14:47:28.817|INFO|RMI TCP Connection(3)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:47:28.817|INFO|RMI TCP Connection(3)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:47:28.817|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:47:28.819|INFO|RMI TCP Connection(3)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 2 ms
+2024-11-25 14:47:28.979|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1a04e9f3
+2024-11-25 14:47:28.986|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:47:33.441|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2815111383386700|请求耗时：493ms
+2024-11-25 14:47:59.086|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.m.MailHealthIndicator|line-94||Mail health check failed
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.qq.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2247)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:754)
+	at jakarta.mail.Service.connect(Service.java:342)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:518)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:398)
+	at org.springframework.boot.actuate.mail.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:42)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:82)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:76)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:122)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:814)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.GeneratedMethodAccessor21.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 14:47:59.089|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.h.HealthEndpointSupport|line-181||Health contributor org.springframework.boot.actuate.mail.MailHealthIndicator (mail) took 30086ms to respond
+2024-11-25 14:48:27.073|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2815165474848100|请求耗时：34ms
+2024-11-25 14:50:20.040|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:50:20.045|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:50:25.357|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 1872 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:50:25.361|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:50:26.436|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:50:26.438|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:50:26.473|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:50:26.988|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:50:26.995|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:50:26.997|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:50:26.998|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:50:27.084|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:50:27.084|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1675 ms
+2024-11-25 14:50:27.211|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:50:28.185|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:50:29.013|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:50:29.080|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:50:29.096|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:50:29.109|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.119 seconds (process running for 4.861)
+2024-11-25 14:50:29.322|INFO|http-nio-8088-exec-2|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:50:29.323|INFO|http-nio-8088-exec-2|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:50:29.324|INFO|http-nio-8088-exec-2|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-11-25 14:50:29.715|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:50:29.809|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2815287782729500|请求耗时：462ms
+2024-11-25 14:50:29.810|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2815287782729400|请求耗时：462ms
+2024-11-25 14:50:29.939|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1f574577
+2024-11-25 14:50:29.941|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:50:30.080|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2815288255632600|请求耗时：259ms
+2024-11-25 14:50:31.098|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2815289462619600|请求耗时：71ms
+2024-11-25 14:50:34.770|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2815293186270000|请求耗时：19ms
+2024-11-25 14:50:34.948|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2815293367830300|请求耗时：16ms
+2024-11-25 14:50:36.120|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2815294548571400|请求耗时：7ms
+2024-11-25 14:50:36.122|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2815294548571300|请求耗时：9ms
+2024-11-25 14:50:36.175|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2815294566605400|请求耗时：44ms
+2024-11-25 14:50:41.863|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2815300229362700|请求耗时：68ms
+2024-11-25 14:51:00.134|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.m.MailHealthIndicator|line-94||Mail health check failed
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.qq.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2247)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:754)
+	at jakarta.mail.Service.connect(Service.java:342)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:518)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:398)
+	at org.springframework.boot.actuate.mail.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:42)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:82)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:76)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:122)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:814)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 14:51:00.138|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.h.HealthEndpointSupport|line-181||Health contributor org.springframework.boot.actuate.mail.MailHealthIndicator (mail) took 30128ms to respond
+2024-11-25 14:51:20.889|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:51:20.893|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:51:26.366|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 16984 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:51:26.369|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:51:27.325|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:51:27.330|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:51:27.360|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:51:28.075|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:51:28.084|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:51:28.085|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:51:28.085|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:51:28.180|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:51:28.181|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1766 ms
+2024-11-25 14:51:28.320|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:51:29.607|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:51:30.555|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:51:30.640|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:51:30.655|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:51:30.668|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.673 seconds (process running for 5.461)
+2024-11-25 14:51:31.165|INFO|RMI TCP Connection(2)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:51:31.164|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:51:31.165|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:51:31.167|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 2 ms
+2024-11-25 14:51:31.344|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@15556c92
+2024-11-25 14:51:31.350|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:51:41.235|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2815359173940100|请求耗时：496ms
+2024-11-25 14:51:41.235|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2815359015658100|请求耗时：655ms
+2024-11-25 14:51:43.786|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2815362161070700|请求耗时：60ms
+2024-11-25 14:52:01.465|WARN|RMI TCP Connection(1)-192.168.200.1|o.s.b.a.m.MailHealthIndicator|line-94||Mail health check failed
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.qq.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2247)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:754)
+	at jakarta.mail.Service.connect(Service.java:342)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:518)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:398)
+	at org.springframework.boot.actuate.mail.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:42)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:82)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:76)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:122)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:814)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.GeneratedMethodAccessor24.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 14:52:01.469|WARN|RMI TCP Connection(1)-192.168.200.1|o.s.b.a.h.HealthEndpointSupport|line-181||Health contributor org.springframework.boot.actuate.mail.MailHealthIndicator (mail) took 30096ms to respond
+2024-11-25 14:52:32.850|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:52:32.856|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:52:38.696|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 17124 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:52:38.698|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:52:39.794|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:52:39.798|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:52:39.828|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:52:40.349|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:52:40.359|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:52:40.360|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:52:40.360|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:52:40.443|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:52:40.443|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1696 ms
+2024-11-25 14:52:40.654|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:52:41.730|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:52:42.522|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:52:42.595|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:52:42.612|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:52:42.626|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.382 seconds (process running for 5.288)
+2024-11-25 14:52:42.783|INFO|RMI TCP Connection(1)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:52:42.784|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:52:42.784|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:52:42.786|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 2 ms
+2024-11-25 14:52:42.954|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5edb1ead
+2024-11-25 14:52:42.960|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:52:43.956|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2815421861169100|请求耗时：530ms
+2024-11-25 14:52:51.128|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2815429492104200|请求耗时：71ms
+2024-11-25 14:52:52.197|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2815430590575100|请求耗时：42ms
+2024-11-25 14:52:54.206|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2815432561333300|请求耗时：80ms
+2024-11-25 14:53:13.059|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.m.MailHealthIndicator|line-94||Mail health check failed
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.qq.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2247)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:754)
+	at jakarta.mail.Service.connect(Service.java:342)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:518)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:398)
+	at org.springframework.boot.actuate.mail.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:42)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:82)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:76)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:122)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:814)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.GeneratedMethodAccessor26.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 14:53:13.066|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.h.HealthEndpointSupport|line-181||Health contributor org.springframework.boot.actuate.mail.MailHealthIndicator (mail) took 30088ms to respond
+2024-11-25 14:53:19.326|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:53:19.331|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:53:24.359|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 23304 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:53:24.362|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:53:25.324|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:53:25.326|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:53:25.359|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 20 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:53:25.839|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:53:25.845|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:53:25.846|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:53:25.847|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:53:25.919|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:53:25.920|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1515 ms
+2024-11-25 14:53:26.037|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:53:26.976|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:53:27.714|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:53:27.782|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:53:27.796|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:53:27.809|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 3.826 seconds (process running for 4.678)
+2024-11-25 14:53:28.051|INFO|RMI TCP Connection(1)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:53:28.052|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:53:28.052|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:53:28.055|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 3 ms
+2024-11-25 14:53:28.369|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1f57945b
+2024-11-25 14:53:28.391|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:53:29.546|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2815467373641700|请求耗时：607ms
+2024-11-25 14:53:29.966|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2815468353410700|请求耗时：48ms
+2024-11-25 14:53:58.709|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.m.MailHealthIndicator|line-94||Mail health check failed
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.qq.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2247)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:754)
+	at jakarta.mail.Service.connect(Service.java:342)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:518)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:398)
+	at org.springframework.boot.actuate.mail.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:42)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:82)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:76)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:122)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:814)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.GeneratedMethodAccessor23.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 14:53:58.713|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.h.HealthEndpointSupport|line-181||Health contributor org.springframework.boot.actuate.mail.MailHealthIndicator (mail) took 30267ms to respond
+2024-11-25 14:54:35.070|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:54:35.076|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:54:40.259|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 39368 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:54:40.261|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:54:41.232|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:54:41.233|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:54:41.265|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 20 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:54:41.759|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:54:41.767|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:54:41.768|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:54:41.768|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:54:41.852|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:54:41.853|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1544 ms
+2024-11-25 14:54:41.963|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:54:42.881|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:54:43.625|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:54:43.688|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:54:43.702|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:54:43.714|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 3.833 seconds (process running for 4.547)
+2024-11-25 14:54:44.028|INFO|RMI TCP Connection(1)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:54:44.029|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:54:44.030|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:54:44.031|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-11-25 14:54:44.190|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@709b2655
+2024-11-25 14:54:44.197|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:54:46.735|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815544642203700|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:54:46.758|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2815544642203700|请求耗时：551ms
+2024-11-25 14:55:14.318|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.m.MailHealthIndicator|line-94||Mail health check failed
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.qq.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2247)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:754)
+	at jakarta.mail.Service.connect(Service.java:342)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:518)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:398)
+	at org.springframework.boot.actuate.mail.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:42)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:82)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:76)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:122)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:814)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.GeneratedMethodAccessor20.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 14:55:14.322|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.h.HealthEndpointSupport|line-181||Health contributor org.springframework.boot.actuate.mail.MailHealthIndicator (mail) took 30108ms to respond
+2024-11-25 14:56:31.365|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815649737334800|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:56:31.370|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2815649737334800|请求耗时：67ms
+2024-11-25 14:56:40.951|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815659334352700|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:56:40.953|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2815659334352700|请求耗时：54ms
+2024-11-25 14:56:41.624|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815659854161000|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:56:41.628|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2815659854161000|请求耗时：210ms
+2024-11-25 14:56:42.541|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815660926342100|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:56:42.543|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2815660926342100|请求耗时：52ms
+2024-11-25 14:56:53.668|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815672054882900|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:56:53.670|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2815672054882900|请求耗时：50ms
+2024-11-25 14:56:58.472|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815676857335100|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:56:58.474|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2815676857335100|请求耗时：52ms
+2024-11-25 14:58:03.707|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815742076196500|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:58:03.712|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2815742076196500|请求耗时：71ms
+2024-11-25 14:58:04.035|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815742432318900|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:58:04.036|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2815742432318900|请求耗时：38ms
+2024-11-25 14:58:06.328|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815744683686200|stringBuilder:<p style="font-size:30rpx;margin:20rpx;"><strong>请假类型:</strong>病假</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假时长（天）:</strong>2</p><p style="font-size:30rpx;margin:20rpx;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="font-size:30rpx;margin:20rpx;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:58:06.333|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2815744683686200|请求耗时：84ms
+2024-11-25 14:58:33.058|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:58:33.064|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:58:38.014|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 17044 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:58:38.017|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:58:38.937|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:58:38.939|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:58:38.968|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:58:39.456|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:58:39.465|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:58:39.467|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:58:39.467|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:58:39.538|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:58:39.539|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1471 ms
+2024-11-25 14:58:39.647|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:58:40.570|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:58:41.357|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:58:41.426|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:58:41.441|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:58:41.454|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 3.799 seconds (process running for 4.511)
+2024-11-25 14:58:41.739|INFO|RMI TCP Connection(2)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:58:41.741|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:58:41.742|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:58:41.743|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-11-25 14:58:41.912|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6d7ef934
+2024-11-25 14:58:41.915|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:58:44.850|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815782664847200|stringBuilder:<p style="color:red;"><strong>请假类型:</strong>病假</p><p style="color:red;"><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p style="color:red;"><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p style="color:red;"><strong>请假时长（天）:</strong>2</p><p style="color:red;"><strong>请假事由:</strong>感冒生病打点滴</p><p style="color:red;"><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p style="color:red;"><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:58:44.876|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2815782664847200|请求耗时：647ms
+2024-11-25 14:59:01.887|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:59:01.895|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:59:06.976|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 37876 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:59:06.978|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:59:07.904|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:59:07.906|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:59:07.931|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:59:08.394|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:59:08.402|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:59:08.402|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:59:08.403|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:59:08.480|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:59:08.481|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1457 ms
+2024-11-25 14:59:08.594|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:59:09.576|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:59:10.422|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:59:10.495|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:59:10.514|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:59:10.527|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 3.906 seconds (process running for 4.609)
+2024-11-25 14:59:10.786|INFO|RMI TCP Connection(1)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:59:10.787|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:59:10.786|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:59:10.789|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-11-25 14:59:10.979|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@78b3d053
+2024-11-25 14:59:10.983|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:59:34.175|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 14:59:34.179|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-11-25 14:59:39.086|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 42356 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-25 14:59:39.088|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-25 14:59:40.015|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-25 14:59:40.017|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-25 14:59:40.046|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
+2024-11-25 14:59:40.555|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-25 14:59:40.564|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:59:40.565|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-25 14:59:40.566|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-25 14:59:40.636|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-25 14:59:40.636|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1503 ms
+2024-11-25 14:59:40.753|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-25 14:59:41.734|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-25 14:59:42.539|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-25 14:59:42.603|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-25 14:59:42.618|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-25 14:59:42.632|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 3.906 seconds (process running for 4.614)
+2024-11-25 14:59:42.877|INFO|RMI TCP Connection(3)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-25 14:59:42.877|INFO|RMI TCP Connection(3)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-25 14:59:42.876|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-25 14:59:42.879|INFO|RMI TCP Connection(3)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-11-25 14:59:43.062|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@99f9cec
+2024-11-25 14:59:43.068|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-25 14:59:44.461|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2815842322586500|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 14:59:44.486|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2815842322586500|请求耗时：599ms
+2024-11-25 15:00:13.170|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.m.MailHealthIndicator|line-94||Mail health check failed
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.qq.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2247)
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:754)
+	at jakarta.mail.Service.connect(Service.java:342)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.connectTransport(JavaMailSenderImpl.java:518)
+	at org.springframework.mail.javamail.JavaMailSenderImpl.testConnection(JavaMailSenderImpl.java:398)
+	at org.springframework.boot.actuate.mail.MailHealthIndicator.doHealthCheck(MailHealthIndicator.java:42)
+	at org.springframework.boot.actuate.health.AbstractHealthIndicator.health(AbstractHealthIndicator.java:82)
+	at org.springframework.boot.actuate.health.HealthIndicator.getHealth(HealthIndicator.java:37)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:82)
+	at org.springframework.boot.actuate.health.HealthEndpoint.getHealth(HealthEndpoint.java:41)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getLoggedHealth(HealthEndpointSupport.java:172)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:145)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getAggregateContribution(HealthEndpointSupport.java:156)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getContribution(HealthEndpointSupport.java:141)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:110)
+	at org.springframework.boot.actuate.health.HealthEndpointSupport.getHealth(HealthEndpointSupport.java:81)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:76)
+	at org.springframework.boot.actuate.health.HealthEndpoint.health(HealthEndpoint.java:66)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:281)
+	at org.springframework.boot.actuate.endpoint.invoke.reflect.ReflectiveOperationInvoker.invoke(ReflectiveOperationInvoker.java:74)
+	at org.springframework.boot.actuate.endpoint.annotation.AbstractDiscoveredOperation.invoke(AbstractDiscoveredOperation.java:60)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:122)
+	at org.springframework.boot.actuate.endpoint.jmx.EndpointMBean.invoke(EndpointMBean.java:97)
+	at java.management/com.sun.jmx.interceptor.DefaultMBeanServerInterceptor.invoke(DefaultMBeanServerInterceptor.java:814)
+	at java.management/com.sun.jmx.mbeanserver.JmxMBeanServer.invoke(JmxMBeanServer.java:802)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doOperation(RMIConnectionImpl.java:1472)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl$PrivilegedOperation.run(RMIConnectionImpl.java:1310)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.doPrivilegedOperation(RMIConnectionImpl.java:1405)
+	at java.management.rmi/javax.management.remote.rmi.RMIConnectionImpl.invoke(RMIConnectionImpl.java:829)
+	at java.base/jdk.internal.reflect.GeneratedMethodAccessor20.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(UnicastServerRef.java:360)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:200)
+	at java.rmi/sun.rmi.transport.Transport$1.run(Transport.java:197)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Transport.java:196)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(TCPTransport.java:587)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(TCPTransport.java:828)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.lambda$run$0(TCPTransport.java:705)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(TCPTransport.java:704)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-25 15:00:13.174|WARN|RMI TCP Connection(2)-192.168.200.1|o.s.b.a.h.HealthEndpointSupport|line-181||Health contributor org.springframework.boot.actuate.mail.MailHealthIndicator (mail) took 30087ms to respond
+2024-11-25 15:03:32.332|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2816070716880200|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>['多选项1','多选项2','多选项3']</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 15:03:32.335|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2816070716880200|请求耗时：53ms
+2024-11-25 15:26:36.175|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2817454570481900|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 15:26:36.182|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2817454570481900|请求耗时：47ms
+2024-11-25 15:42:05.156|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2818383519319600|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 15:42:05.158|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2818383519319600|请求耗时：74ms
+2024-11-25 15:43:51.605|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2818489993378700|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 15:43:51.608|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2818489993378700|请求耗时：50ms
+2024-11-25 15:51:37.000|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2818955376647600|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 15:51:37.004|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2818955376647600|请求耗时：63ms
+2024-11-25 16:06:42.092|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2819860483847100|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 16:06:42.093|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2819860483847100|请求耗时：45ms
+2024-11-25 16:06:45.355|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2819863719583900|请求耗时：71ms
+2024-11-25 16:06:52.311|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2819870740211700|请求耗时：6ms
+2024-11-25 16:06:52.391|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2819870743659300|请求耗时：83ms
+2024-11-25 16:06:52.405|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2819870768573900|请求耗时：72ms
+2024-11-25 16:06:53.267|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2819871658360500|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 16:06:53.269|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2819871658360500|请求耗时：46ms
+2024-11-25 16:06:56.511|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2819874928658000|请求耗时：17ms
+2024-11-25 16:06:59.492|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2819877908519300|请求耗时：20ms
+2024-11-25 16:07:01.566|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2819879983526400|请求耗时：18ms
+2024-11-25 16:07:05.581|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2819884008052100|请求耗时：9ms
+2024-11-25 16:07:05.582|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2819884008058000|请求耗时：10ms
+2024-11-25 16:07:05.642|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2819884028304100|请求耗时：49ms
+2024-11-25 16:07:07.871|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2819886269230200|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 16:07:07.872|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2819886269230200|请求耗时：38ms
+2024-11-25 16:07:09.158|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2819887575528500|请求耗时：18ms
+2024-11-25 16:07:51.850|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2819930254556100|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 16:07:51.852|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2819930254556100|请求耗时：33ms
+2024-11-25 16:07:53.131|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2819931537067500|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 16:07:53.132|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2819931537067500|请求耗时：30ms
+2024-11-25 16:08:00.240|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2819938668950500|请求耗时：6ms
+2024-11-25 16:08:00.241|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2819938668948000|请求耗时：7ms
+2024-11-25 16:08:00.282|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2819938683690400|请求耗时：34ms
+2024-11-25 16:08:01.917|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2819940305264800|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 16:08:01.920|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2819940305264800|请求耗时：50ms
+2024-11-25 16:08:02.448|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2819940854276500|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 16:08:02.449|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2819940854276500|请求耗时：30ms
+2024-11-25 16:08:05.512|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2819943920383800|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>["多选项1","多选项2","多选项3"]</p><p ><strong>测试多选用户数据:</strong>[1,2,3,7,8,9]</p>
+2024-11-25 16:08:05.513|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2819943920383800|请求耗时：29ms
+2024-11-25 16:19:17.979|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2820616363620000|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:19:17.982|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2820616363620000|请求耗时：53ms
+2024-11-25 16:30:05.503|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2821263897268500|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:30:05.512|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2821263897268500|请求耗时：51ms
+2024-11-25 16:30:10.391|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2821268787553600|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:30:10.392|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2821268787553600|请求耗时：39ms
+2024-11-25 16:31:01.843|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2821320240216800|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:31:01.845|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2821320240216800|请求耗时：40ms
+2024-11-25 16:39:37.104|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2821835497417800|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:39:37.109|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2821835497417800|请求耗时：46ms
+2024-11-25 16:39:55.113|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2821853512981300|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:39:55.115|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2821853512981300|请求耗时：37ms
+2024-11-25 16:39:57.087|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2821855505072600|请求耗时：17ms
+2024-11-25 16:39:57.655|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2821856073175100|请求耗时：17ms
+2024-11-25 16:39:58.067|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2821856490990800|请求耗时：12ms
+2024-11-25 16:39:58.485|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2821856908267400|请求耗时：12ms
+2024-11-25 16:39:59.686|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2821858091317700|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:39:59.688|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2821858091317700|请求耗时：33ms
+2024-11-25 16:39:59.929|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2821858353112900|请求耗时：11ms
+2024-11-25 16:40:00.360|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2821858772628700|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:40:00.361|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2821858772628700|请求耗时：24ms
+2024-11-25 16:40:00.610|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2821859033286500|请求耗时：12ms
+2024-11-25 16:40:00.907|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2821859330663400|请求耗时：13ms
+2024-11-25 16:40:01.207|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2821859627732500|请求耗时：15ms
+2024-11-25 16:40:01.475|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2821859896504400|请求耗时：14ms
+2024-11-25 16:40:01.771|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2821860194947400|请求耗时：11ms
+2024-11-25 16:40:02.082|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2821860497457500|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:40:02.083|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2821860497457500|请求耗时：21ms
+2024-11-25 16:40:02.539|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2821860962470500|请求耗时：12ms
+2024-11-25 16:40:02.793|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2821861216369000|请求耗时：12ms
+2024-11-25 16:40:03.215|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2821861640139100|请求耗时：11ms
+2024-11-25 16:40:03.488|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2821861912070600|请求耗时：12ms
+2024-11-25 16:40:03.841|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2821862265899400|请求耗时：11ms
+2024-11-25 16:40:04.157|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-229|traceId_2821862569703900|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束事件:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-25 16:40:04.158|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2821862569703900|请求耗时：24ms
+2024-11-25 16:40:33.376|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2821891805359800|请求耗时：6ms
+2024-11-25 16:40:33.379|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2821891805821200|请求耗时：9ms
+2024-11-25 16:40:33.443|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2821891825941600|请求耗时：53ms
+2024-11-25 16:40:35.232|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2821893662504200|请求耗时：5ms
+2024-11-25 17:10:19.713|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2823678143118300|请求耗时：5ms
+2024-11-25 17:10:22.073|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2823680502618600|请求耗时：5ms
+2024-11-25 17:10:22.078|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2823680507558800|请求耗时：6ms
+2024-11-25 17:10:22.116|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2823680517782200|请求耗时：33ms
+2024-11-25 17:10:27.240|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2823685671136900|请求耗时：4ms
+2024-11-25 17:10:32.039|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2823690468225700|请求耗时：5ms
+2024-11-25 17:11:00.570|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2823718977678800|请求耗时：28ms
+2024-11-25 17:11:00.647|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2823718976395900|请求耗时：107ms
+2024-11-25 17:11:02.755|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2823721138166800|请求耗时：52ms
+2024-11-25 17:11:03.762|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2823722060042100|请求耗时：138ms
+2024-11-25 17:11:04.386|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2823722777635200|请求耗时：44ms
+2024-11-25 17:11:04.719|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2823723120756400|请求耗时：34ms
+2024-11-25 17:11:08.809|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2823727186571500|请求耗时：59ms
+2024-11-25 17:11:10.711|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2823729102713000|请求耗时：43ms
+2024-11-25 17:11:23.343|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2823741731811700|请求耗时：47ms
+2024-11-25 17:11:24.219|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2823742584020300|请求耗时：71ms
+2024-11-25 17:12:03.173|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2823781565415700|请求耗时：43ms
+2024-11-25 17:12:03.590|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2823781992390500|请求耗时：33ms
+2024-11-25 17:12:04.232|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2823782609923800|请求耗时：57ms
+2024-11-25 17:12:04.754|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2823783136548500|请求耗时：53ms
+2024-11-25 17:12:05.332|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2823783721773800|请求耗时：46ms
+2024-11-25 17:12:05.687|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2823784089519900|请求耗时：33ms
+2024-11-25 17:15:17.586|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2823976004290600|请求耗时：18ms
+2024-11-25 17:15:17.624|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2823976004093800|请求耗时：56ms
+2024-11-25 17:16:13.036|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2824031453054400|请求耗时：19ms
+2024-11-25 17:16:13.088|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2824031453054000|请求耗时：71ms
+2024-11-25 17:16:26.184|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2824044598826400|请求耗时：20ms
+2024-11-25 17:16:26.219|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2824044598822300|请求耗时：55ms
+2024-11-25 17:16:53.215|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2824071547987200|请求耗时：103ms
+2024-11-25 17:16:54.452|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2824072801029200|请求耗时：87ms
+2024-11-25 17:16:56.242|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2824074593950500|请求耗时：83ms
+2024-11-25 17:16:57.383|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_2824075733611000|请求耗时：85ms
+2024-11-25 17:17:04.182|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2824082531786400|请求耗时：87ms
+2024-11-25 17:17:05.047|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2824083425597200|请求耗时：57ms
+2024-11-25 17:17:06.823|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2824085208412700|请求耗时：50ms
+2024-11-25 17:17:21.714|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2824100134771100|请求耗时：16ms
+2024-11-25 17:17:21.763|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2824100134505300|请求耗时：65ms
+2024-11-25 17:17:39.368|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2824117783159400|请求耗时：21ms
+2024-11-25 17:17:39.394|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2824117782709600|请求耗时：47ms
+2024-11-25 17:17:54.318|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2824132661342300|请求耗时：92ms
+2024-11-25 17:18:13.856|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2824152271520200|请求耗时：20ms
+2024-11-25 17:18:13.887|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2824152271516100|请求耗时：51ms
+2024-11-25 17:18:18.493|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2824156883625800|请求耗时：45ms
+2024-11-25 17:19:03.591|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2824202004683200|请求耗时：22ms
+2024-11-25 17:19:03.621|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_2824202004467700|请求耗时：52ms
+2024-11-25 17:19:06.405|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2824204786828000|请求耗时：53ms
+2024-11-25 17:19:43.898|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2824242316671800|请求耗时：17ms
+2024-11-25 17:19:43.936|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2824242316101300|请求耗时：55ms
+2024-11-25 17:29:40.931|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_2824839333400400|请求耗时：33ms
+2024-11-25 17:30:36.921|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_2824895317730500|请求耗时：39ms
+2024-11-25 17:30:38.122|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_2824896521704600|请求耗时：36ms
+2024-11-25 17:30:39.654|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_2824898035608200|请求耗时：54ms
+2024-11-25 17:30:40.811|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_2824899202998400|请求耗时：44ms
+2024-11-25 17:30:41.850|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_2824900243477300|请求耗时：42ms
+2024-11-25 17:30:42.965|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_2824901356296300|请求耗时：45ms
+2024-11-25 17:30:44.436|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_2824902832319600|请求耗时：39ms
+2024-11-25 17:30:58.938|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-25 17:30:58.940|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.

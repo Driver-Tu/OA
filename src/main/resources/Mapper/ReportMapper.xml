@@ -56,16 +56,14 @@
             <if test="reportDate != null">
                 AND r.report_date = #{reportDate}
             </if>
-            <if test="type != null">
-                AND r.type = #{type}
-            </if>
             <if test="reportId != null">
                 AND r.report_id = #{reportId}
             </if>
-            <if test="share==1">
-                and r.share_user_id is not null
+            <if test="share!=null">
+               and r.share_user_id LIKE CONCAT('%', #{share}, '%')
             </if>
         </where>
+        order by r.report_date desc
     </select>
     <select id="selectFile" resultType="wh.fcfz.officecontroller.all.bean.Dao.File">
             SELECT

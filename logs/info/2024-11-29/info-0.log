@@ -1,0 +1,97 @@
+2024-11-29 16:43:20.448|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 5864 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-11-29 16:43:20.450|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-11-29 16:43:21.589|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-11-29 16:43:21.593|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-11-29 16:43:21.628|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
+2024-11-29 16:43:22.225|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-11-29 16:43:22.234|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-11-29 16:43:22.236|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-11-29 16:43:22.236|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-11-29 16:43:22.316|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-11-29 16:43:22.316|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1824 ms
+2024-11-29 16:43:22.445|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-11-29 16:43:23.448|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-11-29 16:43:24.224|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-11-29 16:43:24.292|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-11-29 16:43:24.309|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-11-29 16:43:24.320|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.25 seconds (process running for 6.013)
+2024-11-29 16:43:24.752|INFO|RMI TCP Connection(2)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-29 16:43:24.753|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-11-29 16:43:24.755|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 2 ms
+2024-11-29 16:43:24.755|INFO|RMI TCP Connection(3)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-11-29 16:43:24.996|INFO|RMI TCP Connection(3)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@28fb6f8d
+2024-11-29 16:43:25.000|INFO|RMI TCP Connection(3)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-11-29 16:43:38.007|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_85865250263600|请求耗时：419ms
+2024-11-29 16:43:44.196|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_85871392524700|请求耗时：466ms
+2024-11-29 16:43:44.216|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_85871872668700|请求耗时：6ms
+2024-11-29 16:43:45.830|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_85873486877900|请求耗时：5ms
+2024-11-29 16:43:45.887|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_85873491022100|请求耗时：57ms
+2024-11-29 16:43:46.344|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_85873503791700|请求耗时：503ms
+2024-11-29 16:43:48.769|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_85876425803500|请求耗时：6ms
+2024-11-29 16:44:07.841|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_85895500146800|请求耗时：4ms
+2024-11-29 16:44:12.829|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_85900486906800|请求耗时：5ms
+2024-11-29 16:44:17.205|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_85904863256600|请求耗时：5ms
+2024-11-29 16:44:17.207|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_85904863256500|请求耗时：7ms
+2024-11-29 16:44:17.272|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_85904894275300|请求耗时：40ms
+2024-11-29 16:44:25.209|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_85912830374800|请求耗时：41ms
+2024-11-29 16:44:25.211|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_85912830380200|请求耗时：43ms
+2024-11-29 16:44:26.812|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_85914471607500|请求耗时：3ms
+2024-11-29 16:44:26.813|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_85914471605100|请求耗时：4ms
+2024-11-29 16:44:26.860|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_85914487220600|请求耗时：35ms
+2024-11-29 16:44:30.312|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_85917971584400|请求耗时：3ms
+2024-11-29 16:44:30.958|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_85918614066600|请求耗时：6ms
+2024-11-29 16:44:31.827|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_85919485182600|请求耗时：4ms
+2024-11-29 16:44:31.831|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_85919485187100|请求耗时：8ms
+2024-11-29 16:44:31.875|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_85919500225700|请求耗时：37ms
+2024-11-29 16:44:34.888|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_85922544637100|请求耗时：5ms
+2024-11-29 16:44:36.323|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_85923980788000|请求耗时：5ms
+2024-11-29 16:44:36.325|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_85923980782300|请求耗时：7ms
+2024-11-29 16:44:36.394|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_85923998686100|请求耗时：59ms
+2024-11-29 16:44:39.063|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.ApprovalFormsServiceImpl|line-226|traceId_85926271038000|stringBuilder:<p ><strong>请假类型:</strong>病假</p><p ><strong>请假开始时间:</strong>2024-11-21 09:00:00</p><p ><strong>请假结束时间:</strong>2024-11-22 17:30:00</p><p ><strong>请假时长（天）:</strong>2</p><p ><strong>请假事由:</strong>感冒生病打点滴</p><p ><strong>测试用多选项:</strong>[多选项1, 多选项2, 多选项3]</p><p ><strong>测试多选用户数据:</strong>[1, 2, 3, 7, 8, 9]</p>
+2024-11-29 16:44:39.069|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_85926271038000|请求耗时：460ms
+2024-11-29 16:44:39.926|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_85927584115100|请求耗时：5ms
+2024-11-29 16:44:40.904|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_85928562839700|请求耗时：3ms
+2024-11-29 16:44:40.906|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_85928566070800|请求耗时：3ms
+2024-11-29 16:44:41.276|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_85928582700700|请求耗时：356ms
+2024-11-29 16:44:45.291|INFO|http-nio-8088-exec-4|w.f.o.c.s.MyFilter|line-35|traceId_85932915675000|请求耗时：37ms
+2024-11-29 16:44:45.662|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_85933298375800|请求耗时：25ms
+2024-11-29 16:44:46.318|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_85933592119000|请求耗时：398ms
+2024-11-29 16:44:48.502|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_85936143906400|请求耗时：21ms
+2024-11-29 16:44:48.946|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_85936448364900|请求耗时：161ms
+2024-11-29 16:44:49.949|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_85937609330000|请求耗时：3ms
+2024-11-29 16:44:50.920|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_85938579466500|请求耗时：3ms
+2024-11-29 16:44:50.925|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_85938582823200|请求耗时：4ms
+2024-11-29 16:44:51.164|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_85938600518100|请求耗时：226ms
+2024-11-29 16:44:51.871|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_85939510869200|请求耗时：23ms
+2024-11-29 16:44:51.877|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_85939507860000|请求耗时：32ms
+2024-11-29 16:44:55.604|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_85943263959300|请求耗时：3ms
+2024-11-29 16:44:56.752|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_85944411023500|请求耗时：3ms
+2024-11-29 16:44:56.755|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_85944413123300|请求耗时：4ms
+2024-11-29 16:44:56.827|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_85944432013600|请求耗时：58ms
+2024-11-29 16:44:58.127|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_85945666303300|请求耗时：124ms
+2024-11-29 16:44:59.260|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_85946919160500|请求耗时：3ms
+2024-11-29 16:44:59.260|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_85946919168300|请求耗时：3ms
+2024-11-29 16:44:59.577|INFO|http-nio-8088-exec-7|w.f.o.c.s.MyFilter|line-35|traceId_85946931089800|请求耗时：309ms
+2024-11-29 16:45:06.371|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_85953753652600|请求耗时：280ms
+2024-11-29 16:45:09.619|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_85957073474700|请求耗时：209ms
+2024-11-29 16:45:12.602|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_85960227224500|请求耗时：38ms
+2024-11-29 16:45:13.914|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_85961512061600|请求耗时：64ms
+2024-11-29 16:45:51.212|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_85998617548700|请求耗时：257ms
+2024-11-29 16:45:52.913|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_86000512015500|请求耗时：64ms
+2024-11-29 16:46:11.782|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_86019442222600|请求耗时：3ms
+2024-11-29 16:46:12.983|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_86020642191800|请求耗时：4ms
+2024-11-29 16:46:12.987|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_86020645708700|请求耗时：4ms
+2024-11-29 16:46:13.027|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_86020663560000|请求耗时：26ms
+2024-11-29 16:46:14.381|INFO|http-nio-8088-exec-10|w.f.o.c.s.MyFilter|line-35|traceId_86022040050500|请求耗时：4ms
+2024-11-29 16:46:14.741|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_86022399512900|请求耗时：4ms
+2024-11-29 16:46:23.243|INFO|http-nio-8088-exec-9|w.f.o.c.s.MyFilter|line-35|traceId_86030901040300|请求耗时：5ms
+2024-11-29 16:46:24.274|INFO|http-nio-8088-exec-1|w.f.o.c.s.MyFilter|line-35|traceId_86031932357100|请求耗时：4ms
+2024-11-29 16:46:30.457|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_86038116557800|请求耗时：3ms
+2024-11-29 16:46:31.680|INFO|http-nio-8088-exec-3|w.f.o.c.s.MyFilter|line-35|traceId_86039339188900|请求耗时：3ms
+2024-11-29 16:46:31.684|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_86039341884700|请求耗时：5ms
+2024-11-29 16:46:31.719|INFO|http-nio-8088-exec-6|w.f.o.c.s.MyFilter|line-35|traceId_86039356635400|请求耗时：25ms
+2024-11-29 16:58:32.420|INFO|http-nio-8088-exec-5|w.f.o.c.s.MyFilter|line-35|traceId_86760077539200|请求耗时：5ms
+2024-11-29 16:58:32.421|INFO|http-nio-8088-exec-2|w.f.o.c.s.MyFilter|line-35|traceId_86760077539200|请求耗时：5ms
+2024-11-29 16:58:32.453|INFO|http-nio-8088-exec-8|w.f.o.c.s.MyFilter|line-35|traceId_86760091149700|请求耗时：25ms
+2024-11-29 17:30:41.431|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-11-29 17:30:41.431|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.

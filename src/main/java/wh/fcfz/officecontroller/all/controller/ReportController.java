@@ -23,7 +23,6 @@ import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -69,27 +68,14 @@ public class ReportController {
 
     //return:userOnVo
     @PostMapping("/shareReport")
-    public Result<Page<ReportVo>> shareReport(@RequestParam Integer pageNum,@RequestParam Integer pageSize) {
-        ReportDto reportDto = new ReportDto();
-        reportDto.setShare("1");
-        List<ReportVo> reportVos = reportMapper.selectReport(reportDto);
-        List<ReportVo> list = new ArrayList<>();
-        reportVos.stream().forEach(reportVo -> {
-            String[] split = reportVo.getShareUserId().split(",");
-            log.error(Arrays.toString(split));
-            int loginIdAsInt = StpUtil.getLoginIdAsInt();
-            for (String s : split) {
-                log.info(s);
-                if (Integer.parseInt(s) == loginIdAsInt) {
-                    //只要有一个是对的就添加该条数据
-                    list.add(reportVo);
-                }
-            }
-        });
-        Page<ReportVo> page = new Page<>(pageNum,pageSize);
-        List<ReportVo> collect = list.stream().skip((long) (pageNum - 1) * pageSize).limit(pageSize).toList();
+    public Result<Page<ReportVo>> shareReport(@RequestBody MyPage<ReportDto> reportDto) {
+        reportDto.getData().setShare(StpUtil.getLoginId().toString());
+        List<ReportVo> reportVos = reportMapper.selectReport(reportDto.getData());
+        Page<ReportVo> page = new Page<>(reportDto.getPageNum(),reportDto.getPageSize());
+//拿取分页的数据
+        List<ReportVo> collect = reportVos.stream().skip((long) (reportDto.getPageNum() - 1) * reportDto.getPageSize()).limit(reportDto.getPageSize()).collect(java.util.stream.Collectors.toList());
         page.setRecords(collect);
-        page.setTotal(list.size());
+        page.setTotal(reportVos.size());
         return new Result<>(ResponseEnum.SUCCESS, page);
     }
 
