@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import wh.fcfz.officecontroller.all.bean.Dao.File;
 import wh.fcfz.officecontroller.all.bean.Dao.Report;
 import wh.fcfz.officecontroller.all.bean.Dto.ReportDto;
 import wh.fcfz.officecontroller.all.bean.Dto.UserDto;
@@ -71,10 +72,15 @@ public class ReportController {
     public Result<Page<ReportVo>> shareReport(@RequestBody MyPage<ReportDto> reportDto) {
         reportDto.getData().setShare(StpUtil.getLoginId().toString());
         List<ReportVo> reportVos = reportMapper.selectReport(reportDto.getData());
+        List<ReportVo> list = reportVos.stream().skip((long) (reportDto.getPageNum() - 1) * reportDto.getPageSize()).limit(reportDto.getPageSize()).toList();
+        list= list.stream().parallel().peek(reportVo -> {
+            List<File> files = reportMapper.selectFile(reportVo.getReportId());
+            List<String> fileUrlList = files.stream().parallel().map(File::getFileUrl).toList();
+            reportVo.setFileUrls(fileUrlList);
+        }).toList();
         Page<ReportVo> page = new Page<>(reportDto.getPageNum(),reportDto.getPageSize());
 //拿取分页的数据
-        List<ReportVo> collect = reportVos.stream().skip((long) (reportDto.getPageNum() - 1) * reportDto.getPageSize()).limit(reportDto.getPageSize()).collect(java.util.stream.Collectors.toList());
-        page.setRecords(collect);
+        page.setRecords(list);
         page.setTotal(reportVos.size());
         return new Result<>(ResponseEnum.SUCCESS, page);
     }
@@ -93,6 +99,4 @@ public class ReportController {
         }
         return new Result<>(ResponseEnum.SUCCESS, userOnVos);
     }
-
-
 }

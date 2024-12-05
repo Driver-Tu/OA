@@ -34,6 +34,11 @@ public class UserController {
         return userService.login(empNum,password,device);
     }
 
+    @GetMapping("isAdmin")
+    public Result<Boolean> isAdmin(){
+        return new Result<>(ResponseEnum.SUCCESS,StpUtil.hasPermission("admin"));
+    }
+
     @GetMapping("/info")
     public Result<UserVo> info(){
         return userService.SelectByUserId();
