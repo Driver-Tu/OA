@@ -3,7 +3,9 @@ package wh.fcfz.officecontroller.all.controller;
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.stp.StpUtil;
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.UUID;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,14 +13,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import wh.fcfz.officecontroller.all.bean.Dao.User;
 import wh.fcfz.officecontroller.all.bean.Dto.UserDto;
+import wh.fcfz.officecontroller.all.bean.Vo.UserOnVo;
 import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
+import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.Impl.UserServiceImpl;
 import wh.fcfz.officecontroller.all.tool.AliOssUtil;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @RestController
@@ -146,5 +152,35 @@ public class UserController {
         }else {
             return new Result<>(ResponseEnum.DATA_NOT_EXIST,null);
         }
+    }
+
+
+    @Autowired
+    private UserMapper userMapper;
+    /**
+     * 查询所有员工数据
+     * */
+    @GetMapping("/shareUserList")
+    public Result<List<UserOnVo>> selectShareUsers(){
+        User byId = userService.getById(StpUtil.getLoginIdAsInt());
+        String s = userMapper.selectDepartName(byId.getDepartmentId());
+        // 查询所有roleId小于等于2的用户
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.le(User::getRoleId,2);
+        List<User> list = userService.list(queryWrapper);
+        List<UserOnVo> userOnVoList =new ArrayList<>();
+
+        List<UserOnVo> userOnVoLists = list.stream().filter(item -> Objects.equals(item.getDepartmentId(), byId.getDepartmentId()) || item.getRoleId() == 1).map(item -> {
+            UserOnVo userOnVo = new UserOnVo();
+            BeanUtil.copyProperties(item, userOnVo);
+            if (item.getRoleId() == 2) {
+                userOnVo.setRoleName("admin");
+                userOnVo.setDepartmentName(s);
+            } else {
+                userOnVo.setRoleName("boss");
+            }
+            return userOnVo;
+        }).toList();
+        return new Result<>(ResponseEnum.SUCCESS, userOnVoLists);
     }
 }

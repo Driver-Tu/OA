@@ -22,6 +22,7 @@ public class SaTokenConfigure implements WebMvcConfigurer {
                 //允许通过
                 // 放行以下路径
 //                .excludePathPatterns("/**")
+                .excludePathPatterns("/ueditor")
                 .excludePathPatterns("/v3/api-docs")
                 .excludePathPatterns("/user/login")
                 .excludePathPatterns("/user/isLogin")

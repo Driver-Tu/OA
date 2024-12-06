@@ -129,7 +129,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     public static String[] getBirthdayAndGender(String idNumber) {
         if (idNumber == null || (idNumber.length() != 15 && idNumber.length() != 18)) {
-            return null;
+            // 返回默认值
+            return new String[]{null, "1"};
         }
         String birthday = null;
         String gender = null;
@@ -150,14 +151,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                     gender = "1";
                 }
             } else {
-                return null; // 只支持18位身份证号码
+                // 返回默认值
+                return new String[]{null, "1"};
             }
         } catch (ParseException e) {
-            return null; // 发生解析异常，返回null
+            // 返回默认值
+            return new String[]{null, "1"};
         }
 
         return new String[]{birthday, gender};
     }
+
 
     /**
      * 修改密码
@@ -229,8 +233,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return new Result<User>(ResponseEnum.USER_NOT_LOGIN, null);
         }
         boolean b = ObjectUtil.hasEmpty(
-                user.getUserName(), user.getEmpNum(),
-                user.getUserPassword(), user.getUserImage(),
+                user.getUserName(), user.getEmpNum(),user.getStatus(),
                 user.getDepartmentId(), user.getRoleId());
         if(b){
             return new Result<User>(ResponseEnum.DATA_NOT_EXIST,null);
@@ -242,7 +245,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         try {
             user.setCtTime(DateTime.now().toTimestamp());
-            user.setUserPassword(HashEncryption.encrypt(user.getUserPassword()));
+            user.setTimeIn(DateTime.now().toTimestamp());
+//            user.setUserPassword(HashEncryption.encrypt(user.getUserPassword()));
+            if (user.getUserPassword() == null) {
+                user.setUserPassword("123456");
+            }
+            user.setUserPassword(user.getUserPassword());
             userMapper.insert(user);
             return new Result<User>(ResponseEnum.SUCCESS, null);
         } catch (Exception e) {

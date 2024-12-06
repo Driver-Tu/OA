@@ -137,7 +137,7 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
         //内容
         report.setContent(reportdto.getContent());
         //汇报时间
-        report.setReportDate(Date.valueOf(LocalDate.now()));
+        report.setReportDate(reportdto.getReportDate());
         //汇报名称
         report.setReportName(reportdto.getReportName());
         //汇报类型

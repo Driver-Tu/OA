@@ -1,18 +1,14 @@
 package wh.fcfz.officecontroller.all.controller;
 
-import cn.hutool.core.lang.UUID;
 import jakarta.annotation.Resource;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import wh.fcfz.officecontroller.all.bean.Dao.File;
 import wh.fcfz.officecontroller.all.service.FileService;
 import wh.fcfz.officecontroller.all.tool.AliOssUtil;
 import wh.fcfz.officecontroller.all.tool.FileUtil;
-import wh.fcfz.officecontroller.config.file.SystemConfig;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -86,7 +82,8 @@ public class UEditorController {
         List<String> fileUUIDs = fileService.uploadFile(List.of(new MultipartFile[]{file}), businessType, businessId);
 //        fileService.getFileById(fileUUIDs);
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
-        String url = "res/" + fileUUIDs.get(0) + (extension.isEmpty() ? "" : "." + extension);
+//        String url = "res/" + fileUUIDs.get(0) + (extension.isEmpty() ? "" : "." + extension);
+        String url = fileUUIDs.get(0) + (extension.isEmpty() ? "" : "." + extension);
 //        try {
 //            file.transferTo(destination);
             response.put("state", "SUCCESS");
