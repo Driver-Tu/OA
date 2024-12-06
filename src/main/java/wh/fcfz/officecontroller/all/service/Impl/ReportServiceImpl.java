@@ -60,7 +60,7 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
             StringBuilder userIDStr = new StringBuilder();
             for (int i = 0; i < userIDS.size(); i++) {
                 if(i<userIDS.size()-1){
-                    userIDStr.append(userIDS.get(i)).append(",");
+                    userIDStr.append("[").append(userIDS.get(i)).append("],");
                 }else{
                     userIDStr.append(userIDS.get(i));
                 }
@@ -149,9 +149,9 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
             StringBuilder FilePathAll = new StringBuilder();
             for (int i = 0; i < filePaths.size(); i++) {
                 if (i != filePaths.size() - 1) {
-                    FilePathAll.append(filePaths.get(i)).append(",");
+                    FilePathAll.append("[").append(filePaths.get(i)).append("],");
                 } else {
-                    FilePathAll.append(filePaths.get(i));
+                    FilePathAll.append("[").append(filePaths.get(i)).append("]");
                 }
             }
             report.setFilePath(FilePathAll.toString());

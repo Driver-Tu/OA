@@ -1,0 +1,23 @@
+2024-12-06 10:44:57.843|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 22920 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-12-06 10:44:57.845|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-12-06 10:44:59.042|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-06 10:44:59.046|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-06 10:44:59.086|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 21 ms. Found 0 Redis repository interfaces.
+2024-12-06 10:44:59.594|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-12-06 10:44:59.603|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-12-06 10:44:59.604|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-12-06 10:44:59.605|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-12-06 10:44:59.679|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-12-06 10:44:59.679|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1794 ms
+2024-12-06 10:44:59.783|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-12-06 10:45:00.751|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-12-06 10:45:01.524|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-12-06 10:45:01.590|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-12-06 10:45:01.604|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-12-06 10:45:01.616|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.136 seconds (process running for 5.514)
+2024-12-06 10:45:02.097|INFO|RMI TCP Connection(2)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-06 10:45:02.097|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-12-06 10:45:02.097|INFO|RMI TCP Connection(3)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-12-06 10:45:02.100|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-12-06 10:45:02.302|INFO|RMI TCP Connection(3)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ebbfad1
+2024-12-06 10:45:02.311|INFO|RMI TCP Connection(3)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
