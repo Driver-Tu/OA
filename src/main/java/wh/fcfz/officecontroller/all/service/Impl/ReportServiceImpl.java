@@ -59,10 +59,9 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
             List<String> userIDS = reportdto.getUserIDS();
             StringBuilder userIDStr = new StringBuilder();
             for (int i = 0; i < userIDS.size(); i++) {
+                userIDStr.append("[").append(userIDS.get(i)).append("]");
                 if(i<userIDS.size()-1){
-                    userIDStr.append("[").append(userIDS.get(i)).append("],");
-                }else{
-                    userIDStr.append(userIDS.get(i));
+                    userIDStr.append(",");
                 }
             }
             report.setShareUserId(userIDStr.toString());

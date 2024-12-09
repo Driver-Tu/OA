@@ -54,6 +54,12 @@
             <if test="empNum != null and empNum.trim() != ''">
                 AND u.emp_num LIKE CONCAT('%', #{empNum}, '%')
             </if>
+            <if test="empNum != null and telephone.trim() != ''">
+                AND u.telephone LIKE CONCAT('%', #{telephone}, '%')
+            </if>
+            <if test="empNum != null and email.trim() != ''">
+                AND u.email LIKE CONCAT('%', #{email}, '%')
+            </if>
             <if test="status != null">
                 AND u.status = #{status}
             </if>

@@ -116,7 +116,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             String[] birthdayAndGender = getBirthdayAndGender(userVo.getBirthdayNum());
             userVo.setBirth(birthdayAndGender[0]);
             userVo.setSex(birthdayAndGender[1]);
-            userVo.setBirthdayNum(DesensitizedUtil.idCardNum(userVo.getBirthdayNum(),1,1));
+//            userVo.setBirthdayNum(DesensitizedUtil.idCardNum(userVo.getBirthdayNum(),1,1));
+            userVo.setBirthdayNum(userVo.getBirthdayNum());
         }).toList();
         Page<UserVo> pageMessages = new Page<>(page.getPageNum(), page.getPageSize());
         List<UserVo> collect = userVoList.stream()
@@ -211,7 +212,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
         lambdaUpdateWrapper.set(User::getUpTime, DateTime.now())
-                .eq(User::getUserId,StpUtil.getLoginId());
+                .eq(User::getUserId, user.getUserId());
         try {
             if(userMapper.update(user,lambdaUpdateWrapper)>0){
                 return new Result<User>(ResponseEnum.SUCCESS,null);
