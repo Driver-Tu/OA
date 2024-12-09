@@ -59,6 +59,7 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
                 //判断今天打没打过卡
                 .eq(Attendance::getDate,attendance.getDate());
         Attendance attendance1 = attendanceMapper.selectOne(lambdaQueryWrapper);
+
         //判断上班打卡还是下班打卡
         if(attendance1==null){
             //上班卡
@@ -68,20 +69,23 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
             attendanceMapper.insert(attendance);
             return new Result(ResponseEnum.SUCCESS,"上班打卡成功");
         }else {
+            if(attendance1.getTimeOut()!=null&&attendance1.getTimeOut().toLocalDateTime().isBefore(LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 30, 0)))){
+                return new Result(ResponseEnum.SUCCESS,"已经在五点半之前，打过卡了，无法修改");
+            }
             //下班卡
             Timestamp timestamp=new Timestamp(System.currentTimeMillis());
             attendance1.setTimeOut(timestamp);
             //结算几今日打卡成功或者失败
             Timestamp timeIn = attendance1.getTimeIn();
             //小于0则早于九点，大于0则晚于九点，等于0则为九点（都是当天时间）
-            if((!timeIn.toLocalDateTime().isAfter(LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 0, 0))))||(timestamp.toLocalDateTime().isBefore(LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 30, 0))))){
+            if((!timeIn.toLocalDateTime().isAfter(LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 0, 0))))||!(timestamp.toLocalDateTime().isBefore(LocalDateTime.of(LocalDate.now(), LocalTime.of(17, 30, 0))))){
                 attendance1.setStatus("打卡成功");
                 attendanceMapper.updateById(attendance1);
                 return new Result(ResponseEnum.SUCCESS,"下班打卡成功");
             }else {
                 attendance1.setStatus("打卡失败");
                 attendanceMapper.updateById(attendance1);
-                return new Result(ResponseEnum.SUCCESS,"下班打卡失败");
+                return new Result(ResponseEnum.SUCCESS,"下班打卡早退");
             }
         }
     }

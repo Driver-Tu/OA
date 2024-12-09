@@ -96,9 +96,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userVo.setDepartmentName(departName);
         userVo.setRoleName(roleName);
         String[] birthdayAndGender = getBirthdayAndGender(user.getBirthdayNum());
+        log.info("birthdayNum:{}",birthdayAndGender[0]);
         userVo.setBirth(birthdayAndGender[0]);
         userVo.setSex(birthdayAndGender[1]);
         userVo.setBirthdayNum(DesensitizedUtil.idCardNum(user.getBirthdayNum(),1,1));
+        log.info(userVo.toString());
         return new Result<>(ResponseEnum.SUCCESS, userVo);
     }
 /**

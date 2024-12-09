@@ -1,0 +1,375 @@
+2024-12-09 09:06:26.212|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 21884 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-12-09 09:06:26.214|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-12-09 09:06:27.471|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-09 09:06:27.475|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-09 09:06:27.510|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2024-12-09 09:06:28.225|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-12-09 09:06:28.237|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-12-09 09:06:28.239|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-12-09 09:06:28.239|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-12-09 09:06:28.334|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-12-09 09:06:28.335|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 2072 ms
+2024-12-09 09:06:28.505|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-12-09 09:06:29.865|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-12-09 09:06:30.994|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-12-09 09:06:31.123|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-12-09 09:06:31.155|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-12-09 09:06:31.171|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 5.564 seconds (process running for 8.045)
+2024-12-09 09:06:31.579|INFO|http-nio-8088-exec-1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-09 09:06:31.580|INFO|http-nio-8088-exec-1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-12-09 09:06:31.583|INFO|http-nio-8088-exec-1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 3 ms
+2024-12-09 09:06:31.858|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-12-09 09:06:32.175|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6b10a6bd
+2024-12-09 09:06:32.183|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-12-09 15:13:20.762|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 3328 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-12-09 15:13:20.764|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-12-09 15:13:21.690|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-09 15:13:21.692|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-09 15:13:21.719|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2024-12-09 15:13:22.189|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-12-09 15:13:22.199|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:13:22.200|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-12-09 15:13:22.201|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-12-09 15:13:22.272|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-12-09 15:13:22.273|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1470 ms
+2024-12-09 15:13:22.376|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-12-09 15:13:23.310|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-12-09 15:13:24.044|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-12-09 15:13:24.108|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:13:24.127|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Pausing ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:13:24.127|INFO|main|o.a.c.c.StandardService|line-173||Stopping service [Tomcat]
+2024-12-09 15:13:24.133|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Stopping ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:13:24.134|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Destroying ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:13:24.144|INFO|main|o.s.b.a.l.ConditionEvaluationReportLogger|line-82||
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-12-09 15:52:18.169|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 15640 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-12-09 15:52:18.173|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-12-09 15:52:19.196|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-09 15:52:19.198|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-09 15:52:19.224|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 16 ms. Found 0 Redis repository interfaces.
+2024-12-09 15:52:19.709|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-12-09 15:52:19.716|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:52:19.717|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-12-09 15:52:19.718|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-12-09 15:52:19.788|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-12-09 15:52:19.789|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1569 ms
+2024-12-09 15:52:19.907|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-12-09 15:52:20.877|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-12-09 15:52:21.647|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-12-09 15:52:21.710|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:52:21.732|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Pausing ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:52:21.732|INFO|main|o.a.c.c.StandardService|line-173||Stopping service [Tomcat]
+2024-12-09 15:52:21.736|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Stopping ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:52:21.736|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Destroying ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:52:21.746|INFO|main|o.s.b.a.l.ConditionEvaluationReportLogger|line-82||
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-12-09 15:56:02.076|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 15576 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-12-09 15:56:02.078|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-12-09 15:56:03.183|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-09 15:56:03.185|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-09 15:56:03.220|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2024-12-09 15:56:03.838|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-12-09 15:56:03.847|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:56:03.849|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-12-09 15:56:03.849|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-12-09 15:56:03.923|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-12-09 15:56:03.923|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1802 ms
+2024-12-09 15:56:04.042|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-12-09 15:56:05.000|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-12-09 15:56:05.778|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-12-09 15:56:05.850|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-12-09 15:56:05.863|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-12-09 15:56:05.875|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 4.174 seconds (process running for 9.945)
+2024-12-09 15:56:13.365|INFO|http-nio-8088-exec-1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-09 15:56:13.365|INFO|http-nio-8088-exec-1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-12-09 15:56:13.367|INFO|http-nio-8088-exec-1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-12-09 15:56:18.244|INFO|http-nio-8088-exec-2|c.z.h.HikariDataSource|line-110|traceId_161001097100|HikariPool-1 - Starting...
+2024-12-09 15:56:18.429|INFO|http-nio-8088-exec-2|c.z.h.p.HikariPool|line-565|traceId_161001097100|HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@68aef4e4
+2024-12-09 15:56:18.435|INFO|http-nio-8088-exec-2|c.z.h.HikariDataSource|line-123|traceId_161001097100|HikariPool-1 - Start completed.
+2024-12-09 15:56:19.045|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_161792124500|birthdayNum:null
+2024-12-09 15:56:54.243|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_197040565400|birthdayNum:null
+2024-12-09 16:04:49.029|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-12-09 16:04:49.038|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-12-09 16:05:02.089|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 11616 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-12-09 16:05:02.092|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-12-09 16:05:03.142|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-09 16:05:03.145|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-09 16:05:03.178|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 21 ms. Found 0 Redis repository interfaces.
+2024-12-09 16:05:03.636|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-12-09 16:05:03.644|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-12-09 16:05:03.647|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-12-09 16:05:03.647|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-12-09 16:05:03.714|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-12-09 16:05:03.715|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1583 ms
+2024-12-09 16:05:03.811|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-12-09 16:05:04.812|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-12-09 16:05:05.562|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-12-09 16:05:05.662|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-12-09 16:05:05.687|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-12-09 16:05:05.704|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 3.963 seconds (process running for 5.246)
+2024-12-09 16:05:12.690|INFO|http-nio-8088-exec-1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-09 16:05:12.691|INFO|http-nio-8088-exec-1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-12-09 16:05:12.694|INFO|http-nio-8088-exec-1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 2 ms
+2024-12-09 16:05:13.110|INFO|http-nio-8088-exec-1|c.z.h.HikariDataSource|line-110|traceId_695524990800|HikariPool-1 - Starting...
+2024-12-09 16:05:13.275|INFO|http-nio-8088-exec-1|c.z.h.p.HikariPool|line-565|traceId_695524990800|HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@607713ca
+2024-12-09 16:05:13.280|INFO|http-nio-8088-exec-1|c.z.h.HikariDataSource|line-123|traceId_695524990800|HikariPool-1 - Start completed.
+2024-12-09 16:06:12.779|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-12-09 16:06:12.785|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-12-09 16:06:17.763|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 14204 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-12-09 16:06:17.767|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-12-09 16:06:18.738|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-09 16:06:18.739|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-09 16:06:18.768|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2024-12-09 16:06:19.238|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-12-09 16:06:19.245|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-12-09 16:06:19.246|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-12-09 16:06:19.246|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-12-09 16:06:19.317|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-12-09 16:06:19.318|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1501 ms
+2024-12-09 16:06:19.430|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-12-09 16:06:20.391|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-12-09 16:06:21.180|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-12-09 16:06:21.249|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-12-09 16:06:21.265|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-12-09 16:06:21.277|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 3.937 seconds (process running for 4.807)
+2024-12-09 16:06:21.449|INFO|RMI TCP Connection(1)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-09 16:06:21.450|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-12-09 16:06:21.449|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-12-09 16:06:21.451|INFO|RMI TCP Connection(1)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 1 ms
+2024-12-09 16:06:21.651|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@27b43e74
+2024-12-09 16:06:21.655|INFO|RMI TCP Connection(2)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-12-09 16:07:18.680|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_821302273800|birthdayNum:null
+2024-12-09 16:11:33.041|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1075841125100|birthdayNum:null
+2024-12-09 16:11:34.178|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1076983656400|birthdayNum:null
+2024-12-09 16:14:23.244|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1246035912900|birthdayNum:null
+2024-12-09 16:14:26.582|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1249390005500|birthdayNum:null
+2024-12-09 16:16:06.038|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1348831265700|birthdayNum:null
+2024-12-09 16:16:52.029|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1394809432100|birthdayNum:null
+2024-12-09 16:17:29.926|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1432726385000|birthdayNum:null
+2024-12-09 16:19:04.568|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1527363818300|birthdayNum:null
+2024-12-09 16:20:19.505|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1602307413600|birthdayNum:null
+2024-12-09 16:22:13.898|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1716692366100|birthdayNum:null
+2024-12-09 16:23:52.737|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1815531382100|birthdayNum:null
+2024-12-09 16:24:21.100|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1843903809300|birthdayNum:null
+2024-12-09 16:24:55.977|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1878704985100|birthdayNum:null
+2024-12-09 16:25:04.312|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1887123978900|birthdayNum:null
+2024-12-09 16:25:07.449|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1890257142400|birthdayNum:null
+2024-12-09 16:25:08.877|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1891685351900|birthdayNum:null
+2024-12-09 16:25:12.982|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1895788725100|birthdayNum:null
+2024-12-09 16:25:13.579|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1896389191000|birthdayNum:null
+2024-12-09 16:25:19.375|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1902174699500|birthdayNum:null
+2024-12-09 16:25:20.023|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_1902833278000|birthdayNum:null
+2024-12-09 16:31:48.749|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_2291558555600|birthdayNum:null
+2024-12-09 16:31:59.681|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.ReportServiceImpl|line-46|traceId_2302490601800|ReportDto(reportId=null, reportName=好嘟嘟嘟, type=日报, reportDate=null, filePath=[], content=的好地方好的好的好, reportUserId=null, userName=null, departName=null, userIDS=[1, 3], share=null, params=null)
+2024-12-09 16:33:48.685|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_2411489275300|birthdayNum:null
+2024-12-09 16:34:05.035|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.ReportServiceImpl|line-46|traceId_2427852727900|ReportDto(reportId=null, reportName=消磨殆尽点解点解, type=日报, reportDate=null, filePath=[], content=点解点解恢复党籍DJ, reportUserId=null, userName=null, departName=null, userIDS=[], share=null, params=null)
+2024-12-09 16:36:59.295|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_2602102248900|birthdayNum:null
+2024-12-09 16:37:10.032|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.ReportServiceImpl|line-46|traceId_2612844732600|ReportDto(reportId=null, reportName=u工序废墟刚吃过, type=日报, reportDate=null, filePath=[], content=好吃骨刺刚吃过徐, reportUserId=null, userName=null, departName=null, userIDS=[], share=null, params=null)
+2024-12-09 16:39:06.623|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_2729429890500|birthdayNum:null
+2024-12-09 16:40:09.890|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_2792684113200|birthdayNum:null
+2024-12-09 16:41:20.267|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_2863074864300|birthdayNum:null
+2024-12-09 16:42:28.467|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_2931263911600|birthdayNum:null
+2024-12-09 16:42:53.090|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_2955895171300|birthdayNum:null
+2024-12-09 16:43:49.380|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3012177983800|birthdayNum:null
+2024-12-09 16:44:11.648|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3034443768700|birthdayNum:null
+2024-12-09 16:44:38.018|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3060795737400|birthdayNum:null
+2024-12-09 16:44:49.928|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3072727915100|birthdayNum:null
+2024-12-09 16:44:51.628|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3074435562600|birthdayNum:null
+2024-12-09 16:46:43.786|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3186571903700|birthdayNum:null
+2024-12-09 16:47:16.827|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3219619074400|birthdayNum:null
+2024-12-09 16:48:14.895|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3277684590100|birthdayNum:null
+2024-12-09 16:48:20.890|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3283694090500|birthdayNum:null
+2024-12-09 16:48:28.931|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3291737376300|birthdayNum:null
+2024-12-09 16:48:29.833|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3292635124200|birthdayNum:null
+2024-12-09 16:49:09.508|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3332301657000|birthdayNum:null
+2024-12-09 16:51:40.844|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3483645499900|birthdayNum:null
+2024-12-09 16:52:39.850|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3542655581900|birthdayNum:2004-07-18
+2024-12-09 16:53:00.553|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3563330469400|birthdayNum:2004-07-18
+2024-12-09 16:53:48.395|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3611192670300|birthdayNum:2004-07-18
+2024-12-09 16:53:58.286|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3621093260700|birthdayNum:2004-07-18
+2024-12-09 16:53:58.944|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3621723325500|birthdayNum:2004-07-18
+2024-12-09 16:54:01.228|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3624037331400|birthdayNum:2004-07-18
+2024-12-09 16:54:02.728|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3625529858200|birthdayNum:2004-07-18
+2024-12-09 16:54:04.089|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3626889988600|birthdayNum:2004-07-18
+2024-12-09 16:54:14.332|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3637138041200|birthdayNum:2004-07-18
+2024-12-09 16:54:18.823|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3641633038600|birthdayNum:2004-07-18
+2024-12-09 16:55:54.294|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3737104856700|birthdayNum:2004-07-18
+2024-12-09 16:55:55.503|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3738309237600|birthdayNum:2004-07-18
+2024-12-09 16:56:06.363|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3749164679300|birthdayNum:2004-07-18
+2024-12-09 16:56:08.647|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3751453065900|birthdayNum:2004-07-18
+2024-12-09 16:56:09.398|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3752193527000|birthdayNum:null
+2024-12-09 16:56:10.843|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3753646357900|birthdayNum:2004-07-18
+2024-12-09 16:56:12.614|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3755421010100|birthdayNum:2004-07-18
+2024-12-09 16:56:14.062|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3756874231100|birthdayNum:2004-07-18
+2024-12-09 16:56:15.319|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3758119677300|birthdayNum:2004-07-18
+2024-12-09 16:56:17.647|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3760453521100|birthdayNum:2004-07-18
+2024-12-09 16:56:34.387|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3777188663300|birthdayNum:2004-07-18
+2024-12-09 16:56:34.736|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3777546531600|birthdayNum:2004-07-18
+2024-12-09 16:56:37.185|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3779993644000|birthdayNum:2004-07-18
+2024-12-09 16:56:38.565|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3781366488200|birthdayNum:2004-07-18
+2024-12-09 16:56:39.299|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3782097359800|birthdayNum:2004-07-18
+2024-12-09 16:56:40.833|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3783640604800|birthdayNum:2004-07-18
+2024-12-09 16:56:42.023|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3784832913200|birthdayNum:2004-07-18
+2024-12-09 16:56:43.179|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3785987959200|birthdayNum:2004-07-18
+2024-12-09 16:56:45.841|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3788650197500|birthdayNum:2004-07-18
+2024-12-09 16:57:20.814|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3823619485700|birthdayNum:2004-07-18
+2024-12-09 16:58:36.369|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3899176043200|birthdayNum:2004-07-18
+2024-12-09 16:58:38.949|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3901747535000|birthdayNum:2004-07-18
+2024-12-09 16:58:42.413|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3905216056700|birthdayNum:2004-07-18
+2024-12-09 16:58:43.772|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3906579615800|birthdayNum:2004-07-18
+2024-12-09 16:58:44.597|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3907399420200|birthdayNum:2004-07-18
+2024-12-09 16:58:45.124|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3907924319000|birthdayNum:2004-07-18
+2024-12-09 16:58:46.153|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3908957851600|birthdayNum:2004-07-18
+2024-12-09 16:58:47.090|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3909898695000|birthdayNum:2004-07-18
+2024-12-09 16:58:49.431|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3912239563000|birthdayNum:2004-07-18
+2024-12-09 16:58:50.828|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3913637534600|birthdayNum:2004-07-18
+2024-12-09 16:58:53.948|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3916749979800|birthdayNum:2004-07-18
+2024-12-09 16:58:55.703|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3918497369500|birthdayNum:2004-07-18
+2024-12-09 16:58:56.608|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3919409331500|birthdayNum:2004-07-18
+2024-12-09 16:58:56.962|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3919770900500|birthdayNum:null
+2024-12-09 16:58:58.847|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3921656384500|birthdayNum:null
+2024-12-09 16:59:02.228|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3925035670000|birthdayNum:null
+2024-12-09 16:59:03.662|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3926471676900|birthdayNum:2004-07-18
+2024-12-09 16:59:03.896|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3926711256100|birthdayNum:null
+2024-12-09 16:59:05.441|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3928247610300|birthdayNum:null
+2024-12-09 16:59:06.376|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3929174521900|birthdayNum:2004-07-18
+2024-12-09 16:59:07.319|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3930124177100|birthdayNum:null
+2024-12-09 16:59:08.289|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3931084615900|birthdayNum:2004-07-18
+2024-12-09 16:59:09.612|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3932403318300|birthdayNum:2004-07-18
+2024-12-09 16:59:10.868|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3933635892900|birthdayNum:2004-07-18
+2024-12-09 16:59:10.881|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3933658763700|birthdayNum:null
+2024-12-09 16:59:11.472|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3934257936300|birthdayNum:2004-07-18
+2024-12-09 16:59:14.521|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3937314730600|birthdayNum:2004-07-18
+2024-12-09 16:59:15.491|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3938297745100|birthdayNum:null
+2024-12-09 16:59:17.314|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3940113938400|birthdayNum:null
+2024-12-09 16:59:19.632|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3942434500400|birthdayNum:2004-07-18
+2024-12-09 16:59:23.228|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3946031574000|birthdayNum:null
+2024-12-09 16:59:24.395|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3947199833500|birthdayNum:2004-07-18
+2024-12-09 16:59:25.629|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3948432222800|birthdayNum:2004-07-18
+2024-12-09 16:59:28.373|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3951170333600|birthdayNum:2004-07-18
+2024-12-09 16:59:29.017|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3951819987500|birthdayNum:2004-07-18
+2024-12-09 16:59:29.654|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3952458945400|birthdayNum:2004-07-18
+2024-12-09 16:59:31.873|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_3954674147600|birthdayNum:null
+2024-12-09 17:00:33.485|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-12-09 17:00:33.488|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
+2024-12-09 17:00:38.299|INFO|main|w.f.o.OfficeControllerApplication|line-51||Starting OfficeControllerApplication using Java 17.0.11 with PID 9384 (D:\Project\OfficeController\target\classes started by admin in D:\Project\OfficeController)
+2024-12-09 17:00:38.302|INFO|main|w.f.o.OfficeControllerApplication|line-630||No active profile set, falling back to 1 default profile: "default"
+2024-12-09 17:00:39.263|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-291||Multiple Spring Data modules found, entering strict repository configuration mode
+2024-12-09 17:00:39.265|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-138||Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2024-12-09 17:00:39.294|INFO|main|o.s.d.r.c.RepositoryConfigurationDelegate|line-208||Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2024-12-09 17:00:39.781|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-108||Tomcat initialized with port(s): 8088 (http)
+2024-12-09 17:00:39.788|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Initializing ProtocolHandler ["http-nio-8088"]
+2024-12-09 17:00:39.789|INFO|main|o.a.c.c.StandardService|line-173||Starting service [Tomcat]
+2024-12-09 17:00:39.790|INFO|main|o.a.c.c.StandardEngine|line-173||Starting Servlet engine: [Apache Tomcat/10.1.5]
+2024-12-09 17:00:39.862|INFO|main|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring embedded WebApplicationContext
+2024-12-09 17:00:39.863|INFO|main|o.s.b.w.s.c.ServletWebServerApplicationContext|line-291||Root WebApplicationContext: initialization completed in 1521 ms
+2024-12-09 17:00:39.980|INFO|main|w.f.o.c.s.MyFilter|line-16||MyFilter来啦！！！！
+2024-12-09 17:00:40.871|INFO|main|w.f.o.c.o.OssConfiguration|line-17||创建 OssUtil
+2024-12-09 17:00:41.574|INFO|main|o.s.b.a.e.w.EndpointLinksResolver|line-58||Exposing 1 endpoint(s) beneath base path '/actuator'
+2024-12-09 17:00:41.648|INFO|main|o.a.c.h.Http11NioProtocol|line-173||Starting ProtocolHandler ["http-nio-8088"]
+2024-12-09 17:00:41.663|INFO|main|o.s.b.w.e.t.TomcatWebServer|line-220||Tomcat started on port(s): 8088 (http) with context path ''
+2024-12-09 17:00:41.676|INFO|main|w.f.o.OfficeControllerApplication|line-57||Started OfficeControllerApplication in 3.704 seconds (process running for 4.469)
+2024-12-09 17:00:42.190|INFO|RMI TCP Connection(2)-192.168.200.1|o.a.c.c.C.[.[.[/]|line-173||Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-09 17:00:42.190|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-532||Initializing Servlet 'dispatcherServlet'
+2024-12-09 17:00:42.189|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-110||HikariPool-1 - Starting...
+2024-12-09 17:00:42.192|INFO|RMI TCP Connection(2)-192.168.200.1|o.s.w.s.DispatcherServlet|line-554||Completed initialization in 2 ms
+2024-12-09 17:00:42.352|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.p.HikariPool|line-565||HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71889dae
+2024-12-09 17:00:42.355|INFO|RMI TCP Connection(1)-192.168.200.1|c.z.h.HikariDataSource|line-123||HikariPool-1 - Start completed.
+2024-12-09 17:00:48.134|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4030909038600|birthdayNum:null
+2024-12-09 17:00:48.136|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4030909038600|UserVo(roleName=admin, departmentName=人事部, birth=null, sex=1)
+2024-12-09 17:01:01.496|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4044292046600|birthdayNum:null
+2024-12-09 17:01:01.497|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4044292046600|UserVo(roleName=admin, departmentName=人事部, birth=null, sex=1)
+2024-12-09 17:05:42.453|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4325250731500|birthdayNum:2004-12-03
+2024-12-09 17:05:42.454|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4325250731500|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=1)
+2024-12-09 17:05:43.392|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4326198875299|birthdayNum:2004-12-03
+2024-12-09 17:05:43.393|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4326198875299|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=1)
+2024-12-09 17:05:44.420|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4327217496399|birthdayNum:2004-12-03
+2024-12-09 17:05:44.421|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4327217496399|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=1)
+2024-12-09 17:06:26.347|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4369136796900|birthdayNum:2004-12-03
+2024-12-09 17:06:26.349|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4369136796900|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=1)
+2024-12-09 17:06:32.558|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4375355016900|birthdayNum:2004-12-03
+2024-12-09 17:06:32.558|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4375355016900|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=1)
+2024-12-09 17:08:39.820|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4502618767500|birthdayNum:2004-07-18
+2024-12-09 17:08:39.820|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4502618767500|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:08:42.225|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4505027857400|birthdayNum:2004-07-18
+2024-12-09 17:08:42.226|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4505027857400|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:08:43.100|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4505905572900|birthdayNum:2004-07-18
+2024-12-09 17:08:43.101|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4505905572900|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:08:43.486|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4506282828100|birthdayNum:2004-07-18
+2024-12-09 17:08:43.486|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4506282828100|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:08:47.204|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4509979576700|birthdayNum:2004-07-18
+2024-12-09 17:08:47.212|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4509979576700|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:08:48.524|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4511325107800|birthdayNum:2004-07-18
+2024-12-09 17:08:48.525|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4511325107800|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:08:55.950|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4518745525900|birthdayNum:2004-12-03
+2024-12-09 17:08:55.951|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4518745525900|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=2)
+2024-12-09 17:09:03.305|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4526104387100|birthdayNum:2004-12-03
+2024-12-09 17:09:03.305|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4526104387100|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=2)
+2024-12-09 17:09:20.103|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4542904614400|birthdayNum:2004-07-18
+2024-12-09 17:09:20.104|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4542904614400|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:22.828|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4545628358600|birthdayNum:2004-07-18
+2024-12-09 17:09:22.829|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4545628358600|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:23.703|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4546505385200|birthdayNum:2004-07-18
+2024-12-09 17:09:23.703|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4546505385200|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:24.161|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4546961845200|birthdayNum:2004-07-18
+2024-12-09 17:09:24.161|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4546961845200|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:24.598|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4547406939400|birthdayNum:2004-07-18
+2024-12-09 17:09:24.599|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4547406939400|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:25.471|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4548274079500|birthdayNum:2004-07-18
+2024-12-09 17:09:25.472|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4548274079500|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:26.530|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4549329785800|birthdayNum:2004-07-18
+2024-12-09 17:09:26.530|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4549329785800|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:28.002|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4550809758200|birthdayNum:2004-07-18
+2024-12-09 17:09:28.003|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4550809758200|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:29.050|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4551852118500|birthdayNum:2004-07-18
+2024-12-09 17:09:29.051|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4551852118500|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:29.877|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4552675566900|birthdayNum:2004-07-18
+2024-12-09 17:09:29.878|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4552675566900|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:30.255|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4553056882500|birthdayNum:2004-07-18
+2024-12-09 17:09:30.255|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4553056882500|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:30.543|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4553351021700|birthdayNum:2004-07-18
+2024-12-09 17:09:30.543|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4553351021700|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:31.583|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4554386303300|birthdayNum:2004-07-18
+2024-12-09 17:09:31.583|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4554386303300|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:32.558|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4555362195200|birthdayNum:2004-07-18
+2024-12-09 17:09:32.558|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4555362195200|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:32.905|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4555705347100|birthdayNum:2004-07-18
+2024-12-09 17:09:32.905|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4555705347100|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:33.817|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4556614578100|birthdayNum:2004-07-18
+2024-12-09 17:09:33.818|INFO|http-nio-8088-exec-9|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4556614578100|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:34.206|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4557018725700|birthdayNum:2004-07-18
+2024-12-09 17:09:34.207|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4557018725700|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:35.813|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4558620084100|birthdayNum:2004-07-18
+2024-12-09 17:09:35.813|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4558620084100|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:09:37.448|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4560254333500|birthdayNum:2004-12-03
+2024-12-09 17:09:37.449|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4560254333500|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=2)
+2024-12-09 17:09:59.606|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4582362013900|birthdayNum:2004-07-18
+2024-12-09 17:09:59.607|INFO|http-nio-8088-exec-8|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4582362013900|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:10:01.332|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4584062747800|birthdayNum:2004-07-18
+2024-12-09 17:10:01.333|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4584062747800|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:10:02.841|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4585646574000|birthdayNum:2004-07-18
+2024-12-09 17:10:02.842|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4585646574000|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:10:04.180|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4586987205300|birthdayNum:2004-07-18
+2024-12-09 17:10:04.180|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4586987205300|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:10:44.349|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4627155003200|birthdayNum:2004-07-18
+2024-12-09 17:10:44.349|INFO|http-nio-8088-exec-5|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4627155003200|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:10:45.371|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4628173204200|birthdayNum:2004-07-18
+2024-12-09 17:10:45.372|INFO|http-nio-8088-exec-7|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4628173204200|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:10:46.092|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4628894460300|birthdayNum:2004-07-18
+2024-12-09 17:10:46.093|INFO|http-nio-8088-exec-2|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4628894460300|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:10:46.572|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4629376301400|birthdayNum:2004-07-18
+2024-12-09 17:10:46.573|INFO|http-nio-8088-exec-3|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4629376301400|UserVo(roleName=boss, departmentName=人事部, birth=2004-07-18, sex=1)
+2024-12-09 17:12:16.628|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4719431197000|birthdayNum:2004-12-03
+2024-12-09 17:12:16.629|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4719431197000|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=2)
+2024-12-09 17:12:18.998|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4721806096100|birthdayNum:2004-12-03
+2024-12-09 17:12:18.998|INFO|http-nio-8088-exec-10|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4721806096100|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=2)
+2024-12-09 17:12:22.325|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4725127663200|birthdayNum:2004-12-03
+2024-12-09 17:12:22.326|INFO|http-nio-8088-exec-6|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4725127663200|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=2)
+2024-12-09 17:12:23.147|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4725953733200|birthdayNum:2004-12-03
+2024-12-09 17:12:23.148|INFO|http-nio-8088-exec-1|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4725953733200|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=2)
+2024-12-09 17:12:23.520|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-99|traceId_4726329741400|birthdayNum:2004-12-03
+2024-12-09 17:12:23.520|INFO|http-nio-8088-exec-4|w.f.o.a.s.I.UserServiceImpl|line-103|traceId_4726329741400|UserVo(roleName=admin, departmentName=人事部, birth=2004-12-03, sex=2)
+2024-12-09 17:14:41.034|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-350||HikariPool-1 - Shutdown initiated...
+2024-12-09 17:14:41.042|INFO|SpringApplicationShutdownHook|c.z.h.HikariDataSource|line-352||HikariPool-1 - Shutdown completed.
