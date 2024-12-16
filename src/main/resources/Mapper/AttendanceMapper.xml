@@ -60,4 +60,16 @@
                  INNER JOIN user as u ON u.department_id = d.depart_id
         WHERE u.user_id = #{attendanceId}
     </select>
+    <select id="getCountByMonth" resultType="java.lang.Integer">
+            select count(*)
+            from attendance
+            where
+              attendance_user_id = #{userId}
+              <if test="year != 0">
+                  and  year(date) = #{year}
+              </if>
+              <if test="month != 0">
+                and month(date) = #{month}
+              </if>
+    </select>
 </mapper>

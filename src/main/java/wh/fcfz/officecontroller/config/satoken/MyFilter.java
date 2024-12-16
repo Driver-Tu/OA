@@ -23,7 +23,7 @@ public class MyFilter implements Filter {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Headers", "satoken, Content-Type, Authorization");
         response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,HEAD,PUT");
+        response.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,HEAD,PUT,DELETE");
         //让预制请求通过
         if("OPTIONS".equals(request.getMethod())){
             response.setStatus(HttpServletResponse.SC_OK); // 返回200

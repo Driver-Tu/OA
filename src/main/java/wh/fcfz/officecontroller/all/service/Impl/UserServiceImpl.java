@@ -149,7 +149,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
                 // 提取性别
                 gender = idNumber.substring(16, 17);
-                if (Integer.parseInt(gender) % 2 == 0) {
+                if (Integer.parseInt(gender) % 2 == 0||idNumber.endsWith("X")) {
                     gender = "2";
                 } else {
                     gender = "1";
