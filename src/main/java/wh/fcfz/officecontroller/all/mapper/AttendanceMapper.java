@@ -15,5 +15,5 @@ public interface AttendanceMapper extends BaseMapper<Attendance> {
 
     List<AttendancesVo> selectAllAttendances(AttendancesVo attendancesVo);
 
-    Integer getCountByMonth(Integer year, Integer month, Integer userId);
+    List<Attendance> getCountByMonth(Integer year, Integer month, Integer userId);
 }

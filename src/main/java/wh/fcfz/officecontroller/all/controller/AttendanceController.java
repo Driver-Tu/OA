@@ -12,6 +12,10 @@ import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/attendance")
 public class AttendanceController {
@@ -41,7 +45,16 @@ public class AttendanceController {
      */
     @GetMapping("getCountByMonth")
     @Operation(summary = "获取当月打卡次数")
-    public Result<Integer> getCountByMonth(@RequestParam("year") Integer year, @RequestParam("month") Integer month) {
-        return new Result<>(ResponseEnum.SUCCESS,attendanceMapper.getCountByMonth(year,month,StpUtil.getLoginIdAsInt()));
+    public Result<Map<String, Integer>> getCountByMonth(@RequestParam("year") Integer year, @RequestParam("month") Integer month) {
+        List<Attendance> countByMonth = attendanceMapper.getCountByMonth(year, month, StpUtil.getLoginIdAsInt());
+        Map<String,Integer> map = countByMonth.stream().parallel().collect(Collectors.groupingBy(Attendance::getStatus,Collectors.summingInt(e->1)));
+        //将map的键换成英文
+        Integer i = map.get("打卡成功");
+        map.put("success",i==null?0:i);
+        map.remove("打卡成功");
+        i = map.get("打卡失败");
+        map.put("fail",i==null?0:i);
+        map.remove("打卡失败");
+        return new Result<>(ResponseEnum.SUCCESS,map);
     }
 }

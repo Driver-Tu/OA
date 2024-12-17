@@ -60,8 +60,8 @@
                  INNER JOIN user as u ON u.department_id = d.depart_id
         WHERE u.user_id = #{attendanceId}
     </select>
-    <select id="getCountByMonth" resultType="java.lang.Integer">
-            select count(*)
+    <select id="getCountByMonth" resultType="wh.fcfz.officecontroller.all.bean.Dao.Attendance">
+            select *
             from attendance
             where
               attendance_user_id = #{userId}
