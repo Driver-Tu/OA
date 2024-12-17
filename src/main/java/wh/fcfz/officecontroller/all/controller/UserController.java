@@ -111,6 +111,7 @@ public class UserController {
 
     @Autowired
     private AliOssUtil aliOssUtil;
+
     //更换头像
     @PostMapping("/updateAvatar")
     @Transactional
@@ -153,7 +154,6 @@ public class UserController {
             return new Result<>(ResponseEnum.DATA_NOT_EXIST,null);
         }
     }
-
 
     @Autowired
     private UserMapper userMapper;

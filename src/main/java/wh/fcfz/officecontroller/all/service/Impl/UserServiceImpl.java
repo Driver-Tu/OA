@@ -10,8 +10,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wh.fcfz.officecontroller.all.bean.Dao.User;
@@ -39,6 +41,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private DepartMapper departMapper;
     @Autowired
     private RoleMapper roleMapper;
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
     /**
      * 登录
      * */
@@ -217,6 +222,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .eq(User::getUserId, user.getUserId());
         try {
             if(userMapper.update(user,lambdaUpdateWrapper)>0){
+                // 删除redis中roleuserId
+                stringRedisTemplate.delete("role:"+user.getUserId());
+                stringRedisTemplate.delete("permission:"+user.getUserId());
                 return new Result<User>(ResponseEnum.SUCCESS,null);
             }else {
                 log.error("修改个人信息时出现异常，user: {}", user);
