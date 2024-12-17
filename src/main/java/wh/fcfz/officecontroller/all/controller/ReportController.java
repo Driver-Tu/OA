@@ -87,11 +87,17 @@ public class ReportController {
 
     @PostMapping("/shareReportToUser")
     public Result<List<UserOnVo>> shareReportToUser(@RequestBody List<Integer> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return new Result("200", "分享人为空", null);
+        }
         List<UserOnVo> userOnVos=new ArrayList<>();
         for (Integer id : ids) {
             UserDto userDto = new UserDto();
             userDto.setUserId(id);
             List<UserVo> userVos = userMapper.selectUserList(userDto);
+            if (userVos == null || userVos.isEmpty()) {
+                continue;
+            }
             UserOnVo userOnVo = new UserOnVo();
             //只可能有一个
             BeanUtil.copyProperties(userVos.get(0), userOnVo);
