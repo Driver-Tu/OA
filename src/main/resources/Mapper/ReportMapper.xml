@@ -88,4 +88,18 @@
                 AND f.business_type = '报告'
                 AND f.business_id = #{reportId}
     </select>
+    <select id="getSelfReportCount" resultType="wh.fcfz.officecontroller.all.bean.Dao.Report">
+            SELECT
+                *
+            FROM
+                report r
+            WHERE
+                r.report_user_id = #{userId}
+                <if test="year != 0">
+                    AND year(r.report_date) = #{year}
+                </if>
+                <if test="month != 0">
+                AND month(r.report_date) = #{month}
+               </if>
+    </select>
 </mapper>

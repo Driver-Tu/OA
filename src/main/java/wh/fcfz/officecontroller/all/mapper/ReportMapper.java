@@ -16,4 +16,6 @@ public interface ReportMapper extends BaseMapper<Report> {
 
     //查询该路径下面所有file
     List<File> selectFile(Integer reportId);
+
+    List<Report> getSelfReportCount(Integer year, Integer month, Integer userId);
 }

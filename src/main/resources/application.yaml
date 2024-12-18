@@ -111,8 +111,6 @@ springdoc:
 
 #mp日志
 mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     banner: false
     db-config:

@@ -28,4 +28,6 @@ public interface UserService extends IService<User> {
     Result<User> saveUser(User user);
     //删除员工s
     Result<String> deleteUser(List<Integer> ids);
+
+    Result<String> updateSelfUserInfo(User user);
 }

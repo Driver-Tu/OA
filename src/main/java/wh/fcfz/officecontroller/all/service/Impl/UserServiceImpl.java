@@ -101,11 +101,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userVo.setDepartmentName(departName);
         userVo.setRoleName(roleName);
         String[] birthdayAndGender = getBirthdayAndGender(user.getBirthdayNum());
-        log.info("birthdayNum:{}",birthdayAndGender[0]);
         userVo.setBirth(birthdayAndGender[0]);
         userVo.setSex(birthdayAndGender[1]);
         userVo.setBirthdayNum(DesensitizedUtil.idCardNum(user.getBirthdayNum(),1,1));
-        log.info(userVo.toString());
         return new Result<>(ResponseEnum.SUCCESS, userVo);
     }
 /**
@@ -206,11 +204,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             e.printStackTrace();
             return new Result<User>(ResponseEnum.PASSWORD_IS_NULL,null);
         }
-
     }
 
     /**
-     * 修改个人信息
+     * 管理员修改个人信息
      * */
     @Override
     public Result<User> updateUserInfo(User user) {
@@ -222,7 +219,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 .eq(User::getUserId, user.getUserId());
         try {
             if(userMapper.update(user,lambdaUpdateWrapper)>0){
-                // 删除redis中roleuserId
+                // 删除redis中rollerId
                 stringRedisTemplate.delete("role:"+user.getUserId());
                 stringRedisTemplate.delete("permission:"+user.getUserId());
                 return new Result<User>(ResponseEnum.SUCCESS,null);
@@ -287,6 +284,28 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         } catch (Exception e) {
             log.error("批量删除数据时出现异常，ids: {}", ids, e);
            throw e;
+        }
+    }
+
+    @Override
+    public Result<String> updateSelfUserInfo(User user) {
+        //校验身份
+        if (!StpUtil.isLogin(StpUtil.getLoginId())) {
+            return new Result<String>(ResponseEnum.USER_NOT_LOGIN, null);
+        }
+        LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
+        lambdaUpdateWrapper.set(User::getUpTime, DateTime.now())
+                .eq(User::getUserId, StpUtil.getLoginIdAsInt());
+        try {
+            if(userMapper.update(user,lambdaUpdateWrapper)>0){
+                return new Result<String>(ResponseEnum.SUCCESS,null);
+            }else {
+                log.error("修改个人信息时出现异常，user: {}", user);
+                return new Result<String>(ResponseEnum.USER_NOT_EXIST,null);
+            }
+        } catch (Exception e) {
+            log.error("修改个人信息时出现异常，user: {}", user, e);
+            return new Result<String>(ResponseEnum.UPDATE_SERVER_ERROR,null);
         }
     }
 

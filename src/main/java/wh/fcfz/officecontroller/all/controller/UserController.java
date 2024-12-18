@@ -64,11 +64,22 @@ public class UserController {
         return userService.logout();
     }
 
+    @SaCheckPermission(value={"admin","boss"}, mode= SaMode.OR)
     @PostMapping("/updatePassword")
     public Result<User> updatePassword(
             @RequestParam String oldPassword,
             @RequestParam String newPassword){
         return userService.updatePassword(oldPassword,newPassword);
+    }
+
+    /**
+     * 用户修改个人信息
+     * @param user
+     * @return
+     */
+    @PostMapping("/updateSelfUserInfo")
+    public Result<String> updateSelfUserInfo(@RequestBody User user){
+        return userService.updateSelfUserInfo(user);
     }
 
     @PostMapping("/updateUserInfo")

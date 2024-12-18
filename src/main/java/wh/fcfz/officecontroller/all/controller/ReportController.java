@@ -5,6 +5,7 @@ import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -104,5 +106,15 @@ public class ReportController {
             userOnVos.add(userOnVo);
         }
         return new Result<>(ResponseEnum.SUCCESS, userOnVos);
+    }
+
+    /**
+     * 查看自己的本月汇报数量统计
+     */
+    @Operation(summary = "查看自己的本月汇报数量统计")
+    @GetMapping("/getSelfReportCount")
+    public Result<Map<String, Integer>> getSelfReportCount(@RequestParam("year") Integer year , @RequestParam("month") Integer month) {
+        Integer userId = StpUtil.getLoginIdAsInt();
+        return reportService.getSelfReportCount(year, month, userId);
     }
 }

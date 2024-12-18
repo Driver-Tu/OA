@@ -10,6 +10,7 @@ import wh.fcfz.officecontroller.all.tool.Result;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public interface ReportService  extends IService<Report> {
     //增加日报
@@ -23,4 +24,6 @@ public interface ReportService  extends IService<Report> {
 
     //修改日报
     public Result<Report> updateReport(ReportDto report);
+
+    Result<Map<String, Integer>> getSelfReportCount(Integer year,Integer month,Integer userId);
 }
