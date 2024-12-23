@@ -6,6 +6,7 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.OSSObject;
 import com.aliyun.oss.model.ObjectMetadata;
+import com.aliyun.oss.model.VoidResult;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -221,4 +222,9 @@ public class AliOssUtil {
         }
     }
 
+    public boolean deleteFile(String userImage) {
+        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+        VoidResult voidResult = ossClient.deleteObject(bucketName, userImage);
+        return voidResult.getRequestId() != null;
+    }
 }

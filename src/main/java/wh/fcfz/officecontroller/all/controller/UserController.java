@@ -17,10 +17,7 @@ import wh.fcfz.officecontroller.all.bean.Vo.UserOnVo;
 import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.Impl.UserServiceImpl;
-import wh.fcfz.officecontroller.all.tool.AliOssUtil;
-import wh.fcfz.officecontroller.all.tool.MyPage;
-import wh.fcfz.officecontroller.all.tool.ResponseEnum;
-import wh.fcfz.officecontroller.all.tool.Result;
+import wh.fcfz.officecontroller.all.tool.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +67,16 @@ public class UserController {
             @RequestParam String oldPassword,
             @RequestParam String newPassword){
         return userService.updatePassword(oldPassword,newPassword);
+    }
+
+    /**
+     * 修改个人密码
+     */
+    @PostMapping("/updateSelfPassword")
+    public Result<Boolean> updateSelfPassword(
+            @RequestParam String oldPassword,
+            @RequestParam String newPassword){
+        return userService.updateSelfPassword(oldPassword,newPassword);
     }
 
     /**
@@ -140,25 +147,37 @@ public class UserController {
                 String s =  uuid + fileType;
                 upload = aliOssUtil.upload(file, s);
                 log.info("aliyun路径为:{}",upload);
+
             } catch (Exception e) {
                 return new Result<>(ResponseEnum.FILE_UPLOAD_ERROR,null);
             }
             //上传到服务器后，需要改写user数据库的头像字段
             User user = userService.getById(StpUtil.getLoginIdAsInt());
-            if(user!=null){
-                user.setUserImage(upload);
-                try {
-                    boolean b = userService.updateById(user);
-                    if(b){
-                        return new Result<>(ResponseEnum.SUCCESS,upload);
-                    }else {
-                        return new Result<>(ResponseEnum.UPDATE_SERVER_ERROR,null);
-                    }
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+            //成功之后，删除上一个url路径的阿里云文件
+            if(user.getUserImage()!=null
+                    &&!Objects.equals(user.getUserImage(), "https://mp-b8e53f5e-c503-4780-9859-ec2675b3d8cd.cdn.bspapp.com/unicloud/default.png")
+                    //是https开头的图片
+                    && user.getUserImage().startsWith("https://")
+                    //使用正则，图片结尾
+                    && user.getUserImage().matches(".*\\.(jpg|jpeg|png|gif|bmp)")){
+                boolean b = aliOssUtil.deleteFile(user.getUserImage());
+                if(b){
+                    log.info("删除成功");
+                }else {
+                    log.info("删除失败");
+                    throw new MyException("删除失败","10703");
                 }
-            }else {
-                return new Result<>(ResponseEnum.USER_NOT_EXIST,null);
+            }
+            user.setUserImage(upload);
+            try {
+                boolean b = userService.updateById(user);
+                if(b){
+                    return new Result<>(ResponseEnum.SUCCESS,upload);
+                }else {
+                    return new Result<>(ResponseEnum.UPDATE_SERVER_ERROR,null);
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
 
         }else {

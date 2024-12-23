@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import jakarta.annotation.Resource;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -47,15 +48,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     /**
      * 登录
      * */
+    @SneakyThrows
     @Override
-    public Result<User> login(String empNum, String password,String device) {
+    public Result<User> login(String empNum, String password,String device){
         if (empNum==null || password==null){
             return new Result<User>(ResponseEnum.PARAM_ERROR,null);
         }
         LambdaQueryWrapper<User> lambdaQueryWrapper=new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(User::getEmpNum,empNum)
                 .select(User::getEmpNum,User::getUserPassword,User::getUserId)
-                .eq(User::getUserPassword,password);
+                .eq(User::getUserPassword,HashEncryption.encrypt(password));
         User user = userMapper.selectOne(lambdaQueryWrapper);
         if(user == null){
             return new Result<>(ResponseEnum.USER_NOT_EXIST, null);
@@ -180,7 +182,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             if(!StpUtil.isLogin(StpUtil.getLoginId())){
                 return new Result<User>(ResponseEnum.USER_NOT_LOGIN,null);
             }
-            if(password==null||newPassword==null){
+            if(newPassword == null){
                 return new Result<User>(ResponseEnum.PARAM_ERROR,null);
             }
             User user = userMapper.selectById(StpUtil.getLoginIdAsLong());
@@ -309,4 +311,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
     }
 
+    @SneakyThrows
+    @Override
+    @Transactional
+    public Result<Boolean> updateSelfPassword(String oldPassword, String newPassword) {
+        User user = userMapper.selectById(StpUtil.getLoginIdAsInt());
+        //如果新密码和数据库旧密码一致，则无需修改
+        if (HashEncryption.encrypt(newPassword).equals(user.getUserPassword())) {
+            return new Result<Boolean>(ResponseEnum.SUCCESS,true);
+        }
+        if (HashEncryption.encrypt(oldPassword).equals(user.getUserPassword())) {
+            LambdaUpdateWrapper<User> lambdaUpdateWrapper=new LambdaUpdateWrapper<>();
+            lambdaUpdateWrapper.set(User::getUpTime, DateTime.now())
+                    .set(User::getUserPassword, HashEncryption.encrypt(newPassword))
+                    .eq(User::getUserId, StpUtil.getLoginIdAsInt());
+            try {
+                if(userMapper.update(user,lambdaUpdateWrapper)>0){
+                    return new Result<Boolean>(ResponseEnum.SUCCESS,true);
+                }else {
+                    throw new MyException("修改失败", "10703");
+                }
+            } catch (MyException e) {
+                throw new MyException("修改失败", "10703");
+            }
+        }else {
+         throw new MyException("密码错误", "10704");
+        }
+    }
 }

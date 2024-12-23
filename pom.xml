@@ -75,13 +75,13 @@
             <artifactId>sa-token-jwt</artifactId>
             <version>1.37.0</version>
         </dependency>
-<!--         Sa-Token整合redis (使用jdk默认序列化方式) -->
+        <!--         Sa-Token整合redis (使用jdk默认序列化方式) -->
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-redis-jackson</artifactId>
             <version>1.37.0</version>
         </dependency>
-<!--         提供redis连接池 -->
+        <!--         提供redis连接池 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
@@ -116,7 +116,7 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.6</version>
         </dependency>
-<!--        日志-->
+        <!--        日志-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -149,23 +149,23 @@
         </dependency>
 
 
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-webmvc-core</artifactId>-->
-<!--            <version>1.6.14</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springdoc</groupId>-->
+        <!--            <artifactId>springdoc-openapi-webmvc-core</artifactId>-->
+        <!--            <version>1.6.14</version>-->
+        <!--        </dependency>-->
 
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-javadoc</artifactId>-->
-<!--            <version>1.6.14</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springdoc</groupId>-->
+        <!--            <artifactId>springdoc-openapi-javadoc</artifactId>-->
+        <!--            <version>1.6.14</version>-->
+        <!--        </dependency>-->
 
-<!--        <dependency>-->
-<!--            <groupId>org.springdoc</groupId>-->
-<!--            <artifactId>springdoc-openapi-ui</artifactId>-->
-<!--            <version>1.6.14</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springdoc</groupId>-->
+        <!--            <artifactId>springdoc-openapi-ui</artifactId>-->
+        <!--            <version>1.6.14</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.springdoc</groupId>
@@ -173,11 +173,11 @@
             <version>2.6.0</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>com.github.therapi</groupId>-->
-<!--            <artifactId>therapi-runtime-javadoc</artifactId>-->
-<!--            <version>0.15.0</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.github.therapi</groupId>-->
+        <!--            <artifactId>therapi-runtime-javadoc</artifactId>-->
+        <!--            <version>0.15.0</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -185,12 +185,6 @@
             <version>1.9.7</version>
         </dependency>
 
-        <!-- Knife4j for API documentation -->
-<!--        <dependency>-->
-<!--            <groupId>com.github.xiaoymin</groupId>-->
-<!--            <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>-->
-<!--            <version>4.4.0</version>-->
-<!--        </dependency>-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -232,16 +226,6 @@
                             <artifactId>spring-boot-configuration-processor</artifactId>
                             <version>${spring-boot.version}</version>
                         </path>
-<!--                        <path>-->
-<!--                            <groupId>io.github.linpeilie</groupId>-->
-<!--                            <artifactId>mapstruct-plus-processor</artifactId>-->
-<!--                            <version>${mapstruct-plus.version}</version>-->
-<!--                        </path>-->
-<!--                        <path>-->
-<!--                            <groupId>org.projectlombok</groupId>-->
-<!--                            <artifactId>lombok-mapstruct-binding</artifactId>-->
-<!--                            <version>${mapstruct-plus.lombok.version}</version>-->
-<!--                        </path>-->
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
@@ -251,8 +235,14 @@
                 <version>${spring-boot.version}</version>
                 <configuration>
                     <mainClass>wh.fcfz.officecontroller.OfficeControllerApplication</mainClass>
-                    <skip>false</skip>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

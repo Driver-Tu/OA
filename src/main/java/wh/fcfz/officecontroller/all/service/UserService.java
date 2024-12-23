@@ -30,4 +30,6 @@ public interface UserService extends IService<User> {
     Result<String> deleteUser(List<Integer> ids);
 
     Result<String> updateSelfUserInfo(User user);
+
+    Result<Boolean> updateSelfPassword(String oldPassword, String newPassword);
 }
