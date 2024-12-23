@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import wh.fcfz.officecontroller.all.bean.Dto.FormDto;
 import wh.fcfz.officecontroller.all.bean.Vo.FormTemplateVo;
-import wh.fcfz.officecontroller.all.bean.Vo.FormValueVo;
+import wh.fcfz.officecontroller.all.bean.Vo.FormInstanceVo;
 import wh.fcfz.officecontroller.all.bean.Vo.FormVo;
 import wh.fcfz.officecontroller.all.mapper.FormTemplateFieldMapper;
 import wh.fcfz.officecontroller.all.mapper.FormTemplateFieldOptionMapper;
@@ -52,9 +52,9 @@ public class MyFormController {
      * @return 表单结构和数据
      */
     @GetMapping("/{id}")
-    public Result<FormValueVo> getFormById(@PathVariable("id") Integer id) {
-        FormValueVo formValueVo = formService.getFormById(id);
-        return new Result<>("200", "success", formValueVo);
+    public Result<FormInstanceVo> getFormById(@PathVariable("id") Integer id) {
+        FormInstanceVo formInstanceVo = formService.getFormById(id);
+        return new Result<>("200", "success", formInstanceVo);
     }
 
     /**

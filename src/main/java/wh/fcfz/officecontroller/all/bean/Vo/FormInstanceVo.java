@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FormValueVo {
+public class FormInstanceVo {
 
     /**
      * 表单通用表主键
@@ -50,7 +50,7 @@ public class FormValueVo {
     /**
      * 更新时间
      */
-    private Date updatedTime;
+    private Date updateTime;
 
     /**
      * 提交时间

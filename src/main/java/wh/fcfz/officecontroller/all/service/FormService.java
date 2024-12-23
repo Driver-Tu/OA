@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import wh.fcfz.officecontroller.all.bean.Dao.form.Form;
 import wh.fcfz.officecontroller.all.bean.Dto.FormDto;
-import wh.fcfz.officecontroller.all.bean.Vo.FormValueVo;
+import wh.fcfz.officecontroller.all.bean.Vo.FormInstanceVo;
 import wh.fcfz.officecontroller.all.bean.Vo.FormVo;
 import wh.fcfz.officecontroller.all.tool.MyPage;
 
@@ -22,7 +22,7 @@ public interface FormService extends IService<Form> {
 
     List<Form> getAllForms(MyPage<Form> data);
 
-    FormValueVo getFormById(@PathVariable("id") Integer id);
+    FormInstanceVo getFormById(@PathVariable("id") Integer id);
 
     @Transactional
     void addForm(@RequestBody FormDto formDto);

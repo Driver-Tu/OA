@@ -11,6 +11,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class FormVo {
 
+    /**
+     * 表单通用表主键
+     */
     private Integer formId;
 
     /**

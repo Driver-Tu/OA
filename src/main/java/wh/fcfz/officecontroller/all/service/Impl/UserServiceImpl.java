@@ -63,7 +63,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         SaSession sessionByLoginId = StpUtil.getSessionByLoginId(user.getUserId());
         if(StpUtil.isLogin(user.getUserId())&& !sessionByLoginId.getTokenValueListByDevice(device).isEmpty()){
             StpUtil.logout(user.getUserId(),device);
-            throw new MyException("账户已登录，请重新登录","506");
+//            throw new MyException("账户已登录，请重新登录","506");
         }
         StpUtil.login(user.getUserId(),device);
         return new Result(ResponseEnum.SUCCESS,StpUtil.getTokenInfo());

@@ -87,7 +87,7 @@ public class UEditorController {
 //        try {
 //            file.transferTo(destination);
             response.put("state", "SUCCESS");
-            response.put("url", url); // 返回相对路径
+            response.put("url", "https://fcfz-oa.oss-cn-shanghai.aliyuncs.com/" + url); // 返回相对路径
             response.put("title", fileName);
             response.put("original", fileName);
 //        } catch (IOException e) {

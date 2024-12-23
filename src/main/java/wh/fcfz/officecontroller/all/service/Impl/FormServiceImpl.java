@@ -20,7 +20,7 @@ import wh.fcfz.officecontroller.all.bean.Dto.FormDto;
 import wh.fcfz.officecontroller.all.bean.Dto.FormValueDto;
 import wh.fcfz.officecontroller.all.bean.Vo.FieldOptionVo;
 import wh.fcfz.officecontroller.all.bean.Vo.FormFieldValueVo;
-import wh.fcfz.officecontroller.all.bean.Vo.FormValueVo;
+import wh.fcfz.officecontroller.all.bean.Vo.FormInstanceVo;
 import wh.fcfz.officecontroller.all.bean.Vo.FormVo;
 import wh.fcfz.officecontroller.all.mapper.FormFieldValueMapper;
 import wh.fcfz.officecontroller.all.mapper.FormMapper;
@@ -66,12 +66,12 @@ public class FormServiceImpl extends ServiceImpl<FormMapper, Form> implements Fo
      * @return 表单结构和数据
      */
     @Override
-    public FormValueVo getFormById(@PathVariable("id") Integer id) {
+    public FormInstanceVo getFormById(@PathVariable("id") Integer id) {
         List<FormFieldValueVo> formFieldValues = formFieldValueMapper.selecFormFieldValueListByFormId(id);
-        FormValueVo formValueVo = new FormValueVo();
+        FormInstanceVo formInstanceVo = new FormInstanceVo();
         Form form = formMapper.selectById(id);
-        BeanUtil.copyProperties(form, formValueVo);
-        formValueVo.setFormFieldValues(formFieldValues);
+        BeanUtil.copyProperties(form, formInstanceVo);
+        formInstanceVo.setFormFieldValues(formFieldValues);
 
         // 遍历处理 "multi-varchar" 和 "multi-bigint" 类型
         formFieldValues.forEach(formFieldValue -> {
@@ -114,7 +114,7 @@ public class FormServiceImpl extends ServiceImpl<FormMapper, Form> implements Fo
                     formFieldValue.setFieldOptions(fieldOptions);
                 });
 
-        return formValueVo;
+        return formInstanceVo;
     }
 
     /**
