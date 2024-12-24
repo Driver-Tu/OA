@@ -45,6 +45,7 @@
                 AND a.type = #{type}
             </if>
         </where>
+        ORDER BY a.date DESC, a.time_in DESC, a.time_out DESC
     </select>
     <!-- 查询用户名称 -->
     <select id="selectAllUserName" resultType="java.lang.String">

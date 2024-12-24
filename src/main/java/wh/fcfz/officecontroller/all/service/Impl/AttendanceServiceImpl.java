@@ -2,7 +2,6 @@ package wh.fcfz.officecontroller.all.service.Impl;
 
 
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -23,7 +22,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,7 +63,7 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         if(attendance1==null){
             //上班卡
             attendance.setTimeIn(new Timestamp(System.currentTimeMillis()));
-            attendance.setDate(DateUtil.format(new Date(),"yyyy-MM-dd"));
+            attendance.setDate(new Date(System.currentTimeMillis()));
             attendance.setAttendanceUserId(Integer.parseInt(StpUtil.getLoginId().toString()));
             attendance.setStatus("打卡失败");
             attendanceMapper.insert(attendance);

@@ -18,7 +18,7 @@ public class Attendance {
   private Integer attendanceUserId;
   private java.sql.Timestamp timeIn;
   private java.sql.Timestamp timeOut;
-  private String date;
+  private java.sql.Date date;
   private String status;
   private String address;
   private double longitude;
