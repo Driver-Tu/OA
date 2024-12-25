@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wh.fcfz.officecontroller.all.mapper.UserMapper">
+    <!-- 根据部门ID查询部门名称 -->
+    <select id="selectDepartName" resultType="java.lang.String">
+        SELECT depart_name
+        FROM depart
+        WHERE depart_id = #{departmentId}
+    </select>
+
+    <!-- 根据角色ID查询角色名称 -->
+    <select id="selectRoleName" resultType="java.lang.String">
+        SELECT role_name
+        FROM role
+        WHERE role_id = #{roleId}
+    </select>
+    <select id="selectUserList"
+            resultType="wh.fcfz.officecontroller.all.bean.Vo.UserVo">
+        SELECT
+            u.user_id as userId,
+            u.role_id as roleId,
+            u.department_id as departmentId,
+            u.user_name as userName,
+            u.user_image as userImage,
+            u.emp_num as empNum,
+            u.user_password as userPassword,
+            u.telephone,
+            u.email,
+            u.status,
+            u.ct_time as ctTime,
+            u.up_time as upTime,
+            u.birthday_num as birthdayNum,
+            u.time_in as timeIn,
+            u.deleted,
+            r.role_name as roleName,
+            d.depart_name as departmentName
+        FROM
+            user u
+        LEFT JOIN
+            role r ON u.role_id = r.role_id
+        LEFT JOIN
+            depart d ON u.department_id = d.depart_id
+        <where>
+            <if test="userId != null">
+                AND u.user_id = #{userId}
+            </if>
+            <if test="roleName!=null">
+                AND r.role_name LIKE CONCAT('%', #{roleName}, '%')
+            </if>
+            <if test="userName != null and userName.trim() != ''">
+                AND u.user_name LIKE CONCAT('%', #{userName}, '%')
+            </if>
+            <if test="empNum != null and empNum.trim() != ''">
+                AND u.emp_num LIKE CONCAT('%', #{empNum}, '%')
+            </if>
+            <if test="empNum != null and telephone.trim() != ''">
+                AND u.telephone LIKE CONCAT('%', #{telephone}, '%')
+            </if>
+            <if test="empNum != null and email.trim() != ''">
+                AND u.email LIKE CONCAT('%', #{email}, '%')
+            </if>
+            <if test="status != null">
+                AND u.status = #{status}
+            </if>
+            <if test="timeIn != null">
+                AND u.time_in = #{timeIn}
+            </if>
+            <if test="departName != null">
+                AND d.depart_name LIKE CONCAT('%', #{departName}, '%')
+            </if>
+                AND u.deleted=0
+        </where>
+        order by u.time_in desc
+    </select>
+</mapper>

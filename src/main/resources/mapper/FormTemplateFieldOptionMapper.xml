@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wh.fcfz.officecontroller.all.mapper.FormTemplateFieldOptionMapper">
+
+    <resultMap type="wh.fcfz.officecontroller.all.bean.Vo.FieldOptionVo" id="FormFieldOptionResult">
+        <id property="id" column="id"/>
+    </resultMap>
+
+    <select id="selecFormFieldOptionListByFormFieldId" resultMap="FormFieldOptionResult">
+        select
+        o.id,
+        o.template_field_id,
+        o.option_value,
+        o.option_label,
+        o.oprion_sort
+        from form_template_field_option o
+        <if test="formId != null">
+            <where>
+                o.template_field_id = #{fieldId}
+            </where>
+        </if>
+        order by o.oprion_sort asc
+    </select>
+</mapper>

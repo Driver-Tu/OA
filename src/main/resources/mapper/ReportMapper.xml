@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wh.fcfz.officecontroller.all.mapper.ReportMapper">
+    <resultMap id="ReportVoResultMap" type="wh.fcfz.officecontroller.all.bean.Vo.ReportVo">
+        <id property="reportId" column="report_id" />
+        <result property="reportUserId" column="report_user_id" />
+        <result property="reportName" column="report_name" />
+        <result property="type" column="type" />
+        <result property="reportDate" column="report_date" />
+        <result property="upDate" column="up_date" />
+        <result property="ctDate" column="ct_date" />
+        <result property="filePath" column="file_path" />
+        <result property="content" column="content" jdbcType="LONGVARCHAR"/>
+        <result property="userName" column="userName" />
+        <result property="departName" column="departName" />
+    </resultMap>
+    <select id="selectReport" resultMap="ReportVoResultMap">
+        SELECT
+        r.report_id AS report_id,
+        r.report_user_id AS report_user_id,
+        r.report_name AS report_name,
+        r.type AS type,
+        r.report_date AS report_date,
+        r.up_date AS up_date,
+        r.ct_date AS ct_date,
+        r.file_path AS file_path,
+        r.content AS content,
+        r.share_user_id AS share_user_id,
+        u.user_name AS userName,
+        d.depart_name AS departName
+        FROM
+        report r
+        LEFT JOIN user u ON r.report_user_id = u.user_id
+        LEFT JOIN depart d ON u.department_id = d.depart_id
+
+        <where>
+            <if test="reportUserId != null">
+                AND r.report_user_id = #{reportUserId}
+            </if>
+            <if test="reportName != null">
+                AND r.report_name = #{reportName}
+            </if>
+            <if test="userName != null">
+                AND u.user_name = #{userName}
+            </if>
+            <if test="departName != null">
+                AND d.depart_name = #{departName}
+            </if>
+            <if test="type != null">
+                AND r.type = #{type}
+            </if>
+            <if test="content != null and content != ''">
+                AND r.content LIKE CONCAT('%', #{content}, '%')
+            </if>
+            <if test="reportDate != null">
+                AND r.report_date = #{reportDate}
+            </if>
+            <if test="reportId != null">
+                AND r.report_id = #{reportId}
+            </if>
+            <if test="share!=null">
+               and r.share_user_id LIKE CONCAT('%', #{share}, '%')
+            </if>
+        </where>
+        order by r.report_date desc
+    </select>
+    <select id="selectFile" resultType="wh.fcfz.officecontroller.all.bean.Dao.File">
+            SELECT
+                f.id AS id,
+                f.file_name AS file_name,
+                f.file_uuid AS file_uuid,
+                f.file_path AS file_path,
+                f.file_size AS file_size,
+                f.file_type AS file_type,
+                f.file_url AS file_url,
+                f.description AS description,
+                f.uploader_id AS uploader_id,
+                f.upload_time AS upload_time,
+                f.business_type AS business_type,
+                f.business_id AS business_id,
+                f.file_owner_id AS file_owner_id,
+                f.file_status AS file_status
+            FROM
+                file f
+            WHERE
+                f.file_status = 1
+                AND f.business_type = '报告'
+                AND f.business_id = #{reportId}
+    </select>
+    <select id="getSelfReportCount" resultType="wh.fcfz.officecontroller.all.bean.Dao.Report">
+            SELECT
+                *
+            FROM
+                report r
+            WHERE
+                r.report_user_id = #{userId}
+                <if test="year != 0">
+                    AND year(r.report_date) = #{year}
+                </if>
+                <if test="month != 0">
+                AND month(r.report_date) = #{month}
+               </if>
+    </select>
+</mapper>

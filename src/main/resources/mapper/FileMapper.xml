@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wh.fcfz.officecontroller.all.mapper.FileMapper">
+
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id" parameterType="list">
+        INSERT INTO file (file_name, file_uuid, file_path, file_size, file_type, file_url,
+        description, uploader_id, upload_time, business_type, business_id, file_owner_id, file_status)
+        VALUES
+        <foreach collection="files" item="item" separator=",">
+            (#{item.fileName}, #{item.fileUuid}, #{item.filePath}, #{item.fileSize},
+            #{item.fileType}, #{item.fileUrl}, #{item.description}, #{item.uploaderId},
+            #{item.uploadTime}, #{item.businessType}, #{item.businessId}, #{item.fileOwnerId},
+            #{item.fileStatus})
+        </foreach>
+    </insert>
+
+</mapper>
