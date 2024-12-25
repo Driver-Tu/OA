@@ -65,7 +65,7 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
             attendance.setTimeIn(new Timestamp(System.currentTimeMillis()));
             attendance.setDate(new Date(System.currentTimeMillis()));
             attendance.setAttendanceUserId(Integer.parseInt(StpUtil.getLoginId().toString()));
-            attendance.setStatus("打卡失败");
+            attendance.setStatus("打卡未完成");
             attendanceMapper.insert(attendance);
             return new Result(ResponseEnum.SUCCESS, "上班打卡成功");
         } else {
