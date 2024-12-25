@@ -13,6 +13,8 @@ public class UserDto {
     private String userName;
     private String roleName;
     private String departName;
+    private String telephone;
+    private String email;
     private Integer status;
     private java.sql.Timestamp timeIn;
 }
