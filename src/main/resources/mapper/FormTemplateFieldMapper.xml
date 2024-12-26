@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wh.fcfz.officecontroller.all.mapper.FormTemplateFieldMapper">
+
+    <resultMap type="wh.fcfz.officecontroller.all.bean.Vo.TemplateFieldVo" id="FormFieldTemplateResult">
+        <id property="fieldId" column="field_id"/>
+        <result column="validation_rule" jdbcType="VARCHAR" property="validationRule" javaType="cn.hutool.json.JSONArray" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+    </resultMap>
+
+    <select id="selectTemplateFieldListByFormId" resultMap="FormFieldTemplateResult">
+        select
+        f.field_id,
+        f.field_title,
+        f.field_type,
+        f.field_sort,
+        f.validation_rule,
+        f.form_item_type,
+        f.default_value,
+        f.is_summary,
+        f.is_visible
+        from form_template_field f
+        <if test="templateId != null">
+            <where>
+                f.template_id = #{templateId}
+            </where>
+        </if>
+        order by f.field_sort asc
+    </select>
+
+</mapper>

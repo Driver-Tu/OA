@@ -57,4 +57,14 @@ public class AttendanceController {
         map.remove("打卡失败");
         return new Result<>(ResponseEnum.SUCCESS,map);
     }
+
+    /**
+     * 获取今日打卡信息
+     */
+    @GetMapping("getTodayAttendance")
+    @Operation(summary = "获取今日打卡信息")
+    public Result<Attendance> getTodayAttendance() {
+        Attendance attendance = attendanceMapper.getTodayAttendance(StpUtil.getLoginIdAsInt());
+        return new Result<>(ResponseEnum.SUCCESS,attendance);
+    }
 }

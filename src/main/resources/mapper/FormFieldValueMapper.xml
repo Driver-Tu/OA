@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wh.fcfz.officecontroller.all.mapper.FormFieldValueMapper">
+
+    <resultMap type="wh.fcfz.officecontroller.all.bean.Vo.FormFieldValueVo" id="FormFieldValueResult">
+            <id property="id" column="id"/>
+            <result column="validation_rule" jdbcType="VARCHAR" property="validationRule" javaType="cn.hutool.json.JSONArray" typeHandler="com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler"/>
+    </resultMap>
+
+    <select id="selecFormFieldValueListByFormId" resultMap="FormFieldValueResult">
+        select
+            v.id,
+            v.field_id,
+            f.field_title,
+            f.field_type,
+            f.field_sort,
+            f.validation_rule,
+            f.form_item_type,
+            f.default_value,
+            f.is_summary,
+            f.is_visible,
+            v.field_value
+        from form_field_value v
+        left join form_template_field f on f.field_id = v.field_id
+        <if test="formId != null">
+            <where>
+                v.form_id = #{formId}
+            </where>
+        </if>
+        order by f.field_sort asc
+    </select>
+
+    <!-- 批量插入 -->
+    <insert id="batchInsertFormFieldValues" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO form_field_value (
+            form_id,
+            field_id,
+            field_value,
+            create_by,
+            create_time,
+            update_by,
+            update_time
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.formId},
+                #{item.fieldId},
+                #{item.fieldValue},
+                #{item.createBy},
+                #{item.createTime},
+                #{item.updateBy},
+                #{item.updateTime}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

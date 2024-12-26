@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="wh.fcfz.officecontroller.all.mapper.NotificationPushMapper">
+    <select id="selectNotifications" resultType="wh.fcfz.officecontroller.all.bean.Dao.NotificationPush">
+        SELECT *
+        FROM notification_push AS n
+        WHERE n.recipient_ids LIKE '全部'
+           OR n.recipient_ids LIKE CONCAT('%[', #{+userId}, ']%')
+           OR n.recipient_ids = (
+            SELECT depart.depart_name
+            FROM depart, `user`
+            WHERE `user`.department_id = depart.depart_id
+              AND `user`.user_id = #{userId}
+        )
+    </select>
+
+
+
+</mapper>
