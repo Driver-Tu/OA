@@ -31,7 +31,7 @@ public class StpInterfaceImpl implements StpInterface {
             return JSONUtil.toList(s1,String.class);
         }
         List<String> list = new ArrayList<String>();
-        list.add(userService.SelectByUserId().getData().getRoleName());
+        list.add(userService.SelectByUserId(null).getData().getRoleName());
         stringRedisTemplate.opsForValue().set("permission:"+o.toString(), JSONUtil.toJsonStr(list));
         return list;
     }

@@ -19,4 +19,6 @@ public interface ReportMapper extends BaseMapper<Report> {
     List<File> selectFile(Integer reportId);
 
     List<Report> getSelfReportCount(@Param("year") Integer year,@Param("month") Integer month, @Param("userId") Integer userId);
+
+    List<Report> getSelfReportCountByYear(@Param("year") Integer year, @Param("userId")  Integer userId);
 }

@@ -102,4 +102,15 @@
                 AND month(r.report_date) = #{month}
                </if>
     </select>
+    <select id="getSelfReportCountByYear" resultType="wh.fcfz.officecontroller.all.bean.Dao.Report">
+        SELECT
+        *
+        FROM
+        report r
+        WHERE
+        r.report_user_id = #{userId}
+        <if test="year != 0">
+            AND year(r.report_date) = #{year}
+        </if>
+    </select>
 </mapper>

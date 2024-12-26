@@ -113,7 +113,7 @@ public class ReportController {
      */
     @Operation(summary = "查看自己的本月汇报数量统计")
     @GetMapping("/getSelfReportCount")
-    public Result<Map<String, Integer>> getSelfReportCount(@RequestParam("year") Integer year , @RequestParam("month") Integer month) {
+    public Result<Map<String, Integer>> getSelfReportCount(@RequestParam("year") Integer year , @RequestParam(value = "month", required = false) Integer month) {
         Integer userId = StpUtil.getLoginIdAsInt();
         return reportService.getSelfReportCount(year, month, userId);
     }

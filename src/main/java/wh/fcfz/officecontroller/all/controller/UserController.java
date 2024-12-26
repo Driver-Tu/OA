@@ -44,7 +44,7 @@ public class UserController {
 
     @GetMapping("/info")
     public Result<UserVo> info(){
-        return userService.SelectByUserId();
+        return userService.SelectByUserId(null);
     }
 
    /**
@@ -54,6 +54,14 @@ public class UserController {
     @PostMapping("/list")
     public Result<List<UserVo>> selectALL(@RequestBody MyPage<UserDto> page){
         return userService.selectALL(page);
+    }
+
+    /**
+     * 根据id获取用户
+     * */
+    @GetMapping("/info/{id}")
+    public Result<UserVo> getUserById(@PathVariable Integer id){
+        return userService.SelectByUserId(id);
     }
 
     @GetMapping("/logout")

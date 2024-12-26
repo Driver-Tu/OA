@@ -15,7 +15,9 @@ public interface UserService extends IService<User> {
     //登录
     Result<User> login(String empNum,String password,String device);
     //根据id查个人信息
-    Result<UserVo> SelectByUserId();
+
+    Result<UserVo> SelectByUserId(Integer userId);
+
     //查询所有用户
     Result<List<UserVo>> selectALL(MyPage<UserDto> page);
     //退出登录

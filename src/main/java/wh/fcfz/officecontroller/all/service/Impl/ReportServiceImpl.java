@@ -167,18 +167,30 @@ public class ReportServiceImpl extends ServiceImpl<ReportMapper, Report> impleme
     }
 
     @Override
-    public Result<Map<String, Integer>> getSelfReportCount(Integer year, Integer month,Integer userId) {
-        List<Report> reports =reportMapper.getSelfReportCount(year,month,userId);
-        Map<String, Integer> map = reports.stream().parallel().collect(Collectors.groupingBy(Report::getType, Collectors.summingInt(e -> 1)));
+    public Result<Map<String, Integer>> getSelfReportCount(Integer year, Integer month, Integer userId) {
+        List<Report> reports;
+        if (month == 0) {
+            reports = reportMapper.getSelfReportCountByYear(year, userId);
+        } else {
+            reports = reportMapper.getSelfReportCount(year, month, userId);
+        }
+
+        Map<String, Integer> map = reports.stream().parallel()
+                .collect(Collectors.groupingBy(Report::getType, Collectors.summingInt(e -> 1)));
+
         Integer i = map.get("日报");
-        map.put("daily",i==null?0:i);
+        map.put("daily", i == null ? 0 : i);
         map.remove("日报");
+
         i = map.get("周报");
-        map.put("weekly",i==null?0:i);
+        map.put("weekly", i == null ? 0 : i);
         map.remove("周报");
+
         i = map.get("月报");
-        map.put("monthly",i==null?0:i);
+        map.put("monthly", i == null ? 0 : i);
         map.remove("月报");
-        return new Result<>(ResponseEnum.SUCCESS,map);
+
+        return new Result<>(ResponseEnum.SUCCESS, map);
     }
+
 }

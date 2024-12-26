@@ -72,6 +72,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
 
+
     /**
      * 退出登录
      * */
@@ -90,11 +91,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      *
      * @return*/
     @Override
-    public Result<UserVo> SelectByUserId() {
+    public Result<UserVo> SelectByUserId(Integer userId) {
         if(!StpUtil.isLogin(StpUtil.getLoginId())){
             return new Result<UserVo>(ResponseEnum.USER_NOT_LOGIN,null);
         }
-        Long userId = StpUtil.getLoginIdAsLong();
+        if(userId == null){
+            userId = StpUtil.getLoginIdAsInt();
+        }
         User user = userMapper.selectById(userId);
         String departName = userMapper.selectDepartName(user.getDepartmentId());
         String roleName = userMapper.selectRoleName(user.getRoleId());
