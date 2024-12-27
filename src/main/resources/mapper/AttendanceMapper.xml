@@ -73,4 +73,7 @@
                 and month(date) = #{month}
               </if>
     </select>
+    <select id="getTodayAttendance" resultType="wh.fcfz.officecontroller.all.bean.Dao.Attendance">
+        select * from attendance where attendance_user_id = #{loginIdAsInt} and date(date) = curdate()
+    </select>
 </mapper>

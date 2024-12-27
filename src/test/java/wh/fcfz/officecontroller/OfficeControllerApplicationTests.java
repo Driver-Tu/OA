@@ -1,10 +1,16 @@
 package wh.fcfz.officecontroller;
 
+import com.alibaba.excel.EasyExcel;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import wh.fcfz.officecontroller.all.bean.Dto.ReportDto;
+import wh.fcfz.officecontroller.all.bean.Vo.ReportVo;
+import wh.fcfz.officecontroller.all.mapper.ReportMapper;
 import wh.fcfz.officecontroller.all.service.ReportService;
 import wh.fcfz.officecontroller.all.tool.SpringUtils;
+
+import java.util.List;
 
 @SpringBootTest
 class OfficeControllerApplicationTests {
@@ -95,5 +101,16 @@ class OfficeControllerApplicationTests {
 //        });
 //        CompletableFuture.allOf(result1, result2, result3).join();
     }
+
+    /**
+     * 测试easyExcel
+     */
+    @Test
+    void testEasyExcel() {
+        ReportMapper bean = SpringUtils.getBean(ReportMapper.class);
+        List<ReportVo> reportVos = bean.selectReport(new ReportDto());
+        EasyExcel.write("report", ReportVo.class).sheet("首次导出").doWrite(reportVos);
+    }
+
 
 }

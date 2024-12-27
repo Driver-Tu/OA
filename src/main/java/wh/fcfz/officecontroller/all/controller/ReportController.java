@@ -4,8 +4,11 @@ import cn.dev33.satoken.annotation.SaCheckPermission;
 import cn.dev33.satoken.annotation.SaMode;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.converters.date.DateStringConverter;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,7 @@ import wh.fcfz.officecontroller.all.bean.Dto.UserDto;
 import wh.fcfz.officecontroller.all.bean.Vo.ReportVo;
 import wh.fcfz.officecontroller.all.bean.Vo.UserOnVo;
 import wh.fcfz.officecontroller.all.bean.Vo.UserVo;
+import wh.fcfz.officecontroller.all.bean.excel.ReportExport;
 import wh.fcfz.officecontroller.all.mapper.ReportMapper;
 import wh.fcfz.officecontroller.all.mapper.UserMapper;
 import wh.fcfz.officecontroller.all.service.Impl.ReportServiceImpl;
@@ -24,6 +28,8 @@ import wh.fcfz.officecontroller.all.tool.MyPage;
 import wh.fcfz.officecontroller.all.tool.ResponseEnum;
 import wh.fcfz.officecontroller.all.tool.Result;
 
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +78,9 @@ public class ReportController {
     //return:userOnVo
     @PostMapping("/shareReport")
     public Result<Page<ReportVo>> shareReport(@RequestBody MyPage<ReportDto> reportDto) {
-        reportDto.getData().setShare(StpUtil.getLoginId().toString());
+        StringBuilder sb=new StringBuilder();
+        sb.append("[").append(StpUtil.getLoginId().toString()).append("]");
+        reportDto.getData().setShare(sb.toString());
         List<ReportVo> reportVos = reportMapper.selectReport(reportDto.getData());
         List<ReportVo> list = reportVos.stream().skip((long) (reportDto.getPageNum() - 1) * reportDto.getPageSize()).limit(reportDto.getPageSize()).toList();
         list= list.stream().parallel().peek(reportVo -> {
@@ -116,5 +124,26 @@ public class ReportController {
     public Result<Map<String, Integer>> getSelfReportCount(@RequestParam("year") Integer year , @RequestParam(value = "month", required = false) Integer month) {
         Integer userId = StpUtil.getLoginIdAsInt();
         return reportService.getSelfReportCount(year, month, userId);
+    }
+
+    /**
+     * 下载excel
+     */
+    @Operation(summary = "下载excel")
+    @GetMapping("/downloadExcel")
+    public void downloadExcel(HttpServletResponse response) throws IOException {
+        ReportDto reportDto = new ReportDto();
+        StringBuilder sb=new StringBuilder();
+        sb.append("[").append(StpUtil.getLoginId().toString()).append("]");
+        reportDto.setShare(sb.toString());
+        List<ReportVo> reportVos = reportMapper.selectReport(reportDto);
+        List<ReportExport> reportExports=BeanUtil.copyToList(reportVos, ReportExport.class);
+        // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setCharacterEncoding("utf-8");
+        // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+        String fileName = URLEncoder.encode("测试", "UTF-8").replaceAll("\\+", "%20");
+        response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
+        EasyExcel.write(response.getOutputStream(), ReportExport.class).sheet("首次导出").registerConverter(new DateStringConverter()).doWrite(reportExports);
     }
 }
