@@ -173,5 +173,4 @@ public class ReportController {
             response.getWriter().println(JSONUtil.toJsonStr(map));
         }
     }
-
 }
