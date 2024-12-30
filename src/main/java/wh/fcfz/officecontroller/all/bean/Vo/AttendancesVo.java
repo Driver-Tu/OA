@@ -11,6 +11,8 @@ import wh.fcfz.officecontroller.all.bean.Dao.Attendance;
 public class AttendancesVo extends Attendance {
     private String userName;
     private String departName;
+    private String year;
+    private String month;
     public AttendancesVo(Attendance attendance) {
         super(attendance);
     }
