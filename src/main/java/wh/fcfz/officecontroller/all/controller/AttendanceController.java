@@ -141,7 +141,6 @@ public class AttendanceController {
     @Scheduled(cron = "0 0 19 * * ?")
     @GetMapping("/autoAttendance")
     public void autoAttendance() {
-
         Map<Integer, Set<Integer>> map = GetUserIds();
         //获取集合为空
         String date = DateUtil.format(new Date(), "yyyy-MM-dd");
@@ -151,7 +150,6 @@ public class AttendanceController {
            if (value.isEmpty()) {
                //则使用系统规则
                if(sysWork){
-                   log.info("============================================");
                    if(attendanceMapper.getTodayAttendance(key)==null){
                        Attendance attendance = new Attendance();
                        attendance.setAttendanceUserId(key);
@@ -166,9 +164,8 @@ public class AttendanceController {
            }else {
                //判断用户绑定的规则日中是否包含今天
                value.forEach(e->{
-                   if(e==new Date(System.currentTimeMillis()).getDay()){
+                   if(e==new Date(System.currentTimeMillis()).getDate()){
                        //判断用户今天是否打卡
-                       log.info("============================================");
                        if(attendanceMapper.getTodayAttendance(key)==null){
                            Attendance attendance = new Attendance();
                            attendance.setAttendanceUserId(key);

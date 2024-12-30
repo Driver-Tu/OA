@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="wh.fcfz.officecontroller.all.mapper.UserSchedulingMapper">
-    <select id="selectUsers" resultType="wh.fcfz.officecontroller.all.bean.Dao.UserScheduling">
+    <select id="selectUsers" resultType="wh.fcfz.officecontroller.all.bean.Vo.UserSchedulingVo">
         select
             user_scheduling.user_id AS userId,
             user_scheduling.scheduling_id AS schedulingId,
