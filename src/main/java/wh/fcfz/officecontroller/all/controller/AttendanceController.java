@@ -97,8 +97,6 @@ public class AttendanceController {
         List<AttendancesVo> attendancesVos = attendanceMapper.selectAllAttendances(attendanceVo);
         List<AttendanceExport> attendanceExports = BeanUtil.copyToList(attendancesVos, AttendanceExport.class);
 
-        System.out.println(attendanceExports.toString());
-
         try {
             // 设置响应内容类型为 Excel
             response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
