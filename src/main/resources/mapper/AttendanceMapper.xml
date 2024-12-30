@@ -44,6 +44,12 @@
             <if test="type != null">
                 AND a.type = #{type}
             </if>
+            <if test="year != null">
+                AND DATE_FORMAT(a.date, '%Y') = #{year}
+            </if>
+            <if test="month != null">
+                AND DATE_FORMAT(a.date, '%Y-%m') = #{month}
+            </if>
         </where>
         ORDER BY a.date DESC, a.time_in DESC, a.time_out DESC
     </select>

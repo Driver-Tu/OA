@@ -79,8 +79,7 @@ public class AttendanceController {
 
     @Operation(summary = "下载excel")
     @GetMapping("/exportAttendance")
-    public void downloadExcel(HttpServletResponse response) throws IOException {
-        AttendancesVo attendanceVo = new AttendancesVo();
+    public void downloadExcel(AttendancesVo attendanceVo, HttpServletResponse response) throws IOException {
 
         List<AttendancesVo> attendancesVos = attendanceMapper.selectAllAttendances(attendanceVo);
         List<AttendanceExport> attendanceExports = BeanUtil.copyToList(attendancesVos, AttendanceExport.class);
